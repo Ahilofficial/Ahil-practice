@@ -5,38 +5,42 @@ import (
 	"backend_institutions/repository"
 )
 
-type DepartmentService struct {
-	departmentrepo *repository.DepartmentRepository
+func  AddDepartmentService(department *model.Department) error {
+	return repository.CreateDepartment(department)
 }
 
-func NewDepartmentService() *DepartmentService {
-	return &DepartmentService{
-		departmentrepo: repository.NewDepartmentRepository(),
-	}
+func  GetDepartmentService() ([]model.Department, error) {
+	return repository.FetchDepartment()
 }
 
-func (s DepartmentService) AddDepartmentService(department *model.Department) error {
-	return s.departmentrepo.CreateDepartment(department)
+func  GetDepartmentServicePaginated(page, limit int) ([]model.Department, int64, error) {
+	return repository.FetchDepartmentPaginated(page, limit)
 }
 
-func (s DepartmentService) GetDepartmentService() ([]model.Department, error) {
-	return s.departmentrepo.FetchDepartment()
+func  GetDepartmentByIDService(id uint) (model.Department, error) {
+	return repository.FetchDepartmentById(id)
 }
 
-func (s DepartmentService) GetDepartmentByIDService(id uint) (model.Department, error) {
-	return s.departmentrepo.FetchDepartmentById(id)
+func  GetDepartmentServiceDeleted() ([]model.Department, error) {
+	return repository.FetchDepartmentDeleted()
 }
 
-func (s DepartmentService) DeleteDepartment(id uint) error {
-	return s.departmentrepo.DeleteDepartment(id)
+func  DeleteDepartment(id uint) error {
+	return repository.DeleteDepartment(id)
+}
+func  GetActiveDepartmentService() (model.Department, error) {
+	return repository.GetActiveDepartment()
 }
 
-// var department model.Department
-func (s DepartmentService) UpdateDepartmentService(id uint, department_name string) error {
-	department, err := s.departmentrepo.FetchDepartmentById(id)
+func  GetInactiveDepartmentService() (model.Department, error) {
+	return repository.GetInactiveDepartment()
+}
+func  UpdateDepartmentService(id uint, department_name string) error {
+	
+	department, err := repository.FetchDepartmentById(id)
 	if err != nil {
 		return err
 	}
-	department.Department_Name = department_name
-	return s.departmentrepo.UpdateDepartmentById(&department)
+	department.DepartmentName = department_name
+	return repository.UpdateDepartmentById(&department)
 }

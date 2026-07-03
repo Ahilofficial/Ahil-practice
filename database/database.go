@@ -1,20 +1,43 @@
 package database
 
 import (
+	"fmt"
 	"log"
-
+	"os"
+	
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
 var DB *gorm.DB
-func Connect(){
-	dsn := "root:pass@tcp(127.0.0.1:3306)/institution?charset=utf8mb4&parseTime=True&loc=Local"
-	db,err:=gorm.Open(mysql.Open(dsn),&gorm.Config{})
-	if err!=nil{
+
+func Connect() {
+	dbUser := os.Getenv("DB_USER")
+	if dbUser == "" {
+		dbUser = "root"
+	}
+	dbPassword := os.Getenv("DB_PASSWORD")
+	if dbPassword == "" {
+		dbPassword = "pass"
+	}
+	dbHost := os.Getenv("DB_HOST")
+	if dbHost == "" {
+		dbHost = "127.0.0.1"
+	}
+	dbPort := os.Getenv("DB_PORT")
+	if dbPort == "" {
+		dbPort = "3306"
+	}
+	dbName := os.Getenv("DB_NAME")
+	if dbName == "" {
+		dbName = "institution"
+	}
+
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local", dbUser, dbPassword, dbHost, dbPort, dbName)
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	if err != nil {
 		log.Fatal("cant connect to the database")
 	}
-	DB=db
-	log.Print("Connected to the database sucessfully")
-
+	DB = db
+	log.Print("Connected to the database successfully")
 }

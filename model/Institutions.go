@@ -1,19 +1,16 @@
 package model
 
-import (
-	"time"
-
-	"gorm.io/gorm"
-)
+import "time"
 
 type Institutions struct {
-	InstitutionID    uint `gorm:"column:id;primaryKey;autoIncrement"`
-	Name             string
-	Institution_code string
-	State            string
-	CreatedAt        time.Time
-	UpdatedAt        time.Time
-	DeletedAt        gorm.DeletedAt
+	ID              uint       `gorm:"primaryKey;autoIncrement" json:"id"`
+	Name            string     `json:"name"`
+	InstitutionCode string     `gorm:"column:institution_code;" json:"institution_code"`
+	State           string     `json:"state"`
+	CreatedAt       time.Time  `json:"created_at"`
+	UpdatedAt       time.Time  `json:"updated_at"`
+	DeletedAt       *time.Time `json:"-"`
+	IsActive        bool       `gorm:"column:isactive;default:true" json:"isactive"`
 
-	Departments []Department `gorm:"foreignKey:InstitutionID"`
+	Departments []Department `gorm:"foreignKey:InstitutionID;references:ID" json:"departments"`
 }

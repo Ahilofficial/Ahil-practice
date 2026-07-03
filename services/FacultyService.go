@@ -1,44 +1,50 @@
-﻿package services
+package services
 
 import (
-"backend_institutions/model"
-"backend_institutions/repository"
+	"backend_institutions/model"
+	"backend_institutions/repository"
 )
 
-type FacultyService struct {
-facultyrepo *repository.FacultyRepository
+
+
+func  CreateFacultyService(faculty *model.Faculty) error {
+	return repository.CreateFaculty(faculty)
 }
 
-func NewFacultyService() *FacultyService {
-return &FacultyService{
-facultyrepo: repository.NewFacultyRepository(),
-}
+func  GetFacultyService() ([]model.Faculty, error) {
+	return repository.FetchFaculty()
 }
 
-func (s *FacultyService) CreateFacultyService(faculty *model.Faculty) error {
-return s.facultyrepo.CreateFaculty(faculty)
+func  GetFacultyServicePaginated(page, limit int) ([]model.Faculty, int64, error) {
+	return repository.FetchFacultyPaginated(page, limit)
 }
 
-func (s *FacultyService) GetFacultyService() ([]model.Faculty, error) {
-return s.facultyrepo.FetchFaculty()
+func  GetFacultyServiceById(id uint) (model.Faculty, error) {
+	return repository.FetchFacultyById(id)
 }
 
-func (s *FacultyService) GetFacultyServiceById(id uint) (model.Faculty, error) {
-return s.facultyrepo.FetchFacultyById(id)
+func  GetFacultyServiceDeleted() ([]model.Faculty, error) {
+	return repository.FetchFacultyDeleted()
 }
 
-func (s *FacultyService) DeleteFacultyService(id uint) error {
-return s.facultyrepo.DeleteFaculty(id)
+func  GetActiveFacultyService() (model.Faculty, error) {
+	return repository.GetActiveFacutly()
 }
 
-func (s *FacultyService) UpdateFacultyService(id uint, name string, gender string) error {
-faculty, err := s.facultyrepo.FetchFacultyById(id)
-if err != nil {
-return err
+func  GetInactiveFacultyService() (model.Faculty, error) {
+	return repository.GetInactiveFaculty()
 }
 
-faculty.Name = name
-faculty.Gender = gender
+func  DeleteFacultyService(id uint) error {
+	return repository.DeleteFaculty(id)
+}
 
-return s.facultyrepo.UpdateFacultyById(&faculty)
+func  UpdateFacultyService(id uint, name string, gender string) error {
+	faculty, err := repository.FetchFacultyById(id)
+	if err != nil {
+		return err
+	}
+	faculty.Name = name
+	faculty.Gender = gender
+	return repository.UpdateFacultyById(&faculty)
 }

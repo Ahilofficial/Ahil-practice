@@ -1,45 +1,56 @@
-﻿package services
+package services
 
 import (
-"backend_institutions/model"
-"backend_institutions/repository"
+	"backend_institutions/model"
+	"backend_institutions/repository"
 )
 
-type InstituteService struct {
-instituterepo *repository.InstitutionRepository
+func CreateInsituteService(institute *model.Institutions) error {
+	return repository.CreateInstitution(institute)
 }
 
-func NewInstituteService() *InstituteService {
-return &InstituteService{
-instituterepo: repository.NewInstituteRepository(),
-}
+func GetInstituteService() ([]model.Institutions, error) {
+	return repository.FetchInstitution()
 }
 
-func (s *InstituteService) CreateInsituteService(institute *model.Institutions) error {
-return s.instituterepo.CreateInstitution(institute)
+func GetInstituteServicePaginated(page, limit int) ([]model.Institutions, int64, error) {
+	return repository.FetchInstitutionPaginated(page, limit)
 }
 
-func (s *InstituteService) GetInstituteService() ([]model.Institutions, error) {
-return s.instituterepo.FetchInstitution()
+func GetInstituteServiceById(id uint) (model.Institutions, error) {
+	return repository.FetchInstitutionById(id)
 }
 
-func (s *InstituteService) GetInstituteServiceById(id uint) (model.Institutions, error) {
-return s.instituterepo.FetchInstitutionById(id)
+func GetInstituteServiceDeleted() ([]model.Institutions, error) {
+	return repository.FetchInstitutionDeleted()
 }
 
-func (s *InstituteService) DeleteInstitutionService(id uint) error {
-return s.instituterepo.DeleteInstitution(id)
+func DeleteInstitutionService(id uint) error {
+	return repository.DeleteInstitution(id)
 }
 
-func (s *InstituteService) UpdateInstitutionService(id uint, name string, institutionCode string, state string) error {
-institute, err := s.instituterepo.FetchInstitutionById(id)
-if err != nil {
-return err
+func GetActiveInstitute() (model.Institutions, error) {
+	return repository.GetActiveInstitute()
 }
 
-institute.Name = name
-institute.Institution_code = institutionCode
-institute.State = state
+func GetInactiveInstitute() (model.Institutions, error) {
+	return repository.GetInactiveInstitute()
+}
 
-return s.instituterepo.UpdateInstitution(&institute)
+func UpdateInstitutionService(
+	id uint,
+	name string,
+	institutionCode string,
+	state string,
+) error {
+	institute, err := repository.FetchInstitutionById(id)
+	if err != nil {
+		return err
+	}
+
+	institute.Name = name
+	institute.InstitutionCode = institutionCode
+	institute.State = state
+
+	return repository.UpdateInstitution(&institute)
 }

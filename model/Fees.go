@@ -7,14 +7,14 @@ import (
 )
 
 type Fees struct {
-	FeesID       uint `gorm:"column:id;primaryKey;autoIncrement"`
-	StudentID    uint
-	Student      Student `gorm:"foreignKey:StudentID"`
-	Payment_mode string
-	Amount       uint
-	Payment_date time.Time
-	Due_date     time.Time
-	CreatedAt    time.Time
-	UpdatedAt    time.Time
-	DeletedAt    gorm.DeletedAt
+	ID          uint           `gorm:"primaryKey;autoIncrement" json:"id"`
+	PaymentMode string         `gorm:"column:payment_mode" json:"payment_mode"`
+	Amount      uint           `json:"amount"`
+	CreatedAt   time.Time      `json:"created_at"`
+	UpdatedAt   time.Time      `json:"updated_at"`
+	DeletedAt   gorm.DeletedAt `gorm:"index" json:"-"`
+	IsActive    bool           `gorm:"column:isactive;default:true" json:"isactive"`
+	StudentID   uint           `json:"student_id"`
+
+	Student Student `gorm:"foreignKey:StudentID;references:ID" json:"-"`
 }

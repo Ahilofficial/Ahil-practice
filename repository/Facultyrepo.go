@@ -1,36 +1,110 @@
-﻿package repository
+package repository
 
 import (
-"backend_institutions/database"
-"backend_institutions/model"
+	"backend_institutions/database"
+	"backend_institutions/model"
+	"errors"
+	"time"
+
+	"gorm.io/gorm"
 )
 
-type FacultyRepository struct{}
 
-func NewFacultyRepository() *FacultyRepository {
-return &FacultyRepository{}
+func  CreateFaculty(faculty *model.Faculty) error {
+	return database.DB.Create(faculty).Error
 }
 
-func (r *FacultyRepository) CreateFaculty(faculty *model.Faculty) error {
-return database.DB.Create(faculty).Error
+func  FetchFaculty() ([]model.Faculty, error) {
+	var faculty []model.Faculty
+	err := database.DB.Where("deleted_at IS NULL").
+		Preload("Students", "deleted_at IS NULL").
+		Preload("Students.Fees", "deleted_at IS NULL").
+		Find(&faculty).Error
+	return faculty, err
 }
 
-func (r *FacultyRepository) FetchFaculty() ([]model.Faculty, error) {
-var faculty []model.Faculty
-err := database.DB.Find(&faculty).Error
-return faculty, err
+func  FetchFacultyPaginated(page, limit int) ([]model.Faculty, int64, error) {
+	var faculty []model.Faculty
+	var total int64
+
+	err := database.DB.Model(&model.Faculty{}).Where("deleted_at IS NULL").Count(&total).Error
+	if err != nil {
+		return nil, 0, err
+	}
+
+	offset := (page - 1) * limit
+	err = database.DB.Where("deleted_at IS NULL").
+		Preload("Students", "deleted_at IS NULL").
+		Preload("Students.Fees", "deleted_at IS NULL").
+		Offset(offset).Limit(limit).Find(&faculty).Error
+	return faculty, total, err
 }
 
-func (r *FacultyRepository) FetchFacultyById(id uint) (model.Faculty, error) {
-var faculty model.Faculty
-err := database.DB.First(&faculty, id).Error
-return faculty, err
+func  FetchFacultyById(id uint) (model.Faculty, error) {
+	var faculty model.Faculty
+	err := database.DB.Where("id = ? AND isactive = ?", id, true).
+		Preload("Students", "deleted_at IS NULL").
+		Preload("Students.Fees", "deleted_at IS NULL").
+		First(&faculty).Error
+	return faculty, err
 }
 
-func (r *FacultyRepository) DeleteFaculty(id uint) error {
-return database.DB.Delete(&model.Faculty{}, id).Error
+func  GetActiveFacutly() (model.Faculty, error) {
+	var faculty model.Faculty
+
+	err := database.DB.
+		Where("isactive = ?", true).
+		First(&faculty).Error
+
+	if err != nil {
+		return model.Faculty{}, err
+	}
+	return faculty, nil
 }
 
-func (r *FacultyRepository) UpdateFacultyById(faculty *model.Faculty) error {
-return database.DB.Save(faculty).Error
+func  GetInactiveFaculty() (model.Faculty, error) {
+	var faculty model.Faculty
+
+	err := database.DB.
+		Where("isactive = ?", false).
+		First(&faculty).Error
+
+	if err != nil {
+		return model.Faculty{}, err
+	}
+	return faculty, nil
+}
+
+func  FetchFacultyDeleted() ([]model.Faculty, error) {
+	var faculty []model.Faculty
+	err := database.DB.Unscoped().Where("deleted_at IS NOT NULL").
+		Preload("Students", "deleted_at IS NULL").
+		Preload("Students.Fees", "deleted_at IS NULL").
+		Find(&faculty).Error
+	return faculty, err
+}
+
+func  DeleteFaculty(id uint) error {
+	var existing model.Faculty
+	err := database.DB.Where("id = ?", id).First(&existing).Error
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return errors.New("record not found")
+		}
+		return err
+	}
+
+	if !existing.IsActive {
+		return errors.New("already deleted")
+	}
+
+	return database.DB.Model(&model.Faculty{}).
+		Where("id = ?", id).
+		Update("isactive", false).
+		Update("deleted_at", time.Now()).
+		Error
+}
+
+func  UpdateFacultyById(faculty *model.Faculty) error {
+	return database.DB.Save(faculty).Error
 }

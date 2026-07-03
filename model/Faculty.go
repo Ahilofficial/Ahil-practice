@@ -7,15 +7,18 @@ import (
 )
 
 type Faculty struct {
-	FacultyID    uint `gorm:"column:id;primaryKey;autoIncrement"`
-	Name         string
-	Gender       string
-	Joining_Date time.Time
-	DepartmentID uint
-	Department   Department `gorm:"foreignKey:DepartmentID"`
-	CreatedAt    time.Time
-	UpdatedAt    time.Time
-	DeletedAt    gorm.DeletedAt
+	ID          uint      `gorm:"primaryKey;autoIncrement" json:"id"`
+	Name        string    `gorm:"not null" json:"name"`
+	Gender      string    `json:"gender"`
+	JoiningDate time.Time `gorm:"column:joining_date" json:"joining_date"`
 
-	Students []Student `gorm:"foreignKey:FacultyID"`
+	CreatedAt time.Time      `json:"created_at"`
+	UpdatedAt time.Time      `json:"updated_at"`
+	DeletedAt gorm.DeletedAt `gorm:"index" json:"-"`
+	IsActive  bool           `gorm:"column:isactive;default:true" json:"isactive"`
+
+	DepartmentID uint `json:"department_id"`
+	// Department   Department `gorm:"foreignKey:DepartmentID;references:ID" json:"-"`
+
+	Students []Student `gorm:"foreignKey:FacultyID;references:ID" json:"students"`
 }

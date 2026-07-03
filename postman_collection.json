@@ -1,0 +1,1035 @@
+{
+	"info": {
+		"_postman_id": "8b082b2f-7c15-4a64-af32-55dbd7c570b5",
+		"name": "Backend Institutions API Collection",
+		"description": "Postman collection to test the CRUD, soft delete, pagination, deleted value retrieval, and preloading functionality for Institutions, Departments, Faculties, Students, and Fees.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"item": [
+		{
+			"name": "0. Authentication",
+			"item": [
+				{
+					"name": "Sign Up User",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Test User\",\n  \"email\": \"user@example.com\",\n  \"phone\": \"9876543210\",\n  \"password\": \"password123\",\n  \"role\": \"student\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/signup",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign In User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    var jsonData = pm.response.json();",
+									"    if (jsonData.success && jsonData.data && jsonData.data.token) {",
+									"        pm.collectionVariables.set(\"token\", jsonData.data.token);",
+									"        console.log(\"Saved token:\", jsonData.data.token);",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/signin",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Assign User Role",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"user_id\": 2,\n  \"role\": \"principal\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/users/assign-role",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"assign-role"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "1. Institutions",
+			"item": [
+				{
+					"name": "Create Institution",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    var jsonData = pm.response.json();",
+									"    if (jsonData.success && jsonData.data && jsonData.data.id) {",
+									"        pm.collectionVariables.set(\"institution_id\", jsonData.data.id);",
+									"        console.log(\"Saved institution_id:\", jsonData.data.id);",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Anna University\",\n  \"institution_code\": \"AU1001\",\n  \"state\": \"Tamil Nadu\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/institutes",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"institutes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Active Institutions (Paginated)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/institutes?page=1&limit=5",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"institutes"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Active Institutions (Non-Paginated)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/institutes/all",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"institutes",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Institution by ID (Preloaded)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/institutes/{{institution_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"institutes",
+								"{{institution_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Institution",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Anna University Main Campus\",\n  \"institution_code\": \"AU1001-M\",\n  \"state\": \"Tamil Nadu\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/institutes/{{institution_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"institutes",
+								"{{institution_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Institution (Soft Delete)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/institutes/{{institution_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"institutes",
+								"{{institution_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Deleted Institutions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/institutes/deleted",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"institutes",
+								"deleted"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "2. Departments",
+			"item": [
+				{
+					"name": "Create Department",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    var jsonData = pm.response.json();",
+									"    if (jsonData.success && jsonData.data && jsonData.data.id) {",
+									"        pm.collectionVariables.set(\"department_id\", jsonData.data.id);",
+									"        console.log(\"Saved department_id:\", jsonData.data.id);",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"department_name\": \"Information Technology\",\n  \"institution_id\": {{institution_id}}\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/departments",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"departments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Active Departments (Paginated)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/departments?page=1&limit=5",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"departments"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Active Departments (Non-Paginated)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/departments/all",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"departments",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Department by ID (Preloaded)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/departments/{{department_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"departments",
+								"{{department_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Department",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"department_name\": \"Computer Science & Engineering\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/departments/{{department_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"departments",
+								"{{department_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Department (Soft Delete)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/departments/{{department_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"departments",
+								"{{department_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Deleted Departments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/departments/deleted",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"departments",
+								"deleted"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "3. Faculties",
+			"item": [
+				{
+					"name": "Create Faculty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    var jsonData = pm.response.json();",
+									"    if (jsonData.success && jsonData.data && jsonData.data.id) {",
+									"        pm.collectionVariables.set(\"faculty_id\", jsonData.data.id);",
+									"        console.log(\"Saved faculty_id:\", jsonData.data.id);",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Dr. Amit Anand\",\n  \"gender\": \"Male\",\n  \"joining_date\": \"2026-06-24T12:00:00Z\",\n  \"department_id\": {{department_id}}\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/faculties",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"faculties"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Active Faculties (Paginated)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/faculties?page=1&limit=5",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"faculties"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Active Faculties (Non-Paginated)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/faculties/all",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"faculties",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Faculty by ID (Preloaded)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/faculties/{{faculty_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"faculties",
+								"{{faculty_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Faculty",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Dr. Amit Anand (HOD)\",\n  \"gender\": \"Male\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/faculties/{{faculty_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"faculties",
+								"{{faculty_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Faculty (Soft Delete)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/faculties/{{faculty_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"faculties",
+								"{{faculty_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Deleted Faculties",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/faculties/deleted",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"faculties",
+								"deleted"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "4. Students",
+			"item": [
+				{
+					"name": "Create Student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    var jsonData = pm.response.json();",
+									"    if (jsonData.success && jsonData.data && jsonData.data.id) {",
+									"        pm.collectionVariables.set(\"student_id\", jsonData.data.id);",
+									"        console.log(\"Saved student_id:\", jsonData.data.id);",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Rahul Kumar\",\n  \"email\": \"rahul@example.com\",\n  \"gender\": \"Male\",\n  \"faculty_id\": {{faculty_id}}\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/students",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Active Students (Paginated)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/students?page=1&limit=5",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"students"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Active Students (Non-Paginated)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/students/all",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"students",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Student by ID (Preloaded)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/students/{{student_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"students",
+								"{{student_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Student",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Rahul Kumar Sharma\",\n  \"email\": \"rahul.sharma@example.com\",\n  \"gender\": \"Male\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/students/{{student_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"students",
+								"{{student_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Student (Soft Delete)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/students/{{student_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"students",
+								"{{student_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Deleted Students",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/students/deleted",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"students",
+								"deleted"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "5. Fees",
+			"item": [
+				{
+					"name": "Create Fees",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"payment_mode\": \"Online\",\n  \"amount\": 50000,\n  \"student_id\": {{student_id}}\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/fees",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"fees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Active Fees (Paginated)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/fees?page=1&limit=5",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"fees"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Active Fees (Non-Paginated)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/fees/all",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"fees",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Fees by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/fees/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"fees",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Fees",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"payment_mode\": \"Cash\",\n  \"amount\": 45000\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/fees/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"fees",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Fees (Soft Delete)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/fees/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"fees",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Deleted Fees",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/fees/deleted",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"fees",
+								"deleted"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8090",
+			"type": "string"
+		},
+		{
+			"key": "institution_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "department_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "faculty_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "student_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
