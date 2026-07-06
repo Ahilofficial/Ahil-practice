@@ -68,8 +68,6 @@ func assignPermissionsToRoles() {
 		"create_students", "view_students", "update_students", "delete_students",
 		"create_fees", "view_fees", "update_fees", "delete_fees",
 	}
-	
-	
 
 	allPerms := []string{
 		"create_institutes", "view_institutes", "update_institutes", "delete_institutes",
