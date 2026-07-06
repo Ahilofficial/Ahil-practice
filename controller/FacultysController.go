@@ -11,7 +11,6 @@ import (
 	"github.com/gofiber/fiber/v3"
 )
 
-
 func CreateFacultyController(c fiber.Ctx) error {
 	var body dto.CreateFacultyDTO
 

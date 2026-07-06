@@ -11,9 +11,7 @@ import (
 	"github.com/gofiber/fiber/v3"
 )
 
-
-
-func  GetActiveDepartmentController(c fiber.Ctx) error {
+func GetActiveDepartmentController(c fiber.Ctx) error {
 	department, err := services.GetActiveDepartmentService()
 	if err != nil {
 		return helper.Error(c, 404, err.Error())
@@ -26,7 +24,7 @@ func  GetActiveDepartmentController(c fiber.Ctx) error {
 	)
 }
 
-func  GetInactiveDepartmentController(c fiber.Ctx) error {
+func GetInactiveDepartmentController(c fiber.Ctx) error {
 	department, err := services.GetInactiveDepartmentService()
 	if err != nil {
 		return helper.Error(c, 404, err.Error())
@@ -39,7 +37,7 @@ func  GetInactiveDepartmentController(c fiber.Ctx) error {
 	)
 }
 
-func  CreateDepartmentController(c fiber.Ctx) error {
+func CreateDepartmentController(c fiber.Ctx) error {
 	var body dto.CreateDepartmentDTO
 
 	if err := c.Bind().Body(&body); err != nil {
@@ -62,7 +60,7 @@ func  CreateDepartmentController(c fiber.Ctx) error {
 	)
 }
 
-func  GetAllDepartmentsController(c fiber.Ctx) error {
+func GetAllDepartmentsController(c fiber.Ctx) error {
 	pageStr := c.Query("page")
 	limitStr := c.Query("limit")
 
@@ -100,7 +98,7 @@ func  GetAllDepartmentsController(c fiber.Ctx) error {
 	)
 }
 
-func  GetDepartmentByIDController(c fiber.Ctx) error {
+func GetDepartmentByIDController(c fiber.Ctx) error {
 	idStr := c.Params("id")
 
 	id, err := strconv.ParseUint(idStr, 10, 32)
@@ -120,7 +118,7 @@ func  GetDepartmentByIDController(c fiber.Ctx) error {
 	)
 }
 
-func  GetDeletedDepartmentsController(c fiber.Ctx) error {
+func GetDeletedDepartmentsController(c fiber.Ctx) error {
 	departments, err := services.GetDepartmentServiceDeleted()
 	if err != nil {
 		return helper.Error(c, 500, err.Error())
@@ -133,7 +131,7 @@ func  GetDeletedDepartmentsController(c fiber.Ctx) error {
 	)
 }
 
-func  UpdateDepartmentController(c fiber.Ctx) error {
+func UpdateDepartmentController(c fiber.Ctx) error {
 	idStr := c.Params("id")
 
 	id, err := strconv.ParseUint(idStr, 10, 32)
@@ -166,7 +164,7 @@ func  UpdateDepartmentController(c fiber.Ctx) error {
 	)
 }
 
-func  DeleteDepartmentController(c fiber.Ctx) error {
+func DeleteDepartmentController(c fiber.Ctx) error {
 	idStr := c.Params("id")
 
 	id, err := strconv.ParseUint(idStr, 10, 32)
@@ -185,7 +183,7 @@ func  DeleteDepartmentController(c fiber.Ctx) error {
 	)
 }
 
-func  FetchAllDepartmentsController(c fiber.Ctx) error {
+func FetchAllDepartmentsController(c fiber.Ctx) error {
 	departments, err := services.GetDepartmentService()
 	if err != nil {
 		return helper.Error(c, 500, err.Error())

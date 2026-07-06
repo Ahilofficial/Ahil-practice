@@ -1,7 +1,6 @@
 package utils
 
 import (
-
 	"os"
 	"time"
 
@@ -22,7 +21,6 @@ func GenerateToken(userID uint) (string, error) {
 	if secret == "" {
 		secret = "supersecretkey"
 	}
-	
 
 	return token.SignedString([]byte(secret))
 }

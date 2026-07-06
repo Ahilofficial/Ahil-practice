@@ -9,18 +9,17 @@ import (
 	"gorm.io/gorm"
 )
 
-
-func  CreateFees(fees *model.Fees) error {
+func CreateFees(fees *model.Fees) error {
 	return database.DB.Create(fees).Error
 }
 
-func  FetchFees() ([]model.Fees, error) {
+func FetchFees() ([]model.Fees, error) {
 	var fees []model.Fees
 	err := database.DB.Where("deleted_at IS NULL").Find(&fees).Error
 	return fees, err
 }
 
-func  FetchFeesPaginated(page, limit int) ([]model.Fees, int64, error) {
+func FetchFeesPaginated(page, limit int) ([]model.Fees, int64, error) {
 	var fees []model.Fees
 	var total int64
 
@@ -34,7 +33,7 @@ func  FetchFeesPaginated(page, limit int) ([]model.Fees, int64, error) {
 	return fees, total, err
 }
 
-func  FetchFeesById(id uint) (model.Fees, error) {
+func FetchFeesById(id uint) (model.Fees, error) {
 	var fees model.Fees
 	err := database.DB.Where("id = ? AND isactive = ?", id, true).First(&fees).Error
 	return fees, err
@@ -62,7 +61,7 @@ func FetchInactiveFees() ([]model.Fees, error) {
 // 	return r.FetchInactiveFees()
 // }
 
-func  DeleteFees(id uint) error {
+func DeleteFees(id uint) error {
 	var existing model.Fees
 	err := database.DB.Unscoped().Where("id = ?", id).First(&existing).Error
 	if err != nil {
@@ -83,6 +82,6 @@ func  DeleteFees(id uint) error {
 		Error
 }
 
-func  UpdateFeesById(fees *model.Fees) error {
+func UpdateFeesById(fees *model.Fees) error {
 	return database.DB.Save(fees).Error
 }

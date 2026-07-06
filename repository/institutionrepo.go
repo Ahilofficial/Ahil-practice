@@ -9,8 +9,7 @@ import (
 	"gorm.io/gorm"
 )
 
-
-func  CreateInstitution(institute *model.Institutions) error {
+func CreateInstitution(institute *model.Institutions) error {
 	var existing model.Institutions
 
 	err := database.DB.
@@ -28,7 +27,7 @@ func  CreateInstitution(institute *model.Institutions) error {
 	return database.DB.Create(institute).Error
 }
 
-func  FetchInstitution() ([]model.Institutions, error) {
+func FetchInstitution() ([]model.Institutions, error) {
 	var institution []model.Institutions
 	err := database.DB.Where("deleted_at IS NULL").
 		Preload("Departments", "deleted_at IS NULL").
@@ -39,7 +38,7 @@ func  FetchInstitution() ([]model.Institutions, error) {
 	return institution, err
 }
 
-func  FetchInstitutionPaginated(page, limit int) ([]model.Institutions, int64, error) {
+func FetchInstitutionPaginated(page, limit int) ([]model.Institutions, int64, error) {
 	var institution []model.Institutions
 	var total int64
 
@@ -58,7 +57,7 @@ func  FetchInstitutionPaginated(page, limit int) ([]model.Institutions, int64, e
 	return institution, total, err
 }
 
-func  FetchInstitutionById(id uint) (model.Institutions, error) {
+func FetchInstitutionById(id uint) (model.Institutions, error) {
 	var institution model.Institutions
 	err := database.DB.Where("id = ? AND deleted_at IS NULL", id).
 		Preload("Departments", "deleted_at IS NULL").
@@ -69,7 +68,7 @@ func  FetchInstitutionById(id uint) (model.Institutions, error) {
 	return institution, err
 }
 
-func  GetActiveInstitute() (model.Institutions, error) {
+func GetActiveInstitute() (model.Institutions, error) {
 	var institution model.Institutions
 
 	err := database.DB.
@@ -82,7 +81,7 @@ func  GetActiveInstitute() (model.Institutions, error) {
 	return institution, nil
 }
 
-func  GetInactiveInstitute() (model.Institutions, error) {
+func GetInactiveInstitute() (model.Institutions, error) {
 	var institute model.Institutions
 
 	err := database.DB.
@@ -95,7 +94,7 @@ func  GetInactiveInstitute() (model.Institutions, error) {
 	return institute, nil
 }
 
-func  FetchInstitutionDeleted() ([]model.Institutions, error) {
+func FetchInstitutionDeleted() ([]model.Institutions, error) {
 	var institution []model.Institutions
 	err := database.DB.Unscoped().Where("deleted_at IS NOT NULL").
 		Preload("Departments", "deleted_at IS NULL").
@@ -106,7 +105,7 @@ func  FetchInstitutionDeleted() ([]model.Institutions, error) {
 	return institution, err
 }
 
-func  DeleteInstitution(id uint) error {
+func DeleteInstitution(id uint) error {
 	var existing model.Institutions
 	err := database.DB.Unscoped().Where("id = ?", id).First(&existing).Error
 	if err != nil {
@@ -127,6 +126,6 @@ func  DeleteInstitution(id uint) error {
 		Error
 }
 
-func  UpdateInstitution(institute *model.Institutions) error {
+func UpdateInstitution(institute *model.Institutions) error {
 	return database.DB.Save(institute).Error
 }

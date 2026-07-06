@@ -9,7 +9,6 @@ import (
 	"gorm.io/gorm"
 )
 
-
 func CreateStudent(student *model.Student) error {
 	return database.DB.Create(student).Error
 }

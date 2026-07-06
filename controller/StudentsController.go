@@ -11,7 +11,7 @@ import (
 	"github.com/gofiber/fiber/v3"
 )
 
-func  CreateStudentControllers(c fiber.Ctx) error {
+func CreateStudentControllers(c fiber.Ctx) error {
 	var body dto.CreateStudentDTO
 
 	if err := c.Bind().Body(&body); err != nil {
@@ -35,7 +35,7 @@ func  CreateStudentControllers(c fiber.Ctx) error {
 		student,
 	)
 }
-func  GetActiveStudentController(c fiber.Ctx) error {
+func GetActiveStudentController(c fiber.Ctx) error {
 	student, err := services.GetActiveStudentService()
 	if err != nil {
 		return helper.Error(c, 404, err.Error())
@@ -48,7 +48,7 @@ func  GetActiveStudentController(c fiber.Ctx) error {
 	)
 }
 
-func  GetInactiveStudentController(c fiber.Ctx) error {
+func GetInactiveStudentController(c fiber.Ctx) error {
 	student, err := services.GetInactiveStudentService()
 	if err != nil {
 		return helper.Error(c, 404, err.Error())
@@ -61,7 +61,7 @@ func  GetInactiveStudentController(c fiber.Ctx) error {
 	)
 }
 
-func  GetAllStudentsControllers(c fiber.Ctx) error {
+func GetAllStudentsControllers(c fiber.Ctx) error {
 	pageStr := c.Query("page")
 	limitStr := c.Query("limit")
 
@@ -99,7 +99,7 @@ func  GetAllStudentsControllers(c fiber.Ctx) error {
 	)
 }
 
-func  GetStudentByIDControllers(c fiber.Ctx) error {
+func GetStudentByIDControllers(c fiber.Ctx) error {
 	idStr := c.Params("id")
 
 	id, err := strconv.ParseUint(idStr, 10, 32)
@@ -119,7 +119,7 @@ func  GetStudentByIDControllers(c fiber.Ctx) error {
 	)
 }
 
-func  GetDeletedStudentsController(c fiber.Ctx) error {
+func GetDeletedStudentsController(c fiber.Ctx) error {
 	students, err := services.GetStudentServiceDeleted()
 	if err != nil {
 		return helper.Error(c, 500, err.Error())
@@ -132,7 +132,7 @@ func  GetDeletedStudentsController(c fiber.Ctx) error {
 	)
 }
 
-func  UpdateStudentControllers(c fiber.Ctx) error {
+func UpdateStudentControllers(c fiber.Ctx) error {
 	idStr := c.Params("id")
 
 	id, err := strconv.ParseUint(idStr, 10, 32)
@@ -167,7 +167,7 @@ func  UpdateStudentControllers(c fiber.Ctx) error {
 	)
 }
 
-func  DeleteStudentControllers(c fiber.Ctx) error {
+func DeleteStudentControllers(c fiber.Ctx) error {
 	idStr := c.Params("id")
 
 	id, err := strconv.ParseUint(idStr, 10, 32)
@@ -186,7 +186,7 @@ func  DeleteStudentControllers(c fiber.Ctx) error {
 	)
 }
 
-func  FetchAllStudentsControllers(c fiber.Ctx) error {
+func FetchAllStudentsControllers(c fiber.Ctx) error {
 	students, err := services.GetStudentService()
 	if err != nil {
 		return helper.Error(c, 500, err.Error())

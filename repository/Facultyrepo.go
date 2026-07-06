@@ -9,12 +9,11 @@ import (
 	"gorm.io/gorm"
 )
 
-
-func  CreateFaculty(faculty *model.Faculty) error {
+func CreateFaculty(faculty *model.Faculty) error {
 	return database.DB.Create(faculty).Error
 }
 
-func  FetchFaculty() ([]model.Faculty, error) {
+func FetchFaculty() ([]model.Faculty, error) {
 	var faculty []model.Faculty
 	err := database.DB.Where("deleted_at IS NULL").
 		Preload("Students", "deleted_at IS NULL").
@@ -23,7 +22,7 @@ func  FetchFaculty() ([]model.Faculty, error) {
 	return faculty, err
 }
 
-func  FetchFacultyPaginated(page, limit int) ([]model.Faculty, int64, error) {
+func FetchFacultyPaginated(page, limit int) ([]model.Faculty, int64, error) {
 	var faculty []model.Faculty
 	var total int64
 
@@ -40,7 +39,7 @@ func  FetchFacultyPaginated(page, limit int) ([]model.Faculty, int64, error) {
 	return faculty, total, err
 }
 
-func  FetchFacultyById(id uint) (model.Faculty, error) {
+func FetchFacultyById(id uint) (model.Faculty, error) {
 	var faculty model.Faculty
 	err := database.DB.Where("id = ? AND isactive = ?", id, true).
 		Preload("Students", "deleted_at IS NULL").
@@ -49,7 +48,7 @@ func  FetchFacultyById(id uint) (model.Faculty, error) {
 	return faculty, err
 }
 
-func  GetActiveFacutly() (model.Faculty, error) {
+func GetActiveFacutly() (model.Faculty, error) {
 	var faculty model.Faculty
 
 	err := database.DB.
@@ -62,7 +61,7 @@ func  GetActiveFacutly() (model.Faculty, error) {
 	return faculty, nil
 }
 
-func  GetInactiveFaculty() (model.Faculty, error) {
+func GetInactiveFaculty() (model.Faculty, error) {
 	var faculty model.Faculty
 
 	err := database.DB.
@@ -75,7 +74,7 @@ func  GetInactiveFaculty() (model.Faculty, error) {
 	return faculty, nil
 }
 
-func  FetchFacultyDeleted() ([]model.Faculty, error) {
+func FetchFacultyDeleted() ([]model.Faculty, error) {
 	var faculty []model.Faculty
 	err := database.DB.Unscoped().Where("deleted_at IS NOT NULL").
 		Preload("Students", "deleted_at IS NULL").
@@ -84,7 +83,7 @@ func  FetchFacultyDeleted() ([]model.Faculty, error) {
 	return faculty, err
 }
 
-func  DeleteFaculty(id uint) error {
+func DeleteFaculty(id uint) error {
 	var existing model.Faculty
 	err := database.DB.Where("id = ?", id).First(&existing).Error
 	if err != nil {
@@ -105,6 +104,6 @@ func  DeleteFaculty(id uint) error {
 		Error
 }
 
-func  UpdateFacultyById(faculty *model.Faculty) error {
+func UpdateFacultyById(faculty *model.Faculty) error {
 	return database.DB.Save(faculty).Error
 }

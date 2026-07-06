@@ -11,8 +11,6 @@ import (
 	"github.com/gofiber/fiber/v3"
 )
 
-
-
 func GetInactiveFeesController(c fiber.Ctx) error {
 	fees, err := services.GetInactiveFeesService()
 	if err != nil {
@@ -120,8 +118,6 @@ func GetFeesByIDController(c fiber.Ctx) error {
 // 		fees,
 // 	)
 // }
-
-
 
 // func GetDeletedFeesController(c fiber.Ctx) error {
 // 	fees, err := services.GetFeesServiceDeleted()

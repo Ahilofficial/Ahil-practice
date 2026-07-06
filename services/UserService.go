@@ -13,9 +13,7 @@ var (
 	phoneRegex = regexp.MustCompile(`^[0-9]{10}$`)
 )
 
-
-
-func  SignUp(name, email, phone, password, role string) (model.User, error) {
+func SignUp(name, email, phone, password, role string) (model.User, error) {
 	if name == "" || email == "" || phone == "" || password == "" {
 		return model.User{}, errors.New("all fields (name, email, phone, password) are required")
 	}
@@ -55,17 +53,17 @@ func  SignUp(name, email, phone, password, role string) (model.User, error) {
 		IsActive: true,
 	}
 
-    if role == "" {
+	if role == "" {
 		role = "user"
-	}else if role != "user" {
+	} else if role != "user" {
 		return model.User{}, errors.New("can't able to assign role other than user during signup")
 	}
-	
+
 	err = repository.CreateUser(&user)
 	if err != nil {
 		return model.User{}, err
 	}
-		
+
 	err = repository.AssignRoleToUser(user.ID, role)
 	if err != nil {
 		return model.User{}, err
@@ -74,7 +72,7 @@ func  SignUp(name, email, phone, password, role string) (model.User, error) {
 	return user, nil
 }
 
-func  SignIn(email, password string) (string, error) {
+func SignIn(email, password string) (string, error) {
 	if email == "" || password == "" {
 		return "", errors.New("email and password are required")
 	}
@@ -94,12 +92,12 @@ func  SignIn(email, password string) (string, error) {
 		return "", errors.New("invalid email or password")
 	}
 
-	// Generate a JWT Token  
+	// Generate a JWT Token
 	return utils.GenerateToken(user.ID)
 }
 
-func  AssignRole(userID uint, roleName string) error {
-	if roleName != "user" && roleName != "principal" && roleName != "faculty" && roleName != "student"  && roleName != "admin" {
+func AssignRole(userID uint, roleName string) error {
+	if roleName != "user" && roleName != "principal" && roleName != "faculty" && roleName != "student" && roleName != "admin" {
 		return errors.New("invalid role name")
 	}
 	return repository.AssignRoleToUser(userID, roleName)

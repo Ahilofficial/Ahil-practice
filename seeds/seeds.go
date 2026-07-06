@@ -42,7 +42,7 @@ func seedRoles() {
 	roles := []string{"admin", "principal", "faculty", "student", "user"}
 	for _, rName := range roles {
 		var role model.Role
-		err := database.DB.Where("name = ?", rName).First(&role).Error 
+		err := database.DB.Where("name = ?", rName).First(&role).Error
 		if err != nil {
 			role = model.Role{Name: rName}
 			if createErr := database.DB.Create(&role).Error; createErr != nil {
@@ -77,7 +77,7 @@ func assignPermissionsToRoles() {
 		"create_fees", "view_fees", "update_fees", "delete_fees",
 		"assign_roles",
 	}
-	
+
 	mapRolePerms("principal", principalPerms)
 	mapRolePerms("faculty", facultyPerms)
 	mapRolePerms("student", studentPerms)

@@ -8,7 +8,6 @@ import (
 	"github.com/gofiber/fiber/v3"
 )
 
-
 func SignUpController(c fiber.Ctx) error {
 	var body dto.SignUpDTO
 	if err := c.Bind().Body(&body); err != nil {

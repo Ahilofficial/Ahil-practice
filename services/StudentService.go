@@ -5,7 +5,6 @@ import (
 	"backend_institutions/repository"
 )
 
-
 func CreateStudentService(student *model.Student) error {
 	return repository.CreateStudent(student)
 }

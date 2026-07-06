@@ -9,8 +9,6 @@ import (
 	"gorm.io/gorm"
 )
 
-
-
 func CreateDepartment(department *model.Department) error {
 	return database.DB.Create(department).Error
 }

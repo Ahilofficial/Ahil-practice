@@ -10,9 +10,7 @@ import (
 	"strconv"
 )
 
-
-
-func  CreateInstituteController(c fiber.Ctx) error {
+func CreateInstituteController(c fiber.Ctx) error {
 	var body dto.CreateInstitutionDTO
 
 	if err := c.Bind().Body(&body); err != nil {
@@ -36,7 +34,7 @@ func  CreateInstituteController(c fiber.Ctx) error {
 	)
 }
 
-func  GetAllInstitutesController(c fiber.Ctx) error {
+func GetAllInstitutesController(c fiber.Ctx) error {
 	pageStr := c.Query("page")
 	limitStr := c.Query("limit")
 
@@ -74,7 +72,7 @@ func  GetAllInstitutesController(c fiber.Ctx) error {
 	)
 }
 
-func  GetInstituteByIDController(c fiber.Ctx) error {
+func GetInstituteByIDController(c fiber.Ctx) error {
 	idstr := c.Params("id")
 	id, err := strconv.ParseUint(idstr, 10, 32)
 	if err != nil {
@@ -93,7 +91,7 @@ func  GetInstituteByIDController(c fiber.Ctx) error {
 	)
 }
 
-func  GetDeletedInstitutesController(c fiber.Ctx) error {
+func GetDeletedInstitutesController(c fiber.Ctx) error {
 	institutes, err := services.GetInstituteServiceDeleted()
 	if err != nil {
 		return helper.Error(c, 500, err.Error())
@@ -105,7 +103,7 @@ func  GetDeletedInstitutesController(c fiber.Ctx) error {
 		institutes,
 	)
 }
-func  GetActiveInstituteController(c fiber.Ctx) error {
+func GetActiveInstituteController(c fiber.Ctx) error {
 	institute, err := services.GetActiveInstitute()
 	if err != nil {
 		return helper.Error(c, 404, err.Error())
@@ -118,7 +116,7 @@ func  GetActiveInstituteController(c fiber.Ctx) error {
 	)
 }
 
-func  GetInactiveInstituteController(c fiber.Ctx) error {
+func GetInactiveInstituteController(c fiber.Ctx) error {
 	institute, err := services.GetInactiveInstitute()
 	if err != nil {
 		return helper.Error(c, 404, err.Error())
@@ -131,7 +129,7 @@ func  GetInactiveInstituteController(c fiber.Ctx) error {
 	)
 }
 
-func  UpdateInstituteController(c fiber.Ctx) error {
+func UpdateInstituteController(c fiber.Ctx) error {
 	idParam := c.Params("id")
 
 	id, err := strconv.ParseUint(idParam, 10, 32)
@@ -167,7 +165,7 @@ func  UpdateInstituteController(c fiber.Ctx) error {
 	)
 }
 
-func  DeleteInstituteController(c fiber.Ctx) error {
+func DeleteInstituteController(c fiber.Ctx) error {
 	idStr := c.Params("id")
 
 	id, err := strconv.ParseUint(idStr, 10, 32)
@@ -186,7 +184,7 @@ func  DeleteInstituteController(c fiber.Ctx) error {
 	)
 }
 
-func  FetchAllInstitutesController(c fiber.Ctx) error {
+func FetchAllInstitutesController(c fiber.Ctx) error {
 	institutes, err := services.GetInstituteService()
 	if err != nil {
 		return helper.Error(c, 500, err.Error())

@@ -3,10 +3,10 @@ package middleware
 import (
 	"backend_institutions/helper"
 	"fmt"
-	"os"
-	"strings"
 	"github.com/gofiber/fiber/v3"
 	"github.com/golang-jwt/jwt/v5"
+	"os"
+	"strings"
 )
 
 func AuthRequired() fiber.Handler {

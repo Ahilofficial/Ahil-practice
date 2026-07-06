@@ -5,10 +5,10 @@ import (
 	"backend_institutions/model"
 	"backend_institutions/routes"
 	"backend_institutions/seeds"
-	"log"
-	"os"
 	"github.com/gofiber/fiber/v3"
 	"github.com/joho/godotenv"
+	"log"
+	"os"
 )
 
 func main() {
@@ -36,10 +36,10 @@ func main() {
 	seeds.RunSeeders()
 
 	routes.SetUpRoutes(app)
-	
-	port:=os.Getenv("APP_PORT")
-	if port==""{
-		port="8090"
+
+	port := os.Getenv("APP_PORT")
+	if port == "" {
+		port = "8090"
 	}
 	log.Printf("Server starting on :%s", port)
 
