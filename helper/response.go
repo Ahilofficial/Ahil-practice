@@ -2,11 +2,7 @@ package helper
 
 import "github.com/gofiber/fiber/v3"
 
-func Success(
-	c fiber.Ctx,
-	message string,
-	data any,
-) error {
+func Success(c fiber.Ctx, message string, data any,) error {
 	return c.JSON(fiber.Map{
 		"success": true,
 		"message": message,
