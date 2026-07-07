@@ -3,14 +3,12 @@ package main
 import (
 	"backend_institutions/internal/database"
 	"backend_institutions/internal/model"
-	"backend_institutions/internal/routes"
 	"backend_institutions/internal/seeds"
 	"log"
 	"os"
 
 	"backend_institutions/internal/wire"
 
-	"github.com/gofiber/fiber/v3"
 	"github.com/joho/godotenv"
 )
 
@@ -20,7 +18,6 @@ func main() {
 		log.Println("Warning: Error loading .env file, relying on environment variables or defaults")
 	}
 
-	app := fiber.New()
 	database.Connect()
 	err = database.DB.AutoMigrate(
 		&model.Institutions{},
@@ -38,14 +35,10 @@ func main() {
 
 	seeds.RunSeeders()
 
-	router := wire.InitializeRouter()
+	router, err := wire.InitializeRouter()
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("Failed to initialize dependency injection: ", err)
 	}
-
-	router.Start()
-
-	routes.SetUpRoutes(app)
 
 	port := os.Getenv("APP_PORT")
 	if port == "" {
@@ -53,5 +46,5 @@ func main() {
 	}
 	log.Printf("Server starting on :%s", port)
 
-	log.Fatal(app.Listen(":" + port))
+	log.Fatal(router.App.Listen(":" + port))
 }
