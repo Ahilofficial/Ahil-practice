@@ -5,10 +5,13 @@ import (
 	"backend_institutions/internal/model"
 	"backend_institutions/internal/routes"
 	"backend_institutions/internal/seeds"
-	"github.com/gofiber/fiber/v3"
-	"github.com/joho/godotenv"
 	"log"
 	"os"
+
+	"backend_institutions/internal/wire"
+
+	"github.com/gofiber/fiber/v3"
+	"github.com/joho/godotenv"
 )
 
 func main() {
@@ -34,6 +37,13 @@ func main() {
 	}
 
 	seeds.RunSeeders()
+
+	router := wire.InitializeRouter()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	router.Start()
 
 	routes.SetUpRoutes(app)
 
