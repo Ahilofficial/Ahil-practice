@@ -35,9 +35,9 @@ func main() {
 
 	seeds.RunSeeders()
 
-	router, err := wire.InitializeRouter()
+	app, err := wire.InitializeApp()
 	if err != nil {
-		log.Fatal("Failed to initialize dependency injection: ", err)
+		log.Fatal("Failed to initialize application: ", err)
 	}
 
 	port := os.Getenv("APP_PORT")
@@ -46,5 +46,5 @@ func main() {
 	}
 	log.Printf("Server starting on :%s", port)
 
-	log.Fatal(router.App.Listen(":" + port))
+	log.Fatal(app.Listen(":" + port))
 }
