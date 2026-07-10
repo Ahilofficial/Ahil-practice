@@ -1,5 +1,7 @@
 package constants
 
+// import "google.golang.org/grpc/admin"
+
 const (
 	AdminRole     = "admin"
 	PrincipalRole = "principal"
@@ -38,7 +40,7 @@ const (
 )
 
 var PermissionGroups = map[string][]string{
-	
+
 	"institute": {
 		PermissionCreateInstitutes,
 		PermissionViewInstitutes,
@@ -68,4 +70,12 @@ var PermissionGroups = map[string][]string{
 	"other": {
 		PermissionAssignRoles,
 	},
+	
+}
+
+var Admin []string
+func init() {
+	for _, roles := range PermissionGroups {
+		Admin = append(Admin, roles...)
+	}
 }

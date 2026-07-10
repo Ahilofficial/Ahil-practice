@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"backend_institutions/internal/constants"
 	"backend_institutions/internal/database"
 	"backend_institutions/internal/helper"
 	"backend_institutions/internal/model"
@@ -25,7 +26,7 @@ func RequirePermission(permission string) fiber.Handler {
 		}
 
 		for _, role := range user.Roles {
-			if role.Name == "admin" {
+			if role.Name ==constants.AdminRole {
 				return c.Next()
 			}
 			for _, perm := range role.Permissions {

@@ -1,10 +1,10 @@
 package repository
 
 import (
+	// "backend_institutions/internal/dto"
 	"backend_institutions/internal/model"
 	"errors"
 	"time"
-	"backend_institutions/internal/dto"
 
 	"gorm.io/gorm"
 )
@@ -15,112 +15,6 @@ type DepartmentRepository struct {
 
 func NewDepartmentRepository(db *gorm.DB) *DepartmentRepository {
 	return &DepartmentRepository{db: db}
-}
-
-
-
-func (r *DepartmentRepository) fetchWithRelations(baseQuery string, args ...interface{}) ([]model.Department, error) {
-	var rows []dto.DepartmentFlatRow
-	query := `
-	SELECT 
-		d.id AS dept_id, d.department_name, d.institution_id, d.is_active AS dept_active,
-		f.id AS fac_id, f.name AS fac_name, f.gender AS fac_gender, f.joining_date AS fac_joining_date, f.is_active AS fac_active,
-		s.id AS stud_id, s.name AS stud_name, s.email AS stud_email, s.gender AS stud_gender, s.is_active AS stud_active,
-		fe.id AS fee_id, fe.payment_mode AS fee_payment_mode, fe.amount AS fee_amount, fe.is_active AS fee_active
-	FROM (` + baseQuery + `) d
-	LEFT JOIN faculties f ON f.department_id = d.id AND f.deleted_at IS NULL
-	LEFT JOIN students s ON s.faculty_id = f.id AND s.deleted_at IS NULL
-	LEFT JOIN fees fe ON fe.student_id = s.id AND fe.deleted_at IS NULL
-	ORDER BY d.id, f.id, s.id, fe.id`
-
-	err := r.db.Raw(query, args...).Scan(&rows).Error
-	if err != nil {
-		return nil, err
-	}
-
-	deptMap := make(map[uint]*model.Department)
-	facMap := make(map[uint]*model.Faculty)
-	studMap := make(map[uint]*model.Student)
-
-	var orderedIDs []uint
-	for _, row := range rows {
-		dept, exists := deptMap[row.DeptID]
-		if !exists {
-			dept = &model.Department{
-				ID:             row.DeptID,
-				DepartmentName: row.DepartmentName,
-				InstitutionID:  row.InstitutionID,
-				IsActive:       row.DeptActive,
-				Faculties:      []model.Faculty{},
-			}
-			deptMap[row.DeptID] = dept
-			orderedIDs = append(orderedIDs, row.DeptID)
-		}
-
-		if row.FacID != nil {
-			fac, exists := facMap[*row.FacID]
-			if !exists {
-				fac = &model.Faculty{
-					ID:           *row.FacID,
-					Name:         *row.FacName,
-					Gender:       *row.FacGender,
-					JoiningDate:  *row.FacJoiningDate,
-					DepartmentID: row.DeptID,
-					IsActive:     *row.FacActive,
-					Students:     []model.Student{},
-				}
-				facMap[*row.FacID] = fac
-				dept.Faculties = append(dept.Faculties, *fac)
-				fac = &dept.Faculties[len(dept.Faculties)-1]
-				facMap[*row.FacID] = fac
-			}
-
-			if row.StudID != nil {
-				stud, exists := studMap[*row.StudID]
-				if !exists {
-					stud = &model.Student{
-						ID:        *row.StudID,
-						Name:      *row.StudName,
-						Email:     *row.StudEmail,
-						Gender:    *row.StudGender,
-						FacultyID: *row.FacID,
-						IsActive:  *row.StudActive,
-						Fees:      []model.Fees{},
-					}
-					studMap[*row.StudID] = stud
-					fac.Students = append(fac.Students, *stud)
-					stud = &fac.Students[len(fac.Students)-1]
-					studMap[*row.StudID] = stud
-				}
-
-				if row.FeeID != nil {
-					feeFound := false
-					for _, ef := range stud.Fees {
-						if ef.ID == *row.FeeID {
-							feeFound = true
-							break
-						}
-					}
-					if !feeFound {
-						fee := model.Fees{
-							ID:          *row.FeeID,
-							PaymentMode: *row.FeePaymentMode,
-							Amount:      *row.FeeAmount,
-							StudentID:   *row.StudID,
-							IsActive:    *row.FeeActive,
-						}
-						stud.Fees = append(stud.Fees, fee)
-					}
-				}
-			}
-		}
-	}
-
-	result := make([]model.Department, len(orderedIDs))
-	for i, id := range orderedIDs {
-		result[i] = *deptMap[id]
-	}
-	return result, nil
 }
 
 func (r *DepartmentRepository) CreateDepartment(department *model.Department) error {
@@ -159,7 +53,9 @@ func (r *DepartmentRepository) CreateDepartment(department *model.Department) er
 }
 
 func (r *DepartmentRepository) FetchDepartment() ([]model.Department, error) {
-	return r.fetchWithRelations("SELECT * FROM departments WHERE deleted_at IS NULL")
+	var depts []model.Department
+	err := r.db.Raw("SELECT * FROM departments WHERE deleted_at IS NULL").Scan(&depts).Error
+	return depts, err
 }
 
 func (r *DepartmentRepository) FetchDepartmentPaginated(page, limit int) ([]model.Department, int64, error) {
@@ -170,12 +66,14 @@ func (r *DepartmentRepository) FetchDepartmentPaginated(page, limit int) ([]mode
 	}
 
 	offset := (page - 1) * limit
-	depts, err := r.fetchWithRelations("SELECT * FROM departments WHERE deleted_at IS NULL LIMIT ? OFFSET ?", limit, offset)
+	var depts []model.Department
+	err = r.db.Raw("SELECT * FROM departments WHERE deleted_at IS NULL LIMIT ? OFFSET ?", limit, offset).Scan(&depts).Error
 	return depts, total, err
 }
 
 func (r *DepartmentRepository) FetchDepartmentById(id uint) (model.Department, error) {
-	depts, err := r.fetchWithRelations("SELECT * FROM departments WHERE id = ? AND deleted_at IS NULL LIMIT 1", id)
+	var depts []model.Department
+	err := r.db.Raw("SELECT * FROM departments WHERE id = ? AND deleted_at IS NULL LIMIT 1", id).Scan(&depts).Error
 	if err != nil {
 		return model.Department{}, err
 	}
@@ -186,11 +84,14 @@ func (r *DepartmentRepository) FetchDepartmentById(id uint) (model.Department, e
 }
 
 func (r *DepartmentRepository) FetchDepartmentDeleted() ([]model.Department, error) {
-	return r.fetchWithRelations("SELECT * FROM departments WHERE deleted_at IS NOT NULL")
+	var depts []model.Department
+	err := r.db.Raw("SELECT * FROM departments WHERE deleted_at IS NOT NULL").Scan(&depts).Error
+	return depts, err
 }
 
 func (r *DepartmentRepository) GetActiveDepartment() (model.Department, error) {
-	depts, err := r.fetchWithRelations("SELECT * FROM departments WHERE is_active = ? AND deleted_at IS NULL LIMIT 1", true)
+	var depts []model.Department
+	err := r.db.Raw("SELECT * FROM departments WHERE is_active = ? AND deleted_at IS NULL LIMIT 1", true).Scan(&depts).Error
 	if err != nil {
 		return model.Department{}, err
 	}
@@ -201,7 +102,8 @@ func (r *DepartmentRepository) GetActiveDepartment() (model.Department, error) {
 }
 
 func (r *DepartmentRepository) GetInactiveDepartment() (model.Department, error) {
-	depts, err := r.fetchWithRelations("SELECT * FROM departments WHERE is_active = ? AND deleted_at IS NULL LIMIT 1", false)
+	var depts []model.Department
+	err := r.db.Raw("SELECT * FROM departments WHERE is_active = ? AND deleted_at IS NULL LIMIT 1", false).Scan(&depts).Error
 	if err != nil {
 		return model.Department{}, err
 	}

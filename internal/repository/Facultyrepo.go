@@ -4,7 +4,7 @@ import (
 	"backend_institutions/internal/model"
 	"errors"
 	"time"
-	"backend_institutions/internal/dto"
+	// "backend_institutions/internal/dto"
 
 	"gorm.io/gorm"
 )
@@ -19,91 +19,6 @@ func NewFacultyRepository(db *gorm.DB) *FacultyRepository {
 	}
 }
 
-
-
-func (r *FacultyRepository) fetchWithRelations(baseQuery string, args ...interface{}) ([]model.Faculty, error) {
-	var rows []dto.FacultyFlatRow
-	query := `
-	SELECT 
-		f.id AS fac_id, f.name AS fac_name, f.gender AS fac_gender, f.joining_date AS fac_joining_date, f.department_id, f.is_active AS fac_active,
-		s.id AS stud_id, s.name AS stud_name, s.email AS stud_email, s.gender AS stud_gender, s.is_active AS stud_active,
-		fe.id AS fee_id, fe.payment_mode AS fee_payment_mode, fe.amount AS fee_amount, fe.is_active AS fee_active
-	FROM (` + baseQuery + `) f
-	LEFT JOIN students s ON s.faculty_id = f.id AND s.deleted_at IS NULL
-	LEFT JOIN fees fe ON fe.student_id = s.id AND fe.deleted_at IS NULL
-	ORDER BY f.id, s.id, fe.id`
-
-	err := r.db.Raw(query, args...).Scan(&rows).Error
-	if err != nil {
-		return nil, err
-	}
-
-	facMap := make(map[uint]*model.Faculty)
-	studMap := make(map[uint]*model.Student)
-
-	var orderedIDs []uint
-	for _, row := range rows {
-		fac, exists := facMap[row.FacID]
-		if !exists {
-			fac = &model.Faculty{
-				ID:           row.FacID,
-				Name:         row.FacName,
-				Gender:       row.FacGender,
-				JoiningDate:  row.FacJoiningDate,
-				DepartmentID: row.DepartmentID,
-				IsActive:     row.FacActive,
-				Students:     []model.Student{},
-			}
-			facMap[row.FacID] = fac
-			orderedIDs = append(orderedIDs, row.FacID)
-		}
-
-		if row.StudID != nil {
-			stud, exists := studMap[*row.StudID]
-			if !exists {
-				stud = &model.Student{
-					ID:        *row.StudID,
-					Name:      *row.StudName,
-					Email:     *row.StudEmail,
-					Gender:    *row.StudGender,
-					FacultyID: row.FacID,
-					IsActive:  *row.StudActive,
-					Fees:      []model.Fees{},
-				}
-				studMap[*row.StudID] = stud
-				fac.Students = append(fac.Students, *stud)
-				stud = &fac.Students[len(fac.Students)-1]
-				studMap[*row.StudID] = stud
-			}
-
-			if row.FeeID != nil {
-				feeFound := false
-				for _, ef := range stud.Fees {
-					if ef.ID == *row.FeeID {
-						feeFound = true
-						break
-					}
-				}
-				if !feeFound {
-					fee := model.Fees{
-						ID:          *row.FeeID,
-						PaymentMode: *row.FeePaymentMode,
-						Amount:      *row.FeeAmount,
-						StudentID:   *row.StudID,
-						IsActive:    *row.FeeActive,
-					}
-					stud.Fees = append(stud.Fees, fee)
-				}
-			}
-		}
-	}
-
-	result := make([]model.Faculty, len(orderedIDs))
-	for i, id := range orderedIDs {
-		result[i] = *facMap[id]
-	}
-	return result, nil
-}
 
 func (r *FacultyRepository) CreateFaculty(faculty *model.Faculty) error {
 	db, err := r.db.DB()
@@ -150,7 +65,9 @@ func (r *FacultyRepository) CreateFaculty(faculty *model.Faculty) error {
 }
 
 func (r *FacultyRepository) FetchFaculty() ([]model.Faculty, error) {
-	return r.fetchWithRelations("SELECT * FROM faculties WHERE deleted_at IS NULL")
+	var facs []model.Faculty
+	err := r.db.Raw("SELECT * FROM faculties WHERE deleted_at IS NULL").Scan(&facs).Error
+	return facs, err
 }
 
 func (r *FacultyRepository) FetchFacultyPaginated(page, limit int) ([]model.Faculty, int64, error) {
@@ -161,12 +78,14 @@ func (r *FacultyRepository) FetchFacultyPaginated(page, limit int) ([]model.Facu
 	}
 
 	offset := (page - 1) * limit
-	facs, err := r.fetchWithRelations("SELECT * FROM faculties WHERE deleted_at IS NULL LIMIT ? OFFSET ?", limit, offset)
+	var facs []model.Faculty
+	err = r.db.Raw("SELECT * FROM faculties WHERE deleted_at IS NULL LIMIT ? OFFSET ?", limit, offset).Scan(&facs).Error
 	return facs, total, err
 }
 
 func (r *FacultyRepository) FetchFacultyById(id uint) (model.Faculty, error) {
-	facs, err := r.fetchWithRelations("SELECT * FROM faculties WHERE id = ? AND deleted_at IS NULL LIMIT 1", id)
+	var facs []model.Faculty
+	err := r.db.Raw("SELECT * FROM faculties WHERE id = ? AND deleted_at IS NULL LIMIT 1", id).Scan(&facs).Error
 	if err != nil {
 		return model.Faculty{}, err
 	}
@@ -177,11 +96,14 @@ func (r *FacultyRepository) FetchFacultyById(id uint) (model.Faculty, error) {
 }
 
 func (r *FacultyRepository) FetchFacultyDeleted() ([]model.Faculty, error) {
-	return r.fetchWithRelations("SELECT * FROM faculties WHERE deleted_at IS NOT NULL")
+	var facs []model.Faculty
+	err := r.db.Raw("SELECT * FROM faculties WHERE deleted_at IS NOT NULL").Scan(&facs).Error
+	return facs, err
 }
 
 func (r *FacultyRepository) GetActiveFacutly() (model.Faculty, error) {
-	facs, err := r.fetchWithRelations("SELECT * FROM faculties WHERE is_active = ? AND deleted_at IS NULL LIMIT 1", true)
+	var facs []model.Faculty
+	err := r.db.Raw("SELECT * FROM faculties WHERE is_active = ? AND deleted_at IS NULL LIMIT 1", true).Scan(&facs).Error
 	if err != nil {
 		return model.Faculty{}, err
 	}
@@ -192,7 +114,8 @@ func (r *FacultyRepository) GetActiveFacutly() (model.Faculty, error) {
 }
 
 func (r *FacultyRepository) GetInactiveFaculty() (model.Faculty, error) {
-	facs, err := r.fetchWithRelations("SELECT * FROM faculties WHERE is_active = ? AND deleted_at IS NULL LIMIT 1", false)
+	var facs []model.Faculty
+	err := r.db.Raw("SELECT * FROM faculties WHERE is_active = ? AND deleted_at IS NULL LIMIT 1", false).Scan(&facs).Error
 	if err != nil {
 		return model.Faculty{}, err
 	}

@@ -4,7 +4,7 @@ import (
 	"backend_institutions/internal/model"
 	"errors"
 	"time"
-	"backend_institutions/internal/dto"
+	// "backend_institutions/internal/dto"
 	"gorm.io/gorm"
 )
 
@@ -17,66 +17,6 @@ func NewStudentRepository(db *gorm.DB) *StudentRepository {
 }
 
 
-func (r *StudentRepository) fetchWithRelations(baseQuery string, args ...interface{}) ([]model.Student, error) {
-	var rows []dto.StudentFlatRow
-	query := `
-	SELECT 
-		s.id AS stud_id, s.name AS stud_name, s.email AS stud_email, s.gender AS stud_gender, s.faculty_id, s.is_active AS stud_active,
-		fe.id AS fee_id, fe.payment_mode AS fee_payment_mode, fe.amount AS fee_amount, fe.is_active AS fee_active
-	FROM (` + baseQuery + `) s
-	LEFT JOIN fees fe ON fe.student_id = s.id AND fe.deleted_at IS NULL
-	ORDER BY s.id, fe.id`
-
-	err := r.db.Raw(query, args...).Scan(&rows).Error
-	if err != nil {
-		return nil, err
-	}
-
-	studMap := make(map[uint]*model.Student)
-	var orderedIDs []uint
-	for _, row := range rows {
-		stud, exists := studMap[row.StudID]
-		if !exists {
-			stud = &model.Student{
-				ID:        row.StudID,
-				Name:      row.StudName,
-				Email:     row.StudEmail,
-				Gender:    row.StudGender,
-				FacultyID: row.FacultyID,
-				IsActive:  row.StudActive,
-				Fees:      []model.Fees{},
-			}
-			studMap[row.StudID] = stud
-			orderedIDs = append(orderedIDs, row.StudID)
-		}
-
-		if row.FeeID != nil {
-			feeFound := false
-			for _, ef := range stud.Fees {
-				if ef.ID == *row.FeeID {
-					feeFound = true
-					break
-				}
-			}
-			if !feeFound {
-				fee := model.Fees{
-					ID:          *row.FeeID,
-					PaymentMode: *row.FeePaymentMode,
-					Amount:      *row.FeeAmount,
-					StudentID:   row.StudID,
-					IsActive:    *row.FeeActive,
-				}
-				stud.Fees = append(stud.Fees, fee)
-			}
-		}
-	}
-
-	result := make([]model.Student, len(orderedIDs))
-	for i, id := range orderedIDs {
-		result[i] = *studMap[id]
-	}
-	return result, nil
-}
 
 func (r *StudentRepository) CreateStudent(student *model.Student) error {
 	db, err := r.db.DB()
@@ -114,11 +54,14 @@ func (r *StudentRepository) CreateStudent(student *model.Student) error {
 }
 
 func (r *StudentRepository) FetchStudent() ([]model.Student, error) {
-	return r.fetchWithRelations("SELECT * FROM students WHERE deleted_at IS NULL")
+	var studs []model.Student
+	err := r.db.Raw("SELECT * FROM students WHERE deleted_at IS NULL").Scan(&studs).Error
+	return studs, err
 }
 
 func (r *StudentRepository) GetActiveStudent() (model.Student, error) {
-	studs, err := r.fetchWithRelations("SELECT * FROM students WHERE is_active = ? AND deleted_at IS NULL LIMIT 1", true)
+	var studs []model.Student
+	err := r.db.Raw("SELECT * FROM students WHERE is_active = ? AND deleted_at IS NULL LIMIT 1", true).Scan(&studs).Error
 	if err != nil {
 		return model.Student{}, err
 	}
@@ -129,7 +72,8 @@ func (r *StudentRepository) GetActiveStudent() (model.Student, error) {
 }
 
 func (r *StudentRepository) GetInactiveStudent() (model.Student, error) {
-	studs, err := r.fetchWithRelations("SELECT * FROM students WHERE is_active = ? AND deleted_at IS NULL LIMIT 1", false)
+	var studs []model.Student
+	err := r.db.Raw("SELECT * FROM students WHERE is_active = ? AND deleted_at IS NULL LIMIT 1", false).Scan(&studs).Error
 	if err != nil {
 		return model.Student{}, err
 	}
@@ -147,12 +91,14 @@ func (r *StudentRepository) FetchStudentPaginated(page, limit int) ([]model.Stud
 	}
 
 	offset := (page - 1) * limit
-	studs, err := r.fetchWithRelations("SELECT * FROM students WHERE deleted_at IS NULL LIMIT ? OFFSET ?", limit, offset)
+	var studs []model.Student
+	err = r.db.Raw("SELECT * FROM students WHERE deleted_at IS NULL LIMIT ? OFFSET ?", limit, offset).Scan(&studs).Error
 	return studs, total, err
 }
 
 func (r *StudentRepository) FetchStudentById(id uint) (model.Student, error) {
-	studs, err := r.fetchWithRelations("SELECT * FROM students WHERE id = ? AND deleted_at IS NULL LIMIT 1", id)
+	var studs []model.Student
+	err := r.db.Raw("SELECT * FROM students WHERE id = ? AND deleted_at IS NULL LIMIT 1", id).Scan(&studs).Error
 	if err != nil {
 		return model.Student{}, err
 	}
@@ -163,7 +109,9 @@ func (r *StudentRepository) FetchStudentById(id uint) (model.Student, error) {
 }
 
 func (r *StudentRepository) FetchStudentDeleted() ([]model.Student, error) {
-	return r.fetchWithRelations("SELECT * FROM students WHERE deleted_at IS NOT NULL")
+	var studs []model.Student
+	err := r.db.Raw("SELECT * FROM students WHERE deleted_at IS NOT NULL").Scan(&studs).Error
+	return studs, err
 }
 
 func (r *StudentRepository) DeleteStudent(id uint) error {
