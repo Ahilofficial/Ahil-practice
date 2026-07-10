@@ -1,0 +1,45 @@
+//go:build wireinject
+// +build wireinject
+
+package wire
+
+import (
+	"backend_institutions/internal/controller"
+	"backend_institutions/internal/database"
+	"backend_institutions/internal/repository"
+	"backend_institutions/internal/routes"
+	"backend_institutions/internal/services"
+
+	"github.com/gofiber/fiber/v3"
+	"github.com/google/wire"
+)
+
+func InitializeApp() (*fiber.App, error) {
+	wire.Build(
+		database.NewDB,
+
+		repository.NewUserRepository,
+		repository.NewInstitutionRepository,
+		repository.NewDepartmentRepository,
+		repository.NewFacultyRepository,
+		repository.NewStudentRepository,
+		repository.NewFeesRepository,
+
+		services.NewUserService,
+		services.NewInstituteService,
+		services.NewDepartmentService,
+		services.NewFacultyService,
+		services.NewStudentService,
+		services.NewFeesService,
+
+		controller.NewUserController,
+		controller.NewInstituteController,
+		controller.NewDepartmentController,
+		controller.NewFacultyController,
+		controller.NewStudentController,
+		controller.NewFeesController,
+
+		routes.NewApp,
+	)
+	return nil, nil
+}

@@ -1,0 +1,37 @@
+func Seeds(){
+    SeedPermission()
+    SeedRoles()
+    SeedRolesAndPermission()
+}
+func SeedPermission(){
+    perm:=[]string{
+        create, view, update, delete
+    }
+    for _,perm:=range Permission{
+        var perm model.Permission
+        if err:=database.DB.Where("name"=perm).Find(&perm);err!=nil{
+            return model.Permission{
+                Name=perm
+            }
+             if createErr:=database.DB.create(&perm).Error;createErr!=nil{
+            return "error"
+        }
+        }
+       
+    }
+}
+func SeedRolesAndPermission(){
+    adminroles:=[]string{create, view, update, delete}
+    principalroles:=[]string{create,view}
+    studentrole:=[]string{create}
+    maproles("principal",principalroles)
+    maproles("admin",adminroles)
+    maproles("student",studentrole)
+
+}
+
+func maproles(string roles,string Permission){
+    for _,permi:=range perm{
+        
+    } 
+}
