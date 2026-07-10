@@ -8,34 +8,60 @@ const (
 	UserRole      = "user"
 )
 
+const (
+	PermissionCreateInstitutes = "CREATE_INSTITUTION"
+	PermissionViewInstitutes   = "VIEW_INSTITUTIONS"
+	PermissionUpdateInstitutes = "UPDATE_INSTITUTION"
+	PermissionDeleteInstitutes = "DELETE_INSTITUTION"
+
+	PermissionCreateDepartments = "CREATE_DEPARTMENT"
+	PermissionViewDepartments   = "VIEW_DEPARTMENTS"
+	PermissionUpdateDepartments = "UPDATE_DEPARTMENT"
+	PermissionDeleteDepartments = "DELETE_DEPARTMENT"
+
+	PermissionCreateFaculties = "CREATE_FACULTY"
+	PermissionViewFaculties   = "VIEW_FACULTIES"
+	PermissionUpdateFaculties = "UPDATE_FACULTY"
+	PermissionDeleteFaculties = "DELETE_FACULTY"
+
+	PermissionCreateStudents = "CREATE_STUDENT"
+	PermissionViewStudents   = "VIEW_STUDENTS"
+	PermissionUpdateStudents = "UPDATE_STUDENT"
+	PermissionDeleteStudents = "DELETE_STUDENT"
+
+	PermissionCreateFees = "CREATE_FEE"
+	PermissionViewFees   = "VIEW_FEES"
+	PermissionUpdateFees = "UPDATE_FEE"
+	PermissionDeleteFees = "DELETE_FEE"
+
+	PermissionAssignRoles = "ASSIGN_ROLE"
+)
+
 var (
-	rolePermissions = map[string][]string{
+	RolePermissions = map[string][]string{
 		AdminRole: {
-			"CREATE_INSTITUTION",
-			"VIEW_INSTITUTIONS",
-			"UPDATE_INSTITUTION",
-			"DELETE_INSTITUTION",
+			PermissionCreateInstitutes,
+			PermissionViewInstitutes,
+			PermissionUpdateInstitutes,
+			PermissionDeleteInstitutes,
 		},
-
 		PrincipalRole: {
-			"VIEW_INSTITUTIONS",
-			"UPDATE_INSTITUTION",
+			PermissionViewInstitutes,
+			PermissionUpdateInstitutes,
 		},
-
 		FacultyRole: {
-			"VIEW_FACULTIES",
-			"UPDATE_FACULTIES",
+			PermissionViewFaculties,
+			PermissionUpdateFaculties,
 		},
-
 		StudentRole: {
-			"VIEW_STUDENTS",
-			"UPDATE_STUDENTS",
+			PermissionViewStudents,
+			PermissionUpdateStudents,
 		},
 		UserRole: {
-			"VIEW_INSTITUTIONS",
-			"VIEW_DEPARTMENTS",
-			"VIEW_FACULTIES",
-			"VIEW_STUDENTS",
+			PermissionViewInstitutes,
+			PermissionViewDepartments,
+			PermissionViewFaculties,
+			PermissionViewStudents,
 		},
 	}
 )

@@ -1,6 +1,7 @@
 package dto
 
 import (
+	"backend_institutions/internal/constants"
 	"backend_institutions/internal/model"
 	"errors"
 	"regexp"
@@ -90,7 +91,7 @@ func (dto *AssignRoleDTO) Validate() error {
 	if dto.Role == "" {
 		return errors.New("role is required")
 	}
-	if dto.Role != "user" && dto.Role != "principal" && dto.Role != "faculty" && dto.Role != "student" && dto.Role != "admin" {
+	if dto.Role != constants.UserRole && dto.Role != constants.PrincipalRole && dto.Role != constants.FacultyRole && dto.Role != constants.StudentRole && dto.Role != constants.AdminRole {
 		return errors.New("invalid role name")
 	}
 	return nil

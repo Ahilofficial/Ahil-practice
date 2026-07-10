@@ -1,6 +1,7 @@
 package services
 
 import (
+	"backend_institutions/internal/constants"
 	"backend_institutions/internal/dto"
 	"backend_institutions/internal/model"
 	"backend_institutions/internal/repository"
@@ -35,8 +36,8 @@ func (s *UserService) SignUp(dto *dto.SignUpDTO) (model.User, error) {
 
 	role := dto.Role
 	if role == "" {
-		role = "user"
-	} else if role != "user" {
+		role = constants.UserRole
+	} else if role != constants.UserRole {
 		return model.User{}, errors.New("can't able to assign role other than user during signup")
 	}
 
