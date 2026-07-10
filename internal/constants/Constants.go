@@ -37,31 +37,33 @@ const (
 	PermissionAssignRoles = "ASSIGN_ROLE"
 )
 
-var (
-	RolePermissions = map[string][]string{
-		AdminRole: {
-			PermissionCreateInstitutes,
-			PermissionViewInstitutes,
-			PermissionUpdateInstitutes,
-			PermissionDeleteInstitutes,
-		},
-		PrincipalRole: {
-			PermissionViewInstitutes,
-			PermissionUpdateInstitutes,
-		},
-		FacultyRole: {
-			PermissionViewFaculties,
-			PermissionUpdateFaculties,
-		},
-		StudentRole: {
-			PermissionViewStudents,
-			PermissionUpdateStudents,
-		},
-		UserRole: {
-			PermissionViewInstitutes,
-			PermissionViewDepartments,
-			PermissionViewFaculties,
-			PermissionViewStudents,
-		},
-	}
-)
+var InstitutePermissions = []string{
+	PermissionCreateInstitutes,
+	PermissionViewInstitutes,
+	PermissionUpdateInstitutes,
+	PermissionDeleteInstitutes,
+
+}
+var DepartmentPermissions = []string{
+	PermissionCreateDepartments,
+	PermissionViewDepartments,
+	PermissionUpdateDepartments,
+	PermissionDeleteDepartments,
+	
+}
+var FacultyPermissions = []string{
+	PermissionCreateFaculties,
+	PermissionViewFaculties,
+	PermissionUpdateFaculties,
+	PermissionDeleteFaculties,
+}
+var StudentPermissions = []string{
+	PermissionCreateStudents,
+	PermissionViewStudents,
+	PermissionUpdateStudents,
+	PermissionDeleteStudents,
+}
+var OtherPermissions = []string{
+
+	PermissionAssignRoles,
+}
