@@ -14,48 +14,18 @@ func RunSeeders() {
 	log.Println("Database seeding completed.")
 }
 
-var institute = constants.InstitutePermissions
-var department = constants.DepartmentPermissions
-var faculty = constants.FacultyPermissions
-var student = constants.StudentPermissions
-var other = constants.OtherPermissions
+var group= constants.PermissionGroups
 
 func seedPermissions() {
-
-	permissionsGroup := [][]string{
-
-		institute,
-		department,
-		faculty,
-		student,
-		other,
-	}
-	for _, group := range permissionsGroup {
-		for _, pName := range group {
+	for _, permissions := range group {
+		for _, pName := range permissions {
 			var perm model.Permission
+
 			err := database.DB.Where("name = ?", pName).First(&perm).Error
 			if err != nil {
-				perm = model.Permission{
-					Name: pName,
-				}
-				if createErr := database.DB.Create(&perm).Error; createErr != nil {
-					log.Printf("Failed to seed permission %s: %v", pName, createErr)
-				}
+				perm = model.Permission{Name: pName}
+				database.DB.Create(&perm)
 			}
 		}
 	}
 }
-
-// 	for _, pName := range permissions {
-// 		var perm model.Permission
-// 		err := database.DB.Where("name = ?", pName).First(&perm).Error
-// 		if err != nil {
-// 			perm = model.Permission{
-// 				Name: pName,
-// 			}
-// 			if createErr := database.DB.Create(&perm).Error; createErr != nil {
-// 				log.Printf("Failed to seed permission %s: %v", pName, createErr)
-// 			}
-// 		}
-// 	}
-// }
