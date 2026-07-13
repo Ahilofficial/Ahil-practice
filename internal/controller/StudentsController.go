@@ -4,7 +4,7 @@ import (
 	"backend_institutions/internal/dto"
 	"backend_institutions/internal/helper"
 	"backend_institutions/internal/services"
-	"math"
+	// "math"
 	"strconv"
 
 	"github.com/gofiber/fiber/v3"
@@ -68,43 +68,43 @@ func (cl *StudentController) GetInactiveStudentController(c fiber.Ctx) error {
 	)
 }
 
-func (cl *StudentController) GetAllStudentsControllers(c fiber.Ctx) error {
-	pageStr := c.Query("page")
-	limitStr := c.Query("limit")
+// func (cl *StudentController) GetAllStudentsControllers(c fiber.Ctx) error {
+// 	pageStr := c.Query("page")
+// 	limitStr := c.Query("limit")
 
-	page := 1
-	limit := 10
+// 	page := 1
+// 	limit := 10
 
-	if pageStr != "" {
-		if p, err := strconv.Atoi(pageStr); err == nil && p > 0 {
-			page = p
-		}
-	}
-	if limitStr != "" {
-		if l, err := strconv.Atoi(limitStr); err == nil && l > 0 {
-			limit = l
-		}
-	}
+// 	if pageStr != "" {
+// 		if p, err := strconv.Atoi(pageStr); err == nil && p > 0 {
+// 			page = p
+// 		}
+// 	}
+// 	if limitStr != "" {
+// 		if l, err := strconv.Atoi(limitStr); err == nil && l > 0 {
+// 			limit = l
+// 		}
+// 	}
 
-	students, total, err := cl.studentService.GetStudentServicePaginated(page, limit)
-	if err != nil {
-		return helper.Error(c, 500, err.Error())
-	}
+// 	students, total, err := cl.studentService.GetStudentServicePaginated(page, limit)
+// 	if err != nil {
+// 		return helper.Error(c, 500, err.Error())
+// 	}
 
-	totalPages := int(math.Ceil(float64(total) / float64(limit)))
+// 	totalPages := int(math.Ceil(float64(total) / float64(limit)))
 
-	return helper.Success(
-		c,
-		"Students fetched successfully",
-		fiber.Map{
-			"items":       dto.ToStudentResponseListDTO(students),
-			"total_count": total,
-			"page":        page,
-			"limit":       limit,
-			"total_pages": totalPages,
-		},
-	)
-}
+// 	return helper.Success(
+// 		c,
+// 		"Students fetched successfully",
+// 		fiber.Map{
+// 			"items":       dto.ToStudentResponseListDTO(students),
+// 			"total_count": total,
+// 			"page":        page,
+// 			"limit":       limit,
+// 			"total_pages": totalPages,
+// 		},
+// 	)
+// }
 
 func (cl *StudentController) GetStudentByIDControllers(c fiber.Ctx) error {
 	idStr := c.Params("id")
@@ -126,18 +126,18 @@ func (cl *StudentController) GetStudentByIDControllers(c fiber.Ctx) error {
 	)
 }
 
-func (cl *StudentController) GetDeletedStudentsController(c fiber.Ctx) error {
-	students, err := cl.studentService.GetStudentServiceDeleted()
-	if err != nil {
-		return helper.Error(c, 500, err.Error())
-	}
+// func (cl *StudentController) GetDeletedStudentsController(c fiber.Ctx) error {
+// 	students, err := cl.studentService.GetStudentServiceDeleted()
+// 	if err != nil {
+// 		return helper.Error(c, 500, err.Error())
+// 	}
 
-	return helper.Success(
-		c,
-		"Deleted students fetched successfully",
-		dto.ToStudentResponseListDTO(students),
-	)
-}
+// 	return helper.Success(
+// 		c,
+// 		"Deleted students fetched successfully",
+// 		dto.ToStudentResponseListDTO(students),
+// 	)
+// }
 
 func (cl *StudentController) UpdateStudentControllers(c fiber.Ctx) error {
 	idStr := c.Params("id")
@@ -197,7 +197,7 @@ func (cl *StudentController) DeleteStudentControllers(c fiber.Ctx) error {
 }
 
 func (cl *StudentController) FetchAllStudentsControllers(c fiber.Ctx) error {
-	students, err := cl.studentService.GetStudentService()
+	students, err := cl.studentService.GetStudentService(c.Context())
 	if err != nil {
 		return helper.Error(c, 500, err.Error())
 	}

@@ -1,9 +1,12 @@
 package repository
 
 import (
+	"backend_institutions/internal/dto"
 	"backend_institutions/internal/model"
+	"context"
 	"errors"
 	"time"
+
 	// "backend_institutions/internal/dto"
 	"gorm.io/gorm"
 )
@@ -53,10 +56,33 @@ func (r *StudentRepository) CreateStudent(student *model.Student) error {
 	return nil
 }
 
-func (r *StudentRepository) FetchStudent() ([]model.Student, error) {
-	var studs []model.Student
-	err := r.db.Raw("SELECT * FROM students WHERE deleted_at IS NULL").Scan(&studs).Error
-	return studs, err
+func (r *StudentRepository) FetchStudent(ctx context.Context) ([]dto.StudentFlatRow, error) {
+	var rows []dto.StudentFlatRow
+
+	const query = `
+		SELECT
+			s.id AS stud_id,
+			s.name AS stud_name,
+			s.email AS stud_email,
+			s.gender AS stud_gender,
+			s.faculty_id,
+			s.is_active AS stud_active,
+			f.id AS fee_id,
+			f.payment_mode AS fee_payment_mode,
+			f.amount AS fee_amount,
+			f.is_active AS fee_active
+		FROM students s
+		LEFT JOIN fees f
+			ON f.student_id = s.id
+	`
+
+	if err := r.db.WithContext(ctx).
+		Raw(query).
+		Scan(&rows).Error; err != nil {
+		return nil, err
+	}
+
+	return rows, nil
 }
 
 func (r *StudentRepository) GetActiveStudent() (model.Student, error) {

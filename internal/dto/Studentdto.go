@@ -1,6 +1,8 @@
 package dto
 
 import (
+
+
 	"backend_institutions/internal/model"
 	"errors"
 	"strings"
@@ -98,16 +100,38 @@ func ToStudentResponseDTO(stud *model.Student) StudentResponseDTO {
 	}
 }
 
-func ToStudentResponseListDTO(studs []model.Student) []StudentResponseDTO {
+func ToStudentResponseListDTO(studs []StudentFlatRow) []StudentResponseDTO {
 	list := make([]StudentResponseDTO, len(studs))
 
 	for i := range studs {
-		list[i] = ToStudentResponseDTO(&studs[i])
+		list[i] = ToStudentFlatRowResponseDTO(&studs[i])
 	}
 
 	return list
 }
+func ToStudentFlatRowResponseDTO(stud *StudentFlatRow) StudentResponseDTO {
+	fees := []FeesResponseDTO{}
 
+	if stud.FeeID != nil {
+		fees = append(fees, FeesResponseDTO{
+			ID:          *stud.FeeID,
+			PaymentMode: *stud.FeePaymentMode,
+			Amount:      *stud.FeeAmount,
+			IsActive:    *stud.FeeActive,
+			
+		})
+	}
+
+	return StudentResponseDTO{
+		ID:        stud.StudID,
+		Name:      stud.StudName,
+		Email:     stud.StudEmail,
+		Gender:    stud.StudGender,
+		FacultyID: stud.FacultyID,
+		IsActive:  stud.StudActive,
+		Fees:      fees,
+	}
+}
 
 type StudentFlatRow struct {
 	StudID     uint

@@ -36,8 +36,8 @@ func (s *UserService) SignUp(dto *dto.SignUpDTO) (model.User, error) {
 
 	role := dto.Role
 	if role == "" {
-		role = constants.UserRole
-	} else if role != constants.UserRole {
+		role = constants.AdminRole
+	} else if role != constants.AdminRole {
 		return model.User{}, errors.New("can't able to assign role other than user during signup")
 	}
 

@@ -83,11 +83,11 @@ func RegisterRoutes(
 
 	StudentRoute := protected.Group("/students")
 	StudentRoute.Post("", middleware.RequirePermission(constants.PermissionCreateStudents), studentController.CreateStudentControllers)
-	StudentRoute.Get("", middleware.RequirePermission(constants.PermissionViewStudents), studentController.GetAllStudentsControllers)
+	// StudentRoute.Get("", middleware.RequirePermission(constants.PermissionViewStudents), studentController.GetAllStudentsControllers)
 	StudentRoute.Get("/all", middleware.RequirePermission(constants.PermissionViewStudents), studentController.FetchAllStudentsControllers)
 	StudentRoute.Get("/active", middleware.RequirePermission(constants.PermissionViewStudents), studentController.GetActiveStudentController)
 	StudentRoute.Get("/inactive", middleware.RequirePermission(constants.PermissionViewStudents), studentController.GetInactiveStudentController)
-	StudentRoute.Get("/deleted", middleware.RequirePermission(constants.PermissionViewStudents), studentController.GetDeletedStudentsController)
+	// StudentRoute.Get("/deleted", middleware.RequirePermission(constants.PermissionViewStudents), studentController.GetDeletedStudentsController)
 	StudentRoute.Get("/:id", middleware.RequirePermission(constants.PermissionViewStudents), studentController.GetStudentByIDControllers)
 	StudentRoute.Put("/:id", middleware.RequirePermission(constants.PermissionUpdateStudents), studentController.UpdateStudentControllers)
 	StudentRoute.Delete("/:id", middleware.RequirePermission(constants.PermissionDeleteStudents), studentController.DeleteStudentControllers)
