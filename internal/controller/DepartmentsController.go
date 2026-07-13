@@ -3,6 +3,7 @@ package controller
 import (
 	"backend_institutions/internal/dto"
 	"backend_institutions/internal/helper"
+	"backend_institutions/internal/model"
 	"backend_institutions/internal/services"
 	"math"
 	"strconv"
@@ -19,7 +20,6 @@ func NewDepartmentController(departmentService *services.DepartmentService) *Dep
 }
 
 func (cl *DepartmentController) GetActiveDepartmentController(c fiber.Ctx) error {
-	
 	department, err := cl.departmentService.GetActiveDepartmentService()
 	if err != nil {
 		return helper.Error(c, 404, err.Error())
@@ -46,18 +46,19 @@ func (cl *DepartmentController) GetInactiveDepartmentController(c fiber.Ctx) err
 }
 
 func (cl *DepartmentController) CreateDepartmentController(c fiber.Ctx) error {
-	var body dto.CreateDepartmentDTO
-	body.Sanitize()
-
-	if err := c.Bind().Body(&body); err != nil {
-		return helper.Error(c, 400, "invalid request body")
+	var department model.Department
+	if err := c.Bind().Body(&department); err != nil {
+		return helper.Error(c, 400, "invalid request body: "+err.Error())
 	}
 
-	if err := body.Validate(); err != nil {
-		return helper.Error(c, 400, err.Error())
+	if department.DepartmentName == "" {
+		return helper.Error(c, 400, "department_name is required")
+	}
+	if department.InstitutionID == 0 {
+		return helper.Error(c, 400, "institution_id is required")
 	}
 
-	department, err := cl.departmentService.AddDepartmentService(&body)
+	createdDept, err := cl.departmentService.AddDepartmentService(&department)
 	if err != nil {
 		return helper.Error(c, 400, err.Error())
 	}
@@ -65,7 +66,7 @@ func (cl *DepartmentController) CreateDepartmentController(c fiber.Ctx) error {
 	return helper.Success(
 		c,
 		"Department created successfully",
-		dto.ToDepartmentResponseDTO(&department),
+		dto.ToDepartmentResponseDTO(&createdDept),
 	)
 }
 

@@ -6,6 +6,7 @@ import (
 	"errors"
 	"regexp"
 	"strings"
+	"github.com/jinzhu/copier"
 )
 
 type SignUpDTO struct {
@@ -98,13 +99,9 @@ func (dto *AssignRoleDTO) Validate() error {
 }
 
 func ToUserResponseDTO(user *model.User) UserResponseDTO {
-	return UserResponseDTO{
-		ID:       user.ID,
-		Name:     user.Name,
-		Email:    user.Email,
-		Phone:    user.Phone,
-		IsActive: user.IsActive,
-	}
+	var dto UserResponseDTO
+	copier.Copy(&dto, user)
+	return dto
 }
 
 func ToUserResponseListDTO(users []model.User) []UserResponseDTO {

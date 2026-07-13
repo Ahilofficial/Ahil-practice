@@ -4,7 +4,6 @@ import (
 	"backend_institutions/internal/dto"
 	"backend_institutions/internal/model"
 	"backend_institutions/internal/repository"
-	"context"
 )
 
 type StudentService struct {
@@ -15,21 +14,15 @@ func NewStudentService(studentrepo *repository.StudentRepository) *StudentServic
 	return &StudentService{studentrepo: studentrepo}
 }
 
-func (s *StudentService) CreateStudentService(dto *dto.CreateStudentDTO) (model.Student, error) {
-	student := model.Student{
-		Name:      dto.Name,
-		Email:     dto.Email,
-		Gender:    dto.Gender,
-		FacultyID: dto.FacultyID,
-	}
-
-	err := s.studentrepo.CreateStudent(&student)
-	return student, err
+func (s *StudentService) CreateStudentService(student *model.Student) (model.Student, error) {
+	err := s.studentrepo.CreateStudent(student)
+	return *student, err
 }
 
-func (s *StudentService) GetStudentService(ctx context.Context) ([]dto.StudentFlatRow, error) {
-	return s.studentrepo.FetchStudent(ctx)
+func (s *StudentService) GetStudentService() ([]model.Student, error) {
+	return s.studentrepo.FetchStudent()
 }
+
 func (s *StudentService) GetStudentServicePaginated(page, limit int) ([]model.Student, int64, error) {
 	return s.studentrepo.FetchStudentPaginated(page, limit)
 }

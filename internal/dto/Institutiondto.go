@@ -5,6 +5,7 @@ import (
 	"errors"
 	"strings"
 	"time"
+	"github.com/jinzhu/copier"
 )
 
 type CreateInstitutionDTO struct {
@@ -71,20 +72,15 @@ type InstitutionResponseDTO struct {
 }
 
 func ToInstitutionResponseDTO(inst *model.Institutions) InstitutionResponseDTO {
-	departments := make([]DepartmentResponseDTO, len(inst.Departments))
+	var dto InstitutionResponseDTO
+	copier.Copy(&dto, inst)
 
-	for i, dept := range inst.Departments {
-		departments[i] = ToDepartmentResponseDTO(&dept)
+	dto.Departments = make([]DepartmentResponseDTO, len(inst.Departments))
+	for i := range inst.Departments {
+		dto.Departments[i] = ToDepartmentResponseDTO(&inst.Departments[i])
 	}
 
-	return InstitutionResponseDTO{
-		ID:              inst.ID,
-		Name:            inst.Name,
-		InstitutionCode: inst.InstitutionCode,
-		State:           inst.State,
-		IsActive:        inst.IsActive,
-		Departments:     departments,
-	}
+	return dto
 }
 
 func ToInstitutionResponseListDTO(insts []model.Institutions) []InstitutionResponseDTO {
@@ -98,30 +94,30 @@ func ToInstitutionResponseListDTO(insts []model.Institutions) []InstitutionRespo
 }
 
 type InstitutionFlatRow struct {
-	InstID          uint
-	InstName        string
-	InstitutionCode string
-	InstState       string
-	InstActive      bool
+	InstID          uint   `gorm:"column:inst_id"`
+	InstName        string `gorm:"column:inst_name"`
+	InstitutionCode string `gorm:"column:institution_code"`
+	InstState       string `gorm:"column:inst_state"`
+	InstActive      bool   `gorm:"column:inst_active"`
 
-	DeptID         *uint
-	DepartmentName *string
-	DeptActive     *bool
+	DeptID         *uint   `gorm:"column:dept_id"`
+	DepartmentName *string `gorm:"column:department_name"`
+	DeptActive     *bool   `gorm:"column:dept_active"`
 
-	FacID          *uint
-	FacName        *string
-	FacGender      *string
-	FacJoiningDate *time.Time
-	FacActive      *bool
+	FacID          *uint      `gorm:"column:fac_id"`
+	FacName        *string    `gorm:"column:fac_name"`
+	FacGender      *string    `gorm:"column:fac_gender"`
+	FacJoiningDate *time.Time `gorm:"column:fac_joining_date"`
+	FacActive      *bool      `gorm:"column:fac_active"`
 
-	StudID         *uint
-	StudName       *string
-	StudEmail      *string
-	StudGender     *string
-	StudActive     *bool
+	StudID         *uint   `gorm:"column:stud_id"`
+	StudName       *string `gorm:"column:stud_name"`
+	StudEmail      *string `gorm:"column:stud_email"`
+	StudGender     *string `gorm:"column:stud_gender"`
+	StudActive     *bool   `gorm:"column:stud_active"`
 
-	FeeID          *uint
-	FeePaymentMode *string
-	FeeAmount      *float64
-	FeeActive      *bool
+	FeeID          *uint    `gorm:"column:fee_id"`
+	FeePaymentMode *string  `gorm:"column:fee_payment_mode"`
+	FeeAmount      *float64 `gorm:"column:fee_amount"`
+	FeeActive      *bool    `gorm:"column:fee_active"`
 }

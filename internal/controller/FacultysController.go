@@ -3,6 +3,7 @@ package controller
 import (
 	"backend_institutions/internal/dto"
 	"backend_institutions/internal/helper"
+	"backend_institutions/internal/model"
 	"backend_institutions/internal/services"
 	"math"
 	"strconv"
@@ -19,18 +20,19 @@ func NewFacultyController(facultyService *services.FacultyService) *FacultyContr
 }
 
 func (cl *FacultyController) CreateFacultyController(c fiber.Ctx) error {
-	var body dto.CreateFacultyDTO
-	body.Sanitize()
-
-	if err := c.Bind().Body(&body); err != nil {
-		return helper.Error(c, 400, "invalid request body")
+	var faculty model.Faculty
+	if err := c.Bind().Body(&faculty); err != nil {
+		return helper.Error(c, 400, "invalid request body: "+err.Error())
 	}
 
-	if err := body.Validate(); err != nil {
-		return helper.Error(c, 400, err.Error())
+	if faculty.Name == "" {
+		return helper.Error(c, 400, "name is required")
+	}
+	if faculty.DepartmentID == 0 {
+		return helper.Error(c, 400, "department_id is required")
 	}
 
-	faculty, err := cl.facultyService.CreateFacultyService(&body)
+	createdFaculty, err := cl.facultyService.CreateFacultyService(&faculty)
 	if err != nil {
 		return helper.Error(c, 400, err.Error())
 	}
@@ -38,7 +40,7 @@ func (cl *FacultyController) CreateFacultyController(c fiber.Ctx) error {
 	return helper.Success(
 		c,
 		"Faculty created successfully",
-		dto.ToFacultyResponseDTO(&faculty),
+		dto.ToFacultyResponseDTO(&createdFaculty),
 	)
 }
 
@@ -148,8 +150,6 @@ func (cl *FacultyController) UpdateFacultyController(c fiber.Ctx) error {
 	if err != nil {
 		return helper.Error(c, 400, "invalid id")
 	}
-
-	
 
 	if err := c.Bind().Body(&body); err != nil {
 		return helper.Error(c, 400, "invalid request body")

@@ -4,6 +4,7 @@ import (
 	"backend_institutions/internal/model"
 	"errors"
 	"strings"
+	"github.com/jinzhu/copier"
 )
 
 type CreateFeesDTO struct {
@@ -57,13 +58,9 @@ type FeesResponseDTO struct {
 }
 
 func ToFeesResponseDTO(fees *model.Fees) FeesResponseDTO {
-	return FeesResponseDTO{
-		ID:          fees.ID,
-		PaymentMode: fees.PaymentMode,
-		Amount:      fees.Amount,
-		StudentID:   fees.StudentID,
-		IsActive:    fees.IsActive,
-	}
+	var dto FeesResponseDTO
+	copier.Copy(&dto, fees)
+	return dto
 }
 
 func ToFeesResponseListDTO(fees []model.Fees) []FeesResponseDTO {

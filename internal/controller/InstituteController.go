@@ -3,6 +3,7 @@ package controller
 import (
 	"backend_institutions/internal/dto"
 	"backend_institutions/internal/helper"
+	"backend_institutions/internal/model"
 	"backend_institutions/internal/services"
 	"math"
 	"strconv"
@@ -19,18 +20,19 @@ func NewInstituteController(instituteService *services.InstituteService) *Instit
 }
 
 func (cl *InstituteController) CreateInstituteController(c fiber.Ctx) error {
-	var body dto.CreateInstitutionDTO
-	body.Sanitize()
-
-	if err := c.Bind().Body(&body); err != nil {
-		return helper.Error(c, 400, "invalid request body")
+	var institute model.Institutions
+	if err := c.Bind().Body(&institute); err != nil {
+		return helper.Error(c, 400, "invalid request body: "+err.Error())
 	}
 
-	if err := body.Validate(); err != nil {
-		return helper.Error(c, 400, err.Error())
+	if institute.Name == "" {
+		return helper.Error(c, 400, "name is required")
+	}
+	if institute.InstitutionCode == "" {
+		return helper.Error(c, 400, "institution_code is required")
 	}
 
-	institute, err := cl.instituteService.CreateInsituteService(&body)
+	createdInstitute, err := cl.instituteService.CreateInsituteService(&institute)
 	if err != nil {
 		return helper.Error(c, 400, err.Error())
 	}
@@ -38,7 +40,7 @@ func (cl *InstituteController) CreateInstituteController(c fiber.Ctx) error {
 	return helper.Success(
 		c,
 		"Institution created successfully",
-		dto.ToInstitutionResponseDTO(&institute),
+		dto.ToInstitutionResponseDTO(&createdInstitute),
 	)
 }
 

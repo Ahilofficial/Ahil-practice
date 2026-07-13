@@ -3,7 +3,6 @@ package seeds
 import (
 	"backend_institutions/internal/constants"
 	"backend_institutions/internal/database"
-	"backend_institutions/internal/model"
 	"log"
 )
 
@@ -14,17 +13,27 @@ func RunSeeders() {
 	log.Println("Database seeding completed.")
 }
 
-var group= constants.PermissionGroups
+var group = constants.PermissionGroups
 
 func seedPermissions() {
+	db, err := database.DB.DB()
+	if err != nil {
+		log.Printf("Failed to get database connection: %v", err)
+		return
+	}
 	for _, permissions := range group {
 		for _, pName := range permissions {
-			var perm model.Permission
-
-			err := database.DB.Where("name = ?", pName).First(&perm).Error
+			var count int
+			err := db.QueryRow("SELECT COUNT(*) FROM permissions WHERE name = ?", pName).Scan(&count)
 			if err != nil {
-				perm = model.Permission{Name: pName}
-				database.DB.Create(&perm)
+				log.Printf("Failed to check permission %s: %v", pName, err)
+				continue
+			}
+			if count == 0 {
+				_, err = db.Exec("INSERT INTO permissions (name) VALUES (?)", pName)
+				if err != nil {
+					log.Printf("Failed to insert permission %s: %v", pName, err)
+				}
 			}
 		}
 	}

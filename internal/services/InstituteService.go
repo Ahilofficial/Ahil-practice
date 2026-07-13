@@ -14,15 +14,9 @@ func NewInstituteService(instituterepo *repository.InstitutionRepository) *Insti
 	return &InstituteService{instituterepo: instituterepo}
 }
 
-func (s *InstituteService) CreateInsituteService(dto *dto.CreateInstitutionDTO) (model.Institutions, error) {
-	institute := model.Institutions{
-		Name:            dto.Name,
-		InstitutionCode: dto.InstitutionCode,
-		State:           dto.State,
-	}
-
-	err := s.instituterepo.CreateInstitution(&institute)
-	return institute, err
+func (s *InstituteService) CreateInsituteService(institute *model.Institutions) (model.Institutions, error) {
+	err := s.instituterepo.CreateInstitution(institute)
+	return *institute, err
 }
 
 func (s *InstituteService) GetInstituteService() ([]model.Institutions, error) {

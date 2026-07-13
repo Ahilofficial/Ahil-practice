@@ -33,7 +33,7 @@ func (cl *FeesController) GetInactiveFeesController(c fiber.Ctx) error {
 
 func (cl *FeesController) CreateFeesController(c fiber.Ctx) error {
 	var body dto.CreateFeesDTO
-	body.Sanitize()
+	
 
 	if err := c.Bind().Body(&body); err != nil {
 		return helper.Error(c, 400, "invalid request body")
@@ -43,6 +43,7 @@ func (cl *FeesController) CreateFeesController(c fiber.Ctx) error {
 		return helper.Error(c, 400, err.Error())
 	}
 
+	body.Sanitize()
 	fees, err := cl.feesService.CreateFeesService(&body)
 	if err != nil {
 		return helper.Error(c, 400, err.Error())
@@ -115,7 +116,7 @@ func (cl *FeesController) GetFeesByIDController(c fiber.Ctx) error {
 
 func (cl *FeesController) UpdateFeesController(c fiber.Ctx) error {
 	var body dto.UpdateFeesDTO
-	body.Sanitize()
+	
 
 	idStr := c.Params("id")
 
@@ -124,7 +125,6 @@ func (cl *FeesController) UpdateFeesController(c fiber.Ctx) error {
 		return helper.Error(c, 400, "invalid fees id")
 	}
 
-	
 	if err := c.Bind().Body(&body); err != nil {
 		return helper.Error(c, 400, "invalid request body")
 	}
@@ -132,6 +132,7 @@ func (cl *FeesController) UpdateFeesController(c fiber.Ctx) error {
 	if err := body.Validate(); err != nil {
 		return helper.Error(c, 400, err.Error())
 	}
+	body.Sanitize()
 
 	if err := cl.feesService.UpdateFeesService(
 		uint(id),

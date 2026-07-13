@@ -14,14 +14,9 @@ func NewDepartmentService(departmentrepo *repository.DepartmentRepository) *Depa
 	return &DepartmentService{departmentrepo: departmentrepo}
 }
 
-func (s *DepartmentService) AddDepartmentService(dto *dto.CreateDepartmentDTO) (model.Department, error) {
-	department := model.Department{
-		DepartmentName: dto.DepartmentName,
-		InstitutionID:  dto.InstitutionID,
-	}
-
-	err := s.departmentrepo.CreateDepartment(&department)
-	return department, err
+func (s *DepartmentService) AddDepartmentService(department *model.Department) (model.Department, error) {
+	err := s.departmentrepo.CreateDepartment(department)
+	return *department, err
 }
 
 func (s *DepartmentService) GetDepartmentService() ([]model.Department, error) {

@@ -14,16 +14,9 @@ func NewFacultyService(facultyrepo *repository.FacultyRepository) *FacultyServic
 	return &FacultyService{facultyrepo: facultyrepo}
 }
 
-func (s *FacultyService) CreateFacultyService(dto *dto.CreateFacultyDTO) (model.Faculty, error) {
-	faculty := model.Faculty{
-		Name:         dto.Name,
-		Gender:       dto.Gender,
-		JoiningDate:  dto.JoiningDate,
-		DepartmentID: dto.DepartmentID,
-	}
-
-	err := s.facultyrepo.CreateFaculty(&faculty)
-	return faculty, err
+func (s *FacultyService) CreateFacultyService(faculty *model.Faculty) (model.Faculty, error) {
+	err := s.facultyrepo.CreateFaculty(faculty)
+	return *faculty, err
 }
 
 func (s *FacultyService) GetFacultyService() ([]model.Faculty, error) {
@@ -43,7 +36,7 @@ func (s *FacultyService) GetFacultyServiceDeleted() ([]model.Faculty, error) {
 }
 
 func (s *FacultyService) GetActiveFacultyService() (model.Faculty, error) {
-	return s.facultyrepo.GetActiveFacutly()
+	return s.facultyrepo.GetActiveFaculty()
 }
 
 func (s *FacultyService) GetInactiveFacultyService() (model.Faculty, error) {

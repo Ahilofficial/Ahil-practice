@@ -1,11 +1,10 @@
 package dto
 
 import (
-
-
 	"backend_institutions/internal/model"
 	"errors"
 	"strings"
+	"github.com/jinzhu/copier"
 )
 
 type CreateStudentDTO struct {
@@ -48,13 +47,10 @@ type UpdateStudentDTO struct {
 	Gender string `json:"gender"`
 }
 
-func (dto *UpdateStudentDTO) Sanitize() {
-	dto.Name = strings.TrimSpace(dto.Name)
-	dto.Email = strings.TrimSpace(strings.ToLower(dto.Email))
-	dto.Gender = strings.TrimSpace(strings.ToLower(dto.Gender))
-}
+
 
 func (dto *UpdateStudentDTO) Validate() error {
+	dto.Sanitize()
 	
 
 	if dto.Name == "" {
@@ -72,6 +68,11 @@ func (dto *UpdateStudentDTO) Validate() error {
 	return nil
 }
 
+func (dto *UpdateStudentDTO) Sanitize() {
+	dto.Name = strings.TrimSpace(dto.Name)
+	dto.Email = strings.TrimSpace(strings.ToLower(dto.Email))
+	dto.Gender = strings.TrimSpace(strings.ToLower(dto.Gender))
+}
 type StudentResponseDTO struct {
 	ID         uint             `json:"id"`
 	Name       string           `json:"name"`
@@ -82,67 +83,29 @@ type StudentResponseDTO struct {
 	Fees        []FeesResponseDTO `json:"fees"`
 }
 
+
+
 func ToStudentResponseDTO(stud *model.Student) StudentResponseDTO {
-	fees := make([]FeesResponseDTO, len(stud.Fees))
+	var dto StudentResponseDTO
+	copier.Copy(&dto, stud)
 
-	for i, fee := range stud.Fees {
-		fees[i] = ToFeesResponseDTO(&fee)
+	dto.Fees = make([]FeesResponseDTO, len(stud.Fees))
+	for i := range stud.Fees {
+		dto.Fees[i] = ToFeesResponseDTO(&stud.Fees[i])
 	}
 
-	return StudentResponseDTO{
-		ID:        stud.ID,
-		Name:      stud.Name,
-		Email:     stud.Email,
-		Gender:    stud.Gender,
-		FacultyID: stud.FacultyID,
-		IsActive:  stud.IsActive,
-		Fees:      fees,
-	}
+	return dto
 }
 
-func ToStudentResponseListDTO(studs []StudentFlatRow) []StudentResponseDTO {
+func ToStudentResponseListDTO(studs []model.Student) []StudentResponseDTO {
 	list := make([]StudentResponseDTO, len(studs))
 
 	for i := range studs {
-		list[i] = ToStudentFlatRowResponseDTO(&studs[i])
+		list[i] = ToStudentResponseDTO(&studs[i])
 	}
 
 	return list
 }
-func ToStudentFlatRowResponseDTO(stud *StudentFlatRow) StudentResponseDTO {
-	fees := []FeesResponseDTO{}
 
-	if stud.FeeID != nil {
-		fees = append(fees, FeesResponseDTO{
-			ID:          *stud.FeeID,
-			PaymentMode: *stud.FeePaymentMode,
-			Amount:      *stud.FeeAmount,
-			IsActive:    *stud.FeeActive,
-			
-		})
-	}
 
-	return StudentResponseDTO{
-		ID:        stud.StudID,
-		Name:      stud.StudName,
-		Email:     stud.StudEmail,
-		Gender:    stud.StudGender,
-		FacultyID: stud.FacultyID,
-		IsActive:  stud.StudActive,
-		Fees:      fees,
-	}
-}
 
-type StudentFlatRow struct {
-	StudID     uint
-	StudName   string
-	StudEmail  string
-	StudGender string
-	FacultyID  uint
-	StudActive bool
-
-	FeeID          *uint
-	FeePaymentMode *string
-	FeeAmount      *float64
-	FeeActive      *bool
-}

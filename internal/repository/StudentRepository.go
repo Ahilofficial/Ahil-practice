@@ -1,13 +1,10 @@
 package repository
 
 import (
-	"backend_institutions/internal/dto"
 	"backend_institutions/internal/model"
-	"context"
 	"errors"
 	"time"
 
-	// "backend_institutions/internal/dto"
 	"gorm.io/gorm"
 )
 
@@ -19,70 +16,167 @@ func NewStudentRepository(db *gorm.DB) *StudentRepository {
 	return &StudentRepository{db: db}
 }
 
+func (r *StudentRepository) loadAssociations(studs []model.Student) error {
+	if len(studs) == 0 {
+		return nil
+	}
 
+	studIDs := make([]uint, len(studs))
+	for i, stud := range studs {
+		studIDs[i] = stud.ID
+	}
+
+	// Load Fees
+	var fees []model.Fees
+	if err := r.db.Raw("SELECT * FROM fees WHERE student_id IN ? AND deleted_at IS NULL", studIDs).Scan(&fees).Error; err != nil {
+		return err
+	}
+
+	feesMap := make(map[uint][]model.Fees)
+	for _, fee := range fees {
+		feesMap[fee.StudentID] = append(feesMap[fee.StudentID], fee)
+	}
+
+	for i := range studs {
+		studs[i].Fees = feesMap[studs[i].ID]
+	}
+
+	return nil
+}
 
 func (r *StudentRepository) CreateStudent(student *model.Student) error {
 	db, err := r.db.DB()
 	if err != nil {
 		return err
 	}
+
+	tx, err := db.Begin()
+	if err != nil {
+		return err
+	}
+
+	defer func() {
+		if err != nil {
+			tx.Rollback()
+		}
+	}()
+
 	now := time.Now()
-	res, err := db.Exec(
-		`INSERT INTO students (name, email, gender, faculty_id, created_at, updated_at, is_active)
-		SELECT ?, ?, ?, id, ?, ?, ? FROM faculties
-		WHERE id = ? AND deleted_at IS NULL AND is_active = true
+
+	res, err := tx.Exec(
+		`INSERT INTO students 
+			(name, email, gender, faculty_id, created_at, updated_at, is_active)
+
+		SELECT ?, ?, ?, id, ?, ?, ?
+		FROM faculties
+
+		WHERE id = ?
+		  AND deleted_at IS NULL
+		  AND is_active = true
+
 		  AND NOT EXISTS (
-			  SELECT 1 FROM students 
-			  WHERE email = ? AND deleted_at IS NULL
+			  SELECT 1 
+			  FROM students
+			  WHERE email = ?
+			  AND deleted_at IS NULL
 		  )`,
-		student.Name, student.Email, student.Gender, now, now, true,
+		student.Name,
+		student.Email,
+		student.Gender,
+		now,
+		now,
+		true,
 		student.FacultyID,
 		student.Email,
 	)
+
 	if err != nil {
+		tx.Rollback()
 		return err
 	}
+
+
 	rows, err := res.RowsAffected()
 	if err != nil {
+		tx.Rollback()
 		return err
 	}
+
+
 	if rows == 0 {
+		tx.Rollback()
 		return errors.New("student email already registered, or assigned faculty is inactive/invalid")
 	}
+
+
 	id, err := res.LastInsertId()
-	if err == nil {
-		student.ID = uint(id)
+	if err != nil {
+		tx.Rollback()
+		return err
 	}
+
+
+	student.ID = uint(id)
+	student.CreatedAt = now
+	student.UpdatedAt = now
+	student.IsActive = true
+
+
+
+	for i := range student.Fees {
+
+		student.Fees[i].StudentID = student.ID
+		student.Fees[i].CreatedAt = now
+		student.Fees[i].UpdatedAt = now
+		student.Fees[i].IsActive = true
+
+
+		feeRes, err := tx.Exec(
+			`INSERT INTO fees
+				(payment_mode, amount, student_id, created_at, updated_at, is_active)
+
+			VALUES (?, ?, ?, ?, ?, ?)`,
+			student.Fees[i].PaymentMode,
+			student.Fees[i].Amount,
+			student.Fees[i].StudentID,
+			student.Fees[i].CreatedAt,
+			student.Fees[i].UpdatedAt,
+			student.Fees[i].IsActive,
+		)
+
+		if err != nil {
+			tx.Rollback()
+			return err
+		}
+
+
+		feeID, err := feeRes.LastInsertId()
+		if err != nil {
+			tx.Rollback()
+			return err
+		}
+
+
+		student.Fees[i].ID = uint(feeID)
+	}
+
+
+	err = tx.Commit()
+	if err != nil {
+		return err
+	}
+
+
 	return nil
 }
-
-func (r *StudentRepository) FetchStudent(ctx context.Context) ([]dto.StudentFlatRow, error) {
-	var rows []dto.StudentFlatRow
-
-	const query = `
-		SELECT
-			s.id AS stud_id,
-			s.name AS stud_name,
-			s.email AS stud_email,
-			s.gender AS stud_gender,
-			s.faculty_id,
-			s.is_active AS stud_active,
-			f.id AS fee_id,
-			f.payment_mode AS fee_payment_mode,
-			f.amount AS fee_amount,
-			f.is_active AS fee_active
-		FROM students s
-		LEFT JOIN fees f
-			ON f.student_id = s.id
-	`
-
-	if err := r.db.WithContext(ctx).
-		Raw(query).
-		Scan(&rows).Error; err != nil {
+func (r *StudentRepository) FetchStudent() ([]model.Student, error) {
+	var studs []model.Student
+	err := r.db.Raw("SELECT * FROM students WHERE deleted_at IS NULL").Scan(&studs).Error
+	if err != nil {
 		return nil, err
 	}
-
-	return rows, nil
+	err = r.loadAssociations(studs)
+	return studs, err
 }
 
 func (r *StudentRepository) GetActiveStudent() (model.Student, error) {
@@ -93,6 +187,10 @@ func (r *StudentRepository) GetActiveStudent() (model.Student, error) {
 	}
 	if len(studs) == 0 {
 		return model.Student{}, gorm.ErrRecordNotFound
+	}
+	err = r.loadAssociations(studs)
+	if err != nil {
+		return model.Student{}, err
 	}
 	return studs[0], nil
 }
@@ -105,6 +203,10 @@ func (r *StudentRepository) GetInactiveStudent() (model.Student, error) {
 	}
 	if len(studs) == 0 {
 		return model.Student{}, gorm.ErrRecordNotFound
+	}
+	err = r.loadAssociations(studs)
+	if err != nil {
+		return model.Student{}, err
 	}
 	return studs[0], nil
 }
@@ -119,6 +221,10 @@ func (r *StudentRepository) FetchStudentPaginated(page, limit int) ([]model.Stud
 	offset := (page - 1) * limit
 	var studs []model.Student
 	err = r.db.Raw("SELECT * FROM students WHERE deleted_at IS NULL LIMIT ? OFFSET ?", limit, offset).Scan(&studs).Error
+	if err != nil {
+		return nil, 0, err
+	}
+	err = r.loadAssociations(studs)
 	return studs, total, err
 }
 
@@ -131,12 +237,20 @@ func (r *StudentRepository) FetchStudentById(id uint) (model.Student, error) {
 	if len(studs) == 0 {
 		return model.Student{}, gorm.ErrRecordNotFound
 	}
+	err = r.loadAssociations(studs)
+	if err != nil {
+		return model.Student{}, err
+	}
 	return studs[0], nil
 }
 
 func (r *StudentRepository) FetchStudentDeleted() ([]model.Student, error) {
 	var studs []model.Student
 	err := r.db.Raw("SELECT * FROM students WHERE deleted_at IS NOT NULL").Scan(&studs).Error
+	if err != nil {
+		return nil, err
+	}
+	err = r.loadAssociations(studs)
 	return studs, err
 }
 

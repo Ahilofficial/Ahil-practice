@@ -3,6 +3,7 @@ package dto
 import (
 	"backend_institutions/internal/model"
 	"errors"
+	"github.com/jinzhu/copier"
 	"strings"
 	"time"
 )
@@ -17,7 +18,6 @@ func (dto *CreateDepartmentDTO) Sanitize() {
 }
 
 func (dto *CreateDepartmentDTO) Validate() error {
-	
 
 	if dto.DepartmentName == "" {
 		return errors.New("department name is required")
@@ -37,7 +37,6 @@ func (dto *UpdateDepartmentDTO) Sanitize() {
 }
 
 func (dto *UpdateDepartmentDTO) Validate() error {
-	
 
 	if dto.DepartmentName == "" {
 		return errors.New("department name is required")
@@ -54,19 +53,15 @@ type DepartmentResponseDTO struct {
 }
 
 func ToDepartmentResponseDTO(dept *model.Department) DepartmentResponseDTO {
-	faculties := make([]FacultyResponseDTO, len(dept.Faculties))
+	var dto DepartmentResponseDTO
+	copier.Copy(&dto, dept)
 
-	for i, faculty := range dept.Faculties {
-		faculties[i] = ToFacultyResponseDTO(&faculty)
+	dto.Faculties = make([]FacultyResponseDTO, len(dept.Faculties))
+	for i := range dept.Faculties {
+		dto.Faculties[i] = ToFacultyResponseDTO(&dept.Faculties[i])
 	}
 
-	return DepartmentResponseDTO{
-		ID:             dept.ID,
-		DepartmentName: dept.DepartmentName,
-		InstitutionID:  dept.InstitutionID,
-		IsActive:       dept.IsActive,
-		Faculties:      faculties,
-	}
+	return dto
 }
 
 func ToDepartmentResponseListDTO(depts []model.Department) []DepartmentResponseDTO {
@@ -80,25 +75,25 @@ func ToDepartmentResponseListDTO(depts []model.Department) []DepartmentResponseD
 }
 
 type DepartmentFlatRow struct {
-	DeptID             uint
-	DepartmentName     string
-	InstitutionID      uint
-	DeptActive         bool
+	DeptID         uint   `gorm:"column:dept_id"`
+	DepartmentName string `gorm:"column:department_name"`
+	InstitutionID  uint   `gorm:"column:institution_id"`
+	DeptActive     bool   `gorm:"column:dept_active"`
 
-	FacID          *uint
-	FacName        *string
-	FacGender      *string
-	FacJoiningDate *time.Time
-	FacActive      *bool
+	FacID          *uint      `gorm:"column:fac_id"`
+	FacName        *string    `gorm:"column:fac_name"`
+	FacGender      *string    `gorm:"column:fac_gender"`
+	FacJoiningDate *time.Time `gorm:"column:fac_joining_date"`
+	FacActive      *bool      `gorm:"column:fac_active"`
 
-	StudID     *uint
-	StudName   *string
-	StudEmail  *string
-	StudGender *string
-	StudActive *bool
+	StudID     *uint   `gorm:"column:stud_id"`
+	StudName   *string `gorm:"column:stud_name"`
+	StudEmail  *string `gorm:"column:stud_email"`
+	StudGender *string `gorm:"column:stud_gender"`
+	StudActive *bool   `gorm:"column:stud_active"`
 
-	FeeID          *uint
-	FeePaymentMode *string
-	FeeAmount      *float64
-	FeeActive      *bool
+	FeeID          *uint    `gorm:"column:fee_id"`
+	FeePaymentMode *string  `gorm:"column:fee_payment_mode"`
+	FeeAmount      *float64 `gorm:"column:fee_amount"`
+	FeeActive      *bool    `gorm:"column:fee_active"`
 }
