@@ -50,20 +50,14 @@ func (r *StudentRepository) CreateStudent(student *model.Student) error {
 		return err
 	}
 
-	tx, err := db.Begin()
 	if err != nil {
 		return err
 	}
 
-	defer func() {
-		if err != nil {
-			tx.Rollback()
-		}
-	}()
 
 	now := time.Now()
 
-	res, err := tx.Exec(
+	res, err := db.Exec(
 		`INSERT INTO students 
 			(name, email, gender, faculty_id, created_at, updated_at, is_active)
 
@@ -91,27 +85,27 @@ func (r *StudentRepository) CreateStudent(student *model.Student) error {
 	)
 
 	if err != nil {
-		tx.Rollback()
+		
 		return err
 	}
 
 
 	rows, err := res.RowsAffected()
 	if err != nil {
-		tx.Rollback()
+		
 		return err
 	}
 
 
 	if rows == 0 {
-		tx.Rollback()
+		
 		return errors.New("student email already registered, or assigned faculty is inactive/invalid")
 	}
 
 
 	id, err := res.LastInsertId()
 	if err != nil {
-		tx.Rollback()
+	
 		return err
 	}
 
@@ -131,7 +125,7 @@ func (r *StudentRepository) CreateStudent(student *model.Student) error {
 		student.Fees[i].IsActive = true
 
 
-		feeRes, err := tx.Exec(
+		feeRes, err := db.Exec(
 			`INSERT INTO fees
 				(payment_mode, amount, student_id, created_at, updated_at, is_active)
 
@@ -145,14 +139,14 @@ func (r *StudentRepository) CreateStudent(student *model.Student) error {
 		)
 
 		if err != nil {
-			tx.Rollback()
+			
 			return err
 		}
 
 
 		feeID, err := feeRes.LastInsertId()
 		if err != nil {
-			tx.Rollback()
+			
 			return err
 		}
 
@@ -161,7 +155,6 @@ func (r *StudentRepository) CreateStudent(student *model.Student) error {
 	}
 
 
-	err = tx.Commit()
 	if err != nil {
 		return err
 	}
