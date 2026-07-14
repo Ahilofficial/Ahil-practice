@@ -2,12 +2,12 @@ package main
 
 import (
 	"backend_institutions/internal/database"
+	"backend_institutions/internal/grpc"
 	"backend_institutions/internal/model"
 	"backend_institutions/internal/seeds"
+	"backend_institutions/internal/wire"
 	"log"
 	"os"
-
-	"backend_institutions/internal/wire"
 
 	"github.com/joho/godotenv"
 )
@@ -45,6 +45,10 @@ func main() {
 		port = "8090"
 	}
 	log.Printf("Server starting on :%s", port)
+	err = grpc.ConnectLogger()
+	if err != nil {
+		log.Fatal("Failed to connect to Logger Service:", err)
+	}
 
 	log.Fatal(app.Listen(":" + port))
 }
