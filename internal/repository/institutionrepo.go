@@ -4,6 +4,7 @@ import (
 	"backend_institutions/internal/dto"
 	"backend_institutions/internal/model"
 	"errors"
+	"fmt"
 	"time"
 
 	"gorm.io/gorm"
@@ -88,6 +89,7 @@ func (r *InstitutionRepository) loadAssociations(insts []model.Institutions) err
 
 
 	instIndex := make(map[uint]int)
+	fmt.Println(instIndex)
 
 	for i := range insts {
 		instIndex[insts[i].ID] = i

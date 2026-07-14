@@ -61,17 +61,23 @@ func (r *UserRepository) FindByPhone(phone string) (model.User, error) {
 }
 
 func (r *UserRepository) AssignRoleToUser(userID uint, roleName string) error {
-	return r.db.Transaction(func(tx *gorm.DB) error {
-		if err := tx.Exec("DELETE FROM user_roles WHERE user_id = ?", userID).Error; err != nil {
-			return err
-		}
-		result := tx.Exec("INSERT INTO user_roles (user_id, role_id) SELECT ?, id FROM roles WHERE name = ?", userID, roleName)
-		if result.Error != nil {
-			return result.Error
-		}
-		if result.RowsAffected == 0 {
-			return errors.New("role does not exist")
-		}
-		return nil
-	})
+	if err := r.db.Exec("DELETE FROM user_roles WHERE user_id = ?", userID).Error; err != nil {
+		return err
+	}
+
+	result := r.db.Exec(
+		"INSERT INTO user_roles (user_id, role_id) SELECT ?, id FROM roles WHERE name = ?",
+		userID,
+		roleName,
+	)
+
+	if result.Error != nil {
+		return result.Error
+	}
+
+	if result.RowsAffected == 0 {
+		return errors.New("role does not exist")
+	}
+
+	return nil
 }

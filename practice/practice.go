@@ -3,13 +3,16 @@ package main
 import (
 	"fmt"
 )
+func add(a uint, b uint)(uint,error){
+	return a+b, nil
+}
+
 
 func main() {
-	// var a=10
-	var b = 13
-	var c = &b
-	var d = *c
-	fmt.Println(c)
-	fmt.Println(d)
-
+	add,err:=add(8,8)
+	if err==nil{
+		fmt.Println("Its an error")
+	}
+	fmt.Println(add)
+	
 }

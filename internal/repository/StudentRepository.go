@@ -50,9 +50,9 @@ func (r *StudentRepository) CreateStudent(student *model.Student) error {
 		return err
 	}
 
-	if err != nil {
-		return err
-	}
+	// if err != nil {
+	// 	return err
+	// }
 
 
 	now := time.Now()
@@ -155,13 +155,14 @@ func (r *StudentRepository) CreateStudent(student *model.Student) error {
 	}
 
 
-	if err != nil {
-		return err
-	}
+	// if err != nil {
+	// 	return err
+	// }
 
 
 	return nil
 }
+
 func (r *StudentRepository) FetchStudent() ([]model.Student, error) {
 	var studs []model.Student
 	err := r.db.Raw("SELECT * FROM students WHERE deleted_at IS NULL").Scan(&studs).Error
