@@ -40,6 +40,8 @@ func RegisterRoutes(
 ) {
 	fmt.Println("Routes Loaded")
 
+	app.Use(middleware.RequestResponseLogger())
+
 	app.Post("/signup", userController.SignUpController)
 	app.Post("/signin", userController.SignInController)
 

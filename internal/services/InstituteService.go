@@ -2,10 +2,8 @@ package services
 
 import (
 	"backend_institutions/internal/dto"
-	"backend_institutions/internal/grpc"
 	"backend_institutions/internal/model"
 	"backend_institutions/internal/repository"
-	"log"
 	// "errors"
 )
 
@@ -22,26 +20,8 @@ func (s *InstituteService) CreateInsituteService(institute *model.Institutions) 
 	if err != nil {
 		return model.Institutions{}, err
 	}
-	err = grpc.SendLog(
-		"Institution",
-		"POST",
-		"/institutions",
-		"Create Institution",
-		"Institution Created Successfully",
-		201,
-	)
-
-	if err != nil {
-	
-		// Don't fail the API just because logging failed.
-		// You can log the error here if you want.
-		log.Fatal("Its error")
-		
-	}
 
 	return *institute, nil
-
-
 }
 
 func (s *InstituteService) GetInstituteService() ([]model.Institutions, error) {

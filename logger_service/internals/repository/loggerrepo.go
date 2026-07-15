@@ -4,6 +4,7 @@ import (
 	"backend_institutions/logger_service/internals/model"
 	"encoding/json"
 	"fmt"
+	"path/filepath"
 
 	// "logger-service/internal/model"
 	"os"
@@ -15,11 +16,21 @@ func NewLoggerRepo ()*LoggerRepo{
 	return &LoggerRepo{}
 }
 func(l *LoggerRepo) WriteFile(log model.Log)error{
-	open_create,err:=os.OpenFile("log/app.log",os.O_APPEND | os.O_CREATE |os.O_WRONLY,0644)
-	fmt.Println("Successfully Opened files")
-	if err!=nil{
+	path := "logger_service/internals/logs/app.log"
+	if _, err := os.Stat("logger_service"); os.IsNotExist(err) {
+		path = "internals/logs/app.log"
+	}
+
+	dir := filepath.Dir(path)
+	if err := os.MkdirAll(dir, 0755); err != nil {
 		return err
 	}
+
+	open_create, err := os.OpenFile(path, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		return err
+	}
+	fmt.Println("Successfully Opened files")
 	requestbody,err:=json.MarshalIndent(log.Request,"","")
 	if err!=nil{
 		return err
