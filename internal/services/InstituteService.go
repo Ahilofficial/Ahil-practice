@@ -5,6 +5,8 @@ import (
 	"backend_institutions/internal/grpc"
 	"backend_institutions/internal/model"
 	"backend_institutions/internal/repository"
+	"log"
+	// "errors"
 )
 
 type InstituteService struct {
@@ -30,8 +32,11 @@ func (s *InstituteService) CreateInsituteService(institute *model.Institutions) 
 	)
 
 	if err != nil {
+	
 		// Don't fail the API just because logging failed.
 		// You can log the error here if you want.
+		log.Fatal("Its error")
+		
 	}
 
 	return *institute, nil

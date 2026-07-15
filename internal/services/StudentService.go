@@ -14,9 +14,9 @@ func NewStudentService(studentrepo *repository.StudentRepository) *StudentServic
 	return &StudentService{studentrepo: studentrepo}
 }
 
-func (s *StudentService) CreateStudentService(student *model.Student) (model.Student, error) {
+func (s *StudentService) CreateStudentService(student *model.Student) (*model.Student, error) {
 	err := s.studentrepo.CreateStudent(student)
-	return *student, err
+	return student, err
 }
 
 func (s *StudentService) GetStudentService() ([]model.Student, error) {

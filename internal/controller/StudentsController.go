@@ -42,7 +42,7 @@ func (cl *StudentController) CreateStudentControllers(c fiber.Ctx) error {
 	return helper.Success(
 		c,
 		"Student created successfully",
-		dto.ToStudentResponseDTO(&createdStudent),
+		dto.ToStudentResponseDTO(createdStudent),
 	)
 }
 

@@ -18,7 +18,7 @@ var (
 func ConnectLogger() error {
 
 	conn, err := grpc.NewClient(
-		"localhost:8081",
+		"localhost:50051",
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)
 	if err != nil {
@@ -28,10 +28,11 @@ func ConnectLogger() error {
 	Conn = conn
 	LoggerClient = loggerpb.NewLoggerServiceClient(conn)
 
-	log.Println("Connected to Logger Service")
+	log.Println("Connected to Logger Service on port 50051")
 
 	return nil
 }
+
 func SendLog(
 	service string,
 	method string,

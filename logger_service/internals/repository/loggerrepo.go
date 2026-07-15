@@ -20,7 +20,7 @@ func(l *LoggerRepo) WriteFile(log model.Log)error{
 	if err!=nil{
 		return err
 	}
-	requestbody,err:=json.MarshalIndent(log.Response,"","")
+	requestbody,err:=json.MarshalIndent(log.Request,"","")
 	if err!=nil{
 		return err
 	}
@@ -54,6 +54,7 @@ log.Status,
 string(requestbody),
 string(responsebody),
 )
+fmt.Println(logContent)
 	_, err = open_create.WriteString(logContent)
 	if err != nil {
 		return err
