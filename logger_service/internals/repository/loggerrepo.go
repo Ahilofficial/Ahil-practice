@@ -16,10 +16,9 @@ func NewLoggerRepo ()*LoggerRepo{
 	return &LoggerRepo{}
 }
 func(l *LoggerRepo) WriteFile(log model.Log)error{
-	path := "logger_service/internals/logs/app.log"
-	if _, err := os.Stat("logger_service"); os.IsNotExist(err) {
-		path = "internals/logs/app.log"
-	}
+	
+	path := "backend_institutions/logger_service/internals/logs/app.log"
+
 
 	dir := filepath.Dir(path)
 	if err := os.MkdirAll(dir, 0755); err != nil {
@@ -65,12 +64,17 @@ log.Status,
 string(requestbody),
 string(responsebody),
 )
+
+
 fmt.Println(logContent)
-	_, err = open_create.WriteString(logContent)
+	n, err := open_create.WriteString(logContent)
+	fmt.Println("Bytes written:", n)
+
+
 	if err != nil {
 		return err
 	}
 
 	return nil
-
 }
+

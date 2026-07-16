@@ -3,6 +3,7 @@ package grpc
 import (
 	"context"
 	"log"
+	"os"
 
 	"backend_institutions/internal/loggerpb"
 
@@ -16,9 +17,14 @@ var (
 )
 
 func ConnectLogger() error {
+	port := os.Getenv("LOGGER_GRPC_PORT")
+	if port == "" {
+		port = "15051"
+	}
+
 
 	conn, err := grpc.NewClient(
-		"localhost:50051",
+		"localhost:"+port,
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)
 	if err != nil {
@@ -28,7 +34,7 @@ func ConnectLogger() error {
 	Conn = conn
 	LoggerClient = loggerpb.NewLoggerServiceClient(conn)
 
-	log.Println("Connected to Logger Service on port 50051")
+	log.Printf("Connected to Logger Service on port %s\n", port)
 
 	return nil
 }

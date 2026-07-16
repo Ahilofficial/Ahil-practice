@@ -1,0 +1,288 @@
+
+**
+Time      : 2026-07-16 15:10:20.1259225 +0530 IST m=+11.510477801
+Service   : Student
+Method    : POST
+Endpoint  : /students
+Status    : 400
+
+Request:
+"{\n  \"name\": \"Rarrhusla Kumar\",\n  \"email\": \"rarrdbshdsdiha@example.com\",\n  \"gender\": \"Male\",\n  \"faculty_id\": 3\n}"
+
+Response:
+"{\"message\":\"student email already registered, or assigned faculty is inactive/invalid\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-16 15:32:59.8868899 +0530 IST m=+41.300031901
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQyODI1NzksImlhdCI6MTc4NDE5NjE3OSwidXNlcl9pZCI6OX0.70nlyRrZ6ZVFrnkjA6bDpjUMl7-OSGTwlgtIrTAPNy0\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-16 15:38:14.6614343 +0530 IST m=+356.074576301
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQyODI4OTQsImlhdCI6MTc4NDE5NjQ5NCwidXNlcl9pZCI6OX0.MWAHt0XmiSZcI4SuGEqpWXa3c9JH5iA9joJdfxH3bEw\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-16 15:38:59.1619922 +0530 IST m=+400.575134201
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":10,\"name\":\"User\",\"email\":\"Useraddfs@example.com\",\"phone\":\"9999399991\",\"isactive\":true},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-16 15:49:48.0344976 +0530 IST m=+1049.447639601
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 400
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"email already exists\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-16 15:50:00.6535194 +0530 IST m=+1062.066661401
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 400
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"invalid phone number format\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-16 15:50:09.5572034 +0530 IST m=+1070.970345401
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":12,\"name\":\"User\",\"email\":\"Usseraddfs@example.com\",\"phone\":\"9990399991\",\"isactive\":true},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-16 15:54:32.7848424 +0530 IST m=+1334.197984401
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 400
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"email already exists\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-16 15:55:32.0371685 +0530 IST m=+1393.450310501
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":14,\"name\":\"User\",\"email\":\"U@gmail.com\",\"phone\":\"4563218474\",\"isactive\":true},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-16 16:05:42.1787829 +0530 IST m=+2003.591924901
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 400
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"email already exists\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-16 16:05:59.8661671 +0530 IST m=+2021.279309101
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":16,\"name\":\"User\",\"email\":\"Usss@gmail.com\",\"phone\":\"9963218474\",\"isactive\":true},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-16 16:08:51.4428102 +0530 IST m=+2192.855952201
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 400
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"email already exists\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-16 16:09:00.1613586 +0530 IST m=+2201.574500601
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 400
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"email already exists\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-16 16:09:08.4111565 +0530 IST m=+2209.824298501
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":19,\"name\":\"User\",\"email\":\"ushbdhbhj@gmail.com\",\"phone\":\"0863218474\",\"isactive\":true},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-16 16:10:53.0336731 +0530 IST m=+2314.446815101
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":20,\"name\":\"User\",\"email\":\"usgfbhdfbhfdih@gmail.com\",\"phone\":\"1111111111\",\"isactive\":true},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-16 16:21:47.6743863 +0530 IST m=+2969.087528301
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":21,\"name\":\"User\",\"email\":\"OOh@gmail.com\",\"phone\":\"1011111111\",\"isactive\":true},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-16 16:23:10.1078176 +0530 IST m=+3051.520959601
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 400
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"phone number already exists\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-16 16:23:18.5474401 +0530 IST m=+3059.960582101
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":23,\"name\":\"User\",\"email\":\"Omh@gmail.com\",\"phone\":\"1011111311\",\"isactive\":true},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+

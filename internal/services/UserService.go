@@ -3,10 +3,13 @@ package services
 import (
 	"backend_institutions/internal/constants"
 	"backend_institutions/internal/dto"
+	"backend_institutions/internal/grpc"
 	"backend_institutions/internal/model"
 	"backend_institutions/internal/repository"
 	"backend_institutions/internal/utils"
 	"errors"
+	"fmt"
+	"log"
 	"strings"
 
 	"github.com/go-sql-driver/mysql"
@@ -61,6 +64,15 @@ func (s *UserService) SignUp(dto *dto.SignUpDTO) (model.User, error) {
 	if err != nil {
 		return model.User{}, err
 	}
+
+	// Send welcome email asynchronously to not block user registration response
+	go func(email, name string) {
+		subject := "Welcome to Backend Institutions!"
+		body := fmt.Sprintf("<h1>Hello %s,</h1><p>Thank you for registering on our platform. Your account is now active!</p>", name)
+		if sendErr := grpc.SendEmail(email, subject, body); sendErr != nil {
+			log.Printf("Failed to send welcome email via gRPC: %v\n", sendErr)
+		}
+	}(user.Email, user.Name)
 
 	return user, nil
 }

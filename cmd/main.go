@@ -50,5 +50,10 @@ func main() {
 		log.Fatal("Failed to connect to Logger Service:", err)
 	}
 
+	err = grpc.ConnectNotificationService()
+	if err != nil {
+		log.Fatal("Failed to connect to Notification Service:", err)
+	}
+
 	log.Fatal(app.Listen(":" + port))
 }

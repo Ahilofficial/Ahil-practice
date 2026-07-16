@@ -24,10 +24,7 @@ func NewLoggerServer(loggerService *services.LoggerService) *LoggerServer {
 	}
 }
 
-func (s *LoggerServer) SaveLog(
-	ctx context.Context,
-	req *loggerpb.LogRequest,
-) (*loggerpb.LogResponse, error) {
+func (s *LoggerServer) SaveLog(ctx context.Context, req *loggerpb.LogRequest) (*loggerpb.LogResponse, error) {
 
 	logEntry := model.Log{
 		Service:  req.Service,

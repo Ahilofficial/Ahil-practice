@@ -1,0 +1,394 @@
+
+**
+Time      : 2026-07-16 14:44:47.842594 +0530 IST m=+29.402163701
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQyNzk2ODcsImlhdCI6MTc4NDE5MzI4NywidXNlcl9pZCI6OX0.8dULAprx9OA2nlJE-UGaphIXbCD_9Y3qV5dSpcaoVHE\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-16 14:44:57.6798448 +0530 IST m=+39.239414501
+Service   : Institution
+Method    : POST
+Endpoint  : /institutes
+Status    : 200
+
+Request:
+"{\n  \"name\": \"A5DDw\",\n  \"institution_code\": \"dnDjds\",\n  \"state\": \"Tamil Nadu\"\n}"
+
+Response:
+"{\"data\":{\"id\":12,\"name\":\"A5DDw\",\"institution_code\":\"dnDjds\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},\"message\":\"Institution created successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-16 14:47:33.2752101 +0530 IST m=+13.181895401
+Service   : Institution
+Method    : POST
+Endpoint  : /institutes
+Status    : 200
+
+Request:
+"{\n  \"name\": \"A5DDwBB\",\n  \"institution_code\": \"dnDjBBs\",\n  \"state\": \"Tamil Nadu\"\n}"
+
+Response:
+"{\"data\":{\"id\":13,\"name\":\"A5DDwBB\",\"institution_code\":\"dnDjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},\"message\":\"Institution created successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-16 14:48:16.9663726 +0530 IST m=+9.264933201
+Service   : Institution
+Method    : POST
+Endpoint  : /institutes
+Status    : 200
+
+Request:
+"{\n  \"name\": \"A5DDwBBVV\",\n  \"institution_code\": \"dnDVjBBs\",\n  \"state\": \"Tamil Nadu\"\n}"
+
+Response:
+"{\"data\":{\"id\":14,\"name\":\"A5DDwBBVV\",\"institution_code\":\"dnDVjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},\"message\":\"Institution created successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-16 14:49:02.7820687 +0530 IST m=+9.120125101
+Service   : Institution
+Method    : POST
+Endpoint  : /institutes
+Status    : 200
+
+Request:
+"{\n  \"name\": \"A5DDwBBFFVV\",\n  \"institution_code\": \"FFdnDVjBBs\",\n  \"state\": \"Tamil Nadu\"\n}"
+
+Response:
+"{\"data\":{\"id\":15,\"name\":\"A5DDwBBFFVV\",\"institution_code\":\"FFdnDVjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},\"message\":\"Institution created successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-16 14:50:08.9101543 +0530 IST m=+10.750637301
+Service   : Institution
+Method    : POST
+Endpoint  : /institutes
+Status    : 200
+
+Request:
+"{\n  \"name\": \"A5DDwBBSSFFVV\",\n  \"institution_code\": \"FFSSdnDVjBBs\",\n  \"state\": \"Tamil Nadu\"\n}"
+
+Response:
+"{\"data\":{\"id\":16,\"name\":\"A5DDwBBSSFFVV\",\"institution_code\":\"FFSSdnDVjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},\"message\":\"Institution created successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-16 14:51:59.6473089 +0530 IST m=+121.487791901
+Service   : Department
+Method    : POST
+Endpoint  : /departments
+Status    : 200
+
+Request:
+"{\n  \"department_name\": \"Manu\",\n  \"institution_id\": 16\n}"
+
+Response:
+"{\"data\":{\"id\":4,\"department_name\":\"Manu\",\"institution_id\":16,\"isactive\":true,\"faculties\":[]},\"message\":\"Department created successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-16 14:52:12.7141825 +0530 IST m=+134.554665501
+Service   : Department
+Method    : POST
+Endpoint  : /departments
+Status    : 400
+
+Request:
+"{\n  \"department_name\": \"Manu\",\n  \"institution_id\": 16\n}"
+
+Response:
+"{\"message\":\"department name already exists in this institution, or parent institution is inactive/invalid\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-16 14:52:22.877721 +0530 IST m=+144.718204001
+Service   : Department
+Method    : POST
+Endpoint  : /departments
+Status    : 200
+
+Request:
+"{\n  \"department_name\": \"Manu\",\n  \"institution_id\": 5\n}"
+
+Response:
+"{\"data\":{\"id\":5,\"department_name\":\"Manu\",\"institution_id\":5,\"isactive\":true,\"faculties\":[]},\"message\":\"Department created successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-16 14:52:50.5278263 +0530 IST m=+172.368309301
+Service   : Faculty
+Method    : POST
+Endpoint  : /faculties
+Status    : 200
+
+Request:
+"{\n  \"name\": \"Dr. Amit Anand\",\n  \"gender\": \"Male\",\n  \"joining_date\": \"2026-06-24T12:00:00Z\",\n  \"department_id\": 5\n}"
+
+Response:
+"{\"data\":{\"id\":3,\"name\":\"Dr. Amit Anand\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T12:00:00Z\",\"department_id\":5,\"isactive\":true,\"students\":[]},\"message\":\"Faculty created successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-16 14:53:20.0061579 +0530 IST m=+201.846640901
+Service   : Student
+Method    : POST
+Endpoint  : /students
+Status    : 400
+
+Request:
+"{\n  \"name\": \"Rahula Kumar\",\n  \"email\": \"rahaaa@example.com\",\n  \"gender\": \"Male\",\n  \"faculty_id\": 3\n}"
+
+Response:
+"{\"message\":\"student email already registered, or assigned faculty is inactive/invalid\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-16 14:53:26.3580905 +0530 IST m=+208.198573501
+Service   : Student
+Method    : POST
+Endpoint  : /students
+Status    : 200
+
+Request:
+"{\n  \"name\": \"Rahula Kumar\",\n  \"email\": \"raa@example.com\",\n  \"gender\": \"Male\",\n  \"faculty_id\": 3\n}"
+
+Response:
+"{\"data\":{\"id\":6,\"name\":\"Rahula Kumar\",\"email\":\"raa@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},\"message\":\"Student created successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-16 15:02:27.5703454 +0530 IST m=+30.615497101
+Service   : Student
+Method    : POST
+Endpoint  : /students
+Status    : 400
+
+Request:
+"{\n  \"name\": \"Rahula Kumar\",\n  \"email\": \"raa@example.com\",\n  \"gender\": \"Male\",\n  \"faculty_id\": 3\n}"
+
+Response:
+"{\"message\":\"student email already registered, or assigned faculty is inactive/invalid\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-16 15:05:57.9497535 +0530 IST m=+12.389469501
+Service   : Student
+Method    : POST
+Endpoint  : /students
+Status    : 400
+
+Request:
+"{\n  \"name\": \"Rahula Kumar\",\n  \"email\": \"raa@example.com\",\n  \"gender\": \"Male\",\n  \"faculty_id\": 3\n}"
+
+Response:
+"{\"message\":\"student email already registered, or assigned faculty is inactive/invalid\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-16 15:06:59.4363472 +0530 IST m=+73.876063201
+Service   : Student
+Method    : POST
+Endpoint  : /students
+Status    : 400
+
+Request:
+"{\n  \"name\": \"Rahula Kumar\",\n  \"email\": \"raa@example.com\",\n  \"gender\": \"Male\",\n  \"faculty_id\": 3\n}"
+
+Response:
+"{\"message\":\"student email already registered, or assigned faculty is inactive/invalid\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-16 15:07:15.4557761 +0530 IST m=+89.895492101
+Service   : Student
+Method    : POST
+Endpoint  : /students
+Status    : 200
+
+Request:
+"{\n  \"name\": \"Rahusla Kumar\",\n  \"email\": \"radbshdsdiha@example.com\",\n  \"gender\": \"Male\",\n  \"faculty_id\": 3\n}"
+
+Response:
+"{\"data\":{\"id\":7,\"name\":\"Rahusla Kumar\",\"email\":\"radbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},\"message\":\"Student created successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-16 15:08:26.5435334 +0530 IST m=+160.983249401
+Service   : Student
+Method    : POST
+Endpoint  : /students
+Status    : 400
+
+Request:
+"{\n  \"name\": \"Rahusla Kumar\",\n  \"email\": \"radbshdsdiha@example.com\",\n  \"gender\": \"Male\",\n  \"faculty_id\": 3\n}"
+
+Response:
+"{\"message\":\"student email already registered, or assigned faculty is inactive/invalid\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-16 15:09:15.15351 +0530 IST m=+209.593226001
+Service   : Student
+Method    : POST
+Endpoint  : /students
+Status    : 200
+
+Request:
+"{\n  \"name\": \"Rarrhusla Kumar\",\n  \"email\": \"rarrdbshdsdiha@example.com\",\n  \"gender\": \"Male\",\n  \"faculty_id\": 3\n}"
+
+Response:
+"{\"data\":{\"id\":8,\"name\":\"Rarrhusla Kumar\",\"email\":\"rarrdbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},\"message\":\"Student created successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-16 15:13:43
+Service   : Student
+Method    : POST
+Endpoint  : /students
+Status    : 400
+
+Request:
+{
+  "name": "Rarrhusla Kumar",
+  "email": "rarrdbshdsdiha@example.com",
+  "gender": "Male",
+  "faculty_id": 3
+}
+
+Response:
+{
+  "message": "student email already registered, or assigned faculty is inactive/invalid",
+  "success": false
+}
+
+**
+
+
+**
+Time      : 2026-07-16 15:14:28
+Service   : Student
+Method    : POST
+Endpoint  : /students
+Status    : 400
+
+Request:
+{
+  "name": "Rarrhusla Kumar",
+  "email": "rarrdbshdsdiha@example.com",
+  "gender": "Male",
+  "faculty_id": 3
+}
+
+Response:
+{
+  "message": "student email already registered, or assigned faculty is inactive/invalid",
+  "success": false
+}
+
+**
+
+
+**
+Time      : 2026-07-16 15:15:09
+Service   : Student
+Method    : POST
+Endpoint  : /students
+Status    : 200
+
+Request:
+{
+  "name": "Rarrhuslddda Kumar",
+  "email": "rarrdbshddsdiha@example.com",
+  "gender": "Male",
+  "faculty_id": 3
+}
+
+Response:
+{
+  "data": {
+    "id": 9,
+    "name": "Rarrhuslddda Kumar",
+    "email": "rarrdbshddsdiha@example.com",
+    "gender": "Male",
+    "faculty_id": 3,
+    "isactive": true,
+    "fees": []
+  },
+  "message": "Student created successfully",
+  "success": true
+}
+
+**
+
+
+
+**
+Time      : 2026-07-16 15:17:11
+Service   : Student
+Method    : POST
+Endpoint  : /students
+Status    : 400
+
+Request:
+{
+  "name": "Rarrhuslddda Kumar",
+  "email": "rarrdbshddsdiha@example.com",
+  "gender": "Male",
+  "faculty_id": 3
+}
+
+Response:
+{
+  "message": "student email already registered, or assigned faculty is inactive/invalid",
+  "success": false
+}
+
+**
+
