@@ -1,0 +1,48 @@
+
+**
+Time      : 2026-07-17 16:22:32.1518284 +0530 IST m=+16.566469601
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes/
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"items\":[{\"id\":1,\"name\":\"Anna\",\"institution_code\":\"sw51001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":3,\"name\":\"Anna\",\"institution_code\":\"sw51001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[{\"id\":2,\"department_name\":\"Manu\",\"institution_id\":3,\"isactive\":true,\"faculties\":[]}]},{\"id\":4,\"name\":\"Anna University Main Campus\",\"institution_code\":\"AU1001-M\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[{\"id\":3,\"department_name\":\"Manu\",\"institution_id\":4,\"isactive\":true,\"faculties\":[{\"id\":2,\"name\":\"Dr. Amit Anand\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":3,\"isactive\":true,\"students\":[{\"id\":2,\"name\":\"Rahul Kumar Sharma\",\"email\":\"rahul.sharma@example.com\",\"gender\":\"male\",\"faculty_id\":2,\"isactive\":true,\"fees\":[{\"id\":2,\"payment_mode\":\"Online\",\"amount\":50000,\"student_id\":2,\"isactive\":true}]},{\"id\":4,\"name\":\"Rahul Kumar\",\"email\":\"raha@example.com\",\"gender\":\"Male\",\"faculty_id\":2,\"isactive\":true,\"fees\":[]},{\"id\":5,\"name\":\"Rahula Kumar\",\"email\":\"rahaaa@example.com\",\"gender\":\"Male\",\"faculty_id\":2,\"isactive\":true,\"fees\":[]}]}]}]},{\"id\":5,\"name\":\"Annas\",\"institution_code\":\"SW01001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[{\"id\":5,\"department_name\":\"Manu\",\"institution_id\":5,\"isactive\":true,\"faculties\":[{\"id\":3,\"name\":\"Dr. Amit Anand\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":5,\"isactive\":true,\"students\":[{\"id\":6,\"name\":\"Rahula Kumar\",\"email\":\"raa@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":7,\"name\":\"Rahusla Kumar\",\"email\":\"radbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":8,\"name\":\"Rarrhusla Kumar\",\"email\":\"rarrdbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":9,\"name\":\"Rarrhuslddda Kumar\",\"email\":\"rarrdbshddsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]}]}]}]},{\"id\":6,\"name\":\"Annasw\",\"institution_code\":\"SW018001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]}],\"limit\":5,\"page\":1,\"total_count\":15,\"total_pages\":3},\"message\":\"Institutes fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-17 16:24:01.3872009 +0530 IST m=+8.481416301
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes/
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"items\":[{\"id\":1,\"name\":\"Anna\",\"institution_code\":\"sw51001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":3,\"name\":\"Anna\",\"institution_code\":\"sw51001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[{\"id\":2,\"department_name\":\"Manu\",\"institution_id\":3,\"isactive\":true,\"faculties\":[]}]},{\"id\":4,\"name\":\"Anna University Main Campus\",\"institution_code\":\"AU1001-M\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[{\"id\":3,\"department_name\":\"Manu\",\"institution_id\":4,\"isactive\":true,\"faculties\":[{\"id\":2,\"name\":\"Dr. Amit Anand\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":3,\"isactive\":true,\"students\":[{\"id\":2,\"name\":\"Rahul Kumar Sharma\",\"email\":\"rahul.sharma@example.com\",\"gender\":\"male\",\"faculty_id\":2,\"isactive\":true,\"fees\":[{\"id\":2,\"payment_mode\":\"Online\",\"amount\":50000,\"student_id\":2,\"isactive\":true}]},{\"id\":4,\"name\":\"Rahul Kumar\",\"email\":\"raha@example.com\",\"gender\":\"Male\",\"faculty_id\":2,\"isactive\":true,\"fees\":[]},{\"id\":5,\"name\":\"Rahula Kumar\",\"email\":\"rahaaa@example.com\",\"gender\":\"Male\",\"faculty_id\":2,\"isactive\":true,\"fees\":[]}]}]}]},{\"id\":5,\"name\":\"Annas\",\"institution_code\":\"SW01001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[{\"id\":5,\"department_name\":\"Manu\",\"institution_id\":5,\"isactive\":true,\"faculties\":[{\"id\":3,\"name\":\"Dr. Amit Anand\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":5,\"isactive\":true,\"students\":[{\"id\":6,\"name\":\"Rahula Kumar\",\"email\":\"raa@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":7,\"name\":\"Rahusla Kumar\",\"email\":\"radbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":8,\"name\":\"Rarrhusla Kumar\",\"email\":\"rarrdbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":9,\"name\":\"Rarrhuslddda Kumar\",\"email\":\"rarrdbshddsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]}]}]}]},{\"id\":6,\"name\":\"Annasw\",\"institution_code\":\"SW018001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]}],\"limit\":5,\"page\":1,\"total_count\":15,\"total_pages\":3},\"message\":\"Institutes fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-17 16:25:54.2134113 +0530 IST m=+7.285775701
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes/
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"items\":[{\"id\":1,\"name\":\"Anna\",\"institution_code\":\"sw51001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":3,\"name\":\"Anna\",\"institution_code\":\"sw51001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[{\"id\":2,\"department_name\":\"Manu\",\"institution_id\":3,\"isactive\":true,\"faculties\":[]}]},{\"id\":4,\"name\":\"Anna University Main Campus\",\"institution_code\":\"AU1001-M\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[{\"id\":3,\"department_name\":\"Manu\",\"institution_id\":4,\"isactive\":true,\"faculties\":[{\"id\":2,\"name\":\"Dr. Amit Anand\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":3,\"isactive\":true,\"students\":[{\"id\":2,\"name\":\"Rahul Kumar Sharma\",\"email\":\"rahul.sharma@example.com\",\"gender\":\"male\",\"faculty_id\":2,\"isactive\":true,\"fees\":[{\"id\":2,\"payment_mode\":\"Online\",\"amount\":50000,\"student_id\":2,\"isactive\":true}]},{\"id\":4,\"name\":\"Rahul Kumar\",\"email\":\"raha@example.com\",\"gender\":\"Male\",\"faculty_id\":2,\"isactive\":true,\"fees\":[]},{\"id\":5,\"name\":\"Rahula Kumar\",\"email\":\"rahaaa@example.com\",\"gender\":\"Male\",\"faculty_id\":2,\"isactive\":true,\"fees\":[]}]}]}]},{\"id\":5,\"name\":\"Annas\",\"institution_code\":\"SW01001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[{\"id\":5,\"department_name\":\"Manu\",\"institution_id\":5,\"isactive\":true,\"faculties\":[{\"id\":3,\"name\":\"Dr. Amit Anand\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":5,\"isactive\":true,\"students\":[{\"id\":6,\"name\":\"Rahula Kumar\",\"email\":\"raa@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":7,\"name\":\"Rahusla Kumar\",\"email\":\"radbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":8,\"name\":\"Rarrhusla Kumar\",\"email\":\"rarrdbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":9,\"name\":\"Rarrhuslddda Kumar\",\"email\":\"rarrdbshddsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]}]}]}]},{\"id\":6,\"name\":\"Annasw\",\"institution_code\":\"SW018001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]}],\"limit\":5,\"page\":1,\"total_count\":15,\"total_pages\":3},\"message\":\"Institutes fetched successfully\",\"success\":true}"
+
+**
+

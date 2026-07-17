@@ -1,31 +1,40 @@
 package main
 
 import (
-	"backend_institutions/logger_service/internals/grpc"
-	"backend_institutions/logger_service/internals/repository"
-	// "backend_institutions/logger_service/internals/routes"
-	"backend_institutions/logger_service/internals/services"
 	"log"
+	"net"
 	"os"
 
-	"github.com/gofiber/fiber/v3"
+	"backend_institutions/internal/loggerpb"
+	"backend_institutions/logger_service/internals/repository"
+	"backend_institutions/logger_service/internals/services"
+
+	"github.com/joho/godotenv"
+	"google.golang.org/grpc"
 )
 
 func main() {
-	
+	_ = godotenv.Load()
+	_ = godotenv.Load("../.env")
+
 	loggerRepo := repository.NewLoggerRepo()
 	loggerService := services.NewLoggerService(loggerRepo)
+
+	grpcServer := grpc.NewServer()
+	loggerpb.RegisterLoggerServiceServer(grpcServer, loggerService)
 
 	port := os.Getenv("LOGGER_GRPC_PORT")
 	if port == "" {
 		port = "15051"
 	}
-	
-	go grpc.StartGRPCServer(loggerService, port)
 
-	
-	app := fiber.New()
-	// routes.RegisterRoutes(app)
-	log.Println("Logger HTTP server starting on :8081")
-	log.Fatal(app.Listen(":8081"))
+	lis, err := net.Listen("tcp", ":"+port)
+	if err != nil {
+		log.Fatalf("Failed to listen on gRPC port %s: %v", port, err)
+	}
+
+	log.Printf("gRPC Logger Server starting on :%s", port)
+	if err := grpcServer.Serve(lis); err != nil {
+		log.Fatalf("Failed to serve gRPC: %v", err)
+	}
 }
