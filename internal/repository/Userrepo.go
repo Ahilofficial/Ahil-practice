@@ -81,3 +81,21 @@ func (r *UserRepository) AssignRoleToUser(userID uint, roleName string) error {
 
 	return nil
 }
+
+func (r *UserRepository) DeleteUser(id uint) error {
+	// Remove user role associations first to satisfy foreign key constraints
+	if err := r.db.Exec("DELETE FROM user_roles WHERE user_id = ?", id).Error; err != nil {
+		return err
+	}
+
+	res := r.db.Exec("DELETE FROM users WHERE id = ?", id)
+	if res.Error != nil {
+		return res.Error
+	}
+
+	if res.RowsAffected == 0 {
+		return errors.New("user not found")
+	}
+
+	return nil
+}

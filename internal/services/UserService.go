@@ -20,7 +20,9 @@ type UserService struct {
 }
 
 func NewUserService(userrepo *repository.UserRepository) *UserService {
-	return &UserService{userrepo: userrepo}
+	return &UserService{
+		userrepo: userrepo,
+	}
 }
 
 func (s *UserService) SignUp(dto *dto.SignUpDTO) (model.User, error) {
@@ -37,30 +39,21 @@ func (s *UserService) SignUp(dto *dto.SignUpDTO) (model.User, error) {
 		IsActive: true,
 	}
 
-	role := dto.Role
-	if role == "" {
-		role = constants.AdminRole
-	} else if role != constants.AdminRole {
-		return model.User{}, errors.New("can't able to assign role other than user during signup")
-	}
-
 	err = s.userrepo.CreateUser(&user)
 	if err != nil {
-		var mysqlErr *mysql.MySQLError
-		if errors.As(err, &mysqlErr) && mysqlErr.Number == 1062 {
-			msg := strings.ToLower(mysqlErr.Message)
-			if strings.Contains(msg, "email") {
+		if mysqlErr, ok := err.(*mysql.MySQLError); ok && mysqlErr.Number == 1062 {
+			if strings.Contains(mysqlErr.Message, "email") {
 				return model.User{}, errors.New("email already exists")
 			}
-			if strings.Contains(msg, "phone") {
+			if strings.Contains(mysqlErr.Message, "phone") {
 				return model.User{}, errors.New("phone number already exists")
 			}
-			return model.User{}, errors.New("email or phone number already exists")
 		}
 		return model.User{}, err
 	}
 
-	err = s.userrepo.AssignRoleToUser(user.ID, role)
+	// Assign default "user" role to newly signed up user
+	err = s.userrepo.AssignRoleToUser(user.ID, constants.UserRole)
 	if err != nil {
 		return model.User{}, err
 	}
@@ -97,4 +90,8 @@ func (s *UserService) SignIn(dto *dto.SignInDTO) (string, error) {
 
 func (s *UserService) AssignRole(userID uint, roleName string) error {
 	return s.userrepo.AssignRoleToUser(userID, roleName)
+}
+
+func (s *UserService) DeleteUserService(id uint) error {
+	return s.userrepo.DeleteUser(id)
 }

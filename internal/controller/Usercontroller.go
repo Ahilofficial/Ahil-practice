@@ -4,6 +4,7 @@ import (
 	"backend_institutions/internal/dto"
 	"backend_institutions/internal/helper"
 	"backend_institutions/internal/services"
+	"strconv"
 
 	"github.com/gofiber/fiber/v3"
 )
@@ -73,4 +74,19 @@ func (cl *UserController) AssignRoleController(c fiber.Ctx) error {
 	}
 
 	return helper.Success(c, "Role assigned successfully", nil)
+}
+
+func (cl *UserController) DeleteUserController(c fiber.Ctx) error {
+	idStr := c.Params("id")
+
+	id, err := strconv.ParseUint(idStr, 10, 32)
+	if err != nil {
+		return helper.Error(c, 400, "invalid user id")
+	}
+
+	if err := cl.userService.DeleteUserService(uint(id)); err != nil {
+		return helper.Error(c, 400, err.Error())
+	}
+
+	return helper.Success(c, "User deleted successfully", nil)
 }

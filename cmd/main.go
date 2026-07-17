@@ -15,7 +15,10 @@ import (
 func main() {
 	err := godotenv.Load()
 	if err != nil {
-		log.Println("Warning: Error loading .env file, relying on environment variables or defaults")
+		err = godotenv.Load("../.env")
+		if err != nil {
+			log.Println("Warning: Error loading .env file from current or parent directory, relying on environment variables or defaults")
+		}
 	}
 
 	database.Connect()
@@ -50,7 +53,7 @@ func main() {
 		log.Fatal("Failed to connect to Logger Service:", err)
 	}
 
-	err = grpc.ConnectNotificationService()
+	err = grpc.ConnectService()
 	if err != nil {
 		log.Fatal("Failed to connect to Notification Service:", err)
 	}

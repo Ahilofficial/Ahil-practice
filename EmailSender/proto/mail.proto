@@ -1,0 +1,16 @@
+syntax="proto3";
+package mail;
+option go_package = "./notificationpb";
+
+service SendMail{
+    rpc SendMail(MailRequest) returns (MailResponse);
+}
+message MailRequest{
+    string to = 1;
+    string subject = 2;
+    string body = 3;
+}
+message MailResponse{
+    bool success=1;
+    string message =2;
+}

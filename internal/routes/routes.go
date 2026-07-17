@@ -105,6 +105,7 @@ func RegisterRoutes(
 
 	userRoute := protected.Group("/users")
 	userRoute.Post("/assign-role", userController.AssignRoleController)
+	userRoute.Delete("/:id",  userController.DeleteUserController)
 
 	fmt.Println("All routes registered successfully")
 }
