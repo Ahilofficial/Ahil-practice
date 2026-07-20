@@ -31,8 +31,8 @@ func ConnectService()error{
 	return nil
 }
 
-func SendEmail(email string, subject string, body string)error{
-	_,err:=Notificationclient.SendMail(
+func SendEmail(email string, subject string, body string) error {
+	_, err := Notificationclient.SendMail(
 		context.Background(),
 		&notificationpb.MailRequest{
 			To:      email,
@@ -40,5 +40,5 @@ func SendEmail(email string, subject string, body string)error{
 			Body:    body,
 		},
 	)
-	return  err
+	return err
 }

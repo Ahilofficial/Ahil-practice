@@ -1,7 +1,7 @@
 package dto
 
 import (
-	"backend_institutions/internal/constants"
+	
 	"backend_institutions/internal/model"
 	"errors"
 	"regexp"
@@ -85,16 +85,22 @@ func (dto *AssignRoleDTO) Sanitize() {
 }
 
 func (dto *AssignRoleDTO) Validate() error {
-
 	if dto.UserID == 0 {
 		return errors.New("user id is required")
 	}
+
 	if dto.Role == "" {
 		return errors.New("role is required")
 	}
-	if dto.Role != constants.UserRole && dto.Role != constants.PrincipalRole && dto.Role != constants.FacultyRole && dto.Role != constants.StudentRole && dto.Role != constants.AdminRole {
+
+	if dto.Role != "admin" &&
+		dto.Role != "principal" &&
+		dto.Role != "faculty" &&
+		dto.Role != "student" &&
+		dto.Role != "user" {
 		return errors.New("invalid role name")
 	}
+
 	return nil
 }
 

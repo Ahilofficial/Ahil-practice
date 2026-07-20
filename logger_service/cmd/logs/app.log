@@ -606,3 +606,259 @@ Response:
 
 **
 
+
+**
+Time      : 2026-07-20 18:02:41
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 400
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"email already exists\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-20 18:02:55
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 400
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"invalid email format\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-20 18:03:00
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":51,\"name\":\"User\",\"email\":\"ahilcicimllin@gmail.com\",\"phone\":\"5656318090\",\"isactive\":true},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-20 18:03:10
+Service   : General
+Method    : DELETE
+Endpoint  : /users/50
+Status    : 400
+
+Request:
+""
+
+Response:
+"{\"message\":\"user not found\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-20 18:03:52
+Service   : General
+Method    : DELETE
+Endpoint  : /users/49
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-20 18:04:01
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 400
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"phone number already exists\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-20 18:04:06
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 400
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"phone number already exists\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-20 18:04:10
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":54,\"name\":\"User\",\"email\":\"ahilcicillin@gmail.com\",\"phone\":\"5656318099\",\"isactive\":true},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-20 18:04:47
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ2MzcyODcsImlhdCI6MTc4NDU1MDg4NywidXNlcl9pZCI6NTR9.8bD_PJY_v64GJXaTLsa5AvyggIYiKP7oxLsB93TEz1Q\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-20 18:37:08
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes/5
+Status    : 403
+
+Request:
+""
+
+Response:
+"{\"message\":\"Forbidden: you do not have permission to perform this action\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-20 18:37:18
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ2MzkyMzgsImlhdCI6MTc4NDU1MjgzOCwidXNlcl9pZCI6OX0.Bu3mc5QgTELctj-hOSHqkNtffJXN0U07PIfof-uEY-U\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-20 18:37:23
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes/5
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"id\":5,\"name\":\"Annas\",\"institution_code\":\"SW01001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[{\"id\":5,\"department_name\":\"Manu\",\"institution_id\":5,\"isactive\":true,\"faculties\":[{\"id\":3,\"name\":\"Dr. Amit Anand\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":5,\"isactive\":true,\"students\":[{\"id\":6,\"name\":\"Rahula Kumar\",\"email\":\"raa@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":7,\"name\":\"Rahusla Kumar\",\"email\":\"radbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":8,\"name\":\"Rarrhusla Kumar\",\"email\":\"rarrdbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":9,\"name\":\"Rarrhuslddda Kumar\",\"email\":\"rarrdbshddsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]}]}]}]},\"message\":\"Institute fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-20 19:00:42
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes/5
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"id\":5,\"name\":\"Annas\",\"institution_code\":\"SW01001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[{\"id\":5,\"department_name\":\"Manu\",\"institution_id\":5,\"isactive\":true,\"faculties\":[{\"id\":3,\"name\":\"Dr. Amit Anand\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":5,\"isactive\":true,\"students\":[{\"id\":6,\"name\":\"Rahula Kumar\",\"email\":\"raa@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":7,\"name\":\"Rahusla Kumar\",\"email\":\"radbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":8,\"name\":\"Rarrhusla Kumar\",\"email\":\"rarrdbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":9,\"name\":\"Rarrhuslddda Kumar\",\"email\":\"rarrdbshddsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]}]}]}]},\"message\":\"Institute fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-20 19:01:10
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":55,\"name\":\"User\",\"email\":\"afa@gmail.com\",\"phone\":\"5656318010\",\"isactive\":true},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-20 19:01:45
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ2NDA3MDUsImlhdCI6MTc4NDU1NDMwNSwidXNlcl9pZCI6NTV9.HZGTZWwquFdp3XXyHwDmsJ7kxxDko_tKAclDlzuiJ2s\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-20 19:01:52
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes/5
+Status    : 403
+
+Request:
+""
+
+Response:
+"{\"message\":\"Forbidden: you do not have permission to perform this action\",\"success\":false}"
+
+**
+

@@ -58,10 +58,5 @@ func main() {
 		log.Fatal("Failed to connect to Notification Service:", err)
 	}
 
-	err = grpc.ConnectSignInService()
-	if err != nil {
-		log.Fatal("Failed to connect to SignIn Notification Service:", err)
-	}
-
 	log.Fatal(app.Listen(":" + port))
 }

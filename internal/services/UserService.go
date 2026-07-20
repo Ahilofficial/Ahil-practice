@@ -1,14 +1,12 @@
 package services
 
 import (
-	"backend_institutions/internal/constants"
 	"backend_institutions/internal/dto"
 	"backend_institutions/internal/grpc"
 	"backend_institutions/internal/model"
 	"backend_institutions/internal/repository"
 	"backend_institutions/internal/utils"
 	"errors"
-	"fmt"
 	"log"
 	"strings"
 
@@ -53,16 +51,14 @@ func (s *UserService) SignUp(dto *dto.SignUpDTO) (model.User, error) {
 	}
 
 	// Assign default "user" role to newly signed up user
-	err = s.userrepo.AssignRoleToUser(user.ID, constants.UserRole)
+	err = s.userrepo.AssignRoleToUser(user.ID, "user")
 	if err != nil {
 		return model.User{}, err
 	}
 
-	// Send welcome email asynchronously to not block user registration response
+	// Send welcome email asynchronously
 	go func(email, name string) {
-		subject := "Welcome to Backend Institutions!"
-		body := fmt.Sprintf("<h1>Hello %s,</h1><p>Thank you for registering on our platform. Your account is now active!</p>", name)
-		if sendErr := grpc.SendEmail(email, subject, body); sendErr != nil {
+		if sendErr := grpc.SendEmail(email, name, "signup"); sendErr != nil {
 			log.Printf("Failed to send welcome email via gRPC: %v\n", sendErr)
 		}
 	}(user.Email, user.Name)
@@ -84,13 +80,17 @@ func (s *UserService) SignIn(dto *dto.SignInDTO) (string, error) {
 	if err != nil {
 		return "", errors.New("invalid email or password")
 	}
+
+
 	go func(email, name string) {
-		subject := "Sign In Notification"
-		body := fmt.Sprintf("<h1>Hello %s,</h1><p>You have successfully signed in to our platform. Your account is active!</p>", name)
-		if sendErr := grpc.SendSignInEmail(email, subject, body); sendErr != nil {
+		if sendErr := grpc.SendEmail(email, name, "signin"); sendErr != nil {
 			log.Printf("Failed to send sign-in email via gRPC: %v\n", sendErr)
 		}
 	}(user.Email, user.Name)
+
+
+
+	
 	
 	return utils.GenerateToken(user.ID)
 }

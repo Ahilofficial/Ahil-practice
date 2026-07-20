@@ -47,8 +47,7 @@ func RegisterRoutes(
 
 	protected := app.Group("", middleware.AuthRequired())
 
-	protected.Post("/users/assign-role", middleware.RequirePermission(constants.AdminRole), userController.AssignRoleController)
-
+protected.Post("/users/assign-role",middleware.RequirePermission(constants.PermissionAssignRoles),userController.AssignRoleController,)
 	InstituteRoute := protected.Group("/institutes")
 	
 	InstituteRoute.Post("", middleware.RequirePermission(constants.PermissionCreateInstitutes), instituteController.CreateInstituteController)

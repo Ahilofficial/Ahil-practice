@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.2
 // - protoc             v7.35.1
-// source: proto/mail.proto
+// source: EmailSender/proto/mail.proto
 
 package notificationpb
 
@@ -117,5 +117,5 @@ var SendMail_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/mail.proto",
+	Metadata: "EmailSender/proto/mail.proto",
 }

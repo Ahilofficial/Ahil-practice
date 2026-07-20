@@ -1,8 +1,10 @@
 syntax="proto3";
 package log;
+
 service LoggerService{
     rpc SaveLog(logRequest)returns (logResponse);
 }
+
 message logRequest{
     string serv`ice = 1;
     string method = 2;
@@ -10,8 +12,8 @@ message logRequest{
     string request = 4;
     string response = 5;
     string status = 6;
-     
 }
+
 message logResponse{
     boolean success = 1;
     string response =2;

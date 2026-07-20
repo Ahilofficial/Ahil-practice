@@ -11,6 +11,6 @@ message MailRequest{
     string body = 3;
 }
 message MailResponse{
-    bool success=1;
-    string message =2;
+    bool success = 1;
+    string message = 2;
 }

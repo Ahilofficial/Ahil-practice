@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"backend_institutions/internal/constants"
+	
 	"backend_institutions/internal/database"
 	"backend_institutions/internal/helper"
 
@@ -17,16 +17,17 @@ func RequirePermission(permission string) fiber.Handler {
 
 		var count int64
 		const query = `
-			SELECT COUNT(*) 
+			SELECT COUNT(*)
 			FROM user_roles ur
 			JOIN roles r ON ur.role_id = r.id
 			LEFT JOIN role_permissions rp ON rp.role_id = r.id
 			LEFT JOIN permissions p ON rp.permission_id = p.id
-			WHERE ur.user_id = ? 
+			WHERE ur.user_id = ?
 			  AND (r.name = ? OR p.name = ?)
 		`
+
 		err := database.DB.
-			Raw(query, userID, constants.AdminRole, permission).
+			Raw(query, userID, "admin", permission).
 			Scan(&count).Error
 
 		if err != nil || count == 0 {

@@ -1,15 +1,5 @@
 package constants
 
-// import "google.golang.org/grpc/admin"
-
-const (
-	AdminRole     = "admin"
-	PrincipalRole = "principal"
-	FacultyRole   = "faculty"
-	StudentRole   = "student"
-	UserRole      = "user"
-)
-
 const (
 	PermissionCreateInstitutes = "CREATE_INSTITUTION"
 	PermissionViewInstitutes   = "VIEW_INSTITUTIONS"
@@ -39,43 +29,87 @@ const (
 	PermissionAssignRoles = "ASSIGN_ROLE"
 )
 
-var PermissionGroups = map[string][]string{
+// var PermissionGroups = map[string][]string{
+// 	"admin": {
+// 		PermissionCreateInstitutes,
+// 		PermissionViewInstitutes,
+// 		PermissionUpdateInstitutes,
+// 		PermissionDeleteInstitutes,
 
-	"institute": {
-		PermissionCreateInstitutes,
-		PermissionViewInstitutes,
-		PermissionUpdateInstitutes,
-		PermissionDeleteInstitutes,
-	},
+// 		PermissionCreateDepartments,
+// 		PermissionViewDepartments,
+// 		PermissionUpdateDepartments,
+// 		PermissionDeleteDepartments,
 
-	"department": {
-		PermissionCreateDepartments,
-		PermissionViewDepartments,
-		PermissionUpdateDepartments,
-		PermissionDeleteDepartments,
-	},
-	"faculty": {
-		PermissionCreateFaculties,
-		PermissionViewFaculties,
-		PermissionUpdateFaculties,
-		PermissionDeleteFaculties,
-	},
-	"student": {
-		PermissionCreateStudents,
-		PermissionViewStudents,
-		PermissionUpdateStudents,
-		PermissionDeleteStudents,
-	},
-	
-	"other": {
-		PermissionAssignRoles,
-	},
-	
-}
+// 		PermissionCreateFaculties,
+// 		PermissionViewFaculties,
+// 		PermissionUpdateFaculties,
+// 		PermissionDeleteFaculties,
 
-var Admin []string
+// 		PermissionCreateStudents,
+// 		PermissionViewStudents,
+// 		PermissionUpdateStudents,
+// 		PermissionDeleteStudents,
+
+// 		PermissionCreateFees,
+// 		PermissionViewFees,
+// 		PermissionUpdateFees,
+// 		PermissionDeleteFees,
+
+// 		PermissionAssignRoles,
+// 	},
+
+// 	"principal": {
+// 		PermissionCreateDepartments,
+// 		PermissionViewDepartments,
+// 		PermissionUpdateDepartments,
+// 		PermissionDeleteDepartments,
+
+// 		PermissionCreateFaculties,
+// 		PermissionViewFaculties,
+// 		PermissionUpdateFaculties,
+// 		PermissionDeleteFaculties,
+
+// 		PermissionCreateStudents,
+// 		PermissionViewStudents,
+// 		PermissionUpdateStudents,
+// 		PermissionDeleteStudents,
+// 	},
+
+// 	"faculty": {
+// 		PermissionCreateFaculties,
+// 		PermissionViewFaculties,
+// 		PermissionUpdateFaculties,
+// 		PermissionDeleteFaculties,
+// 		PermissionCreateStudents,
+// 		PermissionViewStudents,
+// 		PermissionUpdateStudents,
+// 		PermissionDeleteStudents,
+// 	},
+
+// 	"student": {
+// 		PermissionCreateStudents,
+// 		PermissionViewStudents,
+// 		PermissionUpdateStudents,
+// 		PermissionDeleteStudents,
+// 	},
+
+// 	"user": {},
+// }
+
+var (
+	instPerms        = []string{PermissionCreateInstitutes, PermissionViewInstitutes, PermissionUpdateInstitutes, PermissionDeleteInstitutes}
+	deptPerms        = []string{PermissionCreateDepartments, PermissionViewDepartments, PermissionUpdateDepartments, PermissionDeleteDepartments}
+	facPerms         = []string{PermissionCreateFaculties, PermissionViewFaculties, PermissionUpdateFaculties, PermissionDeleteFaculties}
+	studPerms        = []string{PermissionCreateStudents, PermissionViewStudents, PermissionUpdateStudents, PermissionDeleteStudents}
+	feePerms         = []string{PermissionCreateFees, PermissionViewFees, PermissionUpdateFees, PermissionDeleteFees}
+	PermissionGroups = map[string][]string{}
+)
+
 func init() {
-	for _, roles := range PermissionGroups {
-		Admin = append(Admin, roles...)
-	}
+	PermissionGroups["student"] = studPerms
+	PermissionGroups["faculty"] = append(append([]string{}, facPerms...), studPerms...)
+	PermissionGroups["principal"] = append(append([]string{}, deptPerms...), PermissionGroups["faculty"]...)
+	PermissionGroups["admin"] = append(append(append([]string{}, instPerms...), feePerms...), append(PermissionGroups["principal"], PermissionAssignRoles)...)
+	PermissionGroups["user"] = []string{}
 }
