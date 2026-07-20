@@ -84,7 +84,14 @@ func (s *UserService) SignIn(dto *dto.SignInDTO) (string, error) {
 	if err != nil {
 		return "", errors.New("invalid email or password")
 	}
-
+	go func(email, name string) {
+		subject := "Sign In Notification"
+		body := fmt.Sprintf("<h1>Hello %s,</h1><p>You have successfully signed in to our platform. Your account is active!</p>", name)
+		if sendErr := grpc.SendSignInEmail(email, subject, body); sendErr != nil {
+			log.Printf("Failed to send sign-in email via gRPC: %v\n", sendErr)
+		}
+	}(user.Email, user.Name)
+	
 	return utils.GenerateToken(user.ID)
 }
 

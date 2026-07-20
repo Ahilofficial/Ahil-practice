@@ -1,21 +1,25 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net"
-	
+
 	"os"
 
 	"backend_institutions/EmailSender/notificationpb"
 	"backend_institutions/EmailSender/repository"
 	"backend_institutions/EmailSender/service"
+
 	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
 )
 
 func main() {
-    _ = godotenv.Load()
-    _ = godotenv.Load("../.env")
+    err := godotenv.Load("../.env")
+    if err!=nil{
+        fmt.Println("Cant able to load the envirornment variable")
+    }
 
     emailRepo := repository.NewEmailRepository()
 

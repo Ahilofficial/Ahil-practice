@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net"
 	"os"
@@ -14,8 +15,11 @@ import (
 )
 
 func main() {
-	_ = godotenv.Load()
-	_ = godotenv.Load("../.env")
+	
+	err := godotenv.Load("../../.env")
+	if err!=nil{
+		fmt.Println("Cant able to load the envirornment variable")
+	}
 
 	loggerRepo := repository.NewLoggerRepo()
 	loggerService := services.NewLoggerService(loggerRepo)

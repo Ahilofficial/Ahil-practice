@@ -46,3 +46,563 @@ Response:
 
 **
 
+
+**
+Time      : 2026-07-17 18:55:02
+Service   : Department
+Method    : GET
+Endpoint  : /departments
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"items\":[{\"id\":1,\"department_name\":\"Manu\",\"institution_id\":2,\"isactive\":true,\"faculties\":[{\"id\":1,\"name\":\"Dr. Amit Anand\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":1,\"isactive\":true,\"students\":[{\"id\":1,\"name\":\"Rahul Kumar\",\"email\":\"rahul@example.com\",\"gender\":\"Male\",\"faculty_id\":1,\"isactive\":true,\"fees\":[{\"id\":1,\"payment_mode\":\"Online\",\"amount\":50000,\"student_id\":1,\"isactive\":true}]},{\"id\":3,\"name\":\"Rahul Kumar\",\"email\":\"rahula@example.com\",\"gender\":\"Male\",\"faculty_id\":1,\"isactive\":true,\"fees\":[]}]}]},{\"id\":2,\"department_name\":\"Manu\",\"institution_id\":3,\"isactive\":true,\"faculties\":[]},{\"id\":3,\"department_name\":\"Manu\",\"institution_id\":4,\"isactive\":true,\"faculties\":[{\"id\":2,\"name\":\"Dr. Amit Anand\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":3,\"isactive\":true,\"students\":[{\"id\":2,\"name\":\"Rahul Kumar Sharma\",\"email\":\"rahul.sharma@example.com\",\"gender\":\"male\",\"faculty_id\":2,\"isactive\":true,\"fees\":[{\"id\":2,\"payment_mode\":\"Online\",\"amount\":50000,\"student_id\":2,\"isactive\":true}]},{\"id\":4,\"name\":\"Rahul Kumar\",\"email\":\"raha@example.com\",\"gender\":\"Male\",\"faculty_id\":2,\"isactive\":true,\"fees\":[]},{\"id\":5,\"name\":\"Rahula Kumar\",\"email\":\"rahaaa@example.com\",\"gender\":\"Male\",\"faculty_id\":2,\"isactive\":true,\"fees\":[]}]}]},{\"id\":4,\"department_name\":\"Manu\",\"institution_id\":16,\"isactive\":true,\"faculties\":[]},{\"id\":5,\"department_name\":\"Manu\",\"institution_id\":5,\"isactive\":true,\"faculties\":[{\"id\":3,\"name\":\"Dr. Amit Anand\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":5,\"isactive\":true,\"students\":[{\"id\":6,\"name\":\"Rahula Kumar\",\"email\":\"raa@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":7,\"name\":\"Rahusla Kumar\",\"email\":\"radbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":8,\"name\":\"Rarrhusla Kumar\",\"email\":\"rarrdbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":9,\"name\":\"Rarrhuslddda Kumar\",\"email\":\"rarrdbshddsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]}]}]}],\"limit\":5,\"page\":1,\"total_count\":5,\"total_pages\":1},\"message\":\"Departments fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-17 18:56:39
+Service   : Department
+Method    : GET
+Endpoint  : /departments/all
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":[{\"id\":1,\"department_name\":\"Manu\",\"institution_id\":2,\"isactive\":true,\"faculties\":[{\"id\":1,\"name\":\"Dr. Amit Anand\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":1,\"isactive\":true,\"students\":[{\"id\":1,\"name\":\"Rahul Kumar\",\"email\":\"rahul@example.com\",\"gender\":\"Male\",\"faculty_id\":1,\"isactive\":true,\"fees\":[{\"id\":1,\"payment_mode\":\"Online\",\"amount\":50000,\"student_id\":1,\"isactive\":true}]},{\"id\":3,\"name\":\"Rahul Kumar\",\"email\":\"rahula@example.com\",\"gender\":\"Male\",\"faculty_id\":1,\"isactive\":true,\"fees\":[]}]}]},{\"id\":2,\"department_name\":\"Manu\",\"institution_id\":3,\"isactive\":true,\"faculties\":[]},{\"id\":3,\"department_name\":\"Manu\",\"institution_id\":4,\"isactive\":true,\"faculties\":[{\"id\":2,\"name\":\"Dr. Amit Anand\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":3,\"isactive\":true,\"students\":[{\"id\":2,\"name\":\"Rahul Kumar Sharma\",\"email\":\"rahul.sharma@example.com\",\"gender\":\"male\",\"faculty_id\":2,\"isactive\":true,\"fees\":[{\"id\":2,\"payment_mode\":\"Online\",\"amount\":50000,\"student_id\":2,\"isactive\":true}]},{\"id\":4,\"name\":\"Rahul Kumar\",\"email\":\"raha@example.com\",\"gender\":\"Male\",\"faculty_id\":2,\"isactive\":true,\"fees\":[]},{\"id\":5,\"name\":\"Rahula Kumar\",\"email\":\"rahaaa@example.com\",\"gender\":\"Male\",\"faculty_id\":2,\"isactive\":true,\"fees\":[]}]}]},{\"id\":4,\"department_name\":\"Manu\",\"institution_id\":16,\"isactive\":true,\"faculties\":[]},{\"id\":5,\"department_name\":\"Manu\",\"institution_id\":5,\"isactive\":true,\"faculties\":[{\"id\":3,\"name\":\"Dr. Amit Anand\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":5,\"isactive\":true,\"students\":[{\"id\":6,\"name\":\"Rahula Kumar\",\"email\":\"raa@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":7,\"name\":\"Rahusla Kumar\",\"email\":\"radbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":8,\"name\":\"Rarrhusla Kumar\",\"email\":\"rarrdbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":9,\"name\":\"Rarrhuslddda Kumar\",\"email\":\"rarrdbshddsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]}]}]}],\"message\":\"All departments fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-20 11:06:58
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"invalid email or password\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-20 11:07:26
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ2MTIyNDYsImlhdCI6MTc4NDUyNTg0NiwidXNlcl9pZCI6NDJ9.IpwEKj99gWVhg3_RoXVjSgFvbFAorB2hxZH3NMXamaM\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-20 11:10:45
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 400
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"email already exists\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-20 11:12:58
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ2MTI1NzgsImlhdCI6MTc4NDUyNjE3OCwidXNlcl9pZCI6NDJ9.tOS3VKrjzdohSMvN5yxO6H7gWGTFdayXRIop2RCVwKU\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-20 11:14:53
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ2MTI2OTMsImlhdCI6MTc4NDUyNjI5MywidXNlcl9pZCI6NDJ9.Jd82wEKpvouX_y1vNXbsLTmU2-ziMC_2KNkClniTTmM\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-20 12:34:11
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ2MTc0NTEsImlhdCI6MTc4NDUzMTA1MSwidXNlcl9pZCI6NDJ9.qLg6JQPNJbKAC-OHQPHEumeKE2fE-poXHaVRIh58Wmg\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-20 12:46:04
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ2MTgxNjQsImlhdCI6MTc4NDUzMTc2NCwidXNlcl9pZCI6NDJ9.uOWFgdT-2rBQKW6VlPS8IpeEJbSw-Z1vmrc_rLZE5PY\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-20 12:58:18
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":46,\"name\":\"User\",\"email\":\"ahilcicillin@gmail.com\",\"phone\":\"5656318390\",\"isactive\":true},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-20 12:59:38
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ2MTg5NzgsImlhdCI6MTc4NDUzMjU3OCwidXNlcl9pZCI6NDZ9.XcffNC4NYxP4evY2WMmSm8y9dsQ6tBc6DpxjNHvWR-E\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-20 13:05:22
+Service   : General
+Method    : DELETE
+Endpoint  : //delete/46
+Status    : 200
+
+Request:
+""
+
+Response:
+""
+
+**
+
+
+**
+Time      : 2026-07-20 13:05:48
+Service   : General
+Method    : DELETE
+Endpoint  : //user/46
+Status    : 200
+
+Request:
+""
+
+Response:
+""
+
+**
+
+
+**
+Time      : 2026-07-20 13:05:51
+Service   : General
+Method    : DELETE
+Endpoint  : //users/46
+Status    : 200
+
+Request:
+""
+
+Response:
+""
+
+**
+
+
+**
+Time      : 2026-07-20 13:06:13
+Service   : General
+Method    : DELETE
+Endpoint  : /users/46
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-20 13:06:21
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":47,\"name\":\"User\",\"email\":\"ahilcicillin@gmail.com\",\"phone\":\"5656318390\",\"isactive\":true},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-20 13:07:15
+Service   : General
+Method    : DELETE
+Endpoint  : //delete/47
+Status    : 200
+
+Request:
+""
+
+Response:
+""
+
+**
+
+
+**
+Time      : 2026-07-20 13:07:19
+Service   : General
+Method    : DELETE
+Endpoint  : //delete/47
+Status    : 200
+
+Request:
+""
+
+Response:
+""
+
+**
+
+
+**
+Time      : 2026-07-20 13:07:40
+Service   : General
+Method    : DELETE
+Endpoint  : /users/47
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-20 13:09:07
+Service   : General
+Method    : DELETE
+Endpoint  : /users/47
+Status    : 400
+
+Request:
+""
+
+Response:
+"{\"message\":\"user not found\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-20 13:16:40
+Service   : General
+Method    : DELETE
+Endpoint  : /users/47
+Status    : 400
+
+Request:
+""
+
+Response:
+"{\"message\":\"user not found\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-20 13:16:44
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":48,\"name\":\"User\",\"email\":\"ahilcicillin@gmail.com\",\"phone\":\"5656318390\",\"isactive\":true},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-20 13:16:50
+Service   : General
+Method    : DELETE
+Endpoint  : /users/48
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-20 14:59:06
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":49,\"name\":\"User\",\"email\":\"ahilcicillin@gmail.com\",\"phone\":\"5656318390\",\"isactive\":true},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-20 15:00:11
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ2MjYyMTEsImlhdCI6MTc4NDUzOTgxMSwidXNlcl9pZCI6NDl9.7iH2wNR6gCtRblLltEcrwOmV7gRCCwwgvSWgZhNj8iQ\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-20 15:05:52
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ2MjY1NTIsImlhdCI6MTc4NDU0MDE1MiwidXNlcl9pZCI6NDl9.3GXZ7lk5KMLHUKSYCflRxJw5I0kwf6hhFeBQIVVWHSM\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-20 15:10:45
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes/5
+Status    : 403
+
+Request:
+""
+
+Response:
+"{\"message\":\"Forbidden: you do not have permission to perform this action\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-20 15:10:56
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"invalid email or password\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-20 15:11:11
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ2MjY4NzEsImlhdCI6MTc4NDU0MDQ3MSwidXNlcl9pZCI6OX0.jlGsDDdkYzYyCgajgBu_Qtuf3UaAnx8JzVAbkZ_1bZc\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-20 15:11:22
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes/5
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"id\":5,\"name\":\"Annas\",\"institution_code\":\"SW01001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[{\"id\":5,\"department_name\":\"Manu\",\"institution_id\":5,\"isactive\":true,\"faculties\":[{\"id\":3,\"name\":\"Dr. Amit Anand\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":5,\"isactive\":true,\"students\":[{\"id\":6,\"name\":\"Rahula Kumar\",\"email\":\"raa@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":7,\"name\":\"Rahusla Kumar\",\"email\":\"radbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":8,\"name\":\"Rarrhusla Kumar\",\"email\":\"rarrdbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":9,\"name\":\"Rarrhuslddda Kumar\",\"email\":\"rarrdbshddsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]}]}]}]},\"message\":\"Institute fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-20 15:14:03
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes/5
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"id\":5,\"name\":\"Annas\",\"institution_code\":\"SW01001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[{\"id\":5,\"department_name\":\"Manu\",\"institution_id\":5,\"isactive\":true,\"faculties\":[{\"id\":3,\"name\":\"Dr. Amit Anand\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":5,\"isactive\":true,\"students\":[{\"id\":6,\"name\":\"Rahula Kumar\",\"email\":\"raa@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":7,\"name\":\"Rahusla Kumar\",\"email\":\"radbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":8,\"name\":\"Rarrhusla Kumar\",\"email\":\"rarrdbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":9,\"name\":\"Rarrhuslddda Kumar\",\"email\":\"rarrdbshddsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]}]}]}]},\"message\":\"Institute fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-20 15:14:20
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes/*
+Status    : 400
+
+Request:
+""
+
+Response:
+"{\"message\":\"Invalid institute ID\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-20 15:14:30
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes/5
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"id\":5,\"name\":\"Annas\",\"institution_code\":\"SW01001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[{\"id\":5,\"department_name\":\"Manu\",\"institution_id\":5,\"isactive\":true,\"faculties\":[{\"id\":3,\"name\":\"Dr. Amit Anand\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":5,\"isactive\":true,\"students\":[{\"id\":6,\"name\":\"Rahula Kumar\",\"email\":\"raa@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":7,\"name\":\"Rahusla Kumar\",\"email\":\"radbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":8,\"name\":\"Rarrhusla Kumar\",\"email\":\"rarrdbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":9,\"name\":\"Rarrhuslddda Kumar\",\"email\":\"rarrdbshddsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]}]}]}]},\"message\":\"Institute fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-20 15:18:13
+Service   : General
+Method    : DELETE
+Endpoint  : /users/44
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-20 15:22:34
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes/5
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"id\":5,\"name\":\"Annas\",\"institution_code\":\"SW01001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[{\"id\":5,\"department_name\":\"Manu\",\"institution_id\":5,\"isactive\":true,\"faculties\":[{\"id\":3,\"name\":\"Dr. Amit Anand\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":5,\"isactive\":true,\"students\":[{\"id\":6,\"name\":\"Rahula Kumar\",\"email\":\"raa@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":7,\"name\":\"Rahusla Kumar\",\"email\":\"radbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":8,\"name\":\"Rarrhusla Kumar\",\"email\":\"rarrdbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":9,\"name\":\"Rarrhuslddda Kumar\",\"email\":\"rarrdbshddsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]}]}]}]},\"message\":\"Institute fetched successfully\",\"success\":true}"
+
+**
+

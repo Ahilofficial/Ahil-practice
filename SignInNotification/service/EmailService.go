@@ -4,9 +4,8 @@ import (
 	"context"
 
 	"backend_institutions/EmailSender/notificationpb"
-	"backend_institutions/EmailSender/repository"
-	
-
+	"backend_institutions/SignInNotification/repository"
+	"backend_institutions/utilities"
 )
 
 type NotificationService struct {
@@ -14,13 +13,11 @@ type NotificationService struct {
 	repo *repository.EmailRepository
 }
 
-
 func NewNotificationService(repo *repository.EmailRepository) *NotificationService {
 	return &NotificationService{
 		repo: repo,
 	}
 }
-
 
 func (s *NotificationService) SendMail(
 	ctx context.Context,
@@ -29,15 +26,18 @@ func (s *NotificationService) SendMail(
 
 	err := s.repo.SendMail(
 		req.To,
-		req.Subject, 
+		req.Subject,
 		req.Body,
 	)
 
-	if err!=nil{
-		return nil,err
+	if err != nil {
+		
+		return nil, err
 	}
 
+	_ = utilities.WriteEmailLog(req.To, req.Subject, true, "")
+
 	return &notificationpb.MailResponse{
-		Message: "Mail sent successfully",
+		Message: "Sign-in mail sent successfully",
 	}, nil
 }
