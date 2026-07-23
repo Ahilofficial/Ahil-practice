@@ -862,3 +862,3683 @@ Response:
 
 **
 
+
+**
+Time      : 2026-07-21 09:38:33
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ2OTMzMTMsImlhdCI6MTc4NDYwNjkxMywidXNlcl9pZCI6NTV9.E38oE0VIuHsiNq_UJJmOGzyfeCTnDcpyTRPVZrgVNlo\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 09:38:38
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes/5
+Status    : 403
+
+Request:
+""
+
+Response:
+"{\"message\":\"Forbidden: you do not have permission to perform this action\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-21 09:38:51
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ2OTMzMzEsImlhdCI6MTc4NDYwNjkzMSwidXNlcl9pZCI6OX0.7on3S11knfeSxMzA4qvzunYvfnA_IhPGMmNHkTYgYn0\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 09:38:57
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes/5
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"id\":5,\"name\":\"Annas\",\"institution_code\":\"SW01001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[{\"id\":5,\"department_name\":\"Manu\",\"institution_id\":5,\"isactive\":true,\"faculties\":[{\"id\":3,\"name\":\"Dr. Amit Anand\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":5,\"isactive\":true,\"students\":[{\"id\":6,\"name\":\"Rahula Kumar\",\"email\":\"raa@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":7,\"name\":\"Rahusla Kumar\",\"email\":\"radbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":8,\"name\":\"Rarrhusla Kumar\",\"email\":\"rarrdbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":9,\"name\":\"Rarrhuslddda Kumar\",\"email\":\"rarrdbshddsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]}]}]}]},\"message\":\"Institute fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 10:19:49
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 400
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"email already exists\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-21 10:20:40
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":57,\"name\":\"Amit Anand\",\"email\":\"dropmsil.smit@gmail.com\",\"phone\":\"7857958922\",\"isactive\":true},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 10:24:14
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 400
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"phone number already exists\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-21 10:24:25
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 400
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"phone number already exists\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-21 10:32:44
+Service   : General
+Method    : DELETE
+Endpoint  : /users/54
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 10:33:19
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 400
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"phone number already exists\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-21 10:33:28
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":61,\"name\":\"Amit Anand\",\"email\":\"ahilcicillin@gmail.com\",\"phone\":\"2222222222\",\"isactive\":true},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 10:35:03
+Service   : General
+Method    : DELETE
+Endpoint  : /users/57
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 10:35:14
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":62,\"name\":\"Amit Anand\",\"email\":\"dropmail.amit@gmail.com\",\"phone\":\"7857958922\",\"isactive\":true},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 12:22:14
+Service   : General
+Method    : DELETE
+Endpoint  : /users/61
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 12:22:18
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 400
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"invalid phone number format\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-21 12:22:26
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":63,\"name\":\"Amit Anand\",\"email\":\"ahilcicillin@gmail.com\",\"phone\":\"8888888888\",\"isactive\":true},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 12:31:06
+Service   : General
+Method    : DELETE
+Endpoint  : /users/63
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 12:31:11
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":64,\"name\":\"Amit Anand\",\"email\":\"ahilcicillin@gmail.com\",\"phone\":\"8888888888\",\"isactive\":false},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 12:32:12
+Service   : General
+Method    : DELETE
+Endpoint  : /users/64
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 12:32:56
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 400
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"email already exists\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-21 12:33:05
+Service   : General
+Method    : DELETE
+Endpoint  : /users/41
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 12:33:10
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":66,\"name\":\"Amit Anand\",\"email\":\"adhi.learner@gmail.com\",\"phone\":\"5555555555\",\"isactive\":false},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 12:34:24
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"account is inactive\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-21 12:35:25
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 400
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"email already exists\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-21 12:36:10
+Service   : General
+Method    : DELETE
+Endpoint  : /users/66
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 12:36:32
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":68,\"name\":\"Adhitya\",\"email\":\"adhi.learner@gmail.com\",\"phone\":\"5555555555\",\"isactive\":false},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 12:36:55
+Service   : General
+Method    : DELETE
+Endpoint  : /users/68
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 12:37:15
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":69,\"name\":\"Adithya\",\"email\":\"adhi.learner@gmail.com\",\"phone\":\"5555555555\",\"isactive\":false},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 12:39:15
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-21 12:39:42
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-21 12:39:47
+Service   : General
+Method    : GET
+Endpoint  : /auth/1d2bc4a2901ac648bb333ceabf7e67fb4b2666ec1531376a2a2c1db98acd689a
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-21 12:39:47
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-21 13:01:22
+Service   : General
+Method    : DELETE
+Endpoint  : /users/69
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 13:01:27
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":70,\"name\":\"Adithya\",\"email\":\"ahilcicillin@gmail.com\",\"phone\":\"5555555555\",\"isactive\":false},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 13:05:38
+Service   : General
+Method    : GET
+Endpoint  : /auth/verify/8e2d9c537a01d62a1d347dc3e56c76d657b019034b083155656ac2d6b445df38
+Status    : 200
+
+Request:
+""
+
+Response:
+""
+
+**
+
+
+**
+Time      : 2026-07-21 13:06:02
+Service   : General
+Method    : GET
+Endpoint  : //auth/verify
+Status    : 200
+
+Request:
+""
+
+Response:
+""
+
+**
+
+
+**
+Time      : 2026-07-21 13:06:05
+Service   : General
+Method    : GET
+Endpoint  : //auth/verify
+Status    : 200
+
+Request:
+""
+
+Response:
+""
+
+**
+
+
+**
+Time      : 2026-07-21 13:08:50
+Service   : General
+Method    : DELETE
+Endpoint  : /users/70
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 13:08:55
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":71,\"name\":\"Adithya\",\"email\":\"ahilcicillin@gmail.com\",\"phone\":\"5555555555\",\"isactive\":false},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 13:09:30
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-21 13:10:44
+Service   : General
+Method    : DELETE
+Endpoint  : /users/71
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 13:10:49
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":72,\"name\":\"Adithya\",\"email\":\"ahilcicillin@gmail.com\",\"phone\":\"5555555555\",\"isactive\":false},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 13:11:00
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-21 13:12:29
+Service   : General
+Method    : DELETE
+Endpoint  : /users/72
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 13:12:33
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":73,\"name\":\"Adithya\",\"email\":\"ahilcicillin@gmail.com\",\"phone\":\"5555555555\",\"isactive\":false},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 13:13:04
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-21 13:13:43
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"invalid email or password\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-21 13:13:55
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ3MDYyMzUsImlhdCI6MTc4NDYxOTgzNSwidXNlcl9pZCI6NzN9.cjz7St3cSnVzUs6y8IZVHa75yFSzp7z6TR-e0Xyf8nY\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 13:14:39
+Service   : General
+Method    : DELETE
+Endpoint  : /users/73
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 13:18:15
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-21 13:51:35
+Service   : General
+Method    : DELETE
+Endpoint  : /users/73
+Status    : 400
+
+Request:
+""
+
+Response:
+"{\"message\":\"user not found\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-21 13:51:44
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":74,\"name\":\"Adithya\",\"email\":\"ahilcicillin@gmail.com\",\"phone\":\"5555555555\",\"isactive\":false},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 13:52:25
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-21 13:53:34
+Service   : General
+Method    : DELETE
+Endpoint  : /users/74
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 13:53:40
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":75,\"name\":\"Adithya\",\"email\":\"ahilcicillin@gmail.com\",\"phone\":\"5555555555\",\"isactive\":false},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 13:54:23
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-21 13:54:55
+Service   : General
+Method    : DELETE
+Endpoint  : /users/75
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 13:55:07
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":76,\"name\":\"Adithya\",\"email\":\"ahilcicillin@gmail.com\",\"phone\":\"5555555555\",\"isactive\":false},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 13:55:31
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-21 13:56:11
+Service   : General
+Method    : DELETE
+Endpoint  : /users/76
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 13:56:18
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":77,\"name\":\"Adithya\",\"email\":\"ahilcicillin@gmail.com\",\"phone\":\"5555555555\",\"isactive\":false},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 16:04:51
+Service   : General
+Method    : DELETE
+Endpoint  : /users/77
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 16:04:55
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":78,\"name\":\"Adithya\",\"email\":\"ahilcicillin@gmail.com\",\"phone\":\"5555555555\",\"isactive\":false},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 16:05:34
+Service   : General
+Method    : DELETE
+Endpoint  : /users/77
+Status    : 400
+
+Request:
+""
+
+Response:
+"{\"message\":\"user not found\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-21 16:05:47
+Service   : General
+Method    : DELETE
+Endpoint  : /users/78
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 16:07:18
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":79,\"name\":\"Adithya\",\"email\":\"ahilcicillin@gmail.com\",\"phone\":\"5555555555\",\"isactive\":false},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 16:09:57
+Service   : General
+Method    : DELETE
+Endpoint  : /users/79
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 16:10:01
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":80,\"name\":\"Adithya\",\"email\":\"ahilcicillin@gmail.com\",\"phone\":\"5555555555\",\"isactive\":false},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 16:10:58
+Service   : General
+Method    : DELETE
+Endpoint  : /users/80
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 16:11:06
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":81,\"name\":\"Adithya\",\"email\":\"ahilcicillin@gmail.com\",\"phone\":\"5555555555\",\"isactive\":false},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 16:12:21
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-21 16:22:12
+Service   : General
+Method    : DELETE
+Endpoint  : /users/81
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 17:15:07
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":82,\"name\":\"Adithya\",\"email\":\"ahilcicillin@gmail.com\",\"phone\":\"5555555555\",\"isactive\":false},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 17:16:30
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-21 17:17:06
+Service   : General
+Method    : DELETE
+Endpoint  : /users/82
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-21 17:20:18
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-21 17:54:05
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 10:44:40
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":83,\"name\":\"Adithya\",\"email\":\"ahilcicillin@gmail.com\",\"phone\":\"5555555555\",\"isactive\":false},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 10:44:46
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"account is inactive\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 10:45:00
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 10:45:11
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ3ODM3MTEsImlhdCI6MTc4NDY5NzMxMSwidXNlcl9pZCI6ODN9.7-CEK1bJanJskLueSkGWqYli2h1Cq0K02hBUhVy-sGU\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 11:08:43
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 11:26:10
+Service   : General
+Method    : DELETE
+Endpoint  : /users/83
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 11:26:17
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"invalid email or password\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 11:26:26
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":84,\"name\":\"Adithya\",\"email\":\"ahilcicillin@gmail.com\",\"phone\":\"5555555555\",\"isactive\":false},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 11:26:46
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 11:26:58
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ3ODYyMTgsImlhdCI6MTc4NDY5OTgxOCwidXNlcl9pZCI6ODR9.ddg0CYT9xf48rJJ_9i4oudVjAXHRy9DT_X5H3KucZCk\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 12:28:56
+Service   : General
+Method    : GET
+Endpoint  : /auth/reset-password
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 12:28:56
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 12:29:04
+Service   : General
+Method    : GET
+Endpoint  : /.well-known/appspecific/com.chrome.devtools.json
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 12:29:08
+Service   : General
+Method    : GET
+Endpoint  : /auth/reset-password
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 12:29:08
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 12:29:08
+Service   : General
+Method    : GET
+Endpoint  : /.well-known/appspecific/com.chrome.devtools.json
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 12:38:02
+Service   : General
+Method    : DELETE
+Endpoint  : /users/84
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 12:38:06
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":85,\"name\":\"Adithya\",\"email\":\"ahilcicillin@gmail.com\",\"phone\":\"5555555555\",\"isactive\":false},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 12:38:20
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 12:38:34
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ3OTA1MTQsImlhdCI6MTc4NDcwNDExNCwidXNlcl9pZCI6ODV9.UoAVroZUi109rFeaYvM2nsl5vOsH7-d3LAUefEXKfDk\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 12:39:47
+Service   : General
+Method    : GET
+Endpoint  : /auth/reset-password
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 12:39:47
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 13:38:50
+Service   : General
+Method    : DELETE
+Endpoint  : /users/85
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 13:38:55
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":86,\"name\":\"Adithya\",\"email\":\"ahilcicillin@gmail.com\",\"phone\":\"5555555555\",\"isactive\":false},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 13:39:17
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 13:39:26
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ3OTQxNjYsImlhdCI6MTc4NDcwNzc2NiwidXNlcl9pZCI6ODZ9.r887vMoiYYRGECH29Er1JOUXweARHQllK4JieNlujSs\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 13:39:59
+Service   : General
+Method    : GET
+Endpoint  : /auth/reset-password
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 13:39:59
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 13:40:40
+Service   : General
+Method    : GET
+Endpoint  : /auth/reset-password
+Status    : 200
+
+Request:
+""
+
+Response:
+""
+
+**
+
+
+**
+Time      : 2026-07-22 13:45:52
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"invalid email or password\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 13:46:04
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"invalid email or password\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 13:46:33
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"invalid email or password\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 13:48:39
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"invalid email or password\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 13:55:00
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"invalid email or password\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 13:55:03
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"invalid email or password\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 13:55:33
+Service   : General
+Method    : GET
+Endpoint  : /favicon.icopassword
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 13:55:33
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 13:55:53
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ3OTUxNTMsImlhdCI6MTc4NDcwODc1MywidXNlcl9pZCI6ODZ9.2Z3HGw65S0Q2vyy25WHye1nWjwRdh7dVWtMdislaFk4\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 13:55:59
+Service   : General
+Method    : GET
+Endpoint  : /auth/reset-password
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 13:55:59
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 13:56:03
+Service   : General
+Method    : GET
+Endpoint  : /auth/reset-password
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 13:56:03
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 14:02:48
+Service   : General
+Method    : DELETE
+Endpoint  : /users/86
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 14:02:52
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":87,\"name\":\"Adithya\",\"email\":\"ahilcicillin@gmail.com\",\"phone\":\"5555555555\",\"isactive\":false},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 14:03:08
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 14:03:15
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"invalid email or password\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 14:04:05
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ3OTU2NDUsImlhdCI6MTc4NDcwOTI0NSwidXNlcl9pZCI6ODd9.cE3TI2iSrQ-pzh3pSUYDD7gv8fGBK5wZ_RmU-f0HvMg\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 14:05:27
+Service   : General
+Method    : GET
+Endpoint  : /auth/reset-password
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 14:05:27
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 14:05:57
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"invalid email or password\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 14:06:08
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ3OTU3NjgsImlhdCI6MTc4NDcwOTM2OCwidXNlcl9pZCI6ODd9.rROMtgiPSXedYYvAidyQvJLy09MRw4xWeW9IJpYrp2s\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 14:12:17
+Service   : General
+Method    : DELETE
+Endpoint  : /users/87
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 14:12:23
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":88,\"name\":\"Adithya\",\"email\":\"ahilcicillin@gmail.com\",\"phone\":\"5555555555\",\"isactive\":false},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 14:12:35
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 14:12:41
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ3OTYxNjEsImlhdCI6MTc4NDcwOTc2MSwidXNlcl9pZCI6ODh9.oBUxla4XtuwrejIy39rDgzcKrHVBfBJiPtvUu2bglYw\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 14:12:51
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"invalid email or password\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 14:14:02
+Service   : General
+Method    : GET
+Endpoint  : /auth/reset-password
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 14:14:02
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 14:14:40
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ3OTYyODAsImlhdCI6MTc4NDcwOTg4MCwidXNlcl9pZCI6ODh9.vV2BZA96azu8v7hwPs6Myaqre-pBWwi5DnElWd62j-U\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:17:31
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 400
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"email already exists\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:17:48
+Service   : General
+Method    : DELETE
+Endpoint  : /users/88
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:17:52
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":90,\"name\":\"Adithya\",\"email\":\"ahilcicillin@gmail.com\",\"phone\":\"5555555555\",\"isactive\":false},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:18:13
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:18:18
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"invalid email or password\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:18:27
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ4MDAxMDcsImlhdCI6MTc4NDcxMzcwNywidXNlcl9pZCI6OTB9.2lQDScnM1EL_-KYDiJOm7x3owMdWkbo8kP3drC9r0AM\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:18:31
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes/5
+Status    : 403
+
+Request:
+""
+
+Response:
+"{\"message\":\"Forbidden: you do not have permission to perform this action\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:20:58
+Service   : General
+Method    : GET
+Endpoint  : /auth/reset-password
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:20:58
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:21:24
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 400
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"email already exists\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:21:32
+Service   : General
+Method    : DELETE
+Endpoint  : /users/90
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:21:36
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":92,\"name\":\"Adithya\",\"email\":\"ahilcicillin@gmail.com\",\"phone\":\"5555555555\",\"isactive\":false},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:21:38
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"account is inactive\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:21:52
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:21:57
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ4MDAzMTcsImlhdCI6MTc4NDcxMzkxNywidXNlcl9pZCI6OTJ9.wX7-sQCRnxsauG-_YfJmhDS-JhKSasT2Bq7p6TDvMYU\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:22:28
+Service   : General
+Method    : GET
+Endpoint  : /auth/reset-password
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:22:28
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:26:45
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ4MDA2MDUsImlhdCI6MTc4NDcxNDIwNSwidXNlcl9pZCI6OTJ9.4Xf0nIfpSYAp1mvAHvkPAkLzRVCBGB6YeZ6CLzQ-tRg\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:30:29
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:30:29
+Service   : General
+Method    : GET
+Endpoint  : /auth/reset-password
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:39:35
+Service   : General
+Method    : DELETE
+Endpoint  : /users/92
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:39:40
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":93,\"name\":\"Adithya\",\"email\":\"ahilcicillin@gmail.com\",\"phone\":\"5555555555\",\"isactive\":false},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:39:44
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"account is inactive\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:40:02
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:40:08
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ4MDE0MDgsImlhdCI6MTc4NDcxNTAwOCwidXNlcl9pZCI6OTN9.s24fQyuhl6SxxhQD-djIRqUJ8_rcXKDjvBW_I1hvE4A\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:51:23
+Service   : General
+Method    : DELETE
+Endpoint  : /users/93
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:51:28
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":94,\"name\":\"Adithya\",\"email\":\"ahilcicillin@gmail.com\",\"phone\":\"5555555555\",\"isactive\":false},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:51:31
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"account is inactive\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:51:41
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:51:44
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ4MDIxMDQsImlhdCI6MTc4NDcxNTcwNCwidXNlcl9pZCI6OTR9.jDibQfVea3u10XdVehpyKVT9oGj2L2uT7wkYNXg58-A\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:52:34
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:53:07
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ4MDIxODcsImlhdCI6MTc4NDcxNTc4NywidXNlcl9pZCI6OTR9.PLumRw8wcwEGRIsv7KY1pROp5U62Qu23UDUxeCFm1q8\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 15:54:47
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ4MDIyODcsImlhdCI6MTc4NDcxNTg4NywidXNlcl9pZCI6OTR9.3C1W35oHl6_48snlE02EKwEJ9EGxvu2yJdKGuqJTKG4\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-22 17:56:25
+Service   : General
+Method    : GET
+Endpoint  : /favicon.icopassword
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-22 17:56:25
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 09:58:37
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"invalid email or password\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 09:59:02
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 400
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"email already exists\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 09:59:10
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"invalid email or password\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 09:59:30
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ3ODE4NzAsImlhdCI6MTc4NDc4MDk3MCwidXNlcl9pZCI6OTR9.v8qB0B8JUD3N3WDm1w5RBzEBQeDwdiFp5AigSZCbYms\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODczNzI5NzAsImlhdCI6MTc4NDc4MDk3MCwidXNlcl9pZCI6OTR9.14YUwFG90X6qjS_c499jOKpJg8TLjwgs1948Wm6VIMA\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 10:00:55
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ3ODE5NTUsImlhdCI6MTc4NDc4MTA1NSwidXNlcl9pZCI6OTR9.6x_CA0U3ruxfCUZaaWUeaUKzpIfrV0se9OQqdq5eiMU\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODczNzMwNTUsImlhdCI6MTc4NDc4MTA1NSwidXNlcl9pZCI6OTR9.nAiJcqAM8rCHvNUFh4pc5K9AvoyBcv9qzoSL_-Bvmlc\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 10:01:16
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes/5
+Status    : 403
+
+Request:
+""
+
+Response:
+"{\"message\":\"Forbidden: you do not have permission to perform this action\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 10:01:30
+Service   : Faculty
+Method    : POST
+Endpoint  : /faculties
+Status    : 403
+
+Request:
+"{\n  \"name\": \"Dr. Amit Anand\",\n  \"gender\": \"Male\",\n  \"joining_date\": \"2026-06-24T12:00:00Z\",\n  \"department_id\": 5\n}"
+
+Response:
+"{\"message\":\"Forbidden: you do not have permission to perform this action\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 10:22:07
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":96,\"name\":\"Adithya\",\"email\":\"television85599@gmail.com\",\"phone\":\"5055555555\",\"isactive\":false},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 10:22:22
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 10:22:31
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ3ODMyNTEsImlhdCI6MTc4NDc4MjM1MSwidXNlcl9pZCI6OTR9.NZ2U21aFvkM5t-bYKHbuKcp0HB2xENZs-v9C9ICGwJc\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODczNzQzNTEsImlhdCI6MTc4NDc4MjM1MSwidXNlcl9pZCI6OTR9.Eryakdq9jpIl7rOdj1CGXAX2KY_kS18BFqiySXMQQ7k\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 10:23:16
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ3ODMyOTYsImlhdCI6MTc4NDc4MjM5NiwidXNlcl9pZCI6OTZ9.hnTjUL4EF-E3B-EnZ9YjQJq0NnfBh0BLp9agqWK7SCg\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODczNzQzOTYsImlhdCI6MTc4NDc4MjM5NiwidXNlcl9pZCI6OTZ9.hKd0UfkQacUeHnbLkKf8HZl1nFoKmphmmOVGzNgB9FA\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 10:44:13
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ3ODQ1NTMsImlhdCI6MTc4NDc4MzY1Mywic2Vzc2lvbl9pZCI6IjMwNGQyZjdkLTFlNGMtNDVlMC05ZDk2LTdhZDEyNWNiNWFkYiIsInVzZXJfaWQiOjk2fQ.hd30q9wLgnAAXhKkz_KbnzA1GxqoymRXg6aeyAFkX_U\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODczNzU2NTMsImlhdCI6MTc4NDc4MzY1Mywic2Vzc2lvbl9pZCI6IjMwNGQyZjdkLTFlNGMtNDVlMC05ZDk2LTdhZDEyNWNiNWFkYiIsInVzZXJfaWQiOjk2fQ.8seayF1P_L-pSS_jPAGuzfDuB2bZS4yfSc-c_EdXe70\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 11:16:19
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ3ODY0NzksImlhdCI6MTc4NDc4NTU3OSwic2Vzc2lvbl9pZCI6IjRkYWEwMjFmLWUwNjgtNDMxMy05MTE5LWM1MjJmYTBkN2E3OCIsInVzZXJfaWQiOjk2fQ.6gr_AGXGcMQBmifvSN-lSblfGWaSA9hIkVxoGdxFGXw\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODczNzc1NzksImlhdCI6MTc4NDc4NTU3OSwic2Vzc2lvbl9pZCI6IjRkYWEwMjFmLWUwNjgtNDMxMy05MTE5LWM1MjJmYTBkN2E3OCIsInVzZXJfaWQiOjk2fQ.YqkEZkVgxoRNqBmHaYz26hIv1yf0IUDFRw8kye3vmDQ\",\"user_id\":96,\"session_id\":\"4daa021f-e068-4313-9119-c522fa0d7a78\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 12:37:12
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ3OTEzMzIsImlhdCI6MTc4NDc5MDQzMiwic2Vzc2lvbl9pZCI6IjcxOGI1MTcyLWRmYWEtNDVhMC05MjExLTE5NTg4YmM1MWZlNSIsInVzZXJfaWQiOjk2fQ.4F0ub9vJw5cOdkspoeWJioaFzg05rXiyZiE36So47RI\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODczODI0MzIsImlhdCI6MTc4NDc5MDQzMiwic2Vzc2lvbl9pZCI6IjcxOGI1MTcyLWRmYWEtNDVhMC05MjExLTE5NTg4YmM1MWZlNSIsInVzZXJfaWQiOjk2fQ.caLhk3de8f46-G9PAowG2s9PaGETB_a51mPd6Wpvvmg\",\"user_id\":96,\"session_id\":\"718b5172-dfaa-45a0-9211-19588bc51fe5\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 12:37:33
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ3OTEzNTMsImlhdCI6MTc4NDc5MDQ1Mywic2Vzc2lvbl9pZCI6IjhmZmFiZjM0LTE2NTEtNDg4My04OTkyLTE2ZGYxNWU5MzNkNyIsInVzZXJfaWQiOjk2fQ.znEedPqXbxhNWFqQqB061i7l9UTpQAqf_TcOnkv5gcs\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODczODI0NTMsImlhdCI6MTc4NDc5MDQ1Mywic2Vzc2lvbl9pZCI6IjhmZmFiZjM0LTE2NTEtNDg4My04OTkyLTE2ZGYxNWU5MzNkNyIsInVzZXJfaWQiOjk2fQ.RBkJaGfJc5Y13Dk5GTluxNOg0f3H4_Xxp7bRt6_0Nsg\",\"user_id\":96,\"session_id\":\"8ffabf34-1651-4883-8992-16df15e933d7\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 12:40:13
+Service   : Auth
+Method    : GET
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 12:40:13
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 12:40:20
+Service   : General
+Method    : GET
+Endpoint  : /.well-known/appspecific/com.chrome.devtools.json
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 12:40:20
+Service   : General
+Method    : GET
+Endpoint  : /.well-known/appspecific/com.chrome.devtools.json
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 12:40:22
+Service   : Auth
+Method    : GET
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 12:40:22
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 12:40:22
+Service   : General
+Method    : GET
+Endpoint  : /.well-known/appspecific/com.chrome.devtools.json
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 12:41:31
+Service   : Auth
+Method    : GET
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 12:41:31
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 12:41:31
+Service   : General
+Method    : GET
+Endpoint  : /.well-known/appspecific/com.chrome.devtools.json
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 12:43:53
+Service   : Auth
+Method    : GET
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 12:43:53
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 12:44:13
+Service   : General
+Method    : GET
+Endpoint  : /.well-known/appspecific/com.chrome.devtools.json
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 12:45:09
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"invalid email or password\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 12:45:52
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ3OTE4NTIsImlhdCI6MTc4NDc5MDk1Miwic2Vzc2lvbl9pZCI6IjdkMDgzYWQzLTEzOWQtNDZmMi1iMmM5LWVkMjNmNGYyNWM3ZSIsInVzZXJfaWQiOjk2fQ.pz3w-8etnZpBIQ0VD0UWGP_U7_exJMOgHjTWJZuuJxo\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODczODI5NTIsImlhdCI6MTc4NDc5MDk1Miwic2Vzc2lvbl9pZCI6IjdkMDgzYWQzLTEzOWQtNDZmMi1iMmM5LWVkMjNmNGYyNWM3ZSIsInVzZXJfaWQiOjk2fQ.uYmtZqOJm3I3BViHJtRss7cuNCvXzqJ4huYwAn5swbA\",\"user_id\":96,\"session_id\":\"7d083ad3-139d-46f2-b2c9-ed23f4f25c7e\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 12:47:14
+Service   : Auth
+Method    : GET
+Endpoint  : /SIGNIN
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 12:47:14
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 12:47:14
+Service   : General
+Method    : GET
+Endpoint  : /.well-known/appspecific/com.chrome.devtools.json
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 12:48:31
+Service   : Auth
+Method    : GET
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 12:48:32
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 12:48:33
+Service   : General
+Method    : GET
+Endpoint  : /.well-known/appspecific/com.chrome.devtools.json
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 12:48:46
+Service   : Auth
+Method    : GET
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 12:48:47
+Service   : General
+Method    : GET
+Endpoint  : /.well-known/appspecific/com.chrome.devtools.json
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 12:48:47
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 13:00:58
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"Error 1136 (21S01): Column count doesn't match value count at row 1\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 13:01:57
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"Error 1136 (21S01): Column count doesn't match value count at row 1\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 13:03:49
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"Error 1136 (21S01): Column count doesn't match value count at row 1\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 13:05:10
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ3OTMwMTAsImlhdCI6MTc4NDc5MjExMCwic2Vzc2lvbl9pZCI6ImQ2ODFjYzg1LWIwYjctNDA3OC04OWFiLWNjYTU4NDg3ZmFmNSIsInVzZXJfaWQiOjk2fQ.aLA0k1p0XIASNrs_D9S_Oxuupe5SR9vhFtTmp-YCPZI\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODczODQxMTAsImlhdCI6MTc4NDc5MjExMCwic2Vzc2lvbl9pZCI6ImQ2ODFjYzg1LWIwYjctNDA3OC04OWFiLWNjYTU4NDg3ZmFmNSIsInVzZXJfaWQiOjk2fQ.PcRsRSz1OpvfTW10AVajuAR02qzNyDVAup8U9LCJN9s\",\"user_id\":96,\"session_id\":\"d681cc85-b0b7-4078-89ab-cca58487faf5\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 13:14:59
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ3OTM1OTksImlhdCI6MTc4NDc5MjY5OSwic2Vzc2lvbl9pZCI6IjM0Y2YxMmM1LThmMjctNDQyYS05YTZkLTZlNWY5MTVmYjM5YiIsInVzZXJfaWQiOjk2fQ.Qy09KBQf-j50pb8QOAfoYpoIHjJvcHWaXTbOYwkoMGM\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODczODQ2OTksImlhdCI6MTc4NDc5MjY5OSwic2Vzc2lvbl9pZCI6IjM0Y2YxMmM1LThmMjctNDQyYS05YTZkLTZlNWY5MTVmYjM5YiIsInVzZXJfaWQiOjk2fQ.oYCge2INxxGRlCm8CBVXS03U_h2MeM0ASueai66_IBY\",\"user_id\":96,\"session_id\":\"34cf12c5-8f27-442a-9a6d-6e5f915fb39b\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 15:21:26
+Service   : General
+Method    : POST
+Endpoint  : /logout
+Status    : 401
+
+Request:
+"{\n   \"user_id\":10,\n   \"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ3OTMwMTAsImlhdCI6MTc4NDc5MjExMCwic2Vzc2lvbl9pZCI6ImQ2ODFjYzg1LWIwYjctNDA3OC04OWFiLWNjYTU4NDg3ZmFmNSIsInVzZXJfaWQiOjk2fQ.aLA0k1p0XIASNrs_D9S_Oxuupe5SR9vhFtTmp-YCPZI\"\n}"
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 15:21:55
+Service   : General
+Method    : POST
+Endpoint  : /logout
+Status    : 401
+
+Request:
+"{\n   \"user_id\":10,\n   \"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ3OTMwMTAsImlhdCI6MTc4NDc5MjExMCwic2Vzc2lvbl9pZCI6ImQ2ODFjYzg1LWIwYjctNDA3OC04OWFiLWNjYTU4NDg3ZmFmNSIsInVzZXJfaWQiOjk2fQ.aLA0k1p0XIASNrs_D9S_Oxuupe5SR9vhFtTmp-YCPZI\"\n}"
+
+Response:
+"{\"message\":\"Invalid or expired token\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 15:22:43
+Service   : General
+Method    : POST
+Endpoint  : /logout
+Status    : 401
+
+Request:
+"{\n   \"user_id\":96,\n   \"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ3OTMwMTAsImlhdCI6MTc4NDc5MjExMCwic2Vzc2lvbl9pZCI6ImQ2ODFjYzg1LWIwYjctNDA3OC04OWFiLWNjYTU4NDg3ZmFmNSIsInVzZXJfaWQiOjk2fQ.aLA0k1p0XIASNrs_D9S_Oxuupe5SR9vhFtTmp-YCPZI\"\n}"
+
+Response:
+"{\"message\":\"Invalid or expired token\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 15:23:37
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ4MDEzMTcsImlhdCI6MTc4NDgwMDQxNywic2Vzc2lvbl9pZCI6IjFhYzU0NjA2LWQwMjctNDdjMS1iODRjLTQ4YTM1MTUwMTY2NSIsInVzZXJfaWQiOjk2fQ.Xn1-ABWmSrFUToyJlQWo8ECHi4TvjbrL0UfpSrMZDPA\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODczOTI0MTcsImlhdCI6MTc4NDgwMDQxNywic2Vzc2lvbl9pZCI6IjFhYzU0NjA2LWQwMjctNDdjMS1iODRjLTQ4YTM1MTUwMTY2NSIsInVzZXJfaWQiOjk2fQ.bd4K47OtvRaCkqQqlMaYqAkumfzzFMc-OwfSFXIu0k0\",\"user_id\":96,\"session_id\":\"1ac54606-d027-47c1-b84c-48a351501665\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 15:23:53
+Service   : General
+Method    : POST
+Endpoint  : /logout
+Status    : 200
+
+Request:
+"{\n   \"user_id\":96,\n   \"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ4MDEzMTcsImlhdCI6MTc4NDgwMDQxNywic2Vzc2lvbl9pZCI6IjFhYzU0NjA2LWQwMjctNDdjMS1iODRjLTQ4YTM1MTUwMTY2NSIsInVzZXJfaWQiOjk2fQ.Xn1-ABWmSrFUToyJlQWo8ECHi4TvjbrL0UfpSrMZDPA\"\n}"
+
+Response:
+""
+
+**
+
+
+**
+Time      : 2026-07-23 15:23:59
+Service   : General
+Method    : POST
+Endpoint  : /logout
+Status    : 200
+
+Request:
+"{\n   \"user_id\":96,\n   \"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ4MDEzMTcsImlhdCI6MTc4NDgwMDQxNywic2Vzc2lvbl9pZCI6IjFhYzU0NjA2LWQwMjctNDdjMS1iODRjLTQ4YTM1MTUwMTY2NSIsInVzZXJfaWQiOjk2fQ.Xn1-ABWmSrFUToyJlQWo8ECHi4TvjbrL0UfpSrMZDPA\"\n}"
+
+Response:
+""
+
+**
+
+
+**
+Time      : 2026-07-23 15:24:38
+Service   : General
+Method    : POST
+Endpoint  : //ogout
+Status    : 200
+
+Request:
+"{\n   \"user_id\":96,\n   \"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ4MDEzMTcsImlhdCI6MTc4NDgwMDQxNywic2Vzc2lvbl9pZCI6IjFhYzU0NjA2LWQwMjctNDdjMS1iODRjLTQ4YTM1MTUwMTY2NSIsInVzZXJfaWQiOjk2fQ.Xn1-ABWmSrFUToyJlQWo8ECHi4TvjbrL0UfpSrMZDPA\"\n}"
+
+Response:
+""
+
+**
+
+
+**
+Time      : 2026-07-23 15:24:41
+Service   : General
+Method    : POST
+Endpoint  : /logout
+Status    : 200
+
+Request:
+"{\n   \"user_id\":96,\n   \"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ4MDEzMTcsImlhdCI6MTc4NDgwMDQxNywic2Vzc2lvbl9pZCI6IjFhYzU0NjA2LWQwMjctNDdjMS1iODRjLTQ4YTM1MTUwMTY2NSIsInVzZXJfaWQiOjk2fQ.Xn1-ABWmSrFUToyJlQWo8ECHi4TvjbrL0UfpSrMZDPA\"\n}"
+
+Response:
+""
+
+**
+
+
+**
+Time      : 2026-07-23 15:26:09
+Service   : General
+Method    : POST
+Endpoint  : /logout
+Status    : 200
+
+Request:
+"{\n   \"user_id\":96,\n   \"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ4MDEzMTcsImlhdCI6MTc4NDgwMDQxNywic2Vzc2lvbl9pZCI6IjFhYzU0NjA2LWQwMjctNDdjMS1iODRjLTQ4YTM1MTUwMTY2NSIsInVzZXJfaWQiOjk2fQ.Xn1-ABWmSrFUToyJlQWo8ECHi4TvjbrL0UfpSrMZDPA\"\n}"
+
+Response:
+"{\"data\":null,\"message\":\"Logout successful\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 15:29:00
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ4MDE2NDAsImlhdCI6MTc4NDgwMDc0MCwic2Vzc2lvbl9pZCI6IjEwMDJlYjczLTVhZTUtNGE0Mi04OTY0LTQyMDc4MmRlMmFlYyIsInVzZXJfaWQiOjk2fQ.qQ2dDNxsfS7olmx9Gft63MbHZGx0Bdt8v2vimHWZAHE\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODczOTI3NDAsImlhdCI6MTc4NDgwMDc0MCwic2Vzc2lvbl9pZCI6IjEwMDJlYjczLTVhZTUtNGE0Mi04OTY0LTQyMDc4MmRlMmFlYyIsInVzZXJfaWQiOjk2fQ.XnUeGTwI-hmhk2_MyQ72FSrYyW2ATOPWcEX1ULyc0SE\",\"user_id\":96,\"session_id\":\"1002eb73-5ae5-4a42-8964-420782de2aec\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 15:29:23
+Service   : General
+Method    : POST
+Endpoint  : /logout
+Status    : 200
+
+Request:
+"{\n   \"user_id\":96,\n   \"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ4MDE2NDAsImlhdCI6MTc4NDgwMDc0MCwic2Vzc2lvbl9pZCI6IjEwMDJlYjczLTVhZTUtNGE0Mi04OTY0LTQyMDc4MmRlMmFlYyIsInVzZXJfaWQiOjk2fQ.qQ2dDNxsfS7olmx9Gft63MbHZGx0Bdt8v2vimHWZAHE\"\n}"
+
+Response:
+"{\"data\":null,\"message\":\"Logout successful\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 15:33:41
+Service   : General
+Method    : POST
+Endpoint  : /logout
+Status    : 400
+
+Request:
+"{\n   \"user_id\":96,\n   \"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ4MDE2NDAsImlhdCI6MTc4NDgwMDc0MCwic2Vzc2lvbl9pZCI6IjEwMDJlYjczLTVhZTUtNGE0Mi04OTY0LTQyMDc4MmRlMmFlYyIsInVzZXJfaWQiOjk2fQ.qQ2dDNxsfS7olmx9Gft63MbHZGx0Bdt8v2vimHWZAHE\"\n}"
+
+Response:
+"{\"message\":\"invalid session or already logged out\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 15:34:06
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 400
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"email already exists\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 15:34:18
+Service   : General
+Method    : DELETE
+Endpoint  : /users/96
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Session has expired or logged out\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 15:34:34
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes/5
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Session has expired or logged out\",\"success\":false}"
+
+**
+

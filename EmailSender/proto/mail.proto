@@ -9,6 +9,7 @@ message MailRequest{
     string to = 1;
     string subject = 2;
     string body = 3;
+    string check =4;
 }
 message MailResponse{
     bool success = 1;

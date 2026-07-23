@@ -31,6 +31,7 @@ func main() {
 		&model.User{},
 		&model.Role{},
 		&model.Permission{},
+		&model.Session{},
 	)
 	if err != nil {
 		log.Fatal(err)

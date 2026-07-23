@@ -20,7 +20,9 @@ import (
 func InitializeApp() (*fiber.App, error) {
 	db := database.NewDB()
 	userRepository := repository.NewUserRepository(db)
-	userService := services.NewUserService(userRepository)
+	sessionRepository := repository.NewSessionRepository(db)
+	sessionService := services.NewSessionService(sessionRepository)
+	userService := services.NewUserService(userRepository, sessionService)
 	userController := controller.NewUserController(userService)
 	institutionRepository := repository.NewInstitutionRepository(db)
 	instituteService := services.NewInstituteService(institutionRepository)
@@ -37,6 +39,12 @@ func InitializeApp() (*fiber.App, error) {
 	feesRepository := repository.NewFeesRepository(db)
 	feesService := services.NewFeesService(feesRepository)
 	feesController := controller.NewFeesController(feesService)
-	app := routes.NewApp(userController, instituteController, departmentController, facultyController, studentController, feesController)
+	roleRepository := repository.NewRoleRepository(db)
+	roleService := services.NewRoleService(roleRepository)
+	roleController := controller.NewRoleController(roleService)
+	permissionRepository := repository.NewPermissionRepository(db)
+	permissionService := services.NewPermissionService(permissionRepository)
+	permissionController := controller.NewPermissionController(permissionService)
+	app := routes.NewApp(userController, instituteController, departmentController, facultyController, studentController, feesController, roleController, permissionController)
 	return app, nil
 }

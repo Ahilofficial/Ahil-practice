@@ -2,7 +2,7 @@ package service
 
 import (
 	"context"
-	"fmt"
+	// "fmt"
 
 	"backend_institutions/EmailSender/notificationpb"
 	"backend_institutions/EmailSender/repository"
@@ -25,21 +25,8 @@ func (s *NotificationService) SendMail(
 	req *notificationpb.MailRequest,
 ) (*notificationpb.MailResponse, error) {
 
-	var subject, body string
-	name := req.Subject
-	emailType := req.Body
-
-	switch emailType {
-	case "signup":
-		subject = "Welcome to Backend Institutions!"
-		body = fmt.Sprintf("<h1>Hello %s,</h1><p>Thank you for registering on our platform. Your account is now active!</p>", name)
-
-	case "signin":
-		subject = "Sign In Notification"
-		body = fmt.Sprintf("<h1>Hello %s,</h1><p>You have successfully signed in to our platform.</p>", name)
-
-	
-	}
+	subject := req.Subject
+	body := req.Body
 
 	err := s.repo.SendMail(req.To, subject, body)
 

@@ -31,13 +31,14 @@ func ConnectService()error{
 	return nil
 }
 
-func SendEmail(email string, subject string, body string) error {
+func SendEmail(email string, subject string, body string, check string)  error {
 	_, err := Notificationclient.SendMail(
 		context.Background(),
 		&notificationpb.MailRequest{
 			To:      email,
 			Subject: subject,
 			Body:    body,
+			Check: check,
 		},
 	)
 	return err

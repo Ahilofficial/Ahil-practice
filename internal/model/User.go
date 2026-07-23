@@ -12,8 +12,17 @@ type User struct {
 	Email    string `gorm:"type:varchar(255);unique" json:"email"`
 	Phone    string `gorm:"type:varchar(255);unique" json:"phone"`
 	Password string `gorm:"type:varchar(255)" json:"-"`
+	
 
-	IsActive bool `gorm:"type:boolean;default:true" json:"is_active"`
+	IsActive          bool `gorm:"type:boolean;default:true" json:"is_active"`
+	IsVerified        bool
+	VerificationToken string
+	TokenExpiresAt    time.Time
+
+	ResetPasswordToken string
+	ResetTokenExpiresAt time.Time
+
+
 
 	CreatedAt time.Time      `json:"created_at"`
 	UpdatedAt time.Time      `json:"updated_at"`

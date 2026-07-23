@@ -9,11 +9,8 @@ import (
 func RunSeeders() {
 	log.Println("Running database seeders...")
 	seedPermissions()
-
 	log.Println("Database seeding completed.")
 }
-
-var group = constants.PermissionGroups
 
 func seedPermissions() {
 	db, err := database.DB.DB()
@@ -21,55 +18,28 @@ func seedPermissions() {
 		log.Printf("Failed to get database connection: %v", err)
 		return
 	}
-	for roleName, permissions := range group {
 
-		_, err := db.Exec(`
-		INSERT INTO roles(name)
-		SELECT ?
-		WHERE NOT EXISTS (
-			SELECT 1 FROM roles WHERE name = ?
-		)
-	`, roleName, roleName)
+	for _, pName := range constants.AllPermissions {
+		var count int
+
+		err := db.QueryRow(
+			"SELECT COUNT(*) FROM permissions WHERE name = ?",
+			pName,
+		).Scan(&count)
 
 		if err != nil {
-			log.Println(err)
+			log.Printf("Failed to check permission %s: %v", pName, err)
 			continue
 		}
 
-		var roleID int
-		db.QueryRow("SELECT id FROM roles WHERE name = ?", roleName).Scan(&roleID)
-
-		for _, permName := range permissions {
-
-			_, err := db.Exec(`
-			INSERT INTO permissions(name)
-			SELECT ?
-			WHERE NOT EXISTS (
-				SELECT 1 FROM permissions WHERE name = ?
+		if count == 0 {
+			_, err = db.Exec(
+				"INSERT INTO permissions (name) VALUES (?)",
+				pName,
 			)
-		`, permName, permName)
 
 			if err != nil {
-				log.Println(err)
-				continue
-			}
-
-			var permID int
-			db.QueryRow("SELECT id FROM permissions WHERE name = ?", permName).Scan(&permID)
-
-			_, err = db.Exec(`
-			INSERT INTO role_permissions(role_id, permission_id)
-			SELECT ?, ?
-			WHERE NOT EXISTS (
-				SELECT 1
-				FROM role_permissions
-				WHERE role_id = ?
-				AND permission_id = ?
-			)
-		`, roleID, permID, roleID, permID)
-
-			if err != nil {
-				log.Println(err)
+				log.Printf("Failed to insert permission %s: %v", pName, err)
 			}
 		}
 	}

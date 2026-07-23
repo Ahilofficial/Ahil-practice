@@ -1,6 +1,7 @@
 package smtp
 
 import (
+	"fmt"
 	"net/smtp"
 	"os"
 )
@@ -11,12 +12,9 @@ func SendEmail(email string, subject string, body string) error {
 	host := os.Getenv("SMTP_HOST")
 	port := os.Getenv("SMTP_PORT")
 
-	msg := []byte("To: " + email + "\r\n" +
-		"Subject: " + subject + "\r\n" +
-		"MIME-version: 1.0;\r\n" +
-		"Content-Type: text/html; charset=\"UTF-8\";\r\n" +
-		"\r\n" +
-		body + "\r\n")
+	msg := []byte(fmt.Sprintf("From: %s\r\nTo: %s\r\nSubject: %s\r\nMIME-Version: 1.0\r\nContent-Type: text/html; charset=UTF-8\r\n\r\n%s\r\n",
+		myemail, email, subject, body))
+
 	to := email
 	address := host + ":" + port
 	auth := smtp.PlainAuth("", myemail, password, host)

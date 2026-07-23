@@ -26,6 +26,7 @@ type MailRequest struct {
 	To            string                 `protobuf:"bytes,1,opt,name=to,proto3" json:"to,omitempty"`
 	Subject       string                 `protobuf:"bytes,2,opt,name=subject,proto3" json:"subject,omitempty"`
 	Body          string                 `protobuf:"bytes,3,opt,name=body,proto3" json:"body,omitempty"`
+	Check         string                 `protobuf:"bytes,4,opt,name=check,proto3" json:"check,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

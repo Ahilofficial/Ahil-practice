@@ -24,6 +24,9 @@ func InitializeApp() (*fiber.App, error) {
 		repository.NewFacultyRepository,
 		repository.NewStudentRepository,
 		repository.NewFeesRepository,
+		repository.NewRoleRepository,
+		repository.NewPermissionRepository,
+		repository.NewSessionRepository,
 
 		services.NewUserService,
 		services.NewInstituteService,
@@ -31,6 +34,9 @@ func InitializeApp() (*fiber.App, error) {
 		services.NewFacultyService,
 		services.NewStudentService,
 		services.NewFeesService,
+		services.NewRoleService,
+		services.NewPermissionService,
+		services.NewSessionService,
 
 		controller.NewUserController,
 		controller.NewInstituteController,
@@ -38,6 +44,8 @@ func InitializeApp() (*fiber.App, error) {
 		controller.NewFacultyController,
 		controller.NewStudentController,
 		controller.NewFeesController,
+		controller.NewRoleController,
+		controller.NewPermissionController,
 
 		routes.NewApp,
 	)

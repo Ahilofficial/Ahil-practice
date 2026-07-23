@@ -1,20 +1,29 @@
 package dto
 
 import (
-	
 	"backend_institutions/internal/model"
 	"errors"
 	"regexp"
 	"strings"
+
 	"github.com/jinzhu/copier"
 )
+
+type ForgotPasswordDTO struct{
+	Email string `json:"email"`
+}
+
+type ResetPassword struct{
+	CurrentPassword string `json:"current_password"`
+	NewPassword  string `json:"new_password"`
+}
+
 
 type SignUpDTO struct {
 	Name     string `json:"name"`
 	Email    string `json:"email"`
 	Phone    string `json:"phone"`
-	Password string `json:"password" `
-	Role     string `json:"role" `
+	Password string `json:"password"`
 }
 
 type SignInDTO struct {
@@ -22,13 +31,22 @@ type SignInDTO struct {
 	Password string `json:"password"`
 }
 
+type LogoutDTO struct {
+	UserID uint   `json:"user_id"`
+	Token  string `json:"refresh_token"`
+}
+
 type AuthResponseDTO struct {
-	Token string `json:"token"`
+	AccessToken string `json:"access_token"`
+	RefreshToken string `json:"refresh_token"`
+	UserID uint `json:"user_id"`
+	SessionID string `json:"session_id"`
+
 }
 
 type AssignRoleDTO struct {
-	UserID uint   `json:"user_id"`
-	Role   string `json:"role"`
+	UserID uint `json:"user_id"`
+	RoleID uint `json:"role_id"`
 }
 
 type UserResponseDTO struct {
@@ -48,11 +66,9 @@ func (dto *SignUpDTO) Sanitize() {
 	dto.Name = strings.TrimSpace(dto.Name)
 	dto.Email = strings.TrimSpace(strings.ToLower(dto.Email))
 	dto.Phone = strings.TrimSpace(dto.Phone)
-	dto.Role = strings.TrimSpace(strings.ToLower(dto.Role))
 }
 
 func (dto *SignUpDTO) Validate() error {
-
 	if dto.Name == "" || dto.Email == "" || dto.Phone == "" || dto.Password == "" {
 		return errors.New("all fields are required")
 	}
@@ -73,32 +89,21 @@ func (dto *SignInDTO) Sanitize() {
 }
 
 func (dto *SignInDTO) Validate() error {
-
 	if dto.Email == "" || dto.Password == "" {
 		return errors.New("email and password are required")
 	}
 	return nil
 }
 
-func (dto *AssignRoleDTO) Sanitize() {
-	dto.Role = strings.TrimSpace(strings.ToLower(dto.Role))
-}
+func (dto *AssignRoleDTO) Sanitize() {}
 
 func (dto *AssignRoleDTO) Validate() error {
 	if dto.UserID == 0 {
-		return errors.New("user id is required")
+		return errors.New("user_id is required")
 	}
 
-	if dto.Role == "" {
-		return errors.New("role is required")
-	}
-
-	if dto.Role != "admin" &&
-		dto.Role != "principal" &&
-		dto.Role != "faculty" &&
-		dto.Role != "student" &&
-		dto.Role != "user" {
-		return errors.New("invalid role name")
+	if dto.RoleID == 0 {
+		return errors.New("role_id is required")
 	}
 
 	return nil
@@ -117,3 +122,4 @@ func ToUserResponseListDTO(users []model.User) []UserResponseDTO {
 	}
 	return list
 }
+

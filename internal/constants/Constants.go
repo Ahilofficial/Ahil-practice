@@ -29,87 +29,31 @@ const (
 	PermissionAssignRoles = "ASSIGN_ROLE"
 )
 
-// var PermissionGroups = map[string][]string{
-// 	"admin": {
-// 		PermissionCreateInstitutes,
-// 		PermissionViewInstitutes,
-// 		PermissionUpdateInstitutes,
-// 		PermissionDeleteInstitutes,
+var AllPermissions = []string{
+	PermissionCreateInstitutes,
+	PermissionViewInstitutes,
+	PermissionUpdateInstitutes,
+	PermissionDeleteInstitutes,
 
-// 		PermissionCreateDepartments,
-// 		PermissionViewDepartments,
-// 		PermissionUpdateDepartments,
-// 		PermissionDeleteDepartments,
+	PermissionCreateDepartments,
+	PermissionViewDepartments,
+	PermissionUpdateDepartments,
+	PermissionDeleteDepartments,
 
-// 		PermissionCreateFaculties,
-// 		PermissionViewFaculties,
-// 		PermissionUpdateFaculties,
-// 		PermissionDeleteFaculties,
+	PermissionCreateFaculties,
+	PermissionViewFaculties,
+	PermissionUpdateFaculties,
+	PermissionDeleteFaculties,
 
-// 		PermissionCreateStudents,
-// 		PermissionViewStudents,
-// 		PermissionUpdateStudents,
-// 		PermissionDeleteStudents,
+	PermissionCreateStudents,
+	PermissionViewStudents,
+	PermissionUpdateStudents,
+	PermissionDeleteStudents,
 
-// 		PermissionCreateFees,
-// 		PermissionViewFees,
-// 		PermissionUpdateFees,
-// 		PermissionDeleteFees,
+	PermissionCreateFees,
+	PermissionViewFees,
+	PermissionUpdateFees,
+	PermissionDeleteFees,
 
-// 		PermissionAssignRoles,
-// 	},
-
-// 	"principal": {
-// 		PermissionCreateDepartments,
-// 		PermissionViewDepartments,
-// 		PermissionUpdateDepartments,
-// 		PermissionDeleteDepartments,
-
-// 		PermissionCreateFaculties,
-// 		PermissionViewFaculties,
-// 		PermissionUpdateFaculties,
-// 		PermissionDeleteFaculties,
-
-// 		PermissionCreateStudents,
-// 		PermissionViewStudents,
-// 		PermissionUpdateStudents,
-// 		PermissionDeleteStudents,
-// 	},
-
-// 	"faculty": {
-// 		PermissionCreateFaculties,
-// 		PermissionViewFaculties,
-// 		PermissionUpdateFaculties,
-// 		PermissionDeleteFaculties,
-// 		PermissionCreateStudents,
-// 		PermissionViewStudents,
-// 		PermissionUpdateStudents,
-// 		PermissionDeleteStudents,
-// 	},
-
-// 	"student": {
-// 		PermissionCreateStudents,
-// 		PermissionViewStudents,
-// 		PermissionUpdateStudents,
-// 		PermissionDeleteStudents,
-// 	},
-
-// 	"user": {},
-// }
-
-var (
-	instPerms        = []string{PermissionCreateInstitutes, PermissionViewInstitutes, PermissionUpdateInstitutes, PermissionDeleteInstitutes}
-	deptPerms        = []string{PermissionCreateDepartments, PermissionViewDepartments, PermissionUpdateDepartments, PermissionDeleteDepartments}
-	facPerms         = []string{PermissionCreateFaculties, PermissionViewFaculties, PermissionUpdateFaculties, PermissionDeleteFaculties}
-	studPerms        = []string{PermissionCreateStudents, PermissionViewStudents, PermissionUpdateStudents, PermissionDeleteStudents}
-	feePerms         = []string{PermissionCreateFees, PermissionViewFees, PermissionUpdateFees, PermissionDeleteFees}
-	PermissionGroups = map[string][]string{}
-)
-
-func init() {
-	PermissionGroups["student"] = studPerms
-	PermissionGroups["faculty"] = append(append([]string{}, facPerms...), studPerms...)
-	PermissionGroups["principal"] = append(append([]string{}, deptPerms...), PermissionGroups["faculty"]...)
-	PermissionGroups["admin"] = append(append(append([]string{}, instPerms...), feePerms...), append(PermissionGroups["principal"], PermissionAssignRoles)...)
-	PermissionGroups["user"] = []string{}
+	PermissionAssignRoles,
 }
