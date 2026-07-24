@@ -3,9 +3,11 @@ package controller
 import (
 	"backend_institutions/internal/dto"
 	"backend_institutions/internal/helper"
+	
+
+	// "backend_institutions/internal/model"
 	"backend_institutions/internal/services"
 	"fmt"
-
 
 	// "go/token"
 	"strconv"
@@ -24,7 +26,7 @@ func NewUserController(userService *services.UserService) *UserController {
 func (cl *UserController) SignUpController(c fiber.Ctx) error {
 	var body dto.SignUpDTO
 	body.Sanitize()
-	
+
 	if err := c.Bind().Body(&body); err != nil {
 		return helper.Error(c, 400, "invalid request body: "+err.Error())
 	}
@@ -42,10 +44,10 @@ func (cl *UserController) SignUpController(c fiber.Ctx) error {
 }
 
 func (cl *UserController) SignInController(c fiber.Ctx) error {
-	
+
 	var body dto.SignInDTO
 	body.Sanitize()
-	
+
 	if err := c.Bind().Body(&body); err != nil {
 		return helper.Error(c, 400, "invalid request body: "+err.Error())
 	}
@@ -54,18 +56,16 @@ func (cl *UserController) SignInController(c fiber.Ctx) error {
 		return helper.Error(c, 400, err.Error())
 	}
 
-
-	accessToken, refreshToken,user_id, session_id, err := cl.userService.SignIn(&body, c)
+	accessToken, refreshToken, user_id, session_id, err := cl.userService.SignIn(&body, c)
 	if err != nil {
 		return helper.Error(c, 401, err.Error())
 	}
 
 	return helper.Success(c, "Signed in successfully", dto.AuthResponseDTO{
-		UserID : user_id,
-		SessionID: session_id,
+		UserID:       user_id,
+		SessionID:    session_id,
 		AccessToken:  accessToken,
 		RefreshToken: refreshToken,
-		
 	})
 }
 
@@ -87,7 +87,7 @@ func (c *UserController) VerifyEmail(ctx fiber.Ctx) error {
 func (cl *UserController) AssignRoleController(c fiber.Ctx) error {
 	var body dto.AssignRoleDTO
 	body.Sanitize()
-	
+
 	if err := c.Bind().Body(&body); err != nil {
 		return helper.Error(c, 400, "invalid request body: "+err.Error())
 	}
@@ -96,7 +96,7 @@ func (cl *UserController) AssignRoleController(c fiber.Ctx) error {
 		return helper.Error(c, 400, err.Error())
 	}
 
-	if err := cl.userService.AssignRole(body.UserID, body.RoleID); err != nil {
+	if err := cl.userService.AssignRole(body.UserID, body.Role); err != nil {
 		return helper.Error(c, 400, err.Error())
 	}
 
@@ -118,10 +118,10 @@ func (cl *UserController) DeleteUserController(c fiber.Ctx) error {
 	return helper.Success(c, "User deleted successfully", nil)
 }
 
-func( cl *UserController)ForgotPassword(c fiber.Ctx)error{
+func (cl *UserController) ForgotPassword(c fiber.Ctx) error {
 	var forgotpassword dto.ForgotPasswordDTO
-	err:=c.Bind().Body(&forgotpassword)
-	if err!=nil{
+	err := c.Bind().Body(&forgotpassword)
+	if err != nil {
 		fmt.Println("Error:", err)
 
 		return helper.Error(c, 400, "invalid request body: "+err.Error())
@@ -167,5 +167,22 @@ func (cl *UserController) Logout(c fiber.Ctx) error {
 		return helper.Error(c, 400, err.Error())
 	}
 
-	return helper.Success(c,  "Logout successful", nil)
+	return helper.Success(c, "Logout successful", nil)
 }
+
+func (c *UserController) ResendMail(ctx fiber.Ctx) error {
+
+	var body dto.ResendMailSignUp
+
+	if err := ctx.Bind().Body(&body); err != nil {
+		return helper.Error(ctx, 400, err.Error())
+	}
+
+	err := c.userService.ResendMail(body.Email)
+	if err != nil{
+		return helper.Error(ctx, 400, err.Error())
+	}
+
+	return helper.Success(ctx, "mail sent successfully", nil)
+}
+

@@ -17,6 +17,9 @@ type ResetPassword struct{
 	CurrentPassword string `json:"current_password"`
 	NewPassword  string `json:"new_password"`
 }
+type ResendResetPassword struct{
+	ResetToken string `json:"reset_token"`
+}
 
 
 type SignUpDTO struct {
@@ -31,9 +34,15 @@ type SignInDTO struct {
 	Password string `json:"password"`
 }
 
+
+
 type LogoutDTO struct {
 	UserID uint   `json:"user_id"`
 	Token  string `json:"refresh_token"`
+}
+
+type ResendMailSignUp struct {
+    Email string `json:"email"`
 }
 
 type AuthResponseDTO struct {
@@ -44,9 +53,10 @@ type AuthResponseDTO struct {
 
 }
 
+
 type AssignRoleDTO struct {
 	UserID uint `json:"user_id"`
-	RoleID uint `json:"role_id"`
+	Role   string `json:"role"`
 }
 
 type UserResponseDTO struct {
@@ -95,15 +105,17 @@ func (dto *SignInDTO) Validate() error {
 	return nil
 }
 
-func (dto *AssignRoleDTO) Sanitize() {}
+func (dto *AssignRoleDTO) Sanitize() {
+	dto.Role = strings.TrimSpace(strings.ToLower(dto.Role))
+}
 
 func (dto *AssignRoleDTO) Validate() error {
 	if dto.UserID == 0 {
 		return errors.New("user_id is required")
 	}
 
-	if dto.RoleID == 0 {
-		return errors.New("role_id is required")
+	if dto.Role == "" {
+		return errors.New("role is required")
 	}
 
 	return nil

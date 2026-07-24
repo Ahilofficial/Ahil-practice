@@ -181,8 +181,12 @@ func (s *UserService) SignIn(dto *dto.SignInDTO, c fiber.Ctx) (string, string,ui
 	return accessToken, refreshToken, user.ID, sessionID, nil
 }
 
-func (s *UserService) AssignRole(userID uint, roleID uint) error {
-	return s.userrepo.AssignRoleToUser(userID, roleID)
+func (s *UserService) AssignRole(userID uint, roleName string) error {
+	role, err := s.userrepo.FindRoleByName(roleName)
+	if err != nil {
+		return errors.New("role not found: " + roleName)
+	}
+	return s.userrepo.AssignRoleToUser(userID, role.ID)
 }
 
 func (s *UserService) DeleteUserService(id uint) error {
@@ -196,8 +200,6 @@ func (s *UserService) ForgotPasswordService(mail dto.ForgotPasswordDTO) (model.U
 	subject := "Forgot Password mail"
 	token := utils.ReseTToken()
 	resetURL := fmt.Sprintf("http://localhost:8090/auth/reset-password?token=%s", token)
-	fetchemail.ResetPasswordToken = token
-	fetchemail.ResetTokenExpiresAt = time.Now().Add(15 * time.Minute)
 	
 	
 	body := fmt.Sprintf(`
@@ -250,12 +252,7 @@ func (s *UserService) ForgotPasswordService(mail dto.ForgotPasswordDTO) (model.U
 }
 
 func (s *UserService) ResetPasswordService(token string,reset dto.ResetPassword) error {
-	
-	
 	user, err := s.userrepo.FetchUsertoken(token)
-	
-	
-	
 	if err != nil {
 		return err
 	}
@@ -272,7 +269,7 @@ fmt.Println("New Password:", reset.NewPassword)
 fmt.Println("Hashed Password:", hashedPassword)
 err = s.userrepo.UpdatePassword(user.ID, hashedPassword)
 
-	err = s.userrepo.UpdatePassword(user.ID, hashedPassword)
+	
 	if err != nil {
 		fmt.Println("Cant able to update the password")
 	}
@@ -285,11 +282,35 @@ func (s *UserService) Logout(dto *dto.LogoutDTO) error {
 	return s.userrepo.Logout(dto)
 }
 
-func (s *UserService) CheckEmailPresent(signin dto.SignInDTO, mail dto.ForgotPasswordDTO) error {
+func (s *UserService) ResendMail(email string) error {
+	user,err:=s.userrepo.FindByEmail(email)
+	if err!=nil{
+		return errors.New("Cant able to find  email")
+	}
 
-    if signin.Email != mail.Email {
-        return errors.New("email does not match")
-    }
+	token := utils.SignUpToken()
+	if token == "" {
+		return errors.New("failed to generate verification token")
+	}
+	verifyURL := fmt.Sprintf("http://localhost:8090/auth/verify?token=%s", token)
+	subject := "Verify your email - Backend Institutions"
+	body := fmt.Sprintf(`<h1>Hello %s,</h1>
+<p>Thank you for signing up. Please verify your email by clicking the link below:</p>
+<p><a href="%s" style="background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; display: inline-block; border-radius: 5px;">Verify Email Address</a></p>
+<p>Or copy and paste this link in your browser:<br/><a href="%s">%s</a></p>
+<p>This link will expire in 24 hours.</p>
+<p>If you did not create this account, please ignore this email.</p>`, user.Name, verifyURL, verifyURL, verifyURL)
+	if user.IsVerified!=false{
+		go func(email, subject, body string) {
+		if sendErr := grpc.SendEmail(email, subject, body, "signup"); sendErr != nil {
+			log.Printf("Failed to send verification email via gRPC: %v\n", sendErr)
+		}
+	}(user.Email, subject, body)
+}else{
+	return errors.New("email is already verified")
+	}
 
-    return nil
+	return  nil
+
+
 }

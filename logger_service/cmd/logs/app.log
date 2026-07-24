@@ -4542,3 +4542,1075 @@ Response:
 
 **
 
+
+**
+Time      : 2026-07-23 15:38:45
+Service   : General
+Method    : POST
+Endpoint  : /users/assign-role
+Status    : 401
+
+Request:
+"{\n  \"user_id\": 7,\n  \"role\": \"faculty\"\n}"
+
+Response:
+"{\"message\":\"Session has expired or logged out\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 16:33:32
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ4MDU1MTIsImlhdCI6MTc4NDgwNDYxMiwic2Vzc2lvbl9pZCI6IjhiNzQwNjljLWViMTMtNGRlYi1iMjFiLTFkYTc2NGUzYzNlYiIsInVzZXJfaWQiOjk2fQ.h9oVZiqRW4Am3y2d7DmHsM27yVnf7vyc8PEV1ykSF-I\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODczOTY2MTIsImlhdCI6MTc4NDgwNDYxMiwic2Vzc2lvbl9pZCI6IjhiNzQwNjljLWViMTMtNGRlYi1iMjFiLTFkYTc2NGUzYzNlYiIsInVzZXJfaWQiOjk2fQ.Id1v7_eaqSpuBO-e9Ni-MK2Sfuxzdljkq44nGxF4yMk\",\"user_id\":96,\"session_id\":\"8b74069c-eb13-4deb-b21b-1da764e3c3eb\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 16:34:00
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ4MDU1NDAsImlhdCI6MTc4NDgwNDY0MCwic2Vzc2lvbl9pZCI6IjU0OThjOGE4LTcwM2ItNDA0ZS04MjA4LWQ4ODM1MGJjYTEzNiIsInVzZXJfaWQiOjk2fQ.CrMA_JF_4b245DdPYPUYm_7vFgJjZcrsoC6xBXiSQVY\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODczOTY2NDAsImlhdCI6MTc4NDgwNDY0MCwic2Vzc2lvbl9pZCI6IjU0OThjOGE4LTcwM2ItNDA0ZS04MjA4LWQ4ODM1MGJjYTEzNiIsInVzZXJfaWQiOjk2fQ.Guqvg-dFzFRrMWY7REspj2sO46M2oJgAuSG9th1G6a4\",\"user_id\":96,\"session_id\":\"5498c8a8-703b-404e-8208-d88350bca136\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 16:34:22
+Service   : General
+Method    : POST
+Endpoint  : /logout
+Status    : 200
+
+Request:
+"{\n   \"user_id\":96,\n   \"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODczOTY2NDAsImlhdCI6MTc4NDgwNDY0MCwic2Vzc2lvbl9pZCI6IjU0OThjOGE4LTcwM2ItNDA0ZS04MjA4LWQ4ODM1MGJjYTEzNiIsInVzZXJfaWQiOjk2fQ.Guqvg-dFzFRrMWY7REspj2sO46M2oJgAuSG9th1G6a4\"\n}"
+
+Response:
+"{\"data\":null,\"message\":\"Logout successful\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 16:34:25
+Service   : General
+Method    : POST
+Endpoint  : /logout
+Status    : 400
+
+Request:
+"{\n   \"user_id\":96,\n   \"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODczOTY2NDAsImlhdCI6MTc4NDgwNDY0MCwic2Vzc2lvbl9pZCI6IjU0OThjOGE4LTcwM2ItNDA0ZS04MjA4LWQ4ODM1MGJjYTEzNiIsInVzZXJfaWQiOjk2fQ.Guqvg-dFzFRrMWY7REspj2sO46M2oJgAuSG9th1G6a4\"\n}"
+
+Response:
+"{\"message\":\"invalid session or already logged out\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 16:34:26
+Service   : General
+Method    : POST
+Endpoint  : /logout
+Status    : 400
+
+Request:
+"{\n   \"user_id\":96,\n   \"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODczOTY2NDAsImlhdCI6MTc4NDgwNDY0MCwic2Vzc2lvbl9pZCI6IjU0OThjOGE4LTcwM2ItNDA0ZS04MjA4LWQ4ODM1MGJjYTEzNiIsInVzZXJfaWQiOjk2fQ.Guqvg-dFzFRrMWY7REspj2sO46M2oJgAuSG9th1G6a4\"\n}"
+
+Response:
+"{\"message\":\"invalid session or already logged out\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 16:34:31
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ4MDU1NzEsImlhdCI6MTc4NDgwNDY3MSwic2Vzc2lvbl9pZCI6ImY2NmYwMmNlLTRkZDktNDNkMS05MWEzLTJlOTc4MTNhMGMzOSIsInVzZXJfaWQiOjk2fQ.DjCaks3tAXueuMyq6MGUWJUKY0aVAMWx5y-m8W4tAvk\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODczOTY2NzEsImlhdCI6MTc4NDgwNDY3MSwic2Vzc2lvbl9pZCI6ImY2NmYwMmNlLTRkZDktNDNkMS05MWEzLTJlOTc4MTNhMGMzOSIsInVzZXJfaWQiOjk2fQ._QRxu30xQJ8PYtRDX974EBuJjJRGV03N_MDj3riPmGo\",\"user_id\":96,\"session_id\":\"f66f02ce-4dd9-43d1-91a3-2e97813a0c39\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 16:34:45
+Service   : General
+Method    : POST
+Endpoint  : /logout
+Status    : 200
+
+Request:
+"{\n   \"user_id\":96,\n   \"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODczOTY2NzEsImlhdCI6MTc4NDgwNDY3MSwic2Vzc2lvbl9pZCI6ImY2NmYwMmNlLTRkZDktNDNkMS05MWEzLTJlOTc4MTNhMGMzOSIsInVzZXJfaWQiOjk2fQ._QRxu30xQJ8PYtRDX974EBuJjJRGV03N_MDj3riPmGo\"\n}"
+
+Response:
+"{\"data\":null,\"message\":\"Logout successful\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 16:35:02
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ4MDU2MDIsImlhdCI6MTc4NDgwNDcwMiwic2Vzc2lvbl9pZCI6IjA4OTVhMTlmLWYyMjctNDBjNS1iYjNhLWZjMGI3OGY5ZDMyNCIsInVzZXJfaWQiOjk2fQ.Us-s5LY2vwYSNwOURVpqOkOkhDPRMh4M-ao8g1FQnok\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODczOTY3MDIsImlhdCI6MTc4NDgwNDcwMiwic2Vzc2lvbl9pZCI6IjA4OTVhMTlmLWYyMjctNDBjNS1iYjNhLWZjMGI3OGY5ZDMyNCIsInVzZXJfaWQiOjk2fQ.8BmUzuRSifY26PUdR-nes_u8ca47eCU-VoN4-WH0fuM\",\"user_id\":96,\"session_id\":\"0895a19f-f227-40c5-bb3a-fc0b78f9d324\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 16:35:55
+Service   : General
+Method    : POST
+Endpoint  : /logout
+Status    : 200
+
+Request:
+"{\n   \"user_id\":96,\n   \"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODczOTY3MDIsImlhdCI6MTc4NDgwNDcwMiwic2Vzc2lvbl9pZCI6IjA4OTVhMTlmLWYyMjctNDBjNS1iYjNhLWZjMGI3OGY5ZDMyNCIsInVzZXJfaWQiOjk2fQ.8BmUzuRSifY26PUdR-nes_u8ca47eCU-VoN4-WH0fuM\"\n}"
+
+Response:
+"{\"data\":null,\"message\":\"Logout successful\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 16:36:38
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 400
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"email already exists\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 16:36:48
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ4MDU3MDgsImlhdCI6MTc4NDgwNDgwOCwic2Vzc2lvbl9pZCI6ImJmNjQ0NWVjLTA4NzktNDFjYi1iNjI3LTE2MDM1YWU4MWFlOSIsInVzZXJfaWQiOjk2fQ.R5HtuLQX1mxBbw8z8MSzerEQn-35Hfqfacnp49JS99Y\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODczOTY4MDgsImlhdCI6MTc4NDgwNDgwOCwic2Vzc2lvbl9pZCI6ImJmNjQ0NWVjLTA4NzktNDFjYi1iNjI3LTE2MDM1YWU4MWFlOSIsInVzZXJfaWQiOjk2fQ.JrD6dQyoY7Xx6WYWNFMNrQjFOTydDmwBvdk6zeea2s0\",\"user_id\":96,\"session_id\":\"bf6445ec-0879-41cb-b627-16035ae81ae9\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 16:37:18
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"invalid email or password\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 16:37:32
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"please verify your email before signing in\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 16:43:03
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"invalid email or password\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 16:45:37
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"invalid email or password\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 16:47:40
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"invalid email or password\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 16:48:40
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"invalid email or password\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 16:56:31
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"invalid email or password\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 16:56:32
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"invalid email or password\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 16:56:40
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ4MDY5MDAsImlhdCI6MTc4NDgwNjAwMCwic2Vzc2lvbl9pZCI6IjhiNDUyNzkzLTVkMmItNDU3Yi04M2Y0LTllYmNlNjExMzk2MCIsInVzZXJfaWQiOjk0fQ.3h-ULRzjrKxGWWPo9QcOBXe_Rqb5C_SR2cTIToXg85Y\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODczOTgwMDAsImlhdCI6MTc4NDgwNjAwMCwic2Vzc2lvbl9pZCI6IjhiNDUyNzkzLTVkMmItNDU3Yi04M2Y0LTllYmNlNjExMzk2MCIsInVzZXJfaWQiOjk0fQ.ztrNTqpy1yP0SMPPnsebjnPZGDeJvrllof4f7xXkby8\",\"user_id\":94,\"session_id\":\"8b452793-5d2b-457b-83f4-9ebce6113960\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 16:57:40
+Service   : General
+Method    : POST
+Endpoint  : /users/assign-role
+Status    : 403
+
+Request:
+"{\n  \"user_id\": 96,\n  \"role\": \"faculty\"\n}"
+
+Response:
+"{\"message\":\"Forbidden: you do not have permission to perform this action\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 16:59:12
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ4MDcwNTIsImlhdCI6MTc4NDgwNjE1Miwic2Vzc2lvbl9pZCI6IjcxMWNiNjM4LTQ0ZGMtNDk1NC1hYWI5LTg3MDk1MjIzYTFlMyIsInVzZXJfaWQiOjk0fQ.F-yHGu1d3m-ysYPDMeLGJRd7anOywPqLFUQ0hbx0gQo\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODczOTgxNTIsImlhdCI6MTc4NDgwNjE1Miwic2Vzc2lvbl9pZCI6IjcxMWNiNjM4LTQ0ZGMtNDk1NC1hYWI5LTg3MDk1MjIzYTFlMyIsInVzZXJfaWQiOjk0fQ.KQlgb-dmskdaDObeCb4MVJP31vxbkyzCsXpZtUrxIBA\",\"user_id\":94,\"session_id\":\"711cb638-44dc-4954-aab9-87095223a1e3\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 16:59:16
+Service   : General
+Method    : POST
+Endpoint  : /users/assign-role
+Status    : 400
+
+Request:
+"{\n  \"user_id\": 96,\n  \"role\": \"faculty\"\n}"
+
+Response:
+"{\"message\":\"role_id is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 17:00:17
+Service   : General
+Method    : POST
+Endpoint  : /users/assign-role
+Status    : 400
+
+Request:
+"{\n  \"user_id\": 96,\n  \"role\": 2\n}"
+
+Response:
+"{\"message\":\"role_id is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 17:00:19
+Service   : General
+Method    : POST
+Endpoint  : /users/assign-role
+Status    : 400
+
+Request:
+"{\n  \"user_id\": 96,\n  \"role\": 2\n}"
+
+Response:
+"{\"message\":\"role_id is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 17:01:10
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes/
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"items\":[{\"id\":1,\"name\":\"Anna\",\"institution_code\":\"sw51001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":3,\"name\":\"Anna\",\"institution_code\":\"sw51001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[{\"id\":2,\"department_name\":\"Manu\",\"institution_id\":3,\"isactive\":true,\"faculties\":[]}]},{\"id\":4,\"name\":\"Anna University Main Campus\",\"institution_code\":\"AU1001-M\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[{\"id\":3,\"department_name\":\"Manu\",\"institution_id\":4,\"isactive\":true,\"faculties\":[{\"id\":2,\"name\":\"Dr. Amit Anand\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":3,\"isactive\":true,\"students\":[{\"id\":2,\"name\":\"Rahul Kumar Sharma\",\"email\":\"rahul.sharma@example.com\",\"gender\":\"male\",\"faculty_id\":2,\"isactive\":true,\"fees\":[{\"id\":2,\"payment_mode\":\"Online\",\"amount\":50000,\"student_id\":2,\"isactive\":true}]},{\"id\":4,\"name\":\"Rahul Kumar\",\"email\":\"raha@example.com\",\"gender\":\"Male\",\"faculty_id\":2,\"isactive\":true,\"fees\":[]},{\"id\":5,\"name\":\"Rahula Kumar\",\"email\":\"rahaaa@example.com\",\"gender\":\"Male\",\"faculty_id\":2,\"isactive\":true,\"fees\":[]}]}]}]},{\"id\":5,\"name\":\"Annas\",\"institution_code\":\"SW01001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[{\"id\":5,\"department_name\":\"Manu\",\"institution_id\":5,\"isactive\":true,\"faculties\":[{\"id\":3,\"name\":\"Dr. Amit Anand\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":5,\"isactive\":true,\"students\":[{\"id\":6,\"name\":\"Rahula Kumar\",\"email\":\"raa@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":7,\"name\":\"Rahusla Kumar\",\"email\":\"radbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":8,\"name\":\"Rarrhusla Kumar\",\"email\":\"rarrdbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":9,\"name\":\"Rarrhuslddda Kumar\",\"email\":\"rarrdbshddsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]}]}]}]},{\"id\":6,\"name\":\"Annasw\",\"institution_code\":\"SW018001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]}],\"limit\":5,\"page\":1,\"total_count\":15,\"total_pages\":3},\"message\":\"Institutes fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 17:01:20
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes/5
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"id\":5,\"name\":\"Annas\",\"institution_code\":\"SW01001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[{\"id\":5,\"department_name\":\"Manu\",\"institution_id\":5,\"isactive\":true,\"faculties\":[{\"id\":3,\"name\":\"Dr. Amit Anand\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":5,\"isactive\":true,\"students\":[{\"id\":6,\"name\":\"Rahula Kumar\",\"email\":\"raa@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":7,\"name\":\"Rahusla Kumar\",\"email\":\"radbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":8,\"name\":\"Rarrhusla Kumar\",\"email\":\"rarrdbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":9,\"name\":\"Rarrhuslddda Kumar\",\"email\":\"rarrdbshddsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]}]}]}]},\"message\":\"Institute fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 17:01:27
+Service   : Student
+Method    : GET
+Endpoint  : /students
+Status    : 200
+
+Request:
+""
+
+Response:
+""
+
+**
+
+
+**
+Time      : 2026-07-23 17:01:32
+Service   : Student
+Method    : GET
+Endpoint  : /students/all
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":[{\"id\":1,\"name\":\"Rahul Kumar\",\"email\":\"rahul@example.com\",\"gender\":\"Male\",\"faculty_id\":1,\"isactive\":true,\"fees\":[{\"id\":1,\"payment_mode\":\"Online\",\"amount\":50000,\"student_id\":1,\"isactive\":true}]},{\"id\":2,\"name\":\"Rahul Kumar Sharma\",\"email\":\"rahul.sharma@example.com\",\"gender\":\"male\",\"faculty_id\":2,\"isactive\":true,\"fees\":[{\"id\":2,\"payment_mode\":\"Online\",\"amount\":50000,\"student_id\":2,\"isactive\":true}]},{\"id\":3,\"name\":\"Rahul Kumar\",\"email\":\"rahula@example.com\",\"gender\":\"Male\",\"faculty_id\":1,\"isactive\":true,\"fees\":[]},{\"id\":4,\"name\":\"Rahul Kumar\",\"email\":\"raha@example.com\",\"gender\":\"Male\",\"faculty_id\":2,\"isactive\":true,\"fees\":[]},{\"id\":5,\"name\":\"Rahula Kumar\",\"email\":\"rahaaa@example.com\",\"gender\":\"Male\",\"faculty_id\":2,\"isactive\":true,\"fees\":[]},{\"id\":6,\"name\":\"Rahula Kumar\",\"email\":\"raa@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":7,\"name\":\"Rahusla Kumar\",\"email\":\"radbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":8,\"name\":\"Rarrhusla Kumar\",\"email\":\"rarrdbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":9,\"name\":\"Rarrhuslddda Kumar\",\"email\":\"rarrdbshddsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]}],\"message\":\"All students fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 17:02:21
+Service   : General
+Method    : POST
+Endpoint  : /logout
+Status    : 200
+
+Request:
+"{\n   \"user_id\":94,\n   \"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODczOTgxNTIsImlhdCI6MTc4NDgwNjE1Miwic2Vzc2lvbl9pZCI6IjcxMWNiNjM4LTQ0ZGMtNDk1NC1hYWI5LTg3MDk1MjIzYTFlMyIsInVzZXJfaWQiOjk0fQ.KQlgb-dmskdaDObeCb4MVJP31vxbkyzCsXpZtUrxIBA\"\n}"
+
+Response:
+"{\"data\":null,\"message\":\"Logout successful\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 17:02:28
+Service   : Student
+Method    : GET
+Endpoint  : /students
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Session has expired or logged out\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 17:02:33
+Service   : Student
+Method    : GET
+Endpoint  : /students/all
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Session has expired or logged out\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 17:02:51
+Service   : General
+Method    : POST
+Endpoint  : /users/assign-role
+Status    : 401
+
+Request:
+"{\n  \"user_id\": 96,\n  \"role\": 2\n}"
+
+Response:
+"{\"message\":\"Session has expired or logged out\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 17:03:25
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes/
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Session has expired or logged out\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 17:05:51
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ4MDc0NTEsImlhdCI6MTc4NDgwNjU1MSwic2Vzc2lvbl9pZCI6ImU4NWE4ZjRiLWMwZjYtNGNjNi1iMGNjLTE0YzJkOGEwMmM5NyIsInVzZXJfaWQiOjk0fQ.gLMtqUAYe20Y_1AObUbST9-MpILJubpvau5JWrWEbn0\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODczOTg1NTEsImlhdCI6MTc4NDgwNjU1MSwic2Vzc2lvbl9pZCI6ImU4NWE4ZjRiLWMwZjYtNGNjNi1iMGNjLTE0YzJkOGEwMmM5NyIsInVzZXJfaWQiOjk0fQ.h2H3m9qIE1N0zxPCyXQtv5RI_-B00ajl8AUY8UbYLi8\",\"user_id\":94,\"session_id\":\"e85a8f4b-c0f6-4cc6-b0cc-14c2d8a02c97\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 17:06:15
+Service   : General
+Method    : POST
+Endpoint  : /users/assign-role
+Status    : 400
+
+Request:
+"{\n  \"user_id\": 96,\n  \"role\": \"faculty\"\n}"
+
+Response:
+"{\"message\":\"role_id is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 17:08:14
+Service   : General
+Method    : POST
+Endpoint  : /users/assign-role
+Status    : 200
+
+Request:
+"{\n  \"user_id\": 96,\n  \"role\": \"principal\"\n}"
+
+Response:
+"{\"data\":null,\"message\":\"Role assigned successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 17:59:29
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ4MTA2NTgsImlhdCI6MTc4NDgwOTc1OCwic2Vzc2lvbl9pZCI6IjU0YmIzYzU3LWQwZDEtNDQxMi05NjYyLWRmZmIyMzZiYmEyMiIsInVzZXJfaWQiOjk0fQ.KX-fDQxZ6jqzMHA82OucwCDNvbRXEYtnta0JNjYmgQc\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODc0MDE3NTgsImlhdCI6MTc4NDgwOTc1OCwic2Vzc2lvbl9pZCI6IjU0YmIzYzU3LWQwZDEtNDQxMi05NjYyLWRmZmIyMzZiYmEyMiIsInVzZXJfaWQiOjk0fQ.IIF6UbilRSCZUO4oXBbqnDMKubLEzSBBjQu_g7gXI5M\",\"user_id\":94,\"session_id\":\"54bb3c57-d0d1-4412-9662-dffb236bba22\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 18:12:09
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes/5
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"id\":5,\"name\":\"Annas\",\"institution_code\":\"SW01001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[{\"id\":5,\"department_name\":\"Manu\",\"institution_id\":5,\"isactive\":true,\"faculties\":[{\"id\":3,\"name\":\"Dr. Amit Anand\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":5,\"isactive\":true,\"students\":[{\"id\":6,\"name\":\"Rahula Kumar\",\"email\":\"raa@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":7,\"name\":\"Rahusla Kumar\",\"email\":\"radbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":8,\"name\":\"Rarrhusla Kumar\",\"email\":\"rarrdbshdsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]},{\"id\":9,\"name\":\"Rarrhuslddda Kumar\",\"email\":\"rarrdbshddsdiha@example.com\",\"gender\":\"Male\",\"faculty_id\":3,\"isactive\":true,\"fees\":[]}]}]}]},\"message\":\"Institute fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 18:12:38
+Service   : General
+Method    : DELETE
+Endpoint  : /users/96
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 18:39:28
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":99,\"name\":\"Adithya\",\"email\":\"television85599@gmail.com\",\"phone\":\"5055555555\",\"isactive\":false},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 18:40:16
+Service   : General
+Method    : GET
+Endpoint  : /favicon.ico
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Authorization header is required\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 18:41:10
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ4MTMxNzAsImlhdCI6MTc4NDgxMjI3MCwic2Vzc2lvbl9pZCI6Ijc2ZGQ0NDY4LTFhMmYtNDdmOC04NjcxLTQ2ZjE1NWQ1MTBjOSIsInVzZXJfaWQiOjk5fQ.IPhP_MAR2OdxcT6_07sAat3ImkfeUyIcbPKzV3gHUbY\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODc0MDQyNzAsImlhdCI6MTc4NDgxMjI3MCwic2Vzc2lvbl9pZCI6Ijc2ZGQ0NDY4LTFhMmYtNDdmOC04NjcxLTQ2ZjE1NWQ1MTBjOSIsInVzZXJfaWQiOjk5fQ.nzQKZaMddOZk_U8gw4SFGxa_mx1IH2nXkENPruxGNlE\",\"user_id\":99,\"session_id\":\"76dd4468-1a2f-47f8-8671-46f155d510c9\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 18:42:36
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 400
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"email already exists\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 18:42:51
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 400
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"phone number already exists\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-23 18:43:03
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":102,\"name\":\"Adithya\",\"email\":\"maildrop.amit@gmail.com\",\"phone\":\"5055555544\",\"isactive\":false},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-23 18:43:23
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"account is inactive\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-24 09:43:38
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"invalid email or password\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-24 09:45:34
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"invalid email or password\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-24 09:45:44
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ4Njc0NDQsImlhdCI6MTc4NDg2NjU0NCwic2Vzc2lvbl9pZCI6ImMwYjZmNmRkLWZiMWEtNDcwYy04YjNmLWViOGQ1MjU3ZjBlNiIsInVzZXJfaWQiOjk5fQ.tRkit2y35G9LNmAqTpq5dnvGrgn13S5iuHeO_6D8UoE\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODc0NTg1NDQsImlhdCI6MTc4NDg2NjU0NCwic2Vzc2lvbl9pZCI6ImMwYjZmNmRkLWZiMWEtNDcwYy04YjNmLWViOGQ1MjU3ZjBlNiIsInVzZXJfaWQiOjk5fQ.7Cb0xGInUWf7I-PE_Stz4c3QaTWDR1g5QRPt9jI9JwQ\",\"user_id\":99,\"session_id\":\"c0b6f6dd-fb1a-470c-8b3f-eb8d5257f0e6\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-24 09:46:04
+Service   : General
+Method    : POST
+Endpoint  : /logout
+Status    : 400
+
+Request:
+"{\n   \"user_id\":99,\n   \"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODczOTgxNTIsImlhdCI6MTc4NDgwNjE1Miwic2Vzc2lvbl9pZCI6IjcxMWNiNjM4LTQ0ZGMtNDk1NC1hYWI5LTg3MDk1MjIzYTFlMyIsInVzZXJfaWQiOjk0fQ.KQlgb-dmskdaDObeCb4MVJP31vxbkyzCsXpZtUrxIBA\"\n}"
+
+Response:
+"{\"message\":\"invalid session or already logged out\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-24 09:46:54
+Service   : General
+Method    : POST
+Endpoint  : /logout
+Status    : 200
+
+Request:
+"{\n   \"user_id\":99,\n   \"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODc0NTg1NDQsImlhdCI6MTc4NDg2NjU0NCwic2Vzc2lvbl9pZCI6ImMwYjZmNmRkLWZiMWEtNDcwYy04YjNmLWViOGQ1MjU3ZjBlNiIsInVzZXJfaWQiOjk5fQ.7Cb0xGInUWf7I-PE_Stz4c3QaTWDR1g5QRPt9jI9JwQ\"\n}"
+
+Response:
+"{\"data\":null,\"message\":\"Logout successful\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-24 10:09:20
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ4Njg4NjAsImlhdCI6MTc4NDg2Nzk2MCwic2Vzc2lvbl9pZCI6IjYxMDMwNDY2LTFjMmMtNDIyNy1hYjEzLTc4Y2ZhNzZjMjczYSIsInVzZXJfaWQiOjk5fQ.hYDTob_kVJX8NCv5R9L7GSTYvTRcwwI5Kb2PyrQOb34\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODc0NTk5NjAsImlhdCI6MTc4NDg2Nzk2MCwic2Vzc2lvbl9pZCI6IjYxMDMwNDY2LTFjMmMtNDIyNy1hYjEzLTc4Y2ZhNzZjMjczYSIsInVzZXJfaWQiOjk5fQ.BUewbtLxgh9cD8dqwV6JdtA7D9iGraTB-K3stPen8Ho\",\"user_id\":99,\"session_id\":\"61030466-1c2c-4227-ab13-78cfa76c273a\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-24 10:10:37
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ4Njg5MzcsImlhdCI6MTc4NDg2ODAzNywic2Vzc2lvbl9pZCI6ImU1YjFkZTViLTdmZmMtNDhiYi04Y2IxLTRkZWU3NDZjNDlhMSIsInVzZXJfaWQiOjk5fQ.7SiyvMVwPkYKMnuQbMY6GktXiqJ6feiLUnXaox4al2k\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODc0NjAwMzcsImlhdCI6MTc4NDg2ODAzNywic2Vzc2lvbl9pZCI6ImU1YjFkZTViLTdmZmMtNDhiYi04Y2IxLTRkZWU3NDZjNDlhMSIsInVzZXJfaWQiOjk5fQ.bbZRdSk7jJngcR6Gk278x94J6ZPhHKhW9V_iJrfvj5c\",\"user_id\":99,\"session_id\":\"e5b1de5b-7ffc-48bb-8cb1-4dee746c49a1\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-24 10:29:52
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 400
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"email already exists\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-24 10:30:28
+Service   : General
+Method    : DELETE
+Endpoint  : /users/99
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Invalid or expired token\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-24 10:30:54
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ4NzAxNTQsImlhdCI6MTc4NDg2OTI1NCwic2Vzc2lvbl9pZCI6ImRmM2FkZWZlLTRhYjgtNDhhOC1hNjUxLWM4N2M0MzAxZWRkZiIsInVzZXJfaWQiOjk5fQ.VMrMnocQhXJc2NxjhRKrD7hAu-C3QCxZEQIPMlPGtu4\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODc0NjEyNTQsImlhdCI6MTc4NDg2OTI1NCwic2Vzc2lvbl9pZCI6ImRmM2FkZWZlLTRhYjgtNDhhOC1hNjUxLWM4N2M0MzAxZWRkZiIsInVzZXJfaWQiOjk5fQ.dk-VkEJDpEi0Q1bJt9_d_fWxR6h5W0pXTtqR6DelV_Y\",\"user_id\":99,\"session_id\":\"df3adefe-4ab8-48a8-a651-c87c4301eddf\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-24 10:30:59
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODQ4NzAxNTksImlhdCI6MTc4NDg2OTI1OSwic2Vzc2lvbl9pZCI6IjNhNGYyYTRiLWI4MTQtNDUwNC04MmMxLWM1OTk2MTFhYmM3YSIsInVzZXJfaWQiOjk5fQ.XmVHMH8jNqIjJ5UbBgzNdovisox_4AWSNd3FzdZGfbY\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODc0NjEyNTksImlhdCI6MTc4NDg2OTI1OSwic2Vzc2lvbl9pZCI6IjNhNGYyYTRiLWI4MTQtNDUwNC04MmMxLWM1OTk2MTFhYmM3YSIsInVzZXJfaWQiOjk5fQ.nKl6TY2yiiwmWMIw84Re0MHx7W8eVlMQqQleZfmoj2o\",\"user_id\":99,\"session_id\":\"3a4f2a4b-b814-4504-82c1-c599611abc7a\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-24 10:31:17
+Service   : General
+Method    : DELETE
+Endpoint  : /users/99
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":null,\"message\":\"User deleted successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-24 10:31:42
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 400
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"phone number already exists\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-24 10:31:57
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 400
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"invalid phone number format\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-24 10:32:02
+Service   : Auth
+Method    : POST
+Endpoint  : /signup
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"id\":105,\"name\":\"Adithya\",\"email\":\"television85599@gmail.com\",\"phone\":\"5088555544\",\"isactive\":false},\"message\":\"Signed up successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-24 10:32:09
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"account is inactive\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-24 10:32:17
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 401
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"message\":\"account is inactive\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-24 10:34:12
+Service   : General
+Method    : POST
+Endpoint  : /resendmail
+Status    : 200
+
+Request:
+"{\r\n    \"email\":\"television85599@gmail.com\"\r\n}"
+
+Response:
+"{\"data\":null,\"message\":\"OTP sent successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-24 10:44:48
+Service   : General
+Method    : POST
+Endpoint  : /resendmail
+Status    : 200
+
+Request:
+"{\r\n    \"email\":\"television85599@gmail.com\"\r\n}"
+
+Response:
+"{\"data\":null,\"message\":\"mail sent successfully\",\"success\":true}"
+
+**
+

@@ -21,13 +21,13 @@ func RequirePermission(permission string) fiber.Handler {
 			FROM user_roles ur
 			JOIN roles r ON ur.role_id = r.id
 			LEFT JOIN role_permissions rp ON rp.role_id = r.id
-			LEFT JOIN p ON rp.permission_id = p.id
+			LEFT JOIN permissions p ON rp.permission_id = p.id
 			WHERE ur.user_id = ?
 			  AND (r.name = ? OR r.name = ? OR p.name = ?)
 		`
 
 		err := database.DB.
-			Raw(query, userID, "admin", permission).
+			Raw(query, userID, "superadmin", "admin", permission).
 			Scan(&count).Error
 
 		if err != nil || count == 0 {

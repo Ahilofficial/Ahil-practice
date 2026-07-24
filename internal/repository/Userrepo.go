@@ -283,22 +283,16 @@ func (r *UserRepository) Logout(dto *dto.LogoutDTO) error {
 	return r.db.Exec(update, sessionID).Error
 }
 
-func (r *UserRepository) IsSessionActive(sessionID string) (bool, error) {
+	func (r *UserRepository) FindByID(userID uint) (model.User, error) {
+	var user model.User
 
-	var count int
+	err := r.db.
+		Where("id = ?", userID).
+		First(&user).Error
 
-	query := `
-		SELECT COUNT(*)
-		FROM sessions
-		WHERE
-			session_id = ?
-			AND is_active = TRUE
-	`
-
-	err := r.db.Raw(query, sessionID).Scan(&count).Error
 	if err != nil {
-		return false, err
+		return model.User{}, err
 	}
 
-	return count > 0, nil
+	return user, nil
 }

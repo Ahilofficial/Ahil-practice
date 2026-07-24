@@ -55,6 +55,7 @@ func RegisterRoutes(
 	app.Post("/signup", userController.SignUpController)
 	app.Post("/signin", userController.SignInController)
 	app.Post("/logout", userController.Logout)
+	app.Post("/resendmail",userController.ResendMail)
 
 	protected := app.Group("", middleware.AuthRequired())
 
@@ -124,7 +125,6 @@ func RegisterRoutes(
 	FeesRoute.Delete("/:id", middleware.RequirePermission(constants.PermissionDeleteFees), feesController.DeleteFeesController)
 
 	userRoute := protected.Group("/users")
-	userRoute.Post("/assign-role", userController.AssignRoleController)
 	userRoute.Delete("/:id", userController.DeleteUserController)
 	
 
