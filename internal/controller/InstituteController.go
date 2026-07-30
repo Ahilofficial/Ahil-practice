@@ -75,7 +75,7 @@ func (cl *InstituteController) GetAllInstitutesController(c fiber.Ctx) error {
 		c,
 		"Institutes fetched successfully",
 		fiber.Map{
-			"items":       dto.ToInstitutionResponseListDTO(institutes),
+			"items":       institutes,
 			"total_count": total,
 			"page":        page,
 			"limit":       limit,

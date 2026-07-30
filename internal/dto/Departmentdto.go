@@ -5,7 +5,7 @@ import (
 	"errors"
 	"github.com/jinzhu/copier"
 	"strings"
-	"time"
+	
 )
 
 type CreateDepartmentDTO struct {
@@ -74,26 +74,3 @@ func ToDepartmentResponseListDTO(depts []model.Department) []DepartmentResponseD
 	return list
 }
 
-type DepartmentFlatRow struct {
-	DeptID         uint   `gorm:"column:dept_id"`
-	DepartmentName string `gorm:"column:department_name"`
-	InstitutionID  uint   `gorm:"column:institution_id"`
-	DeptActive     bool   `gorm:"column:dept_active"`
-
-	FacID          *uint      `gorm:"column:fac_id"`
-	FacName        *string    `gorm:"column:fac_name"`
-	FacGender      *string    `gorm:"column:fac_gender"`
-	FacJoiningDate *time.Time `gorm:"column:fac_joining_date"`
-	FacActive      *bool      `gorm:"column:fac_active"`
-
-	StudID     *uint   `gorm:"column:stud_id"`
-	StudName   *string `gorm:"column:stud_name"`
-	StudEmail  *string `gorm:"column:stud_email"`
-	StudGender *string `gorm:"column:stud_gender"`
-	StudActive *bool   `gorm:"column:stud_active"`
-
-	FeeID          *uint    `gorm:"column:fee_id"`
-	FeePaymentMode *string  `gorm:"column:fee_payment_mode"`
-	FeeAmount      *float64 `gorm:"column:fee_amount"`
-	FeeActive      *bool    `gorm:"column:fee_active"`
-}

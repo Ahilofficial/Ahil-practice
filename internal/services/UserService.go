@@ -85,11 +85,6 @@ func (s *UserService) SignUp(dto *dto.SignUpDTO) (model.User, error) {
 	if roleErr == nil && defaultRole.ID != 0 {
 		_ = s.userrepo.AssignRoleToUser(user.ID, defaultRole.ID)
 	}
-
-
-	
-
-
 	// Send verification email asynchronously
 	go func(email, subject, body string) {
 		if sendErr := grpc.SendEmail(email, subject, body, "signup"); sendErr != nil {

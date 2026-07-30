@@ -4,7 +4,7 @@ import (
 	"backend_institutions/internal/model"
 	"errors"
 	"strings"
-	"time"
+	
 	"github.com/jinzhu/copier"
 )
 
@@ -93,31 +93,3 @@ func ToInstitutionResponseListDTO(insts []model.Institutions) []InstitutionRespo
 	return list
 }
 
-type InstitutionFlatRow struct {
-	InstID          uint   `gorm:"column:inst_id"`
-	InstName        string `gorm:"column:inst_name"`
-	InstitutionCode string `gorm:"column:institution_code"`
-	InstState       string `gorm:"column:inst_state"`
-	InstActive      bool   `gorm:"column:inst_active"`
-
-	DeptID         *uint   `gorm:"column:dept_id"`
-	DepartmentName *string `gorm:"column:department_name"`
-	DeptActive     *bool   `gorm:"column:dept_active"`
-
-	FacID          *uint      `gorm:"column:fac_id"`
-	FacName        *string    `gorm:"column:fac_name"`
-	FacGender      *string    `gorm:"column:fac_gender"`
-	FacJoiningDate *time.Time `gorm:"column:fac_joining_date"`
-	FacActive      *bool      `gorm:"column:fac_active"`
-
-	StudID         *uint   `gorm:"column:stud_id"`
-	StudName       *string `gorm:"column:stud_name"`
-	StudEmail      *string `gorm:"column:stud_email"`
-	StudGender     *string `gorm:"column:stud_gender"`
-	StudActive     *bool   `gorm:"column:stud_active"`
-
-	FeeID          *uint    `gorm:"column:fee_id"`
-	FeePaymentMode *string  `gorm:"column:fee_payment_mode"`
-	FeeAmount      *float64 `gorm:"column:fee_amount"`
-	FeeActive      *bool    `gorm:"column:fee_active"`
-}
