@@ -7,6 +7,7 @@ import (
 	"fmt"
 
 	"github.com/gofiber/fiber/v3"
+	"github.com/gofiber/fiber/v3/middleware/cors"
 )
 
 func NewApp(
@@ -45,11 +46,17 @@ func RegisterRoutes(
 	roleController *controller.RoleController,
 	permissionController *controller.PermissionController,
 ) {
+	app.Use(cors.New(cors.Config{
+		AllowOrigins: []string{"http://localhost:4200"},
+		AllowMethods: []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders: []string{"Origin", "Content-Type", "Accept", "Authorization"},
+	}))
+
 	app.Get("/auth/verify", userController.VerifyEmail)
 	app.Post("/auth/forgot-password", userController.ForgotPassword)
 	app.Post("/auth/reset-password", userController.ResetPassword)
-	
-	
+	app.Get("/roles",roleController.FetchRoles)
+	app.Get("/permission",roleController.FetchPermissions)
 	app.Use(middleware.RequestResponseLogger())
 
 	app.Post("/signup", userController.SignUpController)
@@ -59,19 +66,40 @@ func RegisterRoutes(
 
 	protected := app.Group("", middleware.AuthRequired())
 
+	protected.Get("/profile", userController.GetProfile)
 	protected.Post("/users/assign-role", middleware.RequirePermission(constants.PermissionAssignRoles), userController.AssignRoleController)
 
 	roleRoute := protected.Group("/roles", middleware.RequirePermission(constants.PermissionAssignRoles))
 	roleRoute.Post("", roleController.CreateRoleController)
-
-
-	
 	roleRoute.Post("/:id/permissions", roleController.AssignPermissionsController)
 	roleRoute.Get("/:id/permissions", roleController.GetRolePermissionsController)
 	roleRoute.Delete("/:id/permissions/:permissionId", roleController.RemovePermissionController)
+	roleRoute.Get("/:id", roleController.GetRoleByIDController)
+	roleRoute.Put("/:id", roleController.UpdateRoleController)
+	roleRoute.Delete("/:id", roleController.DeleteRoleController)
 
-	// Permission Read API
-	protected.Get("/permissions", middleware.RequirePermission(constants.PermissionAssignRoles), permissionController.GetAllPermissionsController)
+	// Permission CRUD
+	protected.Get("/permissions/:id", middleware.RequirePermission(constants.PermissionAssignRoles), roleController.GetPermissionByIDController)
+	protected.Delete("/permissions/:id", middleware.RequirePermission(constants.PermissionAssignRoles), roleController.DeletePermissionController)
+
+	// UserRole CRUD
+	userRolesRoute := protected.Group("/user-roles", middleware.RequirePermission(constants.PermissionAssignRoles))
+	userRolesRoute.Get("", roleController.FetchUserRolesController)
+	userRolesRoute.Post("", roleController.CreateUserRoleController)
+	userRolesRoute.Get("/user/:userId", roleController.GetUserRolesByUserIDController)
+	userRolesRoute.Get("/:userId/:roleId", roleController.GetUserRoleByIDController)
+	userRolesRoute.Put("/:userId/:roleId", roleController.UpdateUserRoleController)
+	userRolesRoute.Delete("/:userId/:roleId", roleController.DeleteUserRoleController)
+
+	// RolePermission CRUD
+	rolePermsRoute := protected.Group("/role-permissions", middleware.RequirePermission(constants.PermissionAssignRoles))
+	rolePermsRoute.Get("", roleController.FetchRolePermissionsController)
+	rolePermsRoute.Post("", roleController.CreateRolePermissionController)
+	rolePermsRoute.Get("/:roleId/:permissionId", roleController.GetRolePermissionByIDController)
+	rolePermsRoute.Put("/:roleId/:permissionId", roleController.UpdateRolePermissionController)
+	rolePermsRoute.Delete("/:roleId/:permissionId", roleController.DeleteRolePermissionController)
+
+	
 
 	InstituteRoute := protected.Group("/institutes")
 	InstituteRoute.Post("", middleware.RequirePermission(constants.PermissionCreateInstitutes), instituteController.CreateInstituteController)
@@ -83,6 +111,7 @@ func RegisterRoutes(
 	InstituteRoute.Get("/:id", middleware.RequirePermission(constants.PermissionViewInstitutes), instituteController.GetInstituteByIDController)
 	InstituteRoute.Put("/:id", middleware.RequirePermission(constants.PermissionUpdateInstitutes), instituteController.UpdateInstituteController)
 	InstituteRoute.Delete("/:id", middleware.RequirePermission(constants.PermissionDeleteInstitutes), instituteController.DeleteInstituteController)
+	
 
 	DepartmentRoute := protected.Group("/departments")
 	DepartmentRoute.Post("", middleware.RequirePermission(constants.PermissionCreateDepartments), departmentController.CreateDepartmentController)
@@ -108,6 +137,7 @@ func RegisterRoutes(
 
 	StudentRoute := protected.Group("/students")
 	StudentRoute.Post("", middleware.RequirePermission(constants.PermissionCreateStudents), studentController.CreateStudentControllers)
+	StudentRoute.Get("", middleware.RequirePermission(constants.PermissionViewStudents), studentController.FetchAllStudentsPaginatedControllers)
 	StudentRoute.Get("/all", middleware.RequirePermission(constants.PermissionViewStudents), studentController.FetchAllStudentsControllers)
 	StudentRoute.Get("/active", middleware.RequirePermission(constants.PermissionViewStudents), studentController.GetActiveStudentController)
 	StudentRoute.Get("/inactive", middleware.RequirePermission(constants.PermissionViewStudents), studentController.GetInactiveStudentController)

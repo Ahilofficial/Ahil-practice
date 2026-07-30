@@ -22,6 +22,26 @@ type AssignPermissionsDTO struct {
 	PermissionNames []string `json:"permission_names,omitempty"`
 }
 
+type CreateUserRoleDTO struct {
+	UserID uint `json:"user_id"`
+	RoleID uint `json:"role_id"`
+}
+
+type UpdateUserRoleDTO struct {
+	RoleID uint `json:"role_id"`
+}
+
+type CreateRolePermissionDTO struct {
+	RoleID       uint `json:"role_id"`
+	PermissionID uint `json:"permission_id"`
+}
+
+type UpdateRolePermissionDTO struct {
+	PermissionID uint `json:"permission_id"`
+}
+
+
+
 type RoleResponseDTO struct {
 	ID        uint      `json:"id"`
 	Name      string    `json:"name"`
@@ -54,6 +74,40 @@ func (dto *UpdateRoleDTO) Validate() error {
 func (dto *AssignPermissionsDTO) Validate() error {
 	if len(dto.PermissionIDs) == 0 && len(dto.PermissionNames) == 0 {
 		return errors.New("either permission_ids or permission_names must be provided")
+	}
+	return nil
+}
+
+func (dto *CreateUserRoleDTO) Validate() error {
+	if dto.UserID == 0 {
+		return errors.New("user_id is required")
+	}
+	if dto.RoleID == 0 {
+		return errors.New("role_id is required")
+	}
+	return nil
+}
+
+func (dto *UpdateUserRoleDTO) Validate() error {
+	if dto.RoleID == 0 {
+		return errors.New("role_id is required")
+	}
+	return nil
+}
+
+func (dto *CreateRolePermissionDTO) Validate() error {
+	if dto.RoleID == 0 {
+		return errors.New("role_id is required")
+	}
+	if dto.PermissionID == 0 {
+		return errors.New("permission_id is required")
+	}
+	return nil
+}
+
+func (dto *UpdateRolePermissionDTO) Validate() error {
+	if dto.PermissionID == 0 {
+		return errors.New("permission_id is required")
 	}
 	return nil
 }

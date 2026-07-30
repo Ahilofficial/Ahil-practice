@@ -283,15 +283,24 @@ func (r *UserRepository) Logout(dto *dto.LogoutDTO) error {
 	return r.db.Exec(update, sessionID).Error
 }
 
-	func (r *UserRepository) FindByID(userID uint) (model.User, error) {
+
+func (r *UserRepository) FindByID(userID uint) (model.User, error) {
 	var user model.User
 
-	err := r.db.
-		Where("id = ?", userID).
-		First(&user).Error
+	err := r.db.Raw(`
+		SELECT *
+		FROM users
+		WHERE id = ?
+		AND deleted_at IS NULL
+		LIMIT 1
+	`, userID).Scan(&user).Error
 
 	if err != nil {
 		return model.User{}, err
+	}
+
+	if user.ID == 0 {
+		return model.User{}, gorm.ErrRecordNotFound
 	}
 
 	return user, nil

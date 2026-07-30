@@ -23,8 +23,8 @@ func (s *StudentService) GetStudentService() ([]model.Student, error) {
 	return s.studentrepo.FetchStudent()
 }
 
-func (s *StudentService) GetStudentServicePaginated(page, limit int) ([]model.Student, int64, error) {
-	return s.studentrepo.FetchStudentPaginated(page, limit)
+func (s *StudentService) GetStudentServicePaginated(search string, page, limit int) ([]model.Student, int64, error) {
+	return s.studentrepo.FetchStudentPaginated(search,page, limit)
 }
 
 func (s *StudentService) GetStudentServiceById(id uint) (model.Student, error) {

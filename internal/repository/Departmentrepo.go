@@ -1,6 +1,7 @@
 package repository
 
 import (
+	
 	"backend_institutions/internal/dto"
 	"backend_institutions/internal/model"
 	"errors"
@@ -313,22 +314,41 @@ func (r *DepartmentRepository) FetchDepartment() ([]model.Department, error) {
 	return depts, err
 }
 
-func (r *DepartmentRepository) FetchDepartmentPaginated(page, limit int) ([]model.Department, int64, error) {
+func (r *DepartmentRepository) FetchDepartmentPaginated(search string, page, limit int) ([]model.Department, int64, error) {
 	var total int64
-	err := r.db.Raw("SELECT COUNT(*) FROM departments WHERE deleted_at IS NULL").Scan(&total).Error
+	offset := (page - 1) * limit
+
+	err := r.db.Raw(`
+		SELECT COUNT(*)
+		FROM departments
+		WHERE deleted_at IS NULL
+		AND department_name LIKE ?`,
+		"%"+search+"%",
+	).Scan(&total).Error
 	if err != nil {
 		return nil, 0, err
 	}
 
-	offset := (page - 1) * limit
+
 	var depts []model.Department
-	err = r.db.Raw("SELECT * FROM departments WHERE deleted_at IS NULL LIMIT ? OFFSET ?", limit, offset).Scan(&depts).Error
+	err = r.db.Raw(`
+		SELECT *
+		FROM departments
+		WHERE deleted_at IS NULL
+		AND department_name LIKE ?
+		LIMIT ? OFFSET ?`,
+		"%"+search+"%",
+		limit,
+		offset,
+	).Scan(&depts).Error
 	if err != nil {
 		return nil, 0, err
 	}
-	err = r.loadAssociations(depts)
+
+	
 	return depts, total, err
 }
+
 
 func (r *DepartmentRepository) FetchDepartmentById(id uint) (model.Department, error) {
 	var depts []model.Department

@@ -9,6 +9,7 @@ import (
 	"strconv"
 
 	"github.com/gofiber/fiber/v3"
+	
 )
 
 type InstituteController struct {
@@ -45,6 +46,7 @@ func (cl *InstituteController) CreateInstituteController(c fiber.Ctx) error {
 }
 
 func (cl *InstituteController) GetAllInstitutesController(c fiber.Ctx) error {
+	search:=c.Query("search")
 	pageStr := c.Query("page")
 	limitStr := c.Query("limit")
 
@@ -62,7 +64,7 @@ func (cl *InstituteController) GetAllInstitutesController(c fiber.Ctx) error {
 		}
 	}
 
-	institutes, total, err := cl.instituteService.GetInstituteServicePaginated(page, limit)
+	institutes, total, err := cl.instituteService.GetInstituteServicePaginated(search,page, limit)
 	if err != nil {
 		return helper.Error(c, 500, err.Error())
 	}

@@ -16,33 +16,33 @@ func NewStudentRepository(db *gorm.DB) *StudentRepository {
 	return &StudentRepository{db: db}
 }
 
-func (r *StudentRepository) loadAssociations(studs []model.Student) error {
-	if len(studs) == 0 {
-		return nil
-	}
+// func (r *StudentRepository) loadAssociations(studs []model.Student) error {
+// 	if len(studs) == 0 {
+// 		return nil
+// 	}
 
-	studIDs := make([]uint, len(studs))
-	for i, stud := range studs {
-		studIDs[i] = stud.ID
-	}
+// 	studIDs := make([]uint, len(studs))
+// 	for i, stud := range studs {
+// 		studIDs[i] = stud.ID
+// 	}
 
-	// Load Fees
-	var fees []model.Fees
-	if err := r.db.Raw("SELECT * FROM fees WHERE student_id IN ? AND deleted_at IS NULL", studIDs).Scan(&fees).Error; err != nil {
-		return err
-	}
+// 	// Load Fees
+// 	var fees []model.Fees
+// 	if err := r.db.Raw("SELECT * FROM fees WHERE student_id IN ? AND deleted_at IS NULL", studIDs).Scan(&fees).Error; err != nil {
+// 		return err
+// 	}
 
-	feesMap := make(map[uint][]model.Fees)
-	for _, fee := range fees {
-		feesMap[fee.StudentID] = append(feesMap[fee.StudentID], fee)
-	}
+// 	feesMap := make(map[uint][]model.Fees)
+// 	for _, fee := range fees {
+// 		feesMap[fee.StudentID] = append(feesMap[fee.StudentID], fee)
+// 	}
 
-	for i := range studs {
-		studs[i].Fees = feesMap[studs[i].ID]
-	}
+// 	for i := range studs {
+// 		studs[i].Fees = feesMap[studs[i].ID]
+// 	}
 
-	return nil
-}
+// 	return nil
+// }
 
 func (r *StudentRepository) CreateStudent(student *model.Student) error {
 	db, err := r.db.DB()
@@ -103,56 +103,56 @@ func (r *StudentRepository) CreateStudent(student *model.Student) error {
 	}
 
 
-	id, err := res.LastInsertId()
-	if err != nil {
+	// id, err := res.LastInsertId()
+	// if err != nil {
 	
-		return err
-	}
+	// 	return err
+	// }
 
 
-	student.ID = uint(id)
-	student.CreatedAt = now
-	student.UpdatedAt = now
-	student.IsActive = true
+	// student.ID = uint(id)
+	// student.CreatedAt = now
+	// student.UpdatedAt = now
+	// student.IsActive = true
 
 
 
-	for i := range student.Fees {
+	// for i := range student.Fees {
 
-		student.Fees[i].StudentID = student.ID
-		student.Fees[i].CreatedAt = now
-		student.Fees[i].UpdatedAt = now
-		student.Fees[i].IsActive = true
+	// 	student.Fees[i].StudentID = student.ID
+	// 	student.Fees[i].CreatedAt = now
+	// 	student.Fees[i].UpdatedAt = now
+	// 	student.Fees[i].IsActive = true
 
 
-		feeRes, err := db.Exec(
-			`INSERT INTO fees
-				(payment_mode, amount, student_id, created_at, updated_at, is_active)
+	// 	feeRes, err := db.Exec(
+	// 		`INSERT INTO fees
+	// 			(payment_mode, amount, student_id, created_at, updated_at, is_active)
 
-			VALUES (?, ?, ?, ?, ?, ?)`,
-			student.Fees[i].PaymentMode,
-			student.Fees[i].Amount,
-			student.Fees[i].StudentID,
-			student.Fees[i].CreatedAt,
-			student.Fees[i].UpdatedAt,
-			student.Fees[i].IsActive,
-		)
+	// 		VALUES (?, ?, ?, ?, ?, ?)`,
+	// 		student.Fees[i].PaymentMode,
+	// 		student.Fees[i].Amount,
+	// 		student.Fees[i].StudentID,
+	// 		student.Fees[i].CreatedAt,
+	// 		student.Fees[i].UpdatedAt,
+	// 		student.Fees[i].IsActive,
+	// 	)
 
-		if err != nil {
+	// 	if err != nil {
 			
-			return err
-		}
+	// 		return err
+	// 	}
 
 
-		feeID, err := feeRes.LastInsertId()
-		if err != nil {
+	// 	feeID, err := feeRes.LastInsertId()
+	// 	if err != nil {
 			
-			return err
-		}
+	// 		return err
+	// 	}
 
 
-		student.Fees[i].ID = uint(feeID)
-	}
+	// 	student.Fees[i].ID = uint(feeID)
+	// }
 
 
 	// if err != nil {
@@ -169,7 +169,7 @@ func (r *StudentRepository) FetchStudent() ([]model.Student, error) {
 	if err != nil {
 		return nil, err
 	}
-	err = r.loadAssociations(studs)
+	
 	return studs, err
 }
 
@@ -182,10 +182,10 @@ func (r *StudentRepository) GetActiveStudent() (model.Student, error) {
 	if len(studs) == 0 {
 		return model.Student{}, gorm.ErrRecordNotFound
 	}
-	err = r.loadAssociations(studs)
-	if err != nil {
-		return model.Student{}, err
-	}
+	// err = r.loadAssociations(studs)
+	// if err != nil {
+	// 	return model.Student{}, err
+	// }
 	return studs[0], nil
 }
 
@@ -198,28 +198,77 @@ func (r *StudentRepository) GetInactiveStudent() (model.Student, error) {
 	if len(studs) == 0 {
 		return model.Student{}, gorm.ErrRecordNotFound
 	}
-	err = r.loadAssociations(studs)
-	if err != nil {
-		return model.Student{}, err
-	}
+	// err = r.loadAssociations(studs)
+	// if err != nil {
+	// 	return model.Student{}, err
+	// }
 	return studs[0], nil
 }
 
-func (r *StudentRepository) FetchStudentPaginated(page, limit int) ([]model.Student, int64, error) {
+func (r *StudentRepository) FetchStudentPaginated(search string, page, limit int) ([]model.Student, int64, error) {
 	var total int64
-	err := r.db.Raw("SELECT COUNT(*) FROM students WHERE deleted_at IS NULL").Scan(&total).Error
+	var err error
+
+	
+	if search != "" {
+		search = "%" + search + "%"
+		err = r.db.Raw(`
+			SELECT COUNT(*)
+			FROM students
+			WHERE deleted_at IS NULL
+			AND (
+				name LIKE ?
+				OR email LIKE ?
+				OR gender LIKE ?
+			)
+		`, search, search, search).Scan(&total).Error
+	} else {
+		err = r.db.Raw(`
+			SELECT COUNT(*)
+			FROM students
+			WHERE deleted_at IS NULL
+		`).Scan(&total).Error
+	}
+
 	if err != nil {
 		return nil, 0, err
 	}
 
 	offset := (page - 1) * limit
 	var studs []model.Student
-	err = r.db.Raw("SELECT * FROM students WHERE deleted_at IS NULL LIMIT ? OFFSET ?", limit, offset).Scan(&studs).Error
+
+	
+	if search != "" {
+		err = r.db.Raw(`
+			SELECT *
+			FROM students
+			WHERE deleted_at IS NULL
+			AND (
+				name LIKE ?
+				OR email LIKE ?
+				OR gender LIKE ?
+			)
+			LIMIT ? OFFSET ?
+		`, search, search, search, limit, offset).Scan(&studs).Error
+	} else {
+		err = r.db.Raw(`
+			SELECT *
+			FROM students
+			WHERE deleted_at IS NULL
+			LIMIT ? OFFSET ?
+		`, limit, offset).Scan(&studs).Error
+	}
+
 	if err != nil {
 		return nil, 0, err
 	}
-	err = r.loadAssociations(studs)
-	return studs, total, err
+
+	// err = r.loadAssociations(studs)
+	// if err != nil {
+	// 	return nil, 0, err
+	// }
+
+	return studs, total, nil
 }
 
 func (r *StudentRepository) FetchStudentById(id uint) (model.Student, error) {
@@ -231,10 +280,10 @@ func (r *StudentRepository) FetchStudentById(id uint) (model.Student, error) {
 	if len(studs) == 0 {
 		return model.Student{}, gorm.ErrRecordNotFound
 	}
-	err = r.loadAssociations(studs)
-	if err != nil {
-		return model.Student{}, err
-	}
+	// err = r.loadAssociations(studs)
+	// if err != nil {
+	// 	return model.Student{}, err
+	// }
 	return studs[0], nil
 }
 
@@ -244,7 +293,7 @@ func (r *StudentRepository) FetchStudentDeleted() ([]model.Student, error) {
 	if err != nil {
 		return nil, err
 	}
-	err = r.loadAssociations(studs)
+	// err = r.loadAssociations(studs)
 	return studs, err
 }
 

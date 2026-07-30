@@ -260,19 +260,48 @@ func (r *FacultyRepository) FetchFaculty() ([]model.Faculty, error) {
 	return facs, err
 }
 
-func (r *FacultyRepository) FetchFacultyPaginated(page, limit int) ([]model.Faculty, int64, error) {
+func (r *FacultyRepository) FetchFacultyPaginated(search string, page, limit int) ([]model.Faculty, int64, error) {
 	var total int64
-	err := r.db.Raw("SELECT COUNT(*) FROM faculties WHERE deleted_at IS NULL").Scan(&total).Error
+
+	searchPattern := "%" + search + "%"
+
+	
+	err := r.db.Raw(`
+		SELECT COUNT(*)
+		FROM faculties
+		WHERE deleted_at IS NULL
+		AND (
+			name LIKE ?
+			OR gender LIKE ?
+			OR joining_date LIKE ?
+		)
+	`, searchPattern, searchPattern, searchPattern).Scan(&total).Error
+
 	if err != nil {
 		return nil, 0, err
 	}
 
 	offset := (page - 1) * limit
+
 	var facs []model.Faculty
-	err = r.db.Raw("SELECT * FROM faculties WHERE deleted_at IS NULL LIMIT ? OFFSET ?", limit, offset).Scan(&facs).Error
+
+	// Fetch matching records
+	err = r.db.Raw(`
+		SELECT *
+		FROM faculties
+		WHERE deleted_at IS NULL
+		AND (
+			name LIKE ?
+			OR gender LIKE ?
+			OR joining_date LIKE ?
+		)
+		LIMIT ? OFFSET ?
+	`, searchPattern, searchPattern, searchPattern, limit, offset).Scan(&facs).Error
+
 	if err != nil {
 		return nil, 0, err
 	}
+
 	err = r.loadAssociations(facs)
 	return facs, total, err
 }

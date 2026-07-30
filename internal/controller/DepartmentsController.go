@@ -71,6 +71,7 @@ func (cl *DepartmentController) CreateDepartmentController(c fiber.Ctx) error {
 }
 
 func (cl *DepartmentController) GetAllDepartmentsController(c fiber.Ctx) error {
+	search:=c.Query("search")
 	pageStr := c.Query("page")
 	limitStr := c.Query("limit")
 
@@ -88,7 +89,7 @@ func (cl *DepartmentController) GetAllDepartmentsController(c fiber.Ctx) error {
 		}
 	}
 
-	departments, total, err := cl.departmentService.GetDepartmentServicePaginated(page, limit)
+	departments, total, err := cl.departmentService.GetDepartmentServicePaginated(search,page, limit)
 	if err != nil {
 		return helper.Error(c, 500, err.Error())
 	}

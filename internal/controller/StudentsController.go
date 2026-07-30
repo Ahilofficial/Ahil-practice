@@ -5,6 +5,7 @@ import (
 	"backend_institutions/internal/helper"
 	"backend_institutions/internal/model"
 	"backend_institutions/internal/services"
+	"math"
 	"strconv"
 
 	"github.com/gofiber/fiber/v3"
@@ -159,5 +160,45 @@ func (cl *StudentController) FetchAllStudentsControllers(c fiber.Ctx) error {
 		c,
 		"All students fetched successfully",
 		dto.ToStudentResponseListDTO(students),
+	)
+}
+
+func (cl *StudentController) FetchAllStudentsPaginatedControllers(c fiber.Ctx) error {
+	search:=c.Query("search")
+	pageStr := c.Query("page")
+	limitStr := c.Query("limit")
+
+	page := 1
+	limit := 10
+
+	if pageStr != "" {
+		if p, err := strconv.Atoi(pageStr); err == nil && p > 0 {
+			page = p
+		}
+	}
+
+	if limitStr != "" {
+		if l, err := strconv.Atoi(limitStr); err == nil && l > 0 {
+			limit = l
+		}
+	}
+
+	students, total, err := cl.studentService.GetStudentServicePaginated(search,page, limit)
+	if err != nil {
+		return helper.Error(c, 500, err.Error())
+	}
+
+	totalPages := int(math.Ceil(float64(total) / float64(limit)))
+
+	return helper.Success(
+		c,
+		"Students fetched successfully",
+		fiber.Map{
+			"items":       dto.ToStudentResponseListDTO(students),
+			"total_count": total,
+			"page":        page,
+			"limit":       limit,
+			"total_pages": totalPages,
+		},
 	)
 }

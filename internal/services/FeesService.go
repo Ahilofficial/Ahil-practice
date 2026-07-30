@@ -29,8 +29,8 @@ func (s *FeesService) GetFeesService() ([]model.Fees, error) {
 	return s.feesrepo.FetchFees()
 }
 
-func (s *FeesService) GetFeesServicePaginated(page, limit int) ([]model.Fees, int64, error) {
-	return s.feesrepo.FetchFeesPaginated(page, limit)
+func (s *FeesService) GetFeesServicePaginated(search string,page, limit int) ([]model.Fees, int64, error) {
+	return s.feesrepo.FetchFeesPaginated(search,page, limit)
 }
 
 func (s *FeesService) GetFeesServiceById(id uint) (model.Fees, error) {

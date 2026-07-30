@@ -365,21 +365,71 @@ func (r *InstitutionRepository) FetchInstitution() ([]model.Institutions, error)
 	return insts, err
 }
 
-func (r *InstitutionRepository) FetchInstitutionPaginated(page, limit int) ([]model.Institutions, int64, error) {
+func (r *InstitutionRepository) FetchInstitutionPaginated(search string, page, limit int) ([]model.Institutions, int64, error) {
 	var total int64
-	err := r.db.Raw("SELECT COUNT(*) FROM institutions WHERE deleted_at IS NULL").Scan(&total).Error
+	var err error
+
+	
+	if search != "" {
+		search = "%" + search + "%"
+		err = r.db.Raw(`
+			SELECT COUNT(*)
+			FROM institutions
+			WHERE deleted_at IS NULL
+			AND (
+				institution_code LIKE ?
+				OR name LIKE ?
+				OR state LIKE ?
+			)
+		`, search, search, search).Scan(&total).Error
+	} else{
+		err = r.db.Raw(`
+        SELECT COUNT(*)
+        FROM institutions
+        WHERE deleted_at IS NULL
+    `).Scan(&total).Error
+
+	}
+
 	if err != nil {
 		return nil, 0, err
 	}
 
 	offset := (page - 1) * limit
 	var insts []model.Institutions
-	err = r.db.Raw("SELECT * FROM institutions WHERE deleted_at IS NULL LIMIT ? OFFSET ?", limit, offset).Scan(&insts).Error
+
+	
+	if search != "" {
+		err = r.db.Raw(`
+			SELECT *
+			FROM institutions
+			WHERE deleted_at IS NULL
+			AND (
+				institution_code LIKE ?
+				OR name LIKE ?
+				OR state LIKE ?
+			)
+			LIMIT ? OFFSET ?
+		`, search, search, search, limit, offset).Scan(&insts).Error
+	} else {
+    err = r.db.Raw(`
+        SELECT *
+        FROM institutions
+        WHERE deleted_at IS NULL
+        LIMIT ? OFFSET ?
+    `, limit, offset).Scan(&insts).Error
+}
+
 	if err != nil {
 		return nil, 0, err
 	}
+
 	err = r.loadAssociations(insts)
-	return insts, total, err
+	if err != nil {
+		return nil, 0, err
+	}
+
+	return insts, total, nil
 }
 
 func (r *InstitutionRepository) FetchInstitutionById(id uint) (model.Institutions, error) {

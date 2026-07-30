@@ -40,6 +40,7 @@ func AuthRequired() fiber.Handler {
 		}
 
 		claims, ok := token.Claims.(jwt.MapClaims)
+		fmt.Printf("%T\n", claims["user_id"])
 		if !ok {
 			return helper.Error(c, 401, "Invalid token claims")
 		}

@@ -3,7 +3,6 @@ package controller
 import (
 	"backend_institutions/internal/dto"
 	"backend_institutions/internal/helper"
-	
 
 	// "backend_institutions/internal/model"
 	"backend_institutions/internal/services"
@@ -179,10 +178,33 @@ func (c *UserController) ResendMail(ctx fiber.Ctx) error {
 	}
 
 	err := c.userService.ResendMail(body.Email)
-	if err != nil{
+	if err != nil {
 		return helper.Error(ctx, 400, err.Error())
 	}
 
 	return helper.Success(ctx, "mail sent successfully", nil)
+}
+
+func (cl *UserController) GetProfile(c fiber.Ctx) error {
+	var userSID = c.Locals("user_id")
+	fmt.Printf("%T",userSID)
+
+	id, err := strconv.Atoi(fmt.Sprintf("%v", userSID))
+	if err != nil {
+		return helper.Error(c, 401, "Invalid user ID")
+	}
+
+	
+
+	// if !ok {
+	// 	return helper.Error(c, 401, "Unauthorized")
+	// }
+
+	user, err := cl.userService.GetProfileByID(uint(id))
+	if err != nil {
+		return helper.Error(c, 404, "User not found")
+	}
+
+	return helper.Success(c, "Profile retrieved successfully", user)
 }
 

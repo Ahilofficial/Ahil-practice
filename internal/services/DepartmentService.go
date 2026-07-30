@@ -23,8 +23,8 @@ func (s *DepartmentService) GetDepartmentService() ([]model.Department, error) {
 	return s.departmentrepo.FetchDepartment()
 }
 
-func (s *DepartmentService) GetDepartmentServicePaginated(page, limit int) ([]model.Department, int64, error) {
-	return s.departmentrepo.FetchDepartmentPaginated(page, limit)
+func (s *DepartmentService) GetDepartmentServicePaginated(search string,page, limit int) ([]model.Department, int64, error) {
+	return s.departmentrepo.FetchDepartmentPaginated(search,page, limit)
 }
 
 func (s *DepartmentService) GetDepartmentByIDService(id uint) (model.Department, error) {

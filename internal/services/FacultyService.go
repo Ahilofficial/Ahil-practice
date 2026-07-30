@@ -23,8 +23,8 @@ func (s *FacultyService) GetFacultyService() ([]model.Faculty, error) {
 	return s.facultyrepo.FetchFaculty()
 }
 
-func (s *FacultyService) GetFacultyServicePaginated(page, limit int) ([]model.Faculty, int64, error) {
-	return s.facultyrepo.FetchFacultyPaginated(page, limit)
+func (s *FacultyService) GetFacultyServicePaginated(search string, page, limit int) ([]model.Faculty, int64, error) {
+	return s.facultyrepo.FetchFacultyPaginated(search, page, limit)
 }
 
 func (s *FacultyService) GetFacultyServiceById(id uint) (model.Faculty, error) {

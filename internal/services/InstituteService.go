@@ -28,8 +28,8 @@ func (s *InstituteService) GetInstituteService() ([]model.Institutions, error) {
 	return s.instituterepo.FetchInstitution()
 }
 
-func (s *InstituteService) GetInstituteServicePaginated(page, limit int) ([]model.Institutions, int64, error) {
-	return s.instituterepo.FetchInstitutionPaginated(page, limit)
+func (s *InstituteService) GetInstituteServicePaginated(search string,page, limit int) ([]model.Institutions, int64, error) {
+	return s.instituterepo.FetchInstitutionPaginated(search ,page, limit)
 }
 
 func (s *InstituteService) GetInstituteServiceById(id uint) (model.Institutions, error) {

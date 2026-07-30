@@ -283,15 +283,27 @@ func (s *UserService) Logout(dto *dto.LogoutDTO) error {
 }
 
 func (s *UserService) ResendMail(email string) error {
-	user,err:=s.userrepo.FindByEmail(email)
-	if err!=nil{
-		return errors.New("Cant able to find  email")
+	user, err := s.userrepo.FindByEmail(email)
+	if err != nil {
+		return errors.New("cannot find email")
+	}
+
+	if user.IsVerified {
+		return errors.New("email is already verified")
 	}
 
 	token := utils.SignUpToken()
 	if token == "" {
 		return errors.New("failed to generate verification token")
 	}
+
+	user.VerificationToken = token
+	user.TokenExpiresAt = time.Now().Add(24 * time.Hour)
+	err = s.userrepo.UpdateUser(&user)
+	if err != nil {
+		return err
+	}
+
 	verifyURL := fmt.Sprintf("http://localhost:8090/auth/verify?token=%s", token)
 	subject := "Verify your email - Backend Institutions"
 	body := fmt.Sprintf(`<h1>Hello %s,</h1>
@@ -300,17 +312,16 @@ func (s *UserService) ResendMail(email string) error {
 <p>Or copy and paste this link in your browser:<br/><a href="%s">%s</a></p>
 <p>This link will expire in 24 hours.</p>
 <p>If you did not create this account, please ignore this email.</p>`, user.Name, verifyURL, verifyURL, verifyURL)
-	if user.IsVerified!=false{
-		go func(email, subject, body string) {
+
+	go func(email, subject, body string) {
 		if sendErr := grpc.SendEmail(email, subject, body, "signup"); sendErr != nil {
 			log.Printf("Failed to send verification email via gRPC: %v\n", sendErr)
 		}
 	}(user.Email, subject, body)
-}else{
-	return errors.New("email is already verified")
-	}
 
-	return  nil
+	return nil
+}
 
-
+func (s *UserService) GetProfileByID(id uint) (model.User, error) {
+	return s.userrepo.FindByID(id)
 }

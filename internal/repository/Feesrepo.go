@@ -42,18 +42,45 @@ func (r *FeesRepository) FetchFees() ([]model.Fees, error) {
 	return fees, err
 }
 
-func (r *FeesRepository) FetchFeesPaginated(page, limit int) ([]model.Fees, int64, error) {
+func (r *FeesRepository) FetchFeesPaginated(search string, page, limit int) ([]model.Fees, int64, error) {
 	var fees []model.Fees
 	var total int64
 
-	err := r.db.Raw("SELECT COUNT(*) FROM fees WHERE deleted_at IS NULL").Scan(&total).Error
+	searchPattern := "%" + search + "%"
+
+	err := r.db.Raw(`
+		SELECT COUNT(*)
+		FROM fees
+		WHERE deleted_at IS NULL
+		AND (
+			payment_mode LIKE ?
+			OR CAST(amount AS CHAR) LIKE ?
+		)
+	`, searchPattern, searchPattern).Scan(&total).Error
+
 	if err != nil {
 		return nil, 0, err
 	}
 
 	offset := (page - 1) * limit
-	err = r.db.Raw("SELECT * FROM fees WHERE deleted_at IS NULL LIMIT ? OFFSET ?", limit, offset).Scan(&fees).Error
-	return fees, total, err
+
+	
+	err = r.db.Raw(`
+		SELECT *
+		FROM fees
+		WHERE deleted_at IS NULL
+		AND (
+			payment_mode LIKE ?
+			OR CAST(amount AS CHAR) LIKE ?
+		)
+		LIMIT ? OFFSET ?
+	`, searchPattern, searchPattern, limit, offset).Scan(&fees).Error
+
+	if err != nil {
+		return nil, 0, err
+	}
+
+	return fees, total, nil
 }
 
 func (r *FeesRepository) FetchFeesById(id uint) (model.Fees, error) {
