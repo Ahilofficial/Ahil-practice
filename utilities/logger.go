@@ -22,11 +22,11 @@ func WriteAppLog(service, method, endpoint string, status int, request, response
 		return err
 	}
 
-	requestBody, err := json.MarshalIndent(request, "", "")
+	requestBody, err := json.Marshal(request)
 	if err != nil {
 		requestBody = []byte(fmt.Sprintf("%v", request))
 	}
-	responseBody, err := json.MarshalIndent(response, "", "")
+	responseBody, err := json.Marshal(response)
 	if err != nil {
 		responseBody = []byte(fmt.Sprintf("%v", response))
 	}

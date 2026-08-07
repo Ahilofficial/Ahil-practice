@@ -12,6 +12,8 @@ type FeesRepository struct {
 	db *gorm.DB
 }
 
+
+
 func NewFeesRepository(db *gorm.DB) *FeesRepository {
 	return &FeesRepository{db: db}
 }
@@ -21,18 +23,32 @@ func (r *FeesRepository) CreateFees(fees *model.Fees) error {
 	if err != nil {
 		return err
 	}
+
 	now := time.Now()
+
 	res, err := db.Exec(
-		"INSERT INTO fees (payment_mode, amount, student_id, created_at, updated_at, is_active) VALUES (?, ?, ?, ?, ?, ?)",
-		fees.PaymentMode, fees.Amount, fees.StudentID, now, now, true,
+		`INSERT INTO fees
+		(payment_mode, total_amount, total_paid, pending_amount, student_id, created_at, updated_at, is_active)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+		fees.PaymentMode,
+		fees.TotalAmount,
+		fees.TotalPaid,
+		fees.PendingAmount,
+		fees.StudentID,
+		now,
+		now,
+		true,
 	)
 	if err != nil {
 		return err
 	}
+
 	id, err := res.LastInsertId()
-	if err == nil {
-		fees.ID = uint(id)
+	if err != nil {
+		return err
 	}
+
+	fees.ID = uint(id)
 	return nil
 }
 
@@ -48,34 +64,31 @@ func (r *FeesRepository) FetchFeesPaginated(search string, page, limit int) ([]m
 
 	searchPattern := "%" + search + "%"
 
-	err := r.db.Raw(`
-		SELECT COUNT(*)
-		FROM fees
-		WHERE deleted_at IS NULL
-		AND (
-			payment_mode LIKE ?
-			OR CAST(amount AS CHAR) LIKE ?
-		)
-	`, searchPattern, searchPattern).Scan(&total).Error
+	query := r.db.Model(&model.Fees{}).
+		Where(`
+			deleted_at IS NULL
+			AND (
+				CAST(total_amount AS CHAR) LIKE ?
+				OR CAST(total_paid AS CHAR) LIKE ?
+				OR CAST(pending_amount AS CHAR) LIKE ?
+				OR CAST(student_id AS CHAR) LIKE ?
+			)
+		`, searchPattern, searchPattern, searchPattern, searchPattern)
 
-	if err != nil {
+	// Count records
+	if err := query.Count(&total).Error; err != nil {
 		return nil, 0, err
 	}
 
 	offset := (page - 1) * limit
 
-	
-	err = r.db.Raw(`
-		SELECT *
-		FROM fees
-		WHERE deleted_at IS NULL
-		AND (
-			payment_mode LIKE ?
-			OR CAST(amount AS CHAR) LIKE ?
-		)
-		LIMIT ? OFFSET ?
-	`, searchPattern, searchPattern, limit, offset).Scan(&fees).Error
-
+	// Fetch fees with related payments
+	err := query.
+		Preload("Payments").
+		Order("id DESC").
+		Limit(limit).
+		Offset(offset).
+		Find(&fees).Error
 	if err != nil {
 		return nil, 0, err
 	}
@@ -84,15 +97,19 @@ func (r *FeesRepository) FetchFeesPaginated(search string, page, limit int) ([]m
 }
 
 func (r *FeesRepository) FetchFeesById(id uint) (model.Fees, error) {
-	var fees model.Fees
-	err := r.db.Raw("SELECT * FROM fees WHERE id = ? AND deleted_at IS NULL LIMIT 1", id).Scan(&fees).Error
+	var fee model.Fees
+
+	err := r.db.
+		Preload("Student").
+		Preload("Payments").
+		Where("id = ? AND deleted_at IS NULL", id).
+		First(&fee).Error
+
 	if err != nil {
-		return fees, err
+		return model.Fees{}, err
 	}
-	if fees.ID == 0 {
-		return fees, gorm.ErrRecordNotFound
-	}
-	return fees, nil
+
+	return fee, nil
 }
 
 func (r *FeesRepository) DeleteFees(id uint) error {
@@ -123,14 +140,107 @@ func (r *FeesRepository) FetchInactiveFees() ([]model.Fees, error) {
 	return fees, err
 }
 
+func (r *FeesRepository) CreatePayment(payment *model.Payment) error {
+	db, err := r.db.DB()
+	if err != nil {
+		return err
+	}
+
+	now := time.Now()
+
+	res, err := db.Exec(
+		`INSERT INTO payments
+		(month, amount_paid, fee_id, created_at, updated_at)
+		VALUES (?, ?, ?, ?, ?)`,
+		payment.Month,
+		payment.AmountPaid,
+		payment.FeeID,
+		now,
+		now,
+	)
+	if err != nil {
+		return err
+	}
+
+	id, err := res.LastInsertId()
+	if err != nil {
+		return err
+	}
+
+	payment.ID = uint(id)
+
+	return nil
+}
+
+func (r *FeesRepository) FetchPaymentByFeeID(feeID uint) ([]model.Payment, error) {
+	var payments []model.Payment
+
+	err := r.db.Raw(`
+		SELECT *
+		FROM payments
+		WHERE fee_id = ?
+		AND deleted_at IS NULL
+		ORDER BY created_at ASC
+	`, feeID).Scan(&payments).Error
+
+	if err != nil {
+		return nil, err
+	}
+
+	return payments, nil
+}
+
+func (r *FeesRepository) FetchPaymentByID(id uint) (model.Payment, error) {
+	var payment model.Payment
+
+	err := r.db.
+		Preload("Fee").
+		Where("id = ? AND deleted_at IS NULL", id).
+		First(&payment).Error
+
+	if err != nil {
+		return model.Payment{}, err
+	}
+
+	return payment, nil
+}
+
 func (r *FeesRepository) UpdateFeesById(fees *model.Fees) error {
 	db, err := r.db.DB()
 	if err != nil {
 		return err
 	}
-	_, err = db.Exec(
-		"UPDATE fees SET payment_mode = ?, amount = ?, updated_at = ? WHERE id = ?",
-		fees.PaymentMode, fees.Amount, time.Now(), fees.ID,
+
+	_, err = db.Exec(`
+		UPDATE fees
+		SET
+			total_paid = ?,
+			pending_amount = ?,
+			updated_at = ?
+		WHERE id = ?
+	`,
+		fees.TotalPaid,
+		fees.PendingAmount,
+		time.Now(),
+		fees.ID,
 	)
+
 	return err
 }
+
+func (r *FeesRepository) FetchFeesByStudentID(studentID uint) (*model.Fees, error) {
+	var fees model.Fees
+
+	err := r.db.
+		Preload("Payments").
+		Where("student_id = ? AND deleted_at IS NULL", studentID).
+		First(&fees).Error
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &fees, nil
+}
+
+

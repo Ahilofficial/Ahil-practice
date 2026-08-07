@@ -452,3 +452,15 @@ func (cl *RoleController) GetUserRolesByUserIDController(c fiber.Ctx) error {
 
 	return helper.Success(c, "User roles retrieved successfully", userRoles)
 }
+
+
+
+func (cl *RoleController) FetchAllRoles(c fiber.Ctx) error {
+
+	roles, err := cl.roleService.FetchAllRolesPermissions()
+	if err != nil {
+		return helper.Error(c, 500, err.Error())
+	}
+
+	return helper.Success(c, "Roles fetched successfully", roles)
+}

@@ -1,6 +1,7 @@
 package constants
 
 const (
+	PermissionAdminPermission = "ADMIN_PERMISSION"
 	PermissionCreateInstitutes = "CREATE_INSTITUTION"
 	PermissionViewInstitutes   = "VIEW_INSTITUTIONS"
 	PermissionUpdateInstitutes = "UPDATE_INSTITUTION"
@@ -20,6 +21,11 @@ const (
 	PermissionViewStudents   = "VIEW_STUDENTS"
 	PermissionUpdateStudents = "UPDATE_STUDENT"
 	PermissionDeleteStudents = "DELETE_STUDENT"
+
+	PermissionCreatePayments = "CREATE_PAYMENTS"
+	PermissionViewPayments   = "VIEW_PAYMENTS"
+	PermissionUpdatePayments = "UPDATE_PAYMENTS"
+	PermissionDeletePayments = "DELETE_PAYMENTS"
 
 	PermissionCreateFees = "CREATE_FEE"
 	PermissionViewFees   = "VIEW_FEES"
@@ -54,6 +60,8 @@ var AllPermissions = []string{
 	PermissionViewFees,
 	PermissionUpdateFees,
 	PermissionDeleteFees,
+	PermissionViewPayments,
+	PermissionAdminPermission,
 
 	PermissionAssignRoles,
 }

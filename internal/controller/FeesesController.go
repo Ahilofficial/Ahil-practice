@@ -186,3 +186,97 @@ func (cl *FeesController) FetchAllFeesController(c fiber.Ctx) error {
 		dto.ToFeesResponseListDTO(fees),
 	)
 }
+
+func (cl *FeesController) GetPaymentByIDController(c fiber.Ctx) error {
+	idStr := c.Params("id")
+
+	id, err := strconv.ParseUint(idStr, 10, 32)
+	if err != nil {
+		return helper.Error(c, 400, "invalid payment id")
+	}
+
+	payment, err := cl.feesService.GetPaymentByIDService(uint(id))
+	if err != nil {
+		return helper.Error(c, 404, err.Error())
+	}
+
+	return helper.Success(
+		c,
+		"Payment fetched successfully",
+		payment,
+	)
+}
+
+func (cl *FeesController) GetPaymentByFeeIDController(c fiber.Ctx) error {
+	feeIDStr := c.Params("fee_id")
+
+	feeID, err := strconv.ParseUint(feeIDStr, 10, 32)
+	if err != nil {
+		return helper.Error(c, 400, "invalid fee id")
+	}
+
+	payments, err := cl.feesService.GetPaymentByFeeIDService(uint(feeID))
+	if err != nil {
+		return helper.Error(c, 404, err.Error())
+	}
+
+	return helper.Success(
+		c,
+		"Payments fetched successfully",
+		payments,
+	)
+}
+
+func (c *FeesController) CreatePayment(ctx fiber.Ctx) error {
+	var req dto.CreatePaymentDTO
+
+	if err := ctx.Bind().Body(&req); err != nil {
+		return helper.Error(ctx, 400, "Invalid request body")
+	}
+
+	if err := req.Validate(); err != nil {
+		return helper.Error(ctx, 400, err.Error())
+	}
+
+	req.Sanitize()
+
+	payment, err := c.feesService.CreatePaymentService(&req)
+	if err != nil {
+		return helper.Error(ctx, 400, err.Error())
+	}
+
+	return helper.Success(ctx, "Payment created successfully", payment)
+}
+
+func (c *StudentController) FetchPaidStudents(ctx fiber.Ctx) error {
+	students, err := c.studentService.FetchPaidStudents()
+	if err != nil {
+		return helper.Error(ctx, fiber.StatusInternalServerError, err.Error())
+	}
+
+	return helper.Success(ctx, "Paid students fetched successfully", students)
+}
+
+func (c *StudentController) FetchNotPaidStudents(ctx fiber.Ctx) error {
+	students, err := c.studentService.FetchNotPaidStudents()
+	if err != nil {
+		return helper.Error(ctx, fiber.StatusInternalServerError, err.Error())
+	}
+
+	return helper.Success(ctx, "Not paid students fetched successfully", students)
+}
+
+func (c *FeesController) FetchFeesByStudentID(ctx fiber.Ctx) error {
+
+	id, err := strconv.ParseUint(ctx.Params("id"), 10, 64)
+	if err != nil {
+		return helper.Error(ctx, fiber.StatusBadRequest, "Invalid student id")
+	}
+
+	fees, err := c.feesService.FetchFeesByStudentID(uint(id))
+	if err != nil {
+		return helper.Error(ctx, fiber.StatusNotFound, "Fees not found")
+	}
+
+	return helper.Success(ctx, "Fees fetched successfully", fees)
+}

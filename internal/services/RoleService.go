@@ -120,4 +120,8 @@ func (s *RoleService) DeleteRolePermission(roleID, permissionID uint) error {
 
 func (s *RoleService) GetUserRolesByUserID(userID uint) (*model.User, error) {
 	return s.rolerepo.GetUserRolesByUserID(userID)
+}	
+
+func (s *RoleService) FetchAllRolesPermissions() ([]dto.RolesDTOResponse, error) {
+	return s.rolerepo.FetchAllRolesPermissions()
 }

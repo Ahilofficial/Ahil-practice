@@ -186,21 +186,12 @@ func (c *UserController) ResendMail(ctx fiber.Ctx) error {
 }
 
 func (cl *UserController) GetProfile(c fiber.Ctx) error {
-	var userSID = c.Locals("user_id")
-	fmt.Printf("%T",userSID)
-
-	id, err := strconv.Atoi(fmt.Sprintf("%v", userSID))
-	if err != nil {
+	userID, ok := c.Locals("user_id").(uint)
+	if !ok {
 		return helper.Error(c, 401, "Invalid user ID")
 	}
 
-	
-
-	// if !ok {
-	// 	return helper.Error(c, 401, "Unauthorized")
-	// }
-
-	user, err := cl.userService.GetProfileByID(uint(id))
+	user, err := cl.userService.GetProfileByID(userID)
 	if err != nil {
 		return helper.Error(c, 404, "User not found")
 	}

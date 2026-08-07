@@ -56,11 +56,7 @@ func ToDepartmentResponseDTO(dept *model.Department) DepartmentResponseDTO {
 	var dto DepartmentResponseDTO
 	copier.Copy(&dto, dept)
 
-	dto.Faculties = make([]FacultyResponseDTO, len(dept.Faculties))
-	for i := range dept.Faculties {
-		dto.Faculties[i] = ToFacultyResponseDTO(&dept.Faculties[i])
-	}
-
+	
 	return dto
 }
 

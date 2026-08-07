@@ -16,8 +16,8 @@ type Faculty struct {
 	UpdatedAt time.Time      `json:"updated_at"`
 	DeletedAt gorm.DeletedAt `json:"-"`
 	IsActive  bool           `json:"isactive" gorm:"default:true"`
-
+	InstitutionID uint `json:"institution_id"`
 	DepartmentID uint `json:"department_id"`
-
+	
 	Students []Student `gorm:"foreignKey:FacultyID;references:ID" json:"students"`
 }

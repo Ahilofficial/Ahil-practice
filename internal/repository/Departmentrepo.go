@@ -88,55 +88,60 @@ func (r *DepartmentRepository) FetchDepartment() ([]model.Department, error) {
 }
 
 func (r *DepartmentRepository) FetchDepartmentPaginated(search string, page, limit int) ([]model.Department, int64, error) {
-	var total int64
+	var (
+		depts []model.Department
+		total int64
+	)
+
+	query := r.db.Model(&model.Department{})
+
+	// Search
+	if search != "" {
+		search = "%" + search + "%"
+		query = query.Where("department_name LIKE ?", search)
+	}
+
+	// Count
+	if err := query.Count(&total).Error; err != nil {
+		return nil, 0, err
+	}
+
 	offset := (page - 1) * limit
 
-	err := r.db.Raw(`
-		SELECT COUNT(*)
-		FROM departments
-		WHERE deleted_at IS NULL
-		AND department_name LIKE ?`,
-		"%"+search+"%",
-	).Scan(&total).Error
+	// Fetch with associations
+	err := query.
+		Preload("Faculties").
+		Preload("Faculties.Students").
+		Preload("Faculties.Students.Fees").
+		Preload("Faculties.Students.Fees.Payments").
+		Limit(limit).
+		Offset(offset).
+		Find(&depts).Error
+
 	if err != nil {
 		return nil, 0, err
 	}
 
-
-	var depts []model.Department
-	err = r.db.Raw(`
-		SELECT *
-		FROM departments
-		WHERE deleted_at IS NULL
-		AND department_name LIKE ?
-		LIMIT ? OFFSET ?`,
-		"%"+search+"%",
-		limit,
-		offset,
-	).Scan(&depts).Error
-	if err != nil {
-		return nil, 0, err
-	}
-
-	
-	return depts, total, err
+	return depts, total, nil
 }
 
 
 func (r *DepartmentRepository) FetchDepartmentById(id uint) (model.Department, error) {
-	var depts []model.Department
-	err := r.db.Raw("SELECT * FROM departments WHERE id = ? AND deleted_at IS NULL LIMIT 1", id).Scan(&depts).Error
+	var dept model.Department
+
+	err := r.db.
+		Preload("Faculties").
+		Preload("Faculties.Students").
+		Preload("Faculties.Students.Fees").
+		Preload("Faculties.Students.Fees.Payments").
+		Where("id = ? AND deleted_at IS NULL", id).
+		First(&dept).Error
+
 	if err != nil {
 		return model.Department{}, err
 	}
-	if len(depts) == 0 {
-		return model.Department{}, gorm.ErrRecordNotFound
-	}
-	
-	if err != nil {
-		return model.Department{}, err
-	}
-	return depts[0], nil
+
+	return dept, nil
 }
 
 func (r *DepartmentRepository) FetchDepartmentDeleted() ([]model.Department, error) {

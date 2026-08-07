@@ -64,3 +64,7 @@ func (s *InstituteService) UpdateInstitutionService(id uint, dto *dto.UpdateInst
 
 	return s.instituterepo.UpdateInstitution(&institute)
 }
+
+func (s *InstituteService) GetInstitutionIDByUserID(userID uint) (uint, error) {
+	return s.instituterepo.GetInstitutionIDByUserID(userID)
+}

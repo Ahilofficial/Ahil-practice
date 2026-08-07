@@ -9,7 +9,7 @@ import (
 
 type CreateFeesDTO struct {
 	PaymentMode string  `json:"payment_mode"`
-	Amount      float64 `json:"amount"`
+	TotalAmount float64 `json:"total_amount"`
 	StudentID   uint    `json:"student_id"`
 }
 
@@ -21,7 +21,7 @@ func (dto *CreateFeesDTO) Validate() error {
 	if dto.PaymentMode == "" {
 		return errors.New("payment mode is required")
 	}
-	if dto.Amount == 0 {
+	if dto.TotalAmount <= 0 {
 		return errors.New("amount is required and must be greater than 0")
 	}
 	if dto.StudentID == 0 {
@@ -49,13 +49,22 @@ func (dto *UpdateFeesDTO) Validate() error {
 	return nil
 }
 
-type FeesResponseDTO struct {
+type PaymentResponseDTO struct {
 	ID          uint    `json:"id"`
+	Month       string  `json:"month"`
+	AmountPaid  float64 `json:"amount_paid"`
 	PaymentMode string  `json:"payment_mode"`
-	Amount      float64 `json:"amount"`
-	StudentID   uint    `json:"student_id"`
-	IsActive    bool    `json:"isactive"`
 }
+type FeesResponseDTO struct {
+	ID             uint                 `json:"id"`
+	TotalAmount    float64              `json:"total_amount"`
+	TotalPaid      float64              `json:"total_paid"`
+	PendingAmount  float64              `json:"pending_amount"`
+	StudentID      uint                 `json:"student_id"`
+	IsActive       bool                 `json:"is_active"`
+	Payments       []PaymentResponseDTO `json:"payments"`
+}
+
 
 func ToFeesResponseDTO(fees *model.Fees) FeesResponseDTO {
 	var dto FeesResponseDTO
@@ -69,4 +78,31 @@ func ToFeesResponseListDTO(fees []model.Fees) []FeesResponseDTO {
 		list[i] = ToFeesResponseDTO(&f)
 	}
 	return list
+}
+
+type CreatePaymentDTO struct {
+	Month       string  `json:"month"`
+	AmountPaid  float64 `json:"amount_paid"`
+	PaymentMode string  `json:"payment_mode"`
+	FeeID        uint    `json:"fee_id"`
+}
+
+func (dto *CreatePaymentDTO) Validate() error {
+	if strings.TrimSpace(dto.Month) == "" {
+		return errors.New("month is required")
+	}
+
+	if dto.AmountPaid <= 0 {
+		return errors.New("amount paid must be greater than zero")
+	}
+
+	if dto.FeeID == 0 {
+		return errors.New("fee id is required")
+	}
+
+	return nil
+}
+
+func (dto *CreatePaymentDTO) Sanitize() {
+	dto.Month = strings.TrimSpace(dto.Month)
 }

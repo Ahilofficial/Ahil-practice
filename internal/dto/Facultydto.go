@@ -73,10 +73,7 @@ func ToFacultyResponseDTO(fac *model.Faculty) FacultyResponseDTO {
 	var dto FacultyResponseDTO
 	copier.Copy(&dto, fac)
 
-	dto.Students = make([]StudentResponseDTO, len(fac.Students))
-	for i := range fac.Students {
-		dto.Students[i] = ToStudentResponseDTO(&fac.Students[i])
-	}
+	
 
 	return dto
 }
@@ -92,22 +89,3 @@ func ToFacultyResponseListDTO(facs []model.Faculty) []FacultyResponseDTO {
 }
 
 
-type FacultyFlatRow struct {
-	FacultyID uint      `gorm:"column:faculty_id"`
-	FacultyName string  `gorm:"column:faculty_name"`
-	FacultyGender string `gorm:"column:faculty_gender"`
-	JoiningDate time.Time `gorm:"column:joining_date"`
-	DepartmentID uint `gorm:"column:department_id"`
-	FacultyActive bool `gorm:"column:is_active"`
-
-	StudentID *uint `gorm:"column:student_id"`
-	StudentName *string `gorm:"column:student_name"`
-	StudentEmail *string `gorm:"column:student_email"`
-	StudentGender *string `gorm:"column:student_gender"`
-	StudentActive *bool `gorm:"column:student_active"`
-
-	FeeID *uint `gorm:"column:fee_id"`
-	FeePaymentMode *string `gorm:"column:payment_mode"`
-	FeeAmount *float64 `gorm:"column:amount"`
-	FeeActive *bool `gorm:"column:fee_active"`
-}

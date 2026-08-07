@@ -5614,3 +5614,755 @@ Response:
 
 **
 
+
+**
+Time      : 2026-07-30 18:54:52
+Service   : General
+Method    : POST
+Endpoint  : /logout
+Status    : 200
+
+Request:
+"{\"user_id\":94,\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODgwMDg4MjYsImlhdCI6MTc4NTQxNjgyNiwic2Vzc2lvbl9pZCI6IjEwNDJlY2E5LWUzY2YtNDZjNS05MTY4LWQ4NTgwODYyMzQwOCIsInVzZXJfaWQiOjk0fQ.6BizlffEGmDBscp1upAF9BJfEzw41TfouzVKbfUprgw\"}"
+
+Response:
+"{\"data\":null,\"message\":\"Logout successful\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-30 18:54:56
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODU0MTg3OTYsImlhdCI6MTc4NTQxNzg5Niwic2Vzc2lvbl9pZCI6IjdiYzY3MWU4LTI4YzgtNGYyOS1hNGJkLTMzZWQ1YWRhNGM2NSIsInVzZXJfaWQiOjk0fQ.tcyt6h5h1Tx3sRqrbmzKFBWvd013xgxw1lV4DamW-3A\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODgwMDk4OTYsImlhdCI6MTc4NTQxNzg5Niwic2Vzc2lvbl9pZCI6IjdiYzY3MWU4LTI4YzgtNGYyOS1hNGJkLTMzZWQ1YWRhNGM2NSIsInVzZXJfaWQiOjk0fQ.arZNCLRIerLZ3Ql6ziTkxRRD0IsuSXfqRkeVj193ZLQ\",\"user_id\":94,\"session_id\":\"7bc671e8-28c8-4f29-a4bd-33ed5ada4c65\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-30 18:54:56
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"items\":[{\"id\":3,\"name\":\"Anna\",\"institution_code\":\"sw51001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":4,\"name\":\"Anna University Main Campus\",\"institution_code\":\"AU1001-M\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":5,\"name\":\"Annas\",\"institution_code\":\"SW01001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":6,\"name\":\"Annasw\",\"institution_code\":\"SW018001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":7,\"name\":\"Annass\",\"institution_code\":\"SW77789454\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":8,\"name\":\"Annassww\",\"institution_code\":\"SW778545489454\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":11,\"name\":\"A5w\",\"institution_code\":\"dnjds\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":12,\"name\":\"A5DDw\",\"institution_code\":\"dnDjds\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":13,\"name\":\"A5DDwBB\",\"institution_code\":\"dnDjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":14,\"name\":\"A5DDwBBVV\",\"institution_code\":\"dnDVjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]}],\"limit\":10,\"page\":1,\"total_count\":15,\"total_pages\":2},\"message\":\"Institutes fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-30 18:55:36
+Service   : General
+Method    : POST
+Endpoint  : /logout
+Status    : 200
+
+Request:
+"{\"user_id\":94,\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODgwMDk4OTYsImlhdCI6MTc4NTQxNzg5Niwic2Vzc2lvbl9pZCI6IjdiYzY3MWU4LTI4YzgtNGYyOS1hNGJkLTMzZWQ1YWRhNGM2NSIsInVzZXJfaWQiOjk0fQ.arZNCLRIerLZ3Ql6ziTkxRRD0IsuSXfqRkeVj193ZLQ\"}"
+
+Response:
+"{\"data\":null,\"message\":\"Logout successful\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-30 18:58:10
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODU0MTg5OTAsImlhdCI6MTc4NTQxODA5MCwic2Vzc2lvbl9pZCI6ImRmNTUwMzUxLTg3OTYtNDk1ZS04YzVkLTQzODYzMmVlNTFjNCIsInVzZXJfaWQiOjk0fQ.PgM2Yf9Uy-nMnZYZ4M2wVXh-EvZcLXB4jtZ748cOsRE\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODgwMTAwOTAsImlhdCI6MTc4NTQxODA5MCwic2Vzc2lvbl9pZCI6ImRmNTUwMzUxLTg3OTYtNDk1ZS04YzVkLTQzODYzMmVlNTFjNCIsInVzZXJfaWQiOjk0fQ.oCK5fk5amVTicW2mjRsXuWn7r-K66EiDJgNAkYDjtBY\",\"user_id\":94,\"session_id\":\"df550351-8796-495e-8c5d-438632ee51c4\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-30 18:58:10
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"items\":[{\"id\":3,\"name\":\"Anna\",\"institution_code\":\"sw51001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":4,\"name\":\"Anna University Main Campus\",\"institution_code\":\"AU1001-M\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":5,\"name\":\"Annas\",\"institution_code\":\"SW01001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":6,\"name\":\"Annasw\",\"institution_code\":\"SW018001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":7,\"name\":\"Annass\",\"institution_code\":\"SW77789454\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":8,\"name\":\"Annassww\",\"institution_code\":\"SW778545489454\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":11,\"name\":\"A5w\",\"institution_code\":\"dnjds\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":12,\"name\":\"A5DDw\",\"institution_code\":\"dnDjds\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":13,\"name\":\"A5DDwBB\",\"institution_code\":\"dnDjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":14,\"name\":\"A5DDwBBVV\",\"institution_code\":\"dnDVjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]}],\"limit\":10,\"page\":1,\"total_count\":15,\"total_pages\":2},\"message\":\"Institutes fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-30 18:58:47
+Service   : Faculty
+Method    : GET
+Endpoint  : /faculties
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"items\":[{\"id\":1,\"name\":\"Dr. Amit Anand\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":1,\"isactive\":true,\"students\":[]},{\"id\":2,\"name\":\"Dr. Amit Anand\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":3,\"isactive\":true,\"students\":[]},{\"id\":3,\"name\":\"Dr. Amit Anand\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":5,\"isactive\":true,\"students\":[]},{\"id\":4,\"name\":\"Ahil cicil\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":5,\"isactive\":true,\"students\":[]}],\"limit\":10,\"page\":1,\"total_count\":4,\"total_pages\":1},\"message\":\"Faculties fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-30 18:58:58
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"items\":[{\"id\":3,\"name\":\"Anna\",\"institution_code\":\"sw51001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":4,\"name\":\"Anna University Main Campus\",\"institution_code\":\"AU1001-M\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":5,\"name\":\"Annas\",\"institution_code\":\"SW01001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":6,\"name\":\"Annasw\",\"institution_code\":\"SW018001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":7,\"name\":\"Annass\",\"institution_code\":\"SW77789454\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":8,\"name\":\"Annassww\",\"institution_code\":\"SW778545489454\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":11,\"name\":\"A5w\",\"institution_code\":\"dnjds\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":12,\"name\":\"A5DDw\",\"institution_code\":\"dnDjds\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":13,\"name\":\"A5DDwBB\",\"institution_code\":\"dnDjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":14,\"name\":\"A5DDwBBVV\",\"institution_code\":\"dnDVjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]}],\"limit\":10,\"page\":1,\"total_count\":15,\"total_pages\":2},\"message\":\"Institutes fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-30 18:59:02
+Service   : Department
+Method    : GET
+Endpoint  : /departments
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"items\":[{\"id\":1,\"department_name\":\"Manu\",\"institution_id\":2,\"isactive\":true,\"faculties\":[]},{\"id\":2,\"department_name\":\"Manu\",\"institution_id\":3,\"isactive\":true,\"faculties\":[]},{\"id\":3,\"department_name\":\"Manu\",\"institution_id\":4,\"isactive\":true,\"faculties\":[]},{\"id\":4,\"department_name\":\"Manu\",\"institution_id\":16,\"isactive\":true,\"faculties\":[]},{\"id\":5,\"department_name\":\"Manu\",\"institution_id\":5,\"isactive\":true,\"faculties\":[]},{\"id\":6,\"department_name\":\"IT\",\"institution_id\":19,\"isactive\":true,\"faculties\":[]}],\"limit\":10,\"page\":1,\"total_count\":6,\"total_pages\":1},\"message\":\"Departments fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-30 19:00:19
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"items\":[{\"id\":3,\"name\":\"Anna\",\"institution_code\":\"sw51001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":4,\"name\":\"Anna University Main Campus\",\"institution_code\":\"AU1001-M\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":5,\"name\":\"Annas\",\"institution_code\":\"SW01001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":6,\"name\":\"Annasw\",\"institution_code\":\"SW018001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":7,\"name\":\"Annass\",\"institution_code\":\"SW77789454\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":8,\"name\":\"Annassww\",\"institution_code\":\"SW778545489454\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":11,\"name\":\"A5w\",\"institution_code\":\"dnjds\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":12,\"name\":\"A5DDw\",\"institution_code\":\"dnDjds\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":13,\"name\":\"A5DDwBB\",\"institution_code\":\"dnDjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":14,\"name\":\"A5DDwBBVV\",\"institution_code\":\"dnDVjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]}],\"limit\":10,\"page\":1,\"total_count\":15,\"total_pages\":2},\"message\":\"Institutes fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-30 19:01:16
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes/3
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"id\":3,\"name\":\"Anna\",\"institution_code\":\"sw51001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},\"message\":\"Institute fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-30 19:01:34
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes/3
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"id\":3,\"name\":\"Anna\",\"institution_code\":\"sw51001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},\"message\":\"Institute fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-30 19:01:44
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes/3
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"id\":3,\"name\":\"Anna\",\"institution_code\":\"sw51001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},\"message\":\"Institute fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-30 19:02:24
+Service   : Department
+Method    : GET
+Endpoint  : /departments
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"items\":[{\"id\":1,\"department_name\":\"Manu\",\"institution_id\":2,\"isactive\":true,\"faculties\":[]},{\"id\":2,\"department_name\":\"Manu\",\"institution_id\":3,\"isactive\":true,\"faculties\":[]},{\"id\":3,\"department_name\":\"Manu\",\"institution_id\":4,\"isactive\":true,\"faculties\":[]},{\"id\":4,\"department_name\":\"Manu\",\"institution_id\":16,\"isactive\":true,\"faculties\":[]},{\"id\":5,\"department_name\":\"Manu\",\"institution_id\":5,\"isactive\":true,\"faculties\":[]},{\"id\":6,\"department_name\":\"IT\",\"institution_id\":19,\"isactive\":true,\"faculties\":[]}],\"limit\":10,\"page\":1,\"total_count\":6,\"total_pages\":1},\"message\":\"Departments fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-30 19:02:45
+Service   : Student
+Method    : GET
+Endpoint  : /students/all
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Invalid or expired token\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-30 19:04:56
+Service   : General
+Method    : POST
+Endpoint  : /logout
+Status    : 200
+
+Request:
+"{\"user_id\":94,\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODgwMTAwOTAsImlhdCI6MTc4NTQxODA5MCwic2Vzc2lvbl9pZCI6ImRmNTUwMzUxLTg3OTYtNDk1ZS04YzVkLTQzODYzMmVlNTFjNCIsInVzZXJfaWQiOjk0fQ.oCK5fk5amVTicW2mjRsXuWn7r-K66EiDJgNAkYDjtBY\"}"
+
+Response:
+"{\"data\":null,\"message\":\"Logout successful\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-31 10:26:54
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODU0NzQ3MTQsImlhdCI6MTc4NTQ3MzgxNCwic2Vzc2lvbl9pZCI6ImQ5Njk5OWRhLWQyOWQtNDcwZC1iNzg5LWVmNjY1NzFhNTFmZCIsInVzZXJfaWQiOjk0fQ.LLBPj3MzIIPN6HgWf4PwgcqLu2uSjVzRjzPZL6D4KmA\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODgwNjU4MTQsImlhdCI6MTc4NTQ3MzgxNCwic2Vzc2lvbl9pZCI6ImQ5Njk5OWRhLWQyOWQtNDcwZC1iNzg5LWVmNjY1NzFhNTFmZCIsInVzZXJfaWQiOjk0fQ.rdcqUGwkFFLGcdr82Hn1owLEjCWUWn__LHzct69XMyc\",\"user_id\":94,\"session_id\":\"d96999da-d29d-470d-b789-ef66571a51fd\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-31 10:26:54
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"items\":[{\"id\":3,\"name\":\"Anna\",\"institution_code\":\"sw51001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":4,\"name\":\"Anna University Main Campus\",\"institution_code\":\"AU1001-M\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":5,\"name\":\"Annas\",\"institution_code\":\"SW01001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":6,\"name\":\"Annasw\",\"institution_code\":\"SW018001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":7,\"name\":\"Annass\",\"institution_code\":\"SW77789454\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":8,\"name\":\"Annassww\",\"institution_code\":\"SW778545489454\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":11,\"name\":\"A5w\",\"institution_code\":\"dnjds\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":12,\"name\":\"A5DDw\",\"institution_code\":\"dnDjds\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":13,\"name\":\"A5DDwBB\",\"institution_code\":\"dnDjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":14,\"name\":\"A5DDwBBVV\",\"institution_code\":\"dnDVjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]}],\"limit\":10,\"page\":1,\"total_count\":15,\"total_pages\":2},\"message\":\"Institutes fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-31 11:10:23
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Invalid or expired token\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-31 11:57:43
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Invalid or expired token\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-31 12:21:37
+Service   : General
+Method    : POST
+Endpoint  : /logout
+Status    : 200
+
+Request:
+"{\"user_id\":94,\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODgwNjU4MTQsImlhdCI6MTc4NTQ3MzgxNCwic2Vzc2lvbl9pZCI6ImQ5Njk5OWRhLWQyOWQtNDcwZC1iNzg5LWVmNjY1NzFhNTFmZCIsInVzZXJfaWQiOjk0fQ.rdcqUGwkFFLGcdr82Hn1owLEjCWUWn__LHzct69XMyc\"}"
+
+Response:
+"{\"data\":null,\"message\":\"Logout successful\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-31 12:22:01
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODU0ODE2MjEsImlhdCI6MTc4NTQ4MDcyMSwic2Vzc2lvbl9pZCI6IjE1YWE4ODk4LWViNmItNDkwZS04YWI5LTdhZDY5M2ExYTU0NSIsInVzZXJfaWQiOjk0fQ.d-SqQVU3bfH_fLWWV_XQY05-aeT_Eog67UWN0beS_cQ\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODgwNzI3MjEsImlhdCI6MTc4NTQ4MDcyMSwic2Vzc2lvbl9pZCI6IjE1YWE4ODk4LWViNmItNDkwZS04YWI5LTdhZDY5M2ExYTU0NSIsInVzZXJfaWQiOjk0fQ.Z1VQXDtYE_Bu4a5Ws31895jtwMplRR9irtY8-KN2oFM\",\"user_id\":94,\"session_id\":\"15aa8898-eb6b-490e-8ab9-7ad693a1a545\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-31 12:22:01
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"items\":[{\"id\":3,\"name\":\"Anna\",\"institution_code\":\"sw51001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":4,\"name\":\"Anna University Main Campus\",\"institution_code\":\"AU1001-M\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":5,\"name\":\"Annas\",\"institution_code\":\"SW01001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":6,\"name\":\"Annasw\",\"institution_code\":\"SW018001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":7,\"name\":\"Annass\",\"institution_code\":\"SW77789454\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":8,\"name\":\"Annassww\",\"institution_code\":\"SW778545489454\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":11,\"name\":\"A5w\",\"institution_code\":\"dnjds\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":12,\"name\":\"A5DDw\",\"institution_code\":\"dnDjds\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":13,\"name\":\"A5DDwBB\",\"institution_code\":\"dnDjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":14,\"name\":\"A5DDwBBVV\",\"institution_code\":\"dnDVjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]}],\"limit\":10,\"page\":1,\"total_count\":15,\"total_pages\":2},\"message\":\"Institutes fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-31 12:22:10
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"items\":[{\"id\":3,\"name\":\"Anna\",\"institution_code\":\"sw51001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":4,\"name\":\"Anna University Main Campus\",\"institution_code\":\"AU1001-M\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":5,\"name\":\"Annas\",\"institution_code\":\"SW01001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":6,\"name\":\"Annasw\",\"institution_code\":\"SW018001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":7,\"name\":\"Annass\",\"institution_code\":\"SW77789454\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":8,\"name\":\"Annassww\",\"institution_code\":\"SW778545489454\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":11,\"name\":\"A5w\",\"institution_code\":\"dnjds\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":12,\"name\":\"A5DDw\",\"institution_code\":\"dnDjds\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":13,\"name\":\"A5DDwBB\",\"institution_code\":\"dnDjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":14,\"name\":\"A5DDwBBVV\",\"institution_code\":\"dnDVjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]}],\"limit\":10,\"page\":1,\"total_count\":15,\"total_pages\":2},\"message\":\"Institutes fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-31 12:22:13
+Service   : Department
+Method    : GET
+Endpoint  : /departments
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"items\":[{\"id\":1,\"department_name\":\"Manu\",\"institution_id\":2,\"isactive\":true,\"faculties\":[]},{\"id\":2,\"department_name\":\"Manu\",\"institution_id\":3,\"isactive\":true,\"faculties\":[]},{\"id\":3,\"department_name\":\"Manu\",\"institution_id\":4,\"isactive\":true,\"faculties\":[]},{\"id\":4,\"department_name\":\"Manu\",\"institution_id\":16,\"isactive\":true,\"faculties\":[]},{\"id\":5,\"department_name\":\"Manu\",\"institution_id\":5,\"isactive\":true,\"faculties\":[]},{\"id\":6,\"department_name\":\"IT\",\"institution_id\":19,\"isactive\":true,\"faculties\":[]}],\"limit\":10,\"page\":1,\"total_count\":6,\"total_pages\":1},\"message\":\"Departments fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-31 12:22:14
+Service   : Faculty
+Method    : GET
+Endpoint  : /faculties
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"items\":[{\"id\":1,\"name\":\"Dr. Amit Anand\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":1,\"isactive\":true,\"students\":[]},{\"id\":2,\"name\":\"Dr. Amit Anand\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":3,\"isactive\":true,\"students\":[]},{\"id\":3,\"name\":\"Dr. Amit Anand\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":5,\"isactive\":true,\"students\":[]},{\"id\":4,\"name\":\"Ahil cicil\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":5,\"isactive\":true,\"students\":[]}],\"limit\":10,\"page\":1,\"total_count\":4,\"total_pages\":1},\"message\":\"Faculties fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-31 12:31:32
+Service   : Faculty
+Method    : GET
+Endpoint  : /faculties/1
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"id\":1,\"name\":\"Dr. Amit Anand\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":1,\"isactive\":true,\"students\":[]},\"message\":\"Faculty fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-31 12:31:36
+Service   : Faculty
+Method    : GET
+Endpoint  : /faculties/3
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"id\":3,\"name\":\"Dr. Amit Anand\",\"gender\":\"Male\",\"joining_date\":\"2026-06-24T00:00:00+05:30\",\"department_id\":5,\"isactive\":true,\"students\":[]},\"message\":\"Faculty fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-31 12:31:40
+Service   : General
+Method    : POST
+Endpoint  : /logout
+Status    : 200
+
+Request:
+"{\"user_id\":94,\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODgwNzI3MjEsImlhdCI6MTc4NTQ4MDcyMSwic2Vzc2lvbl9pZCI6IjE1YWE4ODk4LWViNmItNDkwZS04YWI5LTdhZDY5M2ExYTU0NSIsInVzZXJfaWQiOjk0fQ.Z1VQXDtYE_Bu4a5Ws31895jtwMplRR9irtY8-KN2oFM\"}"
+
+Response:
+"{\"data\":null,\"message\":\"Logout successful\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-31 12:53:50
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODU0ODM1MzAsImlhdCI6MTc4NTQ4MjYzMCwic2Vzc2lvbl9pZCI6IjllYjgwMTY0LTczZWItNDAyNC1hN2VmLTc2M2ZlOTA0YjRjYiIsInVzZXJfaWQiOjk0fQ.2hD7tZcSka3Nxz171--yRg8eOJEJIDt_jpErQhz_AN4\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODgwNzQ2MzAsImlhdCI6MTc4NTQ4MjYzMCwic2Vzc2lvbl9pZCI6IjllYjgwMTY0LTczZWItNDAyNC1hN2VmLTc2M2ZlOTA0YjRjYiIsInVzZXJfaWQiOjk0fQ.NYJDpyBE6wtCtWKA_sh5Kp_DVRIlk-D9zy06YSA38vM\",\"user_id\":94,\"session_id\":\"9eb80164-73eb-4024-a7ef-763fe904b4cb\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-31 12:53:50
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"items\":[{\"id\":3,\"name\":\"Anna\",\"institution_code\":\"sw51001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":4,\"name\":\"Anna University Main Campus\",\"institution_code\":\"AU1001-M\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":5,\"name\":\"Annas\",\"institution_code\":\"SW01001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":6,\"name\":\"Annasw\",\"institution_code\":\"SW018001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":7,\"name\":\"Annass\",\"institution_code\":\"SW77789454\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":8,\"name\":\"Annassww\",\"institution_code\":\"SW778545489454\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":11,\"name\":\"A5w\",\"institution_code\":\"dnjds\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":12,\"name\":\"A5DDw\",\"institution_code\":\"dnDjds\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":13,\"name\":\"A5DDwBB\",\"institution_code\":\"dnDjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":14,\"name\":\"A5DDwBBVV\",\"institution_code\":\"dnDVjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]}],\"limit\":10,\"page\":1,\"total_count\":15,\"total_pages\":2},\"message\":\"Institutes fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-31 12:53:54
+Service   : General
+Method    : POST
+Endpoint  : /logout
+Status    : 200
+
+Request:
+"{\"user_id\":94,\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODgwNzQ2MzAsImlhdCI6MTc4NTQ4MjYzMCwic2Vzc2lvbl9pZCI6IjllYjgwMTY0LTczZWItNDAyNC1hN2VmLTc2M2ZlOTA0YjRjYiIsInVzZXJfaWQiOjk0fQ.NYJDpyBE6wtCtWKA_sh5Kp_DVRIlk-D9zy06YSA38vM\"}"
+
+Response:
+"{\"data\":null,\"message\":\"Logout successful\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-31 13:15:12
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODU0ODQ4MTIsImlhdCI6MTc4NTQ4MzkxMiwic2Vzc2lvbl9pZCI6ImZhOTM4MDFiLTZkYzAtNDgzNS04N2FjLTc2YjMxNzc4MmMxYiIsInVzZXJfaWQiOjk0fQ.UnNQel1m-mcE68CJsX-SnUgHI-KG4Nggjb8IygXrRT0\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODgwNzU5MTIsImlhdCI6MTc4NTQ4MzkxMiwic2Vzc2lvbl9pZCI6ImZhOTM4MDFiLTZkYzAtNDgzNS04N2FjLTc2YjMxNzc4MmMxYiIsInVzZXJfaWQiOjk0fQ.D__EL0hkdX_Oq3mn-ltHRwpHcfwtKTornH9ViHk2_4s\",\"user_id\":94,\"session_id\":\"fa93801b-6dc0-4835-87ac-76b317782c1b\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-31 13:15:12
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"items\":[{\"id\":3,\"name\":\"Anna\",\"institution_code\":\"sw51001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":4,\"name\":\"Anna University Main Campus\",\"institution_code\":\"AU1001-M\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":5,\"name\":\"Annas\",\"institution_code\":\"SW01001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":6,\"name\":\"Annasw\",\"institution_code\":\"SW018001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":7,\"name\":\"Annass\",\"institution_code\":\"SW77789454\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":8,\"name\":\"Annassww\",\"institution_code\":\"SW778545489454\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":11,\"name\":\"A5w\",\"institution_code\":\"dnjds\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":12,\"name\":\"A5DDw\",\"institution_code\":\"dnDjds\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":13,\"name\":\"A5DDwBB\",\"institution_code\":\"dnDjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":14,\"name\":\"A5DDwBBVV\",\"institution_code\":\"dnDVjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]}],\"limit\":10,\"page\":1,\"total_count\":15,\"total_pages\":2},\"message\":\"Institutes fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-31 13:15:14
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes/3
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"id\":3,\"name\":\"Anna\",\"institution_code\":\"sw51001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},\"message\":\"Institute fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-31 13:15:19
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"items\":[{\"id\":15,\"name\":\"A5DDwBBFFVV\",\"institution_code\":\"FFdnDVjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":16,\"name\":\"A5DDwBBSSFFVV\",\"institution_code\":\"FFSSdnDVjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":17,\"name\":\"Ahil\",\"institution_code\":\"SM5059\",\"state\":\"Karnataka\",\"isactive\":true,\"departments\":[]},{\"id\":18,\"name\":\"fbkjfd\",\"institution_code\":\"SAkjd90\",\"state\":\"Karnataka\",\"isactive\":true,\"departments\":[]},{\"id\":19,\"name\":\"Saple\",\"institution_code\":\"SSADADe\",\"state\":\"Tamil\",\"isactive\":true,\"departments\":[]}],\"limit\":10,\"page\":2,\"total_count\":15,\"total_pages\":2},\"message\":\"Institutes fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-31 13:15:23
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"items\":[{\"id\":15,\"name\":\"A5DDwBBFFVV\",\"institution_code\":\"FFdnDVjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":16,\"name\":\"A5DDwBBSSFFVV\",\"institution_code\":\"FFSSdnDVjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":17,\"name\":\"Ahil\",\"institution_code\":\"SM5059\",\"state\":\"Karnataka\",\"isactive\":true,\"departments\":[]},{\"id\":18,\"name\":\"fbkjfd\",\"institution_code\":\"SAkjd90\",\"state\":\"Karnataka\",\"isactive\":true,\"departments\":[]},{\"id\":19,\"name\":\"Saple\",\"institution_code\":\"SSADADe\",\"state\":\"Tamil\",\"isactive\":true,\"departments\":[]}],\"limit\":5,\"page\":3,\"total_count\":15,\"total_pages\":3},\"message\":\"Institutes fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-31 13:15:24
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"items\":[{\"id\":8,\"name\":\"Annassww\",\"institution_code\":\"SW778545489454\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":11,\"name\":\"A5w\",\"institution_code\":\"dnjds\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":12,\"name\":\"A5DDw\",\"institution_code\":\"dnDjds\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":13,\"name\":\"A5DDwBB\",\"institution_code\":\"dnDjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":14,\"name\":\"A5DDwBBVV\",\"institution_code\":\"dnDVjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]}],\"limit\":5,\"page\":2,\"total_count\":15,\"total_pages\":3},\"message\":\"Institutes fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-31 13:15:26
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"items\":[{\"id\":15,\"name\":\"A5DDwBBFFVV\",\"institution_code\":\"FFdnDVjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":16,\"name\":\"A5DDwBBSSFFVV\",\"institution_code\":\"FFSSdnDVjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":17,\"name\":\"Ahil\",\"institution_code\":\"SM5059\",\"state\":\"Karnataka\",\"isactive\":true,\"departments\":[]},{\"id\":18,\"name\":\"fbkjfd\",\"institution_code\":\"SAkjd90\",\"state\":\"Karnataka\",\"isactive\":true,\"departments\":[]},{\"id\":19,\"name\":\"Saple\",\"institution_code\":\"SSADADe\",\"state\":\"Tamil\",\"isactive\":true,\"departments\":[]}],\"limit\":5,\"page\":3,\"total_count\":15,\"total_pages\":3},\"message\":\"Institutes fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-31 13:17:36
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"items\":[{\"id\":8,\"name\":\"Annassww\",\"institution_code\":\"SW778545489454\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":11,\"name\":\"A5w\",\"institution_code\":\"dnjds\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":12,\"name\":\"A5DDw\",\"institution_code\":\"dnDjds\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":13,\"name\":\"A5DDwBB\",\"institution_code\":\"dnDjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":14,\"name\":\"A5DDwBBVV\",\"institution_code\":\"dnDVjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]}],\"limit\":5,\"page\":2,\"total_count\":15,\"total_pages\":3},\"message\":\"Institutes fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-31 13:17:37
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"items\":[{\"id\":3,\"name\":\"Anna\",\"institution_code\":\"sw51001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":4,\"name\":\"Anna University Main Campus\",\"institution_code\":\"AU1001-M\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":5,\"name\":\"Annas\",\"institution_code\":\"SW01001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":6,\"name\":\"Annasw\",\"institution_code\":\"SW018001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":7,\"name\":\"Annass\",\"institution_code\":\"SW77789454\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]}],\"limit\":5,\"page\":1,\"total_count\":15,\"total_pages\":3},\"message\":\"Institutes fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-31 13:24:25
+Service   : General
+Method    : POST
+Endpoint  : /logout
+Status    : 200
+
+Request:
+"{\"user_id\":94,\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODgwNzU5MTIsImlhdCI6MTc4NTQ4MzkxMiwic2Vzc2lvbl9pZCI6ImZhOTM4MDFiLTZkYzAtNDgzNS04N2FjLTc2YjMxNzc4MmMxYiIsInVzZXJfaWQiOjk0fQ.D__EL0hkdX_Oq3mn-ltHRwpHcfwtKTornH9ViHk2_4s\"}"
+
+Response:
+"{\"data\":null,\"message\":\"Logout successful\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-31 13:29:46
+Service   : Auth
+Method    : POST
+Endpoint  : /signin
+Status    : 200
+
+Request:
+"[REDACTED/SENSITIVE]"
+
+Response:
+"{\"data\":{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODU0ODU2ODYsImlhdCI6MTc4NTQ4NDc4Niwic2Vzc2lvbl9pZCI6ImZkZTlmNWQ2LWYyODEtNDMwNC1hYmEyLTZkNzRjYWQyMWMzMiIsInVzZXJfaWQiOjk0fQ.E6v7Aii8yBAFtiQc-cCzcn4vbteSVLhISfJ51Kis1lY\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODgwNzY3ODYsImlhdCI6MTc4NTQ4NDc4Niwic2Vzc2lvbl9pZCI6ImZkZTlmNWQ2LWYyODEtNDMwNC1hYmEyLTZkNzRjYWQyMWMzMiIsInVzZXJfaWQiOjk0fQ.BYGC-CsW1sfGni_i27qzJsl_SM6-E-Kp37L2U0ko3Eg\",\"user_id\":94,\"session_id\":\"fde9f5d6-f281-4304-aba2-6d74cad21c32\"},\"message\":\"Signed in successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-31 13:29:46
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"items\":[{\"id\":3,\"name\":\"Anna\",\"institution_code\":\"sw51001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":4,\"name\":\"Anna University Main Campus\",\"institution_code\":\"AU1001-M\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":5,\"name\":\"Annas\",\"institution_code\":\"SW01001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":6,\"name\":\"Annasw\",\"institution_code\":\"SW018001\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":7,\"name\":\"Annass\",\"institution_code\":\"SW77789454\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":8,\"name\":\"Annassww\",\"institution_code\":\"SW778545489454\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":11,\"name\":\"A5w\",\"institution_code\":\"dnjds\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":12,\"name\":\"A5DDw\",\"institution_code\":\"dnDjds\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":13,\"name\":\"A5DDwBB\",\"institution_code\":\"dnDjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]},{\"id\":14,\"name\":\"A5DDwBBVV\",\"institution_code\":\"dnDVjBBs\",\"state\":\"Tamil Nadu\",\"isactive\":true,\"departments\":[]}],\"limit\":10,\"page\":1,\"total_count\":15,\"total_pages\":2},\"message\":\"Institutes fetched successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-31 13:29:48
+Service   : General
+Method    : GET
+Endpoint  : /profile
+Status    : 200
+
+Request:
+""
+
+Response:
+"{\"data\":{\"id\":94,\"name\":\"Adithya\",\"email\":\"ahilcicillin@gmail.com\",\"phone\":\"5555555555\",\"is_active\":true,\"IsVerified\":true,\"VerificationToken\":\"\",\"TokenExpiresAt\":\"0001-01-01T00:00:00Z\",\"ResetPasswordToken\":\"\",\"ResetTokenExpiresAt\":\"0001-01-01T00:00:00Z\",\"created_at\":\"2026-07-22T15:51:28.166+05:30\",\"updated_at\":\"2026-07-22T15:51:40+05:30\"},\"message\":\"Profile retrieved successfully\",\"success\":true}"
+
+**
+
+
+**
+Time      : 2026-07-31 13:55:28
+Service   : Institution
+Method    : GET
+Endpoint  : /institutes
+Status    : 401
+
+Request:
+""
+
+Response:
+"{\"message\":\"Invalid or expired token\",\"success\":false}"
+
+**
+
+
+**
+Time      : 2026-07-31 13:55:31
+Service   : General
+Method    : POST
+Endpoint  : /logout
+Status    : 200
+
+Request:
+"{\"user_id\":94,\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODgwNzY3ODYsImlhdCI6MTc4NTQ4NDc4Niwic2Vzc2lvbl9pZCI6ImZkZTlmNWQ2LWYyODEtNDMwNC1hYmEyLTZkNzRjYWQyMWMzMiIsInVzZXJfaWQiOjk0fQ.BYGC-CsW1sfGni_i27qzJsl_SM6-E-Kp37L2U0ko3Eg\"}"
+
+Response:
+"{\"data\":null,\"message\":\"Logout successful\",\"success\":true}"
+
+**
+

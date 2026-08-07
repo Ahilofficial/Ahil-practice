@@ -1,9 +1,10 @@
 package repository
 
 import (
-	
 	"backend_institutions/internal/model"
 	"errors"
+	"fmt"
+
 	"time"
 
 	"gorm.io/gorm"
@@ -18,7 +19,6 @@ func NewInstitutionRepository(db *gorm.DB) *InstitutionRepository {
 		db: db,
 	}
 }
-
 
 
 func (r *InstitutionRepository) CreateInstitution(institute *model.Institutions) error {
@@ -76,74 +76,48 @@ func (r *InstitutionRepository) CreateInstitution(institute *model.Institutions)
 
 func (r *InstitutionRepository) FetchInstitution() ([]model.Institutions, error) {
 	var insts []model.Institutions
-	err := r.db.Raw("SELECT * FROM institutions WHERE deleted_at IS NULL").Scan(&insts).Error
+	err:=r.db.Preload("Departments").Preload("Faculties").Preload("Students").Preload("Fees").Where("deleted_at IS NULL").Find(&insts).Error
 	if err != nil {
 		return nil, err
 	}
-	
 	return insts, err
 }
 
 func (r *InstitutionRepository) FetchInstitutionPaginated(search string, page, limit int) ([]model.Institutions, int64, error) {
-	var total int64
-	var err error
+	var (
+		insts []model.Institutions
+		total int64
+	)
 
-	
+	query := r.db.Model(&model.Institutions{})
+
+	// Search
 	if search != "" {
 		search = "%" + search + "%"
-		err = r.db.Raw(`
-			SELECT COUNT(*)
-			FROM institutions
-			WHERE deleted_at IS NULL
-			AND (
-				institution_code LIKE ?
-				OR name LIKE ?
-				OR state LIKE ?
-			)
-		`, search, search, search).Scan(&total).Error
-	} else{
-		err = r.db.Raw(`
-        SELECT COUNT(*)
-        FROM institutions
-        WHERE deleted_at IS NULL
-    `).Scan(&total).Error
-
+		query = query.Where(
+			"institution_code LIKE ? OR name LIKE ? OR state LIKE ?",
+			search, search, search,
+		)
 	}
 
-	if err != nil {
+	// Count
+	if err := query.Count(&total).Error; err != nil {
 		return nil, 0, err
 	}
 
 	offset := (page - 1) * limit
-	var insts []model.Institutions
 
 	
-	if search != "" {
-		err = r.db.Raw(`
-			SELECT *
-			FROM institutions
-			WHERE deleted_at IS NULL
-			AND (
-				institution_code LIKE ?
-				OR name LIKE ?
-				OR state LIKE ?
-			)
-			LIMIT ? OFFSET ?
-		`, search, search, search, limit, offset).Scan(&insts).Error
-	} else {
-    err = r.db.Raw(`
-        SELECT *
-        FROM institutions
-        WHERE deleted_at IS NULL
-        LIMIT ? OFFSET ?
-    `, limit, offset).Scan(&insts).Error
-}
+	err := query.
+		Preload("Departments").
+		Preload("Departments.Faculties").
+		Preload("Departments.Faculties.Students").
+		Preload("Departments.Faculties.Students.Fees").
+		Preload("Departments.Faculties.Students.Fees.Payments").
+		Limit(limit).
+		Offset(offset).
+		Find(&insts).Error
 
-	if err != nil {
-		return nil, 0, err
-	}
-
-	
 	if err != nil {
 		return nil, 0, err
 	}
@@ -152,19 +126,22 @@ func (r *InstitutionRepository) FetchInstitutionPaginated(search string, page, l
 }
 
 func (r *InstitutionRepository) FetchInstitutionById(id uint) (model.Institutions, error) {
-	var insts []model.Institutions
-	err := r.db.Raw("SELECT * FROM institutions WHERE id = ? AND deleted_at IS NULL LIMIT 1", id).Scan(&insts).Error
+	var inst model.Institutions
+
+	err := r.db.
+		Preload("Departments").
+		Preload("Departments.Faculties").
+		Preload("Departments.Faculties.Students").
+		Preload("Departments.Faculties.Students.Fees").
+		Preload("Departments.Faculties.Students.Fees.Payments").
+		Where("id = ? AND deleted_at IS NULL", id).
+		First(&inst).Error
+
 	if err != nil {
 		return model.Institutions{}, err
 	}
-	if len(insts) == 0 {
-		return model.Institutions{}, gorm.ErrRecordNotFound
-	}
-	
-	if err != nil {
-		return model.Institutions{}, err
-	}
-	return insts[0], nil
+
+	return inst, nil
 }
 
 func (r *InstitutionRepository) GetActiveInstitute() (model.Institutions, error) {
@@ -241,4 +218,27 @@ func (r *InstitutionRepository) UpdateInstitution(institute *model.Institutions)
 		institute.Name, institute.InstitutionCode, institute.State, time.Now(), institute.ID,
 	)
 	return err
+}
+
+func (r *InstitutionRepository) GetInstitutionIDByUserID(userID uint) (uint, error) {
+
+	var institutionID uint
+
+	result := r.db.Raw(`
+		SELECT institution_id
+		FROM institution_admins
+		WHERE user_id = ?
+		AND deleted_at IS NULL
+		LIMIT 1
+	`, userID).Scan(&institutionID)
+
+	if result.Error != nil {
+		return 0, result.Error
+	}
+
+	if result.RowsAffected == 0 {
+		return 0, fmt.Errorf("institution admin mapping not found")
+	}
+
+	return institutionID, nil
 }

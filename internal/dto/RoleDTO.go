@@ -40,7 +40,15 @@ type UpdateRolePermissionDTO struct {
 	PermissionID uint `json:"permission_id"`
 }
 
-
+type RolesDTOResponse struct {
+	ID          uint            `json:"id"`
+	Name        string          `json:"name"`
+	Permissions []PermissionDTO `json:"permissions"`
+}
+type PermissionDTO struct {
+	ID   uint   `json:"id"`
+	Name string `json:"name"`
+}
 
 type RoleResponseDTO struct {
 	ID        uint      `json:"id"`

@@ -57,3 +57,18 @@ func (s *StudentService) GetActiveStudentService() (model.Student, error) {
 func (s *StudentService) GetInactiveStudentService() (model.Student, error) {
 	return s.studentrepo.GetInactiveStudent()
 }
+
+func (s *StudentService) FetchStudentsByPaymentMonth(month string) ([]model.Student, error) {
+	return s.studentrepo.FetchStudentsByPaymentMonth(month)
+}
+func (s *StudentService) FetchPaidStudents() ([]model.Student, error) {
+	return s.studentrepo.FetchPaidStudents()
+}
+
+func (s *StudentService) FetchNotPaidStudents() ([]model.Student, error) {
+	return s.studentrepo.FetchNotPaidStudents()
+}
+
+func (s *StudentService) GetInstitutionID(studentID uint) (uint, error) {
+	return s.studentrepo.GetInstitutionIDByStudent(studentID)
+}

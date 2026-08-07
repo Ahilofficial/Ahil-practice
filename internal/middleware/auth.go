@@ -46,9 +46,18 @@ func AuthRequired() fiber.Handler {
 		}
 
 		
-		userID, ok := claims["user_id"]
-		if !ok || userID == nil {
+		userIDVal, ok := claims["user_id"]
+		if !ok || userIDVal == nil {
 			return helper.Error(c, 401, "user_id not found in token")
+		}
+
+		var userID uint
+		if f, ok := userIDVal.(float64); ok {
+			userID = uint(f)
+		} else if u, ok := userIDVal.(uint); ok {
+			userID = u
+		} else {
+			return helper.Error(c, 401, "Invalid user_id type in token")
 		}
 
 		
@@ -114,8 +123,19 @@ func OptionalAuth() fiber.Handler {
 			return c.Next()
 		}
 
-		userID, ok := claims["user_id"]
-		if !ok || userID == nil {
+		userIDVal, ok := claims["user_id"]
+		if !ok || userIDVal == nil {
+			c.Locals("user_id", nil)
+			c.Locals("session_id", nil)
+			return c.Next()
+		}
+
+		var userID uint
+		if f, ok := userIDVal.(float64); ok {
+			userID = uint(f)
+		} else if u, ok := userIDVal.(uint); ok {
+			userID = u
+		} else {
 			c.Locals("user_id", nil)
 			c.Locals("session_id", nil)
 			return c.Next()

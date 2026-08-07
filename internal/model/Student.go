@@ -16,6 +16,7 @@ type Student struct {
 	UpdatedAt time.Time      `json:"updated_at"`
 	DeletedAt gorm.DeletedAt `json:"-"`
 	IsActive  bool           `json:"isactive" gorm:"default:true"`
+	InstitutionID uint `json:"institution_id"`
 
 	FacultyID uint `json:"faculty_id"`
 

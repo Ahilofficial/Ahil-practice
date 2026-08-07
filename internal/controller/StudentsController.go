@@ -202,3 +202,19 @@ func (cl *StudentController) FetchAllStudentsPaginatedControllers(c fiber.Ctx) e
 		},
 	)
 }
+
+func (c *StudentController) FetchStudentsByPaymentMonth(ctx fiber.Ctx) error {
+	month := ctx.Query("month")
+
+	if month == "" {
+		return helper.Error(ctx, fiber.StatusBadRequest, "month is required")
+	}
+
+	students, err := c.studentService.FetchStudentsByPaymentMonth(month)
+	if err != nil {
+		return helper.Error(ctx, fiber.StatusInternalServerError, err.Error())
+	}
+
+	return helper.Success(ctx, "Students fetched successfully", students)
+}
+

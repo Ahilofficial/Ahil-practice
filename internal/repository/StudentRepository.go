@@ -3,6 +3,7 @@ package repository
 import (
 	"backend_institutions/internal/model"
 	"errors"
+	// "fmt"
 	"time"
 
 	"gorm.io/gorm"
@@ -94,9 +95,7 @@ func (r *StudentRepository) GetActiveStudent() (model.Student, error) {
 		return model.Student{}, gorm.ErrRecordNotFound
 	}
 	
-	if err != nil {
-		return model.Student{}, err
-	}
+	
 	return studs[0], nil
 }
 
@@ -110,71 +109,45 @@ func (r *StudentRepository) GetInactiveStudent() (model.Student, error) {
 		return model.Student{}, gorm.ErrRecordNotFound
 	}
 	
-	if err != nil {
-		return model.Student{}, err
-	}
+	
 	return studs[0], nil
 }
 
 func (r *StudentRepository) FetchStudentPaginated(search string, page, limit int) ([]model.Student, int64, error) {
-	var total int64
-	var err error
+	var (
+		studs []model.Student
+		total int64
+	)
 
-	
+	query := r.db.Model(&model.Student{})
+
 	if search != "" {
-		search = "%" + search + "%"
-		err = r.db.Raw(`
-			SELECT COUNT(*)
-			FROM students
-			WHERE deleted_at IS NULL
-			AND (
-				name LIKE ?
-				OR email LIKE ?
-				OR gender LIKE ?
+		searchPattern := "%" + search + "%"
+		query = query.Where(`
+			deleted_at IS NULL AND (
+				name LIKE ? OR
+				email LIKE ? OR
+				gender LIKE ?
 			)
-		`, search, search, search).Scan(&total).Error
+		`, searchPattern, searchPattern, searchPattern)
 	} else {
-		err = r.db.Raw(`
-			SELECT COUNT(*)
-			FROM students
-			WHERE deleted_at IS NULL
-		`).Scan(&total).Error
+		query = query.Where("deleted_at IS NULL")
 	}
 
-	if err != nil {
+	
+	if err := query.Count(&total).Error; err != nil {
 		return nil, 0, err
 	}
 
 	offset := (page - 1) * limit
-	var studs []model.Student
 
 	
-	if search != "" {
-		err = r.db.Raw(`
-			SELECT *
-			FROM students
-			WHERE deleted_at IS NULL
-			AND (
-				name LIKE ?
-				OR email LIKE ?
-				OR gender LIKE ?
-			)
-			LIMIT ? OFFSET ?
-		`, search, search, search, limit, offset).Scan(&studs).Error
-	} else {
-		err = r.db.Raw(`
-			SELECT *
-			FROM students
-			WHERE deleted_at IS NULL
-			LIMIT ? OFFSET ?
-		`, limit, offset).Scan(&studs).Error
-	}
-
-	if err != nil {
-		return nil, 0, err
-	}
-
-	
+	err := query.
+		Preload("Fees").
+		Preload("Fees.Payments").
+		Limit(limit).
+		Offset(offset).
+		Find(&studs).Error
 	if err != nil {
 		return nil, 0, err
 	}
@@ -182,20 +155,21 @@ func (r *StudentRepository) FetchStudentPaginated(search string, page, limit int
 	return studs, total, nil
 }
 
+
 func (r *StudentRepository) FetchStudentById(id uint) (model.Student, error) {
-	var studs []model.Student
-	err := r.db.Raw("SELECT * FROM students WHERE id = ? AND deleted_at IS NULL LIMIT 1", id).Scan(&studs).Error
+	var student model.Student
+
+	err := r.db.
+		Preload("Fees").
+		Preload("Fees.Payments").
+		Where("id = ? AND deleted_at IS NULL", id).
+		First(&student).Error
+
 	if err != nil {
 		return model.Student{}, err
 	}
-	if len(studs) == 0 {
-		return model.Student{}, gorm.ErrRecordNotFound
-	}
-	
-	if err != nil {
-		return model.Student{}, err
-	}
-	return studs[0], nil
+
+	return student, nil
 }
 
 func (r *StudentRepository) FetchStudentDeleted() ([]model.Student, error) {
@@ -240,4 +214,90 @@ func (r *StudentRepository) UpdateStudentById(student *model.Student) error {
 		student.Name, student.Email, student.Gender, time.Now(), student.ID,
 	)
 	return err
+}
+
+
+func (r *StudentRepository) FetchStudentsByPaymentMonth(month string) ([]model.Student, error) {
+	var students []model.Student
+
+	err := r.db.
+		Model(&model.Student{}).
+		Joins("JOIN fees ON fees.student_id = students.id").
+		Joins("JOIN payments ON payments.fee_id = fees.id").
+		Where("LOWER(payments.month) = LOWER(?)", month).
+		Preload("Fees").
+		Preload("Fees.Payments").
+		Distinct().
+		Find(&students).Error
+
+	if err != nil {
+		return nil, err
+	}
+
+	return students, nil
+}
+
+
+func (r *StudentRepository) FetchPaidStudents() ([]model.Student, error) {
+	var students []model.Student
+
+	err := r.db.
+		Model(&model.Student{}).
+		Joins("JOIN fees ON fees.student_id = students.id").
+		Where("fees.total_amount = fees.total_paid").
+		Preload("Fees").
+		Preload("Fees.Payments").
+		Find(&students).Error
+
+	if err != nil {
+		return nil, err
+	}
+
+	return students, nil
+}
+
+func (r *StudentRepository) FetchNotPaidStudents() ([]model.Student, error) {
+	var students []model.Student
+
+	err := r.db.Raw(`
+		SELECT DISTINCT students.*
+		FROM students
+		INNER JOIN fees
+			ON fees.student_id = students.id
+		WHERE students.deleted_at IS NULL
+		AND fees.total_amount <> fees.total_paid
+	`).Scan(&students).Error
+
+	if err != nil {
+		return nil, err
+	}
+
+	// Load associations
+	if err := r.db.
+		Preload("Fees").
+		Preload("Fees.Payments").
+		Find(&students).Error; err != nil {
+		return nil, err
+	}
+
+	return students, nil
+}
+
+func (r *StudentRepository) GetInstitutionIDByStudent(studentID uint) (uint, error) {
+
+	var institutionID uint
+
+	err := r.db.Raw(`
+		SELECT d.institution_id
+		FROM students s
+		JOIN faculties f ON s.faculty_id = f.id
+		JOIN departments d ON f.department_id = d.id
+		WHERE s.id = ?
+	`, studentID).Scan(&institutionID).Error
+
+	if err != nil {
+		return 0, err
+	}
+
+	return institutionID, nil
 }

@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"backend_institutions/internal/dto"
 	"backend_institutions/internal/model"
 	"errors"
 
@@ -354,4 +355,46 @@ func (r *RoleRepository) GetUserRolesByUserID(userID uint) (*model.User, error) 
 	user.Roles = roles
 
 	return &user, nil
+}
+func (r *RoleRepository) FetchingPermissionBasedOnRoleID(roleID uint) ([]model.Permission, error) {
+	var role model.Role
+
+	err := r.db.
+		Preload("Permissions").
+		First(&role, roleID).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return role.Permissions, nil
+}
+func (r *RoleRepository) FetchAllRolesPermissions() ([]dto.RolesDTOResponse, error) {
+	var roles []model.Role
+
+	err := r.db.
+		Preload("Permissions").
+		Find(&roles).Error
+	if err != nil {
+		return nil, err
+	}
+
+	var response []dto.RolesDTOResponse
+
+	for _, role := range roles {
+		roleDTO := dto.RolesDTOResponse{
+			ID:   role.ID,
+			Name: role.Name,
+		}
+
+		for _, permission := range role.Permissions {
+			roleDTO.Permissions = append(roleDTO.Permissions, dto.PermissionDTO{
+				ID:   permission.ID,
+				Name: permission.Name,
+			})
+		}
+
+		response = append(response, roleDTO)
+	}
+
+	return response, nil
 }

@@ -20,6 +20,8 @@ func NewInstituteController(instituteService *services.InstituteService) *Instit
 	return &InstituteController{instituteService: instituteService}
 }
 
+
+
 func (cl *InstituteController) CreateInstituteController(c fiber.Ctx) error {
 	var institute model.Institutions
 	if err := c.Bind().Body(&institute); err != nil {
@@ -46,7 +48,7 @@ func (cl *InstituteController) CreateInstituteController(c fiber.Ctx) error {
 }
 
 func (cl *InstituteController) GetAllInstitutesController(c fiber.Ctx) error {
-	search:=c.Query("search")
+	search := c.Query("search")
 	pageStr := c.Query("page")
 	limitStr := c.Query("limit")
 
@@ -58,13 +60,14 @@ func (cl *InstituteController) GetAllInstitutesController(c fiber.Ctx) error {
 			page = p
 		}
 	}
+
 	if limitStr != "" {
 		if l, err := strconv.Atoi(limitStr); err == nil && l > 0 {
 			limit = l
 		}
 	}
 
-	institutes, total, err := cl.instituteService.GetInstituteServicePaginated(search,page, limit)
+	institutes, total, err := cl.instituteService.GetInstituteServicePaginated(search, page, limit)
 	if err != nil {
 		return helper.Error(c, 500, err.Error())
 	}
@@ -75,7 +78,7 @@ func (cl *InstituteController) GetAllInstitutesController(c fiber.Ctx) error {
 		c,
 		"Institutes fetched successfully",
 		fiber.Map{
-			"items":       institutes,
+			"items":       dto.ToInstitutionResponseListDTO(institutes),
 			"total_count": total,
 			"page":        page,
 			"limit":       limit,

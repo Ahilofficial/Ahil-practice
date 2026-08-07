@@ -88,12 +88,6 @@ type StudentResponseDTO struct {
 func ToStudentResponseDTO(stud *model.Student) StudentResponseDTO {
 	var dto StudentResponseDTO
 	copier.Copy(&dto, stud)
-
-	dto.Fees = make([]FeesResponseDTO, len(stud.Fees))
-	for i := range stud.Fees {
-		dto.Fees[i] = ToFeesResponseDTO(&stud.Fees[i])
-	}
-
 	return dto
 }
 

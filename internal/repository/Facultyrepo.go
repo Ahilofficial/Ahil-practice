@@ -1,7 +1,6 @@
 package repository
 
 import (
-	
 	"backend_institutions/internal/model"
 	"errors"
 	"time"
@@ -18,8 +17,6 @@ func NewFacultyRepository(db *gorm.DB) *FacultyRepository {
 		db: db,
 	}
 }
-
-
 
 func (r *FacultyRepository) CreateFaculty(faculty *model.Faculty) error {
 	db, err := r.db.DB()
@@ -86,70 +83,64 @@ func (r *FacultyRepository) FetchFaculty() ([]model.Faculty, error) {
 	if err != nil {
 		return nil, err
 	}
-	
+
 	return facs, err
 }
 
 func (r *FacultyRepository) FetchFacultyPaginated(search string, page, limit int) ([]model.Faculty, int64, error) {
-	var total int64
+	var (
+		facs  []model.Faculty
+		total int64
+	)
 
-	searchPattern := "%" + search + "%"
+	query := r.db.Model(&model.Faculty{})
 
-	
-	err := r.db.Raw(`
-		SELECT COUNT(*)
-		FROM faculties
-		WHERE deleted_at IS NULL
-		AND (
-			name LIKE ?
-			OR gender LIKE ?
-			OR joining_date LIKE ?
-		)
-	`, searchPattern, searchPattern, searchPattern).Scan(&total).Error
+	// Search
+	if search != "" {
+		search = "%" + search + "%"
+		query = query.Where(`
+			name LIKE ? OR
+			gender LIKE ? OR
+			joining_date LIKE ?
+		`, search, search, search)
+	}
 
-	if err != nil {
+	// Count
+	if err := query.Count(&total).Error; err != nil {
 		return nil, 0, err
 	}
 
 	offset := (page - 1) * limit
 
-	var facs []model.Faculty
-
-	
-	err = r.db.Raw(`
-		SELECT *
-		FROM faculties
-		WHERE deleted_at IS NULL
-		AND (
-			name LIKE ?
-			OR gender LIKE ?
-			OR joining_date LIKE ?
-		)
-		LIMIT ? OFFSET ?
-	`, searchPattern, searchPattern, searchPattern, limit, offset).Scan(&facs).Error
+	// Fetch with associations
+	err := query.
+		Preload("Students").
+		Preload("Students.Fees").
+		Preload("Students.Fees.Payments").
+		Limit(limit).
+		Offset(offset).
+		Find(&facs).Error
 
 	if err != nil {
 		return nil, 0, err
 	}
 
-	
-	return facs, total, err
+	return facs, total, nil
 }
 
 func (r *FacultyRepository) FetchFacultyById(id uint) (model.Faculty, error) {
-	var facs []model.Faculty
-	err := r.db.Raw("SELECT * FROM faculties WHERE id = ? AND deleted_at IS NULL LIMIT 1", id).Scan(&facs).Error
+	var fac model.Faculty
+	err := r.db.
+		Preload("Students").
+		Preload("Students.Fees").
+		Preload("Students.Fees.Payments").
+		Where("id = ? AND deleted_at IS NULL", id).
+		First(&fac).Error
 	if err != nil {
 		return model.Faculty{}, err
 	}
-	if len(facs) == 0 {
-		return model.Faculty{}, gorm.ErrRecordNotFound
-	}
-	
-	if err != nil {
-		return model.Faculty{}, err
-	}
-	return facs[0], nil
+
+	return fac, nil
 }
 
 func (r *FacultyRepository) FetchFacultyDeleted() ([]model.Faculty, error) {
@@ -158,7 +149,6 @@ func (r *FacultyRepository) FetchFacultyDeleted() ([]model.Faculty, error) {
 	if err != nil {
 		return nil, err
 	}
-	
 	return facs, err
 }
 
@@ -171,10 +161,7 @@ func (r *FacultyRepository) GetActiveFaculty() (model.Faculty, error) {
 	if len(facs) == 0 {
 		return model.Faculty{}, gorm.ErrRecordNotFound
 	}
-	
-	if err != nil {
-		return model.Faculty{}, err
-	}
+
 	return facs[0], nil
 }
 
@@ -187,10 +174,7 @@ func (r *FacultyRepository) GetInactiveFaculty() (model.Faculty, error) {
 	if len(facs) == 0 {
 		return model.Faculty{}, gorm.ErrRecordNotFound
 	}
-	
-	if err != nil {
-		return model.Faculty{}, err
-	}
+
 	return facs[0], nil
 }
 

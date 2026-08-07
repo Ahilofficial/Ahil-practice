@@ -45,6 +45,9 @@ func InitializeApp() (*fiber.App, error) {
 	permissionRepository := repository.NewPermissionRepository(db)
 	permissionService := services.NewPermissionService(permissionRepository)
 	permissionController := controller.NewPermissionController(permissionService)
-	app := routes.NewApp(userController, instituteController, departmentController, facultyController, studentController, feesController, roleController, permissionController)
+	menuRepository := repository.NewMenuRepository(db)
+	menuService := services.NewMenuService(menuRepository)
+	menuController := controller.NewMenuController(menuService)
+	app := routes.NewApp(userController, instituteController, departmentController, facultyController, studentController, departmentService, facultyService, studentService, feesController, roleController, permissionController, menuController)
 	return app, nil
 }
