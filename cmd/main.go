@@ -8,7 +8,6 @@ import (
 	"backend_institutions/internal/wire"
 	"log"
 	"os"
-
 	"github.com/joho/godotenv"
 )
 
@@ -22,6 +21,7 @@ func main() {
 	}
 
 	database.Connect()
+
 	err = database.DB.AutoMigrate(
 		&model.Institutions{},
 		&model.Department{},
@@ -35,6 +35,7 @@ func main() {
 		&model.Menu{},
 		&model.RoleMenu{},
 		&model.Payment{},
+		&model.Institution_Admins{},
 	
 	)
 	if err != nil {

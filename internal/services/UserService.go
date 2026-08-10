@@ -9,9 +9,7 @@ import (
 	"errors"
 	"fmt"
 	"log"
-
 	// "os"
-
 	// "os/user"
 	"strings"
 	"time"
@@ -42,21 +40,13 @@ func (s *UserService) SignUp(dto *dto.SignUpDTO) (model.User, error) {
 		return model.User{}, err
 	}
 
-	token := utils.SignUpToken()
-	if token == "" {
-		return model.User{}, errors.New("failed to generate verification token")
-	}
-	var expiry = time.Now().Add(24 * time.Hour)
-
 	user := model.User{
-		Name:              dto.Name,
-		Email:             dto.Email,
-		Phone:             dto.Phone,
-		Password:          hashedPassword,
-		IsActive:          false,
-		IsVerified:        false,
-		VerificationToken: token,
-		TokenExpiresAt:    expiry,
+		Name:       dto.Name,
+		Email:      dto.Email,
+		Phone:      dto.Phone,
+		Password:   hashedPassword,
+		IsActive:   false,
+		IsVerified: false,
 	}
 
 	err = s.userrepo.CreateUser(&user)
@@ -65,58 +55,74 @@ func (s *UserService) SignUp(dto *dto.SignUpDTO) (model.User, error) {
 			if strings.Contains(mysqlErr.Message, "email") {
 				return model.User{}, errors.New("email already exists")
 			}
+
 			if strings.Contains(mysqlErr.Message, "phone") {
 				return model.User{}, errors.New("phone number already exists")
 			}
 		}
+
 		return model.User{}, err
 	}
-
-	verifyURL := fmt.Sprintf("http://localhost:8090/auth/verify?token=%s", token)
-	subject := "Verify your email - Backend Institutions"
-	body := fmt.Sprintf(`<h1>Hello %s,</h1>
-<p>Thank you for signing up. Please verify your email by clicking the link below:</p>
-<p><a href="%s" style="background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; display: inline-block; border-radius: 5px;">Verify Email Address</a></p>
-<p>Or copy and paste this link in your browser:<br/><a href="%s">%s</a></p>
-<p>This link will expire in 24 hours.</p>
-<p>If you did not create this account, please ignore this email.</p>`, user.Name, verifyURL, verifyURL, verifyURL)
-
-	defaultRole, roleErr := s.userrepo.FindRoleByName("user")
-	if roleErr == nil && defaultRole.ID != 0 {
-		_ = s.userrepo.AssignRoleToUser(user.ID, defaultRole.ID)
-	}
-	// Send verification email asynchronously
-	go func(email, subject, body string) {
-		if sendErr := grpc.SendEmail(email, subject, body, "signup"); sendErr != nil {
-			log.Printf("Failed to send verification email via gRPC: %v\n", sendErr)
-		}
-	}(user.Email, subject, body)
 
 	return user, nil
 }
 
-func (s *UserService) VerifyEmail(token string) error {
-	user, err := s.userrepo.FindByVerificationToken(token)
+func (s *UserService) SendVerificationEmail(userID uint) error {
+	user, err := s.userrepo.FindByID(userID)
 	if err != nil {
-		return errors.New("invalid verification link")
+		return err
 	}
 
-	if user.IsVerified {
-		return errors.New("email already verified")
+	
+	if user.StudentID == 0 && user.FacultyID == 0 {
+		return nil
 	}
 
-	if time.Now().After(user.TokenExpiresAt) {
-		return errors.New("verification link expired")
+	token := utils.SignUpToken()
+	if token == "" {
+		return errors.New("failed to generate verification token")
 	}
 
-	user.IsVerified = true
-	user.IsActive = true
-	user.VerificationToken = ""
-	user.TokenExpiresAt = time.Time{}
+	user.IsActive = false
+	user.IsVerified = false
+	user.VerificationToken = token
+	user.TokenExpiresAt = time.Now().Add(24 * time.Hour)
 
-	return s.userrepo.UpdateUser(&user)
+	if err := s.userrepo.UpdateUser(&user); err != nil {
+		return err
+	}
+
+	verifyURL := fmt.Sprintf(
+		"http://localhost:8090/auth/verify?token=%s",
+		token,
+	)
+
+	subject := "Verify your email - Backend Institutions"
+
+	body := fmt.Sprintf(`
+		<h1>Hello %s,</h1>
+		<p>Please verify your email address.</p>
+		<p>
+			<a href="%s">Verify Email</a>
+		</p>
+	`, user.Name, verifyURL)
+
+	go func(email, subject, body string) {
+		if err := grpc.SendEmail(
+			email,
+			subject,
+			body,
+			"signup",
+		); err != nil {
+			log.Printf(
+				"Failed to send verification email via gRPC: %v",
+				err,
+			)
+		}
+	}(user.Email, subject, body)
+
+	return nil
 }
-
 
 func (s *UserService) SignIn(dto *dto.SignInDTO, c fiber.Ctx) (string, string,uint, string, error) {
 	user, err := s.userrepo.FindByEmail(dto.Email)
@@ -272,6 +278,27 @@ err = s.userrepo.UpdatePassword(user.ID, hashedPassword)
 
 }
 
+func (s *UserService) VerifyEmail(token string) error {
+	user, err := s.userrepo.FindByVerificationToken(token)
+	if err != nil {
+		return errors.New("invalid verification link")
+	}
+
+	if user.IsVerified {
+		return errors.New("email already verified")
+	}
+
+	if time.Now().After(user.TokenExpiresAt) {
+		return errors.New("verification link expired")
+	}
+
+	user.IsVerified = true
+	user.IsActive = true
+	user.VerificationToken = ""
+	user.TokenExpiresAt = time.Time{}
+
+	return s.userrepo.UpdateUser(&user)
+}
 
 func (s *UserService) Logout(dto *dto.LogoutDTO) error {
 	return s.userrepo.Logout(dto)

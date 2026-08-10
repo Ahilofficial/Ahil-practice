@@ -27,6 +27,9 @@ type SignUpDTO struct {
 	Email    string `json:"email"`
 	Phone    string `json:"phone"`
 	Password string `json:"password"`
+
+	StudentID uint `json:"student_id"`
+	FacultyID uint `json:"faculty_id"`
 }
 
 type SignInDTO struct {

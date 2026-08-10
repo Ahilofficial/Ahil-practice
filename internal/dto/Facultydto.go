@@ -3,9 +3,9 @@ package dto
 import (
 	"backend_institutions/internal/model"
 	"errors"
+	"github.com/jinzhu/copier"
 	"strings"
 	"time"
-	"github.com/jinzhu/copier"
 )
 
 type CreateFacultyDTO struct {
@@ -13,6 +13,7 @@ type CreateFacultyDTO struct {
 	Gender       string    `json:"gender"`
 	JoiningDate  time.Time `json:"joining_date"`
 	DepartmentID uint      `json:"department_id"`
+	UserID       uint      `json:"user_id"`
 }
 
 func (dto *CreateFacultyDTO) Sanitize() {
@@ -21,7 +22,6 @@ func (dto *CreateFacultyDTO) Sanitize() {
 }
 
 func (dto *CreateFacultyDTO) Validate() error {
-	
 
 	if dto.Name == "" {
 		return errors.New("name is required")
@@ -49,7 +49,7 @@ func (dto *UpdateFacultyDTO) Sanitize() {
 }
 
 func (dto *UpdateFacultyDTO) Validate() error {
-	
+
 	if dto.Name == "" {
 		return errors.New("name is required")
 	}
@@ -73,8 +73,6 @@ func ToFacultyResponseDTO(fac *model.Faculty) FacultyResponseDTO {
 	var dto FacultyResponseDTO
 	copier.Copy(&dto, fac)
 
-	
-
 	return dto
 }
 
@@ -87,5 +85,3 @@ func ToFacultyResponseListDTO(facs []model.Faculty) []FacultyResponseDTO {
 
 	return list
 }
-
-

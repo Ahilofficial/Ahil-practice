@@ -20,6 +20,24 @@ func NewUserRepository(db *gorm.DB) *UserRepository {
 	return &UserRepository{db: db}
 }
 
+func (r *UserRepository) HasInstitutionAccess(
+    userID uint,
+    institutionID uint,
+) (bool, error) {
+
+    var count int64
+
+    err := r.db.Model(&model.Institution_Admins{}).
+        Where("user_id = ? AND institution_id = ?", userID, institutionID).
+        Count(&count).Error
+
+    if err != nil {
+        return false, err
+    }
+
+    return count > 0, nil
+}
+
 func (r *UserRepository) FindByVerificationToken(token string) (model.User, error) {
 	var user model.User
 
@@ -304,4 +322,71 @@ func (r *UserRepository) FindByID(userID uint) (model.User, error) {
 	}
 
 	return user, nil
+}
+
+func (r *UserRepository) FetchUserRoles(userID uint) ([]model.Role, error) {
+	var roles []model.Role
+
+	query := `
+		SELECT r.id, r.name
+		FROM roles r
+		INNER JOIN user_roles ur
+			ON ur.role_id = r.id
+		WHERE ur.user_id = ?
+	`
+
+	result := r.db.Raw(query, userID).Scan(&roles)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+
+	if result.RowsAffected == 0 {
+		return nil, errors.New("no roles assigned to user")
+	}
+
+	return roles, nil
+}
+
+func (r *UserRepository) HasPermission(
+	userID uint,
+	permission string,
+) (bool, error) {
+
+	var count int64
+
+	query := `
+		SELECT COUNT(*)
+		FROM user_roles ur
+		JOIN role_permissions rp ON rp.role_id = ur.role_id
+		JOIN permissions p ON p.id = rp.permission_id
+		WHERE ur.user_id = ?
+		  AND p.name = ?
+	`
+
+	err := r.db.Raw(
+		query,
+		userID,
+		permission,
+	).Scan(&count).Error
+
+	if err != nil {
+		return false, err
+	}
+
+	return count > 0, nil
+}
+
+func (r *UserRepository) ValidateUser(userID uint) error {
+
+	var user model.User
+
+	result := r.db.
+		Where("id = ?", userID).
+		First(&user)
+
+	if result.Error != nil {
+		return result.Error
+	}
+
+	return nil
 }

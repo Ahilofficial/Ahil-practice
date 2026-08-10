@@ -12,6 +12,8 @@ type FacultyRepository struct {
 	db *gorm.DB
 }
 
+
+
 func NewFacultyRepository(db *gorm.DB) *FacultyRepository {
 	return &FacultyRepository{
 		db: db,
@@ -95,7 +97,7 @@ func (r *FacultyRepository) FetchFacultyPaginated(search string, page, limit int
 
 	query := r.db.Model(&model.Faculty{})
 
-	// Search
+	
 	if search != "" {
 		search = "%" + search + "%"
 		query = query.Where(`
@@ -105,14 +107,14 @@ func (r *FacultyRepository) FetchFacultyPaginated(search string, page, limit int
 		`, search, search, search)
 	}
 
-	// Count
+	
 	if err := query.Count(&total).Error; err != nil {
 		return nil, 0, err
 	}
 
 	offset := (page - 1) * limit
 
-	// Fetch with associations
+	
 	err := query.
 		Preload("Students").
 		Preload("Students.Fees").
@@ -210,4 +212,65 @@ func (r *FacultyRepository) UpdateFacultyById(faculty *model.Faculty) error {
 		faculty.Name, faculty.Gender, time.Now(), faculty.ID,
 	)
 	return err
+}
+func (r *FacultyRepository) GetInstitutionByFacultyID(facultyID uint) (uint, error) {
+	var institutionID uint
+
+	err := r.db.Raw(`
+		SELECT d.institution_id
+		FROM faculties f
+		JOIN departments d ON f.department_id = d.id
+		WHERE f.id = ?
+		  AND f.deleted_at IS NULL
+		  AND d.deleted_at IS NULL
+	`, facultyID).Scan(&institutionID).Error
+
+	if err != nil {
+		return 0, err
+	}
+
+	return institutionID, nil
+}
+
+func (r *FacultyRepository) GetInstitutionByDepartmentID(
+	departmentID uint,
+) (uint, error) {
+
+	var institutionID uint
+
+	err := r.db.Raw(`
+		SELECT institution_id
+		FROM departments
+		WHERE id = ?
+		LIMIT 1
+	`, departmentID).Scan(&institutionID).Error
+
+	if err != nil {
+		return 0, err
+	}
+
+	if institutionID == 0 {
+		return 0, errors.New("institution not found")
+	}
+
+	return institutionID, nil
+}
+
+func (r *FacultyRepository) ExistsByUserID(userID uint) (bool, error) {
+
+	var exists bool
+
+	result := r.db.Raw(`
+		SELECT EXISTS(
+			SELECT 1
+			FROM faculties
+			WHERE user_id = ?
+		)
+	`, userID).Scan(&exists)
+
+	if result.Error != nil {
+		return false, result.Error
+	}
+
+	return exists, nil
 }

@@ -12,6 +12,7 @@ type CreateStudentDTO struct {
 	Email     string `json:"email"`
 	Gender    string `json:"gender"`
 	FacultyID uint   `json:"faculty_id"`
+	UserID    uint   `json:"user_id"`
 }
 
 func (dto *CreateStudentDTO) Sanitize() {

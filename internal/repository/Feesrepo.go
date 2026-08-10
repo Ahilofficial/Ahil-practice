@@ -243,4 +243,25 @@ func (r *FeesRepository) FetchFeesByStudentID(studentID uint) (*model.Fees, erro
 	return &fees, nil
 }
 
+func (r *FeesRepository) GetInstitutionByFeeID(feeID uint) (uint, error) {
+	var institutionID uint
 
+	err := r.db.Raw(`
+		SELECT d.institution_id
+		FROM fees fe
+		JOIN students s ON fe.student_id = s.id
+		JOIN faculties f ON s.faculty_id = f.id
+		JOIN departments d ON f.department_id = d.id
+		WHERE fe.id = ?
+		  AND fe.deleted_at IS NULL
+		  AND s.deleted_at IS NULL
+		  AND f.deleted_at IS NULL
+		  AND d.deleted_at IS NULL
+	`, feeID).Scan(&institutionID).Error
+
+	if err != nil {
+		return 0, err
+	}
+
+	return institutionID, nil
+}

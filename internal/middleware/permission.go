@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	
 	"backend_institutions/internal/database"
 	"backend_institutions/internal/helper"
 
@@ -10,28 +9,49 @@ import (
 
 func RequirePermission(permission string) fiber.Handler {
 	return func(c fiber.Ctx) error {
+
 		userID := c.Locals("user_id")
 		if userID == nil {
-			return helper.Error(c, 401, "Unauthorized")
+			return helper.Error(
+				c,
+				401,
+				"Unauthorized",
+			)
 		}
 
-		var count int64
-		const query = `
-			SELECT COUNT(*)
-			FROM user_roles ur
-			JOIN roles r ON ur.role_id = r.id
-			LEFT JOIN role_permissions rp ON rp.role_id = r.id
-			LEFT JOIN permissions p ON rp.permission_id = p.id
-			WHERE ur.user_id = ?
-			  AND (r.name = ? OR r.name = ? OR p.name = ?)
+		var allowed bool
+
+		query := `
+			SELECT EXISTS (
+				SELECT 1
+				FROM user_roles ur
+				JOIN role_permissions rp
+					ON rp.role_id = ur.role_id
+				JOIN permissions p
+					ON p.id = rp.permission_id
+				WHERE ur.user_id = ?
+				  AND p.name = ?
+			)
 		`
 
 		err := database.DB.
-			Raw(query, userID, "superadmin", "admin", permission).
-			Scan(&count).Error
+			Raw(query, userID, permission).
+			Scan(&allowed).Error
 
-		if err != nil || count == 0 {
-			return helper.Error(c, 403, "Forbidden: you do not have permission to perform this action")
+		if err != nil {
+			return helper.Error(
+				c,
+				500,
+				"Failed to check permission",
+			)
+		}
+
+		if !allowed {
+			return helper.Error(
+				c,
+				403,
+				"Forbidden: you do not have permission to perform this action",
+			)
 		}
 
 		return c.Next()

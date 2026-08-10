@@ -219,3 +219,27 @@ func (r *DepartmentRepository) UpdateDepartmentById(department *model.Department
 	)
 	return err
 }
+
+func (r *DepartmentRepository) GetInstitutionByDepartmentID(
+	departmentID uint,
+) (uint, error) {
+
+	var institutionID uint
+
+	err := r.db.Raw(`
+		SELECT institution_id
+		FROM departments
+		WHERE id = ?
+		LIMIT 1
+	`, departmentID).Scan(&institutionID).Error
+
+	if err != nil {
+		return 0, err
+	}
+
+	if institutionID == 0 {
+		return 0, errors.New("institution not found")
+	}
+
+	return institutionID, nil
+}

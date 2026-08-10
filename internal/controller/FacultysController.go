@@ -21,7 +21,14 @@ func NewFacultyController(facultyService *services.FacultyService) *FacultyContr
 }
 
 func (cl *FacultyController) CreateFacultyController(c fiber.Ctx) error {
+
+	userID, ok := c.Locals("user_id").(uint)
+	if !ok {
+		return helper.Error(c, 401, "Invalid user")
+	}
+
 	var faculty model.Faculty
+
 	if err := c.Bind().Body(&faculty); err != nil {
 		return helper.Error(c, 400, "invalid request body: "+err.Error())
 	}
@@ -29,12 +36,21 @@ func (cl *FacultyController) CreateFacultyController(c fiber.Ctx) error {
 	if faculty.Name == "" {
 		return helper.Error(c, 400, "name is required")
 	}
+
 	if faculty.DepartmentID == 0 {
 		return helper.Error(c, 400, "department_id is required")
 	}
 
-	createdFaculty, err := cl.facultyService.CreateFacultyService(&faculty)
+	createdFaculty, err := cl.facultyService.CreateFacultyService(
+		userID,
+		&faculty,
+	)
 	if err != nil {
+
+		if err.Error() == "access denied" {
+			return helper.Error(c, 403, "Access denied")
+		}
+
 		return helper.Error(c, 400, err.Error())
 	}
 
@@ -85,6 +101,12 @@ func (cl *FacultyController) GetAllFacultiesController(c fiber.Ctx) error {
 }
 
 func (cl *FacultyController) GetFacultyByIDController(c fiber.Ctx) error {
+
+	userID, ok := c.Locals("user_id").(uint)
+	if !ok {
+		return helper.Error(c, 401, "Invalid user")
+	}
+
 	idStr := c.Params("id")
 
 	id, err := strconv.ParseUint(idStr, 10, 32)
@@ -92,15 +114,23 @@ func (cl *FacultyController) GetFacultyByIDController(c fiber.Ctx) error {
 		return helper.Error(c, 400, "invalid faculty ID")
 	}
 
-	faculty, err := cl.facultyService.GetFacultyServiceById(uint(id))
+	faculty, err := cl.facultyService.GetFacultyServiceById(
+		userID,
+		uint(id),
+	)
 	if err != nil {
+
+		if err.Error() == "access denied" {
+			return helper.Error(c, 403, "Access denied")
+		}
+
 		return helper.Error(c, 404, err.Error())
 	}
 
 	return helper.Success(
 		c,
 		"Faculty fetched successfully",
-		dto.ToFacultyResponseDTO(&faculty),
+		dto.ToFacultyResponseDTO(faculty),
 	)
 }
 
@@ -144,8 +174,12 @@ func (cl *FacultyController) GetInactiveFacultyController(c fiber.Ctx) error {
 }
 
 func (cl *FacultyController) UpdateFacultyController(c fiber.Ctx) error {
-	var body dto.UpdateFacultyDTO
-	body.Sanitize()
+
+	userID, ok := c.Locals("user_id").(uint)
+	if !ok {
+		return helper.Error(c, 401, "Invalid user")
+	}
+
 	idParam := c.Params("id")
 
 	id, err := strconv.ParseUint(idParam, 10, 32)
@@ -153,34 +187,58 @@ func (cl *FacultyController) UpdateFacultyController(c fiber.Ctx) error {
 		return helper.Error(c, 400, "invalid id")
 	}
 
+	var body dto.UpdateFacultyDTO
+
 	if err := c.Bind().Body(&body); err != nil {
 		return helper.Error(c, 400, "invalid request body")
 	}
+
+	body.Sanitize()
 
 	if err := body.Validate(); err != nil {
 		return helper.Error(c, 400, err.Error())
 	}
 
 	if err := cl.facultyService.UpdateFacultyService(
+		userID,
 		uint(id),
 		&body,
 	); err != nil {
+
+		if err.Error() == "access denied" {
+			return helper.Error(c, 403, "Access denied")
+		}
+
 		return helper.Error(c, 400, err.Error())
 	}
 
-	updated, err := cl.facultyService.GetFacultyServiceById(uint(id))
+	updated, err := cl.facultyService.GetFacultyServiceById(
+		userID,
+		uint(id),
+	)
 	if err != nil {
+
+		if err.Error() == "access denied" {
+			return helper.Error(c, 403, "Access denied")
+		}
+
 		return helper.Error(c, 500, err.Error())
 	}
 
 	return helper.Success(
 		c,
 		"Faculty updated successfully",
-		dto.ToFacultyResponseDTO(&updated),
+		dto.ToFacultyResponseDTO(updated),
 	)
 }
 
 func (cl *FacultyController) DeleteFacultyController(c fiber.Ctx) error {
+
+	userID, ok := c.Locals("user_id").(uint)
+	if !ok {
+		return helper.Error(c, 401, "Invalid user")
+	}
+
 	idStr := c.Params("id")
 
 	id, err := strconv.ParseUint(idStr, 10, 32)
@@ -188,7 +246,15 @@ func (cl *FacultyController) DeleteFacultyController(c fiber.Ctx) error {
 		return helper.Error(c, 400, "invalid faculty id")
 	}
 
-	if err := cl.facultyService.DeleteFacultyService(uint(id)); err != nil {
+	if err := cl.facultyService.DeleteFacultyService(
+		userID,
+		uint(id),
+	); err != nil {
+
+		if err.Error() == "access denied" {
+			return helper.Error(c, 403, "Access denied")
+		}
+
 		return helper.Error(c, 400, err.Error())
 	}
 

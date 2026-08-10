@@ -20,7 +20,14 @@ func NewStudentController(studentService *services.StudentService) *StudentContr
 }
 
 func (cl *StudentController) CreateStudentControllers(c fiber.Ctx) error {
+
+	userID, ok := c.Locals("user_id").(uint)
+	if !ok {
+		return helper.Error(c, 401, "Invalid user")
+	}
+
 	var student model.Student
+
 	if err := c.Bind().Body(&student); err != nil {
 		return helper.Error(c, 400, "invalid request body: "+err.Error())
 	}
@@ -28,25 +35,29 @@ func (cl *StudentController) CreateStudentControllers(c fiber.Ctx) error {
 	if student.Name == "" {
 		return helper.Error(c, 400, "name is required")
 	}
+
 	if student.Email == "" {
 		return helper.Error(c, 400, "email is required")
 	}
+
 	if student.FacultyID == 0 {
 		return helper.Error(c, 400, "faculty_id is required")
 	}
 
-	createdStudent, err := cl.studentService.CreateStudentService(&student)
+	createdStudent, err := cl.studentService.CreateStudentService(
+		userID,
+		&student,
+	)
 	if err != nil {
+		if err.Error() == "access denied" {
+			return helper.Error(c, 403, "Access denied")
+		}
+
 		return helper.Error(c, 400, err.Error())
 	}
 
-	return helper.Success(
-		c,
-		"Student created successfully",
-		dto.ToStudentResponseDTO(createdStudent),
-	)
+	return helper.Success(c, "succcess", createdStudent)
 }
-
 func (cl *StudentController) GetActiveStudentController(c fiber.Ctx) error {
 	student, err := cl.studentService.GetActiveStudentService()
 	if err != nil {
@@ -74,6 +85,12 @@ func (cl *StudentController) GetInactiveStudentController(c fiber.Ctx) error {
 }
 
 func (cl *StudentController) GetStudentByIDControllers(c fiber.Ctx) error {
+
+	userID, ok := c.Locals("user_id").(uint)
+	if !ok {
+		return helper.Error(c, 401, "Invalid user")
+	}
+
 	idStr := c.Params("id")
 
 	id, err := strconv.ParseUint(idStr, 10, 32)
@@ -81,8 +98,16 @@ func (cl *StudentController) GetStudentByIDControllers(c fiber.Ctx) error {
 		return helper.Error(c, 400, "invalid student id")
 	}
 
-	student, err := cl.studentService.GetStudentServiceById(uint(id))
+	student, err := cl.studentService.GetStudentServiceById(
+		userID,
+		uint(id),
+	)
 	if err != nil {
+
+		if err.Error() == "access denied" {
+			return helper.Error(c, 403, "Access denied")
+		}
+
 		return helper.Error(c, 404, err.Error())
 	}
 
@@ -94,6 +119,12 @@ func (cl *StudentController) GetStudentByIDControllers(c fiber.Ctx) error {
 }
 
 func (cl *StudentController) UpdateStudentControllers(c fiber.Ctx) error {
+
+	userID, ok := c.Locals("user_id").(uint)
+	if !ok {
+		return helper.Error(c, 401, "Invalid user")
+	}
+
 	idStr := c.Params("id")
 
 	id, err := strconv.ParseUint(idStr, 10, 32)
@@ -102,25 +133,40 @@ func (cl *StudentController) UpdateStudentControllers(c fiber.Ctx) error {
 	}
 
 	var body dto.UpdateStudentDTO
-	body.Sanitize()
 
 	if err := c.Bind().Body(&body); err != nil {
 		return helper.Error(c, 400, "invalid request body")
 	}
+
+	body.Sanitize()
 
 	if err := body.Validate(); err != nil {
 		return helper.Error(c, 400, err.Error())
 	}
 
 	if err := cl.studentService.UpdateStudentService(
+		userID,
 		uint(id),
 		&body,
 	); err != nil {
+
+		if err.Error() == "access denied" {
+			return helper.Error(c, 403, "Access denied")
+		}
+
 		return helper.Error(c, 400, err.Error())
 	}
 
-	updated, err := cl.studentService.GetStudentServiceById(uint(id))
+	updated, err := cl.studentService.GetStudentServiceById(
+		userID,
+		uint(id),
+	)
 	if err != nil {
+
+		if err.Error() == "access denied" {
+			return helper.Error(c, 403, "Access denied")
+		}
+
 		return helper.Error(c, 500, err.Error())
 	}
 
@@ -132,6 +178,12 @@ func (cl *StudentController) UpdateStudentControllers(c fiber.Ctx) error {
 }
 
 func (cl *StudentController) DeleteStudentControllers(c fiber.Ctx) error {
+
+	userID, ok := c.Locals("user_id").(uint)
+	if !ok {
+		return helper.Error(c, 401, "Invalid user")
+	}
+
 	idStr := c.Params("id")
 
 	id, err := strconv.ParseUint(idStr, 10, 32)
@@ -139,7 +191,15 @@ func (cl *StudentController) DeleteStudentControllers(c fiber.Ctx) error {
 		return helper.Error(c, 400, "invalid student id")
 	}
 
-	if err := cl.studentService.DeleteStudentService(uint(id)); err != nil {
+	if err := cl.studentService.DeleteStudentService(
+		userID,
+		uint(id),
+	); err != nil {
+
+		if err.Error() == "access denied" {
+			return helper.Error(c, 403, "Access denied")
+		}
+
 		return helper.Error(c, 400, err.Error())
 	}
 

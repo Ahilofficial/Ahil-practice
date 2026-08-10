@@ -32,7 +32,11 @@ const (
 	PermissionUpdateFees = "UPDATE_FEE"
 	PermissionDeleteFees = "DELETE_FEE"
 
+	PermissionManageInstitution = "institution.manage"
+
+
 	PermissionAssignRoles = "ASSIGN_ROLE"
+
 )
 
 var AllPermissions = []string{
@@ -62,6 +66,7 @@ var AllPermissions = []string{
 	PermissionDeleteFees,
 	PermissionViewPayments,
 	PermissionAdminPermission,
+	PermissionManageInstitution,
 
 	PermissionAssignRoles,
 }

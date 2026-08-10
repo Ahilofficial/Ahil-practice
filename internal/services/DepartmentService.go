@@ -1,57 +1,157 @@
 package services
 
 import (
+	"errors"
+
 	"backend_institutions/internal/dto"
 	"backend_institutions/internal/model"
 	"backend_institutions/internal/repository"
 )
 
 type DepartmentService struct {
-	departmentrepo *repository.DepartmentRepository
+	departmentRepo *repository.DepartmentRepository
+	userRepo       *repository.UserRepository
 }
 
-func NewDepartmentService(departmentrepo *repository.DepartmentRepository) *DepartmentService {
-	return &DepartmentService{departmentrepo: departmentrepo}
+func NewDepartmentService(
+	departmentRepo *repository.DepartmentRepository,
+	userRepo *repository.UserRepository,
+) *DepartmentService {
+	return &DepartmentService{
+		departmentRepo: departmentRepo,
+		userRepo:       userRepo,
+	}
 }
 
-func (s *DepartmentService) AddDepartmentService(department *model.Department) (model.Department, error) {
-	err := s.departmentrepo.CreateDepartment(department)
-	return *department, err
-}
+func (s *DepartmentService) checkInstitutionAccess(
+	userID uint,
+	institutionID uint,
+) error {
 
-func (s *DepartmentService) GetDepartmentService() ([]model.Department, error) {
-	return s.departmentrepo.FetchDepartment()
-}
-
-func (s *DepartmentService) GetDepartmentServicePaginated(search string,page, limit int) ([]model.Department, int64, error) {
-	return s.departmentrepo.FetchDepartmentPaginated(search,page, limit)
-}
-
-func (s *DepartmentService) GetDepartmentByIDService(id uint) (model.Department, error) {
-	return s.departmentrepo.FetchDepartmentById(id)
-}
-
-func (s *DepartmentService) GetDepartmentServiceDeleted() ([]model.Department, error) {
-	return s.departmentrepo.FetchDepartmentDeleted()
-}
-
-func (s *DepartmentService) DeleteDepartment(id uint) error {
-	return s.departmentrepo.DeleteDepartment(id)
-}
-
-func (s *DepartmentService) GetActiveDepartmentService() (model.Department, error) {
-	return s.departmentrepo.GetActiveDepartment()
-}
-
-func (s *DepartmentService) GetInactiveDepartmentService() (model.Department, error) {
-	return s.departmentrepo.GetInactiveDepartment()
-}
-
-func (s *DepartmentService) UpdateDepartmentService(id uint, dto *dto.UpdateDepartmentDTO) error {
-	department, err := s.departmentrepo.FetchDepartmentById(id)
+	hasAccess, err := s.userRepo.HasInstitutionAccess(
+		userID,
+		institutionID,
+	)
 	if err != nil {
 		return err
 	}
-	department.DepartmentName = dto.DepartmentName
-	return s.departmentrepo.UpdateDepartmentById(&department)
+
+	if !hasAccess {
+		return errors.New(
+			"user does not have access to this institution",
+		)
+	}
+
+	return nil
+}
+
+func (s *DepartmentService) AddDepartmentService(
+	userID uint,
+	department *model.Department,
+) (model.Department, error) {
+
+	if err := s.checkInstitutionAccess(
+		userID,
+		department.InstitutionID,
+	); err != nil {
+		return model.Department{}, err
+	}
+
+	if err := s.departmentRepo.CreateDepartment(department); err != nil {
+		return model.Department{}, err
+	}
+
+	return *department, nil
+}
+
+func (s *DepartmentService) GetDepartmentService() ([]model.Department, error) {
+	return s.departmentRepo.FetchDepartment()
+}
+
+func (s *DepartmentService) GetDepartmentServicePaginated(
+	search string,
+	page int,
+	limit int,
+) ([]model.Department, int64, error) {
+
+	return s.departmentRepo.FetchDepartmentPaginated(
+		search,
+		page,
+		limit,
+	)
+}
+
+func (s *DepartmentService) GetDepartmentByIDService(
+	userID uint,
+	id uint,
+) (model.Department, error) {
+
+	department, err := s.departmentRepo.FetchDepartmentById(id)
+	if err != nil {
+		return model.Department{}, err
+	}
+
+	if err := s.checkInstitutionAccess(
+		userID,
+		department.InstitutionID,
+	); err != nil {
+		return model.Department{}, err
+	}
+
+	return department, nil
+}
+
+func (s *DepartmentService) GetDepartmentServiceDeleted() ([]model.Department, error) {
+	return s.departmentRepo.FetchDepartmentDeleted()
+}
+
+func (s *DepartmentService) DeleteDepartment(
+	userID uint,
+	id uint,
+) error {
+
+	department, err := s.departmentRepo.FetchDepartmentById(id)
+	if err != nil {
+		return err
+	}
+
+	if err := s.checkInstitutionAccess(
+		userID,
+		department.InstitutionID,
+	); err != nil {
+		return err
+	}
+
+	return s.departmentRepo.DeleteDepartment(id)
+}
+
+func (s *DepartmentService) GetActiveDepartmentService() (model.Department, error) {
+	return s.departmentRepo.GetActiveDepartment()
+}
+
+func (s *DepartmentService) GetInactiveDepartmentService() (model.Department, error) {
+	return s.departmentRepo.GetInactiveDepartment()
+}
+
+func (s *DepartmentService) UpdateDepartmentService(
+	userID uint,
+	id uint,
+	req *dto.UpdateDepartmentDTO,
+) error {
+
+	department, err := s.departmentRepo.FetchDepartmentById(id)
+	if err != nil {
+		return err
+	}
+
+	if err := s.checkInstitutionAccess(
+		userID,
+		department.InstitutionID,
+	); err != nil {
+		return err
+	}
+
+	department.DepartmentName = req.DepartmentName
+
+	return s.departmentRepo.UpdateDepartmentById(&department)
 }

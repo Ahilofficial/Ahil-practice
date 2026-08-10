@@ -301,3 +301,39 @@ func (r *StudentRepository) GetInstitutionIDByStudent(studentID uint) (uint, err
 
 	return institutionID, nil
 }
+func (r *StudentRepository) GetInstitutionByStudentID(studentId uint) (uint, error) {
+	var institutionID uint
+
+	err := r.db.Raw(`
+		SELECT d.institution_id
+		FROM students s
+		JOIN faculties f ON s.faculty_id = f.id
+		JOIN departments d ON f.department_id = d.id
+		WHERE s.id = ?
+	`, studentId).Scan(&institutionID).Error
+
+	if err != nil {
+		return 0, err
+	}
+
+	return institutionID, nil
+}
+
+func (r *StudentRepository) ExistsByUserID(userID uint) (bool, error) {
+
+	var exists bool
+
+	result := r.db.Raw(`
+		SELECT EXISTS(
+			SELECT 1
+			FROM students
+			WHERE user_id = ?
+		)
+	`, userID).Scan(&exists)
+
+	if result.Error != nil {
+		return false, result.Error
+	}
+
+	return exists, nil
+}

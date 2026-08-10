@@ -33,20 +33,34 @@ func (cl *FeesController) GetInactiveFeesController(c fiber.Ctx) error {
 }
 
 func (cl *FeesController) CreateFeesController(c fiber.Ctx) error {
+
+	userID, ok := c.Locals("user_id").(uint)
+	if !ok {
+		return helper.Error(c, 401, "Invalid user")
+	}
+
 	var body dto.CreateFeesDTO
-	
 
 	if err := c.Bind().Body(&body); err != nil {
 		return helper.Error(c, 400, "invalid request body")
 	}
 
+	body.Sanitize()
+
 	if err := body.Validate(); err != nil {
 		return helper.Error(c, 400, err.Error())
 	}
 
-	body.Sanitize()
-	fees, err := cl.feesService.CreateFeesService(&body)
+	fees, err := cl.feesService.CreateFeesService(
+		userID,
+		&body,
+	)
 	if err != nil {
+
+		if err.Error() == "access denied" {
+			return helper.Error(c, 403, "Access denied")
+		}
+
 		return helper.Error(c, 400, err.Error())
 	}
 
@@ -97,6 +111,12 @@ func (cl *FeesController) GetAllFeesController(c fiber.Ctx) error {
 }
 
 func (cl *FeesController) GetFeesByIDController(c fiber.Ctx) error {
+
+	userID, ok := c.Locals("user_id").(uint)
+	if !ok {
+		return helper.Error(c, 401, "Invalid user")
+	}
+
 	idStr := c.Params("id")
 
 	id, err := strconv.ParseUint(idStr, 10, 32)
@@ -104,8 +124,16 @@ func (cl *FeesController) GetFeesByIDController(c fiber.Ctx) error {
 		return helper.Error(c, 400, "invalid fees id")
 	}
 
-	fees, err := cl.feesService.GetFeesServiceById(uint(id))
+	fees, err := cl.feesService.GetFeesServiceById(
+		userID,
+		uint(id),
+	)
 	if err != nil {
+
+		if err.Error() == "access denied" {
+			return helper.Error(c, 403, "Access denied")
+		}
+
 		return helper.Error(c, 404, err.Error())
 	}
 
@@ -117,8 +145,11 @@ func (cl *FeesController) GetFeesByIDController(c fiber.Ctx) error {
 }
 
 func (cl *FeesController) UpdateFeesController(c fiber.Ctx) error {
-	var body dto.UpdateFeesDTO
-	
+
+	userID, ok := c.Locals("user_id").(uint)
+	if !ok {
+		return helper.Error(c, 401, "Invalid user")
+	}
 
 	idStr := c.Params("id")
 
@@ -127,24 +158,42 @@ func (cl *FeesController) UpdateFeesController(c fiber.Ctx) error {
 		return helper.Error(c, 400, "invalid fees id")
 	}
 
+	var body dto.UpdateFeesDTO
+
 	if err := c.Bind().Body(&body); err != nil {
 		return helper.Error(c, 400, "invalid request body")
 	}
 
+	body.Sanitize()
+
 	if err := body.Validate(); err != nil {
 		return helper.Error(c, 400, err.Error())
 	}
-	body.Sanitize()
 
 	if err := cl.feesService.UpdateFeesService(
+		userID,
 		uint(id),
 		&body,
 	); err != nil {
+
+		if err.Error() == "access denied" {
+			return helper.Error(c, 403, "Access denied")
+		}
+
 		return helper.Error(c, 400, err.Error())
 	}
 
-	updated, err := cl.feesService.GetFeesServiceById(uint(id))
+	// Get updated fee.
+	updated, err := cl.feesService.GetFeesServiceById(
+		userID,
+		uint(id),
+	)
 	if err != nil {
+
+		if err.Error() == "access denied" {
+			return helper.Error(c, 403, "Access denied")
+		}
+
 		return helper.Error(c, 500, err.Error())
 	}
 
@@ -156,6 +205,12 @@ func (cl *FeesController) UpdateFeesController(c fiber.Ctx) error {
 }
 
 func (cl *FeesController) DeleteFeesController(c fiber.Ctx) error {
+
+	userID, ok := c.Locals("user_id").(uint)
+	if !ok {
+		return helper.Error(c, 401, "Invalid user")
+	}
+
 	idStr := c.Params("id")
 
 	id, err := strconv.ParseUint(idStr, 10, 32)
@@ -163,7 +218,15 @@ func (cl *FeesController) DeleteFeesController(c fiber.Ctx) error {
 		return helper.Error(c, 400, "invalid fees id")
 	}
 
-	if err := cl.feesService.DeleteFeesService(uint(id)); err != nil {
+	if err := cl.feesService.DeleteFeesService(
+		userID,
+		uint(id),
+	); err != nil {
+
+		if err.Error() == "access denied" {
+			return helper.Error(c, 403, "Access denied")
+		}
+
 		return helper.Error(c, 400, err.Error())
 	}
 
@@ -228,25 +291,44 @@ func (cl *FeesController) GetPaymentByFeeIDController(c fiber.Ctx) error {
 }
 
 func (c *FeesController) CreatePayment(ctx fiber.Ctx) error {
+
+	userID, ok := ctx.Locals("user_id").(uint)
+	if !ok {
+		return helper.Error(ctx, 401, "Invalid user")
+	}
+
 	var req dto.CreatePaymentDTO
 
 	if err := ctx.Bind().Body(&req); err != nil {
 		return helper.Error(ctx, 400, "Invalid request body")
 	}
 
+	req.Sanitize()
+
 	if err := req.Validate(); err != nil {
 		return helper.Error(ctx, 400, err.Error())
 	}
 
-	req.Sanitize()
-
-	payment, err := c.feesService.CreatePaymentService(&req)
+	payment, err := c.feesService.CreatePaymentService(
+		userID,
+		&req,
+	)
 	if err != nil {
+
+		if err.Error() == "access denied" {
+			return helper.Error(ctx, 403, "Access denied")
+		}
+
 		return helper.Error(ctx, 400, err.Error())
 	}
 
-	return helper.Success(ctx, "Payment created successfully", payment)
+	return helper.Success(
+		ctx,
+		"Payment created successfully",
+		payment,
+	)
 }
+
 
 func (c *StudentController) FetchPaidStudents(ctx fiber.Ctx) error {
 	students, err := c.studentService.FetchPaidStudents()
