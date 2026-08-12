@@ -10,8 +10,7 @@ import (
 
 func WriteAppLog(service, method, endpoint string, status int, request, response interface{}) error {
 	path := "logs/app.log"
-	
-	
+
 	dir := filepath.Dir(path)
 	if err := os.MkdirAll(dir, 0755); err != nil {
 		return err
@@ -57,33 +56,29 @@ Response:
 		string(responseBody),
 	)
 
-	// fmt.Print(logContent) 
+	// fmt.Print(logContent)
 	_, err = file.WriteString(logContent)
-	if err!=nil{
+	if err != nil {
 		fmt.Println("Cant able to write the data inside the log")
-	}else{
+	} else {
 		fmt.Println("Written the data successfully")
 	}
 	return err
 }
 
-
 func WriteEmailLog(to, subject string, success bool, errorMsg string) error {
 	path := "logs/notification.log"
-	
 
 	dir := filepath.Dir(path)
 	if err := os.MkdirAll(dir, 0755); err != nil {
 		return err
-		
+
 	}
-	
 
 	file, err := os.OpenFile(path, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		return err
 	}
-	
 
 	status := "SUCCESS"
 	detail := ""
@@ -102,9 +97,9 @@ func WriteEmailLog(to, subject string, success bool, errorMsg string) error {
 
 	// fmt.Print(logEntry)
 	_, err = file.WriteString(logEntry)
-	if err!=nil{
+	if err != nil {
 		fmt.Println("Cant able to write the data inside the log")
-	}else{
+	} else {
 		fmt.Println("Written the data successfully")
 	}
 	return err

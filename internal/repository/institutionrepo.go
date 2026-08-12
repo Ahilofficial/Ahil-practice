@@ -20,7 +20,6 @@ func NewInstitutionRepository(db *gorm.DB) *InstitutionRepository {
 	}
 }
 
-
 func (r *InstitutionRepository) CreateInstitution(institute *model.Institutions) error {
 	db, err := r.db.DB()
 	if err != nil {
@@ -76,7 +75,7 @@ func (r *InstitutionRepository) CreateInstitution(institute *model.Institutions)
 
 func (r *InstitutionRepository) FetchInstitution() ([]model.Institutions, error) {
 	var insts []model.Institutions
-	err:=r.db.Preload("Departments").Preload("Faculties").Preload("Students").Preload("Fees").Where("deleted_at IS NULL").Find(&insts).Error
+	err := r.db.Preload("Departments").Preload("Faculties").Preload("Students").Preload("Fees").Where("deleted_at IS NULL").Find(&insts).Error
 	if err != nil {
 		return nil, err
 	}
@@ -107,7 +106,6 @@ func (r *InstitutionRepository) FetchInstitutionPaginated(search string, page, l
 
 	offset := (page - 1) * limit
 
-	
 	err := query.
 		Preload("Departments").
 		Preload("Departments.Faculties").
@@ -153,7 +151,7 @@ func (r *InstitutionRepository) GetActiveInstitute() (model.Institutions, error)
 	if len(insts) == 0 {
 		return model.Institutions{}, gorm.ErrRecordNotFound
 	}
-	
+
 	if err != nil {
 		return model.Institutions{}, err
 	}
@@ -169,7 +167,7 @@ func (r *InstitutionRepository) GetInactiveInstitute() (model.Institutions, erro
 	if len(insts) == 0 {
 		return model.Institutions{}, gorm.ErrRecordNotFound
 	}
-	
+
 	if err != nil {
 		return model.Institutions{}, err
 	}
@@ -182,7 +180,7 @@ func (r *InstitutionRepository) FetchInstitutionDeleted() ([]model.Institutions,
 	if err != nil {
 		return nil, err
 	}
-	
+
 	return insts, err
 }
 

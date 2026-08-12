@@ -6,9 +6,9 @@ import (
 	"backend_institutions/internal/model"
 	"backend_institutions/internal/seeds"
 	"backend_institutions/internal/wire"
+	"github.com/joho/godotenv"
 	"log"
 	"os"
-	"github.com/joho/godotenv"
 )
 
 func main() {
@@ -36,7 +36,6 @@ func main() {
 		&model.RoleMenu{},
 		&model.Payment{},
 		&model.Institution_Admins{},
-	
 	)
 	if err != nil {
 		log.Fatal(err)

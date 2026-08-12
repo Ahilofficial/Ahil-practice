@@ -28,6 +28,5 @@ func (r *SessionRepository) CreateSession(session *model.Session) error {
 		session.SessionID,
 		session.AccessToken,
 		session.RefreshToken,
-
 	).Error
 }

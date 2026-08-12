@@ -7,23 +7,31 @@ import (
 )
 
 type User struct {
-	ID       uint   `gorm:"primaryKey;autoIncrement" json:"id"`
-	Name     string `gorm:"type:varchar(255)" json:"name"`
-	Email    string `gorm:"type:varchar(255);unique" json:"email"`
-	Phone    string `gorm:"type:varchar(255);unique" json:"phone"`
-	Password string `gorm:"type:varchar(255)" json:"-"`
+	ID         uint   `gorm:"primaryKey;autoIncrement" json:"id"`
+	Name       string `gorm:"type:varchar(255)" json:"name"`
+	Email      string `gorm:"type:varchar(255)" json:"email"`
+	Phone      string `gorm:"type:varchar(255)" json:"phone"`
+	Password   string `gorm:"type:varchar(255)" json:"-"`
 
-	IsActive          bool `gorm:"type:boolean;default:true" json:"is_active"`
-	IsVerified        bool
-	VerificationToken string
-	TokenExpiresAt    time.Time
-	ResetPasswordToken string
-	ResetTokenExpiresAt time.Time			
+	IsActive   bool `gorm:"type:boolean;default:true" json:"is_active"`
+	IsVerified bool `json:"is_verified"`
+
+	VerificationToken   string    `json:"-"`
+	TokenExpiresAt      time.Time `json:"-"`
+	ResetPasswordToken  string    `json:"-"`
+	ResetTokenExpiresAt time.Time `json:"-"`
+
 	CreatedAt time.Time      `json:"created_at"`
 	UpdatedAt time.Time      `json:"updated_at"`
 	DeletedAt gorm.DeletedAt `json:"-"`
-	StudentID uint `json:"student_id"`
-	FacultyID uint `json:"faculty_id"`
+
+	StudentID   uint `json:"student_id"`
+	FacultyID   uint `json:"faculty_id"`
+	PrincipalID uint `json:"principal_id"`
+
+	Student   *Student   `gorm:"foreignKey:StudentID;references:ID" json:"student,omitempty"`
+	Faculty   *Faculty   `gorm:"foreignKey:FacultyID;references:ID" json:"faculty,omitempty"`
+	Principal *Principal `gorm:"foreignKey:PrincipalID;references:ID" json:"principal,omitempty"`
 
 	Roles []Role `gorm:"many2many:user_roles" json:"roles,omitempty"`
 }

@@ -7,7 +7,6 @@ import (
 	"strconv"
 
 	"github.com/gofiber/fiber/v3"
-	
 )
 
 type RoleController struct {
@@ -37,10 +36,9 @@ func (cl *RoleController) CreateRoleController(c fiber.Ctx) error {
 	return helper.Success(c, "Role created successfully", role)
 }
 
-
-
 func (cl *RoleController) GetRoleByIDController(c fiber.Ctx) error {
 	idParam := c.Params("id")
+
 	id, err := strconv.ParseUint(idParam, 10, 32)
 	if err != nil || id == 0 {
 		return helper.Error(c, 400, "Invalid role ID")
@@ -80,12 +78,11 @@ func (c *RoleController) FetchRoles(ctx fiber.Ctx) error {
 	})
 }
 
-
 func (c *RoleController) FetchPermissions(ctx fiber.Ctx) error {
 
-	search:=ctx.Query("search")
+	search := ctx.Query("search")
 	page, err := strconv.Atoi(ctx.Query("page"))
-	if err!= nil || page < 1 {
+	if err != nil || page < 1 {
 		page = 1
 	}
 
@@ -94,7 +91,7 @@ func (c *RoleController) FetchPermissions(ctx fiber.Ctx) error {
 		limit = 10
 	}
 
-	permissions, total, err := c.roleService.FetchPermissionsService(search,page, limit)
+	permissions, total, err := c.roleService.FetchPermissionsService(search, page, limit)
 	if err != nil {
 		return helper.Error(ctx, fiber.StatusInternalServerError, err.Error())
 	}
@@ -452,8 +449,6 @@ func (cl *RoleController) GetUserRolesByUserIDController(c fiber.Ctx) error {
 
 	return helper.Success(c, "User roles retrieved successfully", userRoles)
 }
-
-
 
 func (cl *RoleController) FetchAllRoles(c fiber.Ctx) error {
 

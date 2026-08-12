@@ -1,7 +1,6 @@
 package repository
 
 import (
-	
 	"backend_institutions/internal/model"
 	"errors"
 	"time"
@@ -16,8 +15,6 @@ type DepartmentRepository struct {
 func NewDepartmentRepository(db *gorm.DB) *DepartmentRepository {
 	return &DepartmentRepository{db: db}
 }
-
-
 
 func (r *DepartmentRepository) CreateDepartment(department *model.Department) error {
 	db, err := r.db.DB()
@@ -76,14 +73,13 @@ func (r *DepartmentRepository) CreateDepartment(department *model.Department) er
 	return nil
 }
 
-
 func (r *DepartmentRepository) FetchDepartment() ([]model.Department, error) {
 	var depts []model.Department
 	err := r.db.Raw("SELECT * FROM departments WHERE deleted_at IS NULL").Scan(&depts).Error
 	if err != nil {
 		return nil, err
 	}
-	
+
 	return depts, err
 }
 
@@ -125,7 +121,6 @@ func (r *DepartmentRepository) FetchDepartmentPaginated(search string, page, lim
 	return depts, total, nil
 }
 
-
 func (r *DepartmentRepository) FetchDepartmentById(id uint) (model.Department, error) {
 	var dept model.Department
 
@@ -150,7 +145,7 @@ func (r *DepartmentRepository) FetchDepartmentDeleted() ([]model.Department, err
 	if err != nil {
 		return nil, err
 	}
-	
+
 	return depts, err
 }
 
@@ -163,7 +158,7 @@ func (r *DepartmentRepository) GetActiveDepartment() (model.Department, error) {
 	if len(depts) == 0 {
 		return model.Department{}, gorm.ErrRecordNotFound
 	}
-	
+
 	if err != nil {
 		return model.Department{}, err
 	}
@@ -179,7 +174,7 @@ func (r *DepartmentRepository) GetInactiveDepartment() (model.Department, error)
 	if len(depts) == 0 {
 		return model.Department{}, gorm.ErrRecordNotFound
 	}
-	
+
 	if err != nil {
 		return model.Department{}, err
 	}

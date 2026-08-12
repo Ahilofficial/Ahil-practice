@@ -9,7 +9,6 @@ import (
 	"strconv"
 
 	"github.com/gofiber/fiber/v3"
-	
 )
 
 type InstituteController struct {
@@ -19,8 +18,6 @@ type InstituteController struct {
 func NewInstituteController(instituteService *services.InstituteService) *InstituteController {
 	return &InstituteController{instituteService: instituteService}
 }
-
-
 
 func (cl *InstituteController) CreateInstituteController(c fiber.Ctx) error {
 	var institute model.Institutions

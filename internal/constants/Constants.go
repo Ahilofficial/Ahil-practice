@@ -1,7 +1,7 @@
 package constants
 
 const (
-	PermissionAdminPermission = "ADMIN_PERMISSION"
+	PermissionAdminPermission  = "ADMIN_PERMISSION"
 	PermissionCreateInstitutes = "CREATE_INSTITUTION"
 	PermissionViewInstitutes   = "VIEW_INSTITUTIONS"
 	PermissionUpdateInstitutes = "UPDATE_INSTITUTION"
@@ -16,6 +16,11 @@ const (
 	PermissionViewFaculties   = "VIEW_FACULTIES"
 	PermissionUpdateFaculties = "UPDATE_FACULTY"
 	PermissionDeleteFaculties = "DELETE_FACULTY"
+
+	PermissionCreatePrincipals = "CREATE_PRINCIPAL"
+	PermissionViewPrincipals   = "VIEW_PRINCIPALS"
+	PermissionUpdatePrincipals = "UPDATE_PRINCIPAL"
+	PermissionDeletePrincipals = "DELETE_PRINCIPAL"
 
 	PermissionCreateStudents = "CREATE_STUDENT"
 	PermissionViewStudents   = "VIEW_STUDENTS"
@@ -34,9 +39,7 @@ const (
 
 	PermissionManageInstitution = "institution.manage"
 
-
 	PermissionAssignRoles = "ASSIGN_ROLE"
-
 )
 
 var AllPermissions = []string{
@@ -54,6 +57,11 @@ var AllPermissions = []string{
 	PermissionViewFaculties,
 	PermissionUpdateFaculties,
 	PermissionDeleteFaculties,
+
+	PermissionCreatePrincipals,
+	PermissionViewPrincipals,
+	PermissionUpdatePrincipals,
+	PermissionDeletePrincipals,
 
 	PermissionCreateStudents,
 	PermissionViewStudents,

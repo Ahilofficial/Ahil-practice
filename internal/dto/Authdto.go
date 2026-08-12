@@ -9,27 +9,23 @@ import (
 	"github.com/jinzhu/copier"
 )
 
-type ForgotPasswordDTO struct{
+type ForgotPasswordDTO struct {
 	Email string `json:"email"`
 }
 
-type ResetPassword struct{
+type ResetPassword struct {
 	CurrentPassword string `json:"current_password"`
-	NewPassword  string `json:"new_password"`
+	NewPassword     string `json:"new_password"`
 }
-type ResendResetPassword struct{
+type ResendResetPassword struct {
 	ResetToken string `json:"reset_token"`
 }
-
 
 type SignUpDTO struct {
 	Name     string `json:"name"`
 	Email    string `json:"email"`
 	Phone    string `json:"phone"`
 	Password string `json:"password"`
-
-	StudentID uint `json:"student_id"`
-	FacultyID uint `json:"faculty_id"`
 }
 
 type SignInDTO struct {
@@ -37,28 +33,24 @@ type SignInDTO struct {
 	Password string `json:"password"`
 }
 
-
-
 type LogoutDTO struct {
 	UserID uint   `json:"user_id"`
 	Token  string `json:"refresh_token"`
 }
 
 type ResendMailSignUp struct {
-    Email string `json:"email"`
+	Email string `json:"email"`
 }
 
 type AuthResponseDTO struct {
-	AccessToken string `json:"access_token"`
+	AccessToken  string `json:"access_token"`
 	RefreshToken string `json:"refresh_token"`
-	UserID uint `json:"user_id"`
-	SessionID string `json:"session_id"`
-
+	UserID       uint   `json:"user_id"`
+	SessionID    string `json:"session_id"`
 }
 
-
 type AssignRoleDTO struct {
-	UserID uint `json:"user_id"`
+	UserID uint   `json:"user_id"`
 	Role   string `json:"role"`
 }
 
@@ -137,4 +129,3 @@ func ToUserResponseListDTO(users []model.User) []UserResponseDTO {
 	}
 	return list
 }
-

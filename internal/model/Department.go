@@ -7,15 +7,15 @@ import (
 )
 
 type Department struct {
-	ID             uint   `gorm:"primaryKey;autoIncrement" json:"id"`
-	DepartmentName string `gorm:"type:varchar(255)" json:"department_name"`
+	ID             uint           `gorm:"primaryKey;autoIncrement" json:"id"`
+	DepartmentName string         `gorm:"type:varchar(255)" json:"department_name"`
+	CreatedAt      time.Time      `json:"created_at"`
+	UpdatedAt      time.Time      `json:"updated_at"`
+	DeletedAt      gorm.DeletedAt `json:"-"`
+	IsActive       bool           `gorm:"default:true" json:"isactive"`
 
-	CreatedAt time.Time      `json:"created_at"`
-	UpdatedAt time.Time      `json:"updated_at"`
-	DeletedAt gorm.DeletedAt `json:"-"`
-	IsActive  bool           `json:"isactive" gorm:"default:true"`
+	InstitutionID uint          `json:"institution_id"`
+	Institution   *Institutions `gorm:"foreignKey:InstitutionID;references:ID" json:"institution,omitempty"`
 
-	InstitutionID uint `json:"institution_id"`
-
-	Faculties []Faculty `gorm:"foreignKey:DepartmentID;references:ID" json:"-"`
+	Faculties []Faculty `gorm:"foreignKey:DepartmentID;references:ID" json:"faculties,omitempty"`
 }

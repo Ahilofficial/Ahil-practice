@@ -13,14 +13,15 @@ import (
 )
 
 func NewApp(
-
 	userController *controller.UserController,
 	instituteController *controller.InstituteController,
 	departmentController *controller.DepartmentController,
 	facultyController *controller.FacultyController,
+	principalController *controller.PrincipalControllers,
 	studentController *controller.StudentController,
 	departmentService *services.DepartmentService,
 	facultyService *services.FacultyService,
+	principalService *services.PrincipalService,
 	studentService *services.StudentService,
 	feesController *controller.FeesController,
 	roleController *controller.RoleController,
@@ -28,10 +29,10 @@ func NewApp(
 	menuController *controller.MenuController,
 	studentRepo *repository.StudentRepository,
 	facultyRepo *repository.FacultyRepository,
+	principalRepo *repository.PrincipalRepository,
 	departmentRepo *repository.DepartmentRepository,
 	feeRepo *repository.FeesRepository,
 	userRepo *repository.UserRepository,
-
 ) *fiber.App {
 	app := fiber.New()
 	RegisterRoutes(
@@ -40,16 +41,19 @@ func NewApp(
 		instituteController,
 		departmentController,
 		facultyController,
+		principalController,
 		studentController,
 		studentService,
 		departmentService,
 		facultyService,
+		principalService,
 		feesController,
 		roleController,
 		permissionController,
 		menuController,
 		studentRepo,
 		facultyRepo,
+		principalRepo,
 		departmentRepo,
 		feeRepo,
 		userRepo,
@@ -63,20 +67,22 @@ func RegisterRoutes(
 	instituteController *controller.InstituteController,
 	departmentController *controller.DepartmentController,
 	facultyController *controller.FacultyController,
+	principalController *controller.PrincipalControllers,
 	studentController *controller.StudentController,
 	studentService *services.StudentService,
 	departmentService *services.DepartmentService,
 	facultyService *services.FacultyService,
+	principalService *services.PrincipalService,
 	feesController *controller.FeesController,
 	roleController *controller.RoleController,
 	permissionController *controller.PermissionController,
 	menuController *controller.MenuController,
 	studentRepo *repository.StudentRepository,
 	facultyRepo *repository.FacultyRepository,
+	principalRepo *repository.PrincipalRepository,
 	departmentRepo *repository.DepartmentRepository,
 	feeRepo *repository.FeesRepository,
 	userRepo *repository.UserRepository,
-
 ) {
 	app.Use(cors.New(cors.Config{
 		AllowOrigins: []string{"http://localhost:4200"},
@@ -153,9 +159,9 @@ func RegisterRoutes(
 	DepartmentRoute.Get("/active", middleware.RequirePermission(constants.PermissionViewDepartments), departmentController.GetActiveDepartmentController)
 	DepartmentRoute.Get("/inactive", middleware.RequirePermission(constants.PermissionViewDepartments), departmentController.GetInactiveDepartmentController)
 	DepartmentRoute.Get("/deleted", middleware.RequirePermission(constants.PermissionViewDepartments), departmentController.GetDeletedDepartmentsController)
-	DepartmentRoute.Get("/:id", middleware.RequirePermission(constants.PermissionViewDepartments),  departmentController.GetDepartmentByIDController)
-	DepartmentRoute.Put("/:id", middleware.RequirePermission(constants.PermissionUpdateDepartments),  departmentController.UpdateDepartmentController)
-	DepartmentRoute.Delete("/:id", middleware.RequirePermission(constants.PermissionDeleteDepartments),  departmentController.DeleteDepartmentController)
+	DepartmentRoute.Get("/:id", middleware.RequirePermission(constants.PermissionViewDepartments), departmentController.GetDepartmentByIDController)
+	DepartmentRoute.Put("/:id", middleware.RequirePermission(constants.PermissionUpdateDepartments), departmentController.UpdateDepartmentController)
+	DepartmentRoute.Delete("/:id", middleware.RequirePermission(constants.PermissionDeleteDepartments), departmentController.DeleteDepartmentController)
 
 	//for faculty
 
@@ -166,9 +172,22 @@ func RegisterRoutes(
 	FacultyRoute.Get("/active", middleware.RequirePermission(constants.PermissionViewFaculties), facultyController.GetActiveFacultyController)
 	FacultyRoute.Get("/inactive", middleware.RequirePermission(constants.PermissionViewFaculties), facultyController.GetInactiveFacultyController)
 	FacultyRoute.Get("/deleted", middleware.RequirePermission(constants.PermissionViewFaculties), facultyController.GetDeletedFacultiesController)
-	FacultyRoute.Get("/:id", middleware.RequirePermission(constants.PermissionViewFaculties),facultyController.GetFacultyByIDController)
-	FacultyRoute.Put("/:id", middleware.RequirePermission(constants.PermissionUpdateFaculties),  facultyController.UpdateFacultyController)
-	FacultyRoute.Delete("/:id", middleware.RequirePermission(constants.PermissionDeleteFaculties),  facultyController.DeleteFacultyController)
+	FacultyRoute.Get("/:id", middleware.RequirePermission(constants.PermissionViewFaculties), facultyController.GetFacultyByIDController)
+	FacultyRoute.Put("/:id", middleware.RequirePermission(constants.PermissionUpdateFaculties), facultyController.UpdateFacultyController)
+	FacultyRoute.Delete("/:id", middleware.RequirePermission(constants.PermissionDeleteFaculties), facultyController.DeleteFacultyController)
+
+	// for principals
+
+	PrincipalRoute := protected.Group("/principals")
+	PrincipalRoute.Post("", middleware.RequirePermission(constants.PermissionCreatePrincipals), principalController.CreatePrincipalController)
+	PrincipalRoute.Get("", middleware.RequirePermission(constants.PermissionViewPrincipals), principalController.GetAllPrincipalsController)
+	PrincipalRoute.Get("/all", middleware.RequirePermission(constants.PermissionViewPrincipals), principalController.FetchAllPrincipalsController)
+	PrincipalRoute.Get("/active", middleware.RequirePermission(constants.PermissionViewPrincipals), principalController.GetActivePrincipalController)
+	PrincipalRoute.Get("/inactive", middleware.RequirePermission(constants.PermissionViewPrincipals), principalController.GetInactivePrincipalController)
+	PrincipalRoute.Get("/deleted", middleware.RequirePermission(constants.PermissionViewPrincipals), principalController.GetDeletedPrincipalsController)
+	PrincipalRoute.Get("/:id", middleware.RequirePermission(constants.PermissionViewPrincipals), principalController.GetPrincipalByIDController)
+	PrincipalRoute.Put("/:id", middleware.RequirePermission(constants.PermissionUpdatePrincipals), principalController.UpdatePrincipalController)
+	PrincipalRoute.Delete("/:id", middleware.RequirePermission(constants.PermissionDeletePrincipals), principalController.DeletePrincipalController)
 
 	// student routes
 

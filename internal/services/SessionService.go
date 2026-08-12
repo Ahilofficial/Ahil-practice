@@ -14,11 +14,11 @@ func NewSessionService(sessionrepo *repository.SessionRepository) *SessionServic
 }
 func (s *SessionService) CreateSession(userID uint, platform string, session_id string, access_token string, refresh_token string) (*model.Session, error) {
 	session := &model.Session{
-		UserID:   userID,
-		IsActive: true,
-		Platform: platform,
-		SessionID: session_id,
-		AccessToken: access_token,
+		UserID:       userID,
+		IsActive:     true,
+		Platform:     platform,
+		SessionID:    session_id,
+		AccessToken:  access_token,
 		RefreshToken: refresh_token,
 	}
 

@@ -7,7 +7,7 @@ import (
 )
 
 type Permission struct {
-	ID   uint              `gorm:"primaryKey;autoIncrement" json:"id"`
+	ID   uint   `gorm:"primaryKey;autoIncrement" json:"id"`
 	Name string `gorm:"type:varchar(255);unique;not null" json:"name"`
 
 	CreatedAt time.Time      `json:"created_at"`

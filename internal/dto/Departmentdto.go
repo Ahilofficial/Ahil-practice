@@ -5,7 +5,6 @@ import (
 	"errors"
 	"github.com/jinzhu/copier"
 	"strings"
-	
 )
 
 type CreateDepartmentDTO struct {
@@ -56,7 +55,6 @@ func ToDepartmentResponseDTO(dept *model.Department) DepartmentResponseDTO {
 	var dto DepartmentResponseDTO
 	copier.Copy(&dto, dept)
 
-	
 	return dto
 }
 
@@ -69,4 +67,3 @@ func ToDepartmentResponseListDTO(depts []model.Department) []DepartmentResponseD
 
 	return list
 }
-

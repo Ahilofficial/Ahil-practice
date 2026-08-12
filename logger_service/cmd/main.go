@@ -15,9 +15,9 @@ import (
 )
 
 func main() {
-	
+
 	err := godotenv.Load("../../.env")
-	if err!=nil{
+	if err != nil {
 		fmt.Println("Cant able to load the envirornment variable")
 	}
 

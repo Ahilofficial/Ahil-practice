@@ -17,14 +17,17 @@ var (
 )
 
 func ConnectLogger() error {
+	host := os.Getenv("LOGGER_GRPC_HOST")
+	if host == "" {
+		host = "localhost"
+	}
 	port := os.Getenv("LOGGER_GRPC_PORT")
 	if port == "" {
 		port = "15051"
 	}
 
-
 	conn, err := grpc.NewClient(
-		"localhost:"+port,
+		host+":"+port,
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)
 	if err != nil {

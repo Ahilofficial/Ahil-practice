@@ -16,33 +16,33 @@ import (
 )
 
 func main() {
-    err := godotenv.Load("../.env")
-    if err!=nil{
-        fmt.Println("Cant able to load the envirornment variable")
-    }
+	err := godotenv.Load("../.env")
+	if err != nil {
+		fmt.Println("Cant able to load the envirornment variable")
+	}
 
-    emailRepo := repository.NewEmailRepository()
+	emailRepo := repository.NewEmailRepository()
 
-    notificationService := service.NewNotificationService(emailRepo)
+	notificationService := service.NewNotificationService(emailRepo)
 
-    grpcServer := grpc.NewServer()
+	grpcServer := grpc.NewServer()
 
-    notificationpb.RegisterSendMailServer(
-        grpcServer,
-        notificationService,
-    )
+	notificationpb.RegisterSendMailServer(
+		grpcServer,
+		notificationService,
+	)
 
-    port := os.Getenv("NOTIFICATION_GRPC_PORT")
-    if port == "" {
-        port = "15052"
-    }
+	port := os.Getenv("NOTIFICATION_GRPC_PORT")
+	if port == "" {
+		port = "15052"
+	}
 
-    lis, err := net.Listen("tcp", ":"+port)
-    if err != nil {
-        log.Fatal(err)
-    }
+	lis, err := net.Listen("tcp", ":"+port)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-    log.Printf("Notification gRPC Server started on %s", port)
+	log.Printf("Notification gRPC Server started on %s", port)
 
-    grpcServer.Serve(lis)
+	grpcServer.Serve(lis)
 }

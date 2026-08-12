@@ -1,0 +1,23 @@
+# Binaries and executables
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+main
+cmd.exe
+
+# Output / Temp directories
+tmp/
+cmd/tmp/
+internal/tmp/
+logs/
+*.log
+
+# Environment variables
+.env
+
+# IDE / OS files
+.vscode/
+.idea/
+.DS_Store

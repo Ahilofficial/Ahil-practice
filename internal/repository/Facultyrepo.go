@@ -12,8 +12,6 @@ type FacultyRepository struct {
 	db *gorm.DB
 }
 
-
-
 func NewFacultyRepository(db *gorm.DB) *FacultyRepository {
 	return &FacultyRepository{
 		db: db,
@@ -30,8 +28,8 @@ func (r *FacultyRepository) CreateFaculty(faculty *model.Faculty) error {
 
 	res, err := db.Exec(
 		`INSERT INTO faculties
-			(name, gender, joining_date, department_id, created_at, updated_at, is_active)
-		SELECT ?, ?, ?, id, ?, ?, ?
+			(name, gender, joining_date, department_id, user_id, created_at, updated_at, is_active)
+		SELECT ?, ?, ?, id, ?, ?, ?, ?
 		FROM departments
 		WHERE id = ?
 		  AND deleted_at IS NULL
@@ -46,6 +44,7 @@ func (r *FacultyRepository) CreateFaculty(faculty *model.Faculty) error {
 		faculty.Name,
 		faculty.Gender,
 		faculty.JoiningDate,
+		faculty.UserID,
 		now,
 		now,
 		true,
@@ -97,7 +96,6 @@ func (r *FacultyRepository) FetchFacultyPaginated(search string, page, limit int
 
 	query := r.db.Model(&model.Faculty{})
 
-	
 	if search != "" {
 		search = "%" + search + "%"
 		query = query.Where(`
@@ -107,14 +105,12 @@ func (r *FacultyRepository) FetchFacultyPaginated(search string, page, limit int
 		`, search, search, search)
 	}
 
-	
 	if err := query.Count(&total).Error; err != nil {
 		return nil, 0, err
 	}
 
 	offset := (page - 1) * limit
 
-	
 	err := query.
 		Preload("Students").
 		Preload("Students.Fees").

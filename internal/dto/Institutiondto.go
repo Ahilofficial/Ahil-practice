@@ -4,7 +4,7 @@ import (
 	"backend_institutions/internal/model"
 	"errors"
 	"strings"
-	
+
 	"github.com/jinzhu/copier"
 )
 
@@ -21,7 +21,6 @@ func (dto *CreateInstitutionDTO) Sanitize() {
 }
 
 func (dto *CreateInstitutionDTO) Validate() error {
-
 
 	if dto.Name == "" {
 		return errors.New("name is required")
@@ -48,7 +47,6 @@ func (dto *UpdateInstitutionDTO) Sanitize() {
 }
 
 func (dto *UpdateInstitutionDTO) Validate() error {
-	
 
 	if dto.Name == "" {
 		return errors.New("name is required")
@@ -92,4 +90,3 @@ func ToInstitutionResponseListDTO(insts []model.Institutions) []InstitutionRespo
 
 	return list
 }
-

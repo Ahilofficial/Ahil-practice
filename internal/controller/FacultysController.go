@@ -9,7 +9,6 @@ import (
 	"strconv"
 
 	"github.com/gofiber/fiber/v3"
-	
 )
 
 type FacultyController struct {
@@ -62,7 +61,7 @@ func (cl *FacultyController) CreateFacultyController(c fiber.Ctx) error {
 }
 
 func (cl *FacultyController) GetAllFacultiesController(c fiber.Ctx) error {
-	search:=c.Query("search")
+	search := c.Query("search")
 	pageStr := c.Query("page")
 	limitStr := c.Query("limit")
 
@@ -80,7 +79,7 @@ func (cl *FacultyController) GetAllFacultiesController(c fiber.Ctx) error {
 		}
 	}
 
-	faculties, total, err := cl.facultyService.GetFacultyServicePaginated(search,page, limit)
+	faculties, total, err := cl.facultyService.GetFacultyServicePaginated(search, page, limit)
 	if err != nil {
 		return helper.Error(c, 500, err.Error())
 	}

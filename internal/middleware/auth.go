@@ -45,7 +45,6 @@ func AuthRequired() fiber.Handler {
 			return helper.Error(c, 401, "Invalid token claims")
 		}
 
-		
 		userIDVal, ok := claims["user_id"]
 		if !ok || userIDVal == nil {
 			return helper.Error(c, 401, "user_id not found in token")
@@ -60,7 +59,6 @@ func AuthRequired() fiber.Handler {
 			return helper.Error(c, 401, "Invalid user_id type in token")
 		}
 
-		
 		sessionID, ok := claims["session_id"]
 		if !ok || sessionID == nil {
 			return helper.Error(c, 401, "session_id not found in token")

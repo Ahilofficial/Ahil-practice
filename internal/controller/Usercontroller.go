@@ -3,12 +3,8 @@ package controller
 import (
 	"backend_institutions/internal/dto"
 	"backend_institutions/internal/helper"
-
-	// "backend_institutions/internal/model"
 	"backend_institutions/internal/services"
 	"fmt"
-
-	// "go/token"
 	"strconv"
 
 	"github.com/gofiber/fiber/v3"
@@ -43,7 +39,6 @@ func (cl *UserController) SignUpController(c fiber.Ctx) error {
 }
 
 func (cl *UserController) SignInController(c fiber.Ctx) error {
-
 	var body dto.SignInDTO
 	body.Sanitize()
 
@@ -121,32 +116,32 @@ func (cl *UserController) ForgotPassword(c fiber.Ctx) error {
 	var forgotpassword dto.ForgotPasswordDTO
 	err := c.Bind().Body(&forgotpassword)
 	if err != nil {
-		fmt.Println("Error:", err)
-
-		return helper.Error(c, 400, "invalid request body: "+err.Error())
+		return helper.Error(c, 400, "Invalid email format")
 	}
 	_, err = cl.userService.ForgotPasswordService(forgotpassword)
+
 	if err != nil {
 		return helper.Error(c, 400, err.Error())
 	}
-	// return helper.Success(c, "success", user)
+
 	return c.SendString("Sended the forgot password link just check it")
-
 }
-func (cl *UserController) ResetPassword(c fiber.Ctx) error {
 
+func (cl *UserController) ResetPassword(c fiber.Ctx) error {
 	token := c.Query("token")
 	if token == "" {
-		return helper.Error(c, 400, "reset token is required")
+		return helper.Error(c, 400, "Token is required")
 	}
 
-	var body dto.ResetPassword
-
-	if err := c.Bind().Body(&body); err != nil {
-		return helper.Error(c, 400, err.Error())
+	var reset dto.ResetPassword
+	if err := c.Bind().Body(&reset); err != nil {
+		return helper.Error(c, 400, "Invalid payload format")
 	}
 
-	err := cl.userService.ResetPasswordService(token, body)
+	fmt.Println("Token:", token)
+	fmt.Println("Reset Body:", reset)
+
+	err := cl.userService.ResetPasswordService(token, reset)
 	if err != nil {
 		return helper.Error(c, 400, err.Error())
 	}
@@ -158,11 +153,10 @@ func (cl *UserController) Logout(c fiber.Ctx) error {
 	var body dto.LogoutDTO
 
 	if err := c.Bind().Body(&body); err != nil {
-		return helper.Error(c, 400, err.Error())
+		return helper.Error(c, 400, "invalid payload format")
 	}
 
-	err := cl.userService.Logout(&body)
-	if err != nil {
+	if err := cl.userService.Logout(&body); err != nil {
 		return helper.Error(c, 400, err.Error())
 	}
 
@@ -170,13 +164,11 @@ func (cl *UserController) Logout(c fiber.Ctx) error {
 }
 
 func (c *UserController) ResendMail(ctx fiber.Ctx) error {
-
 	var body dto.ResendMailSignUp
 
 	if err := ctx.Bind().Body(&body); err != nil {
 		return helper.Error(ctx, 400, err.Error())
 	}
-
 	err := c.userService.ResendMail(body.Email)
 	if err != nil {
 		return helper.Error(ctx, 400, err.Error())
@@ -196,6 +188,5 @@ func (cl *UserController) GetProfile(c fiber.Ctx) error {
 		return helper.Error(c, 404, "User not found")
 	}
 
-	return helper.Success(c, "Profile retrieved successfully", user)
+	return helper.Success(c, "User profile fetched successfully", dto.ToUserResponseDTO(&user))
 }
-

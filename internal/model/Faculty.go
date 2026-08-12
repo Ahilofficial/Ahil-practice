@@ -7,20 +7,20 @@ import (
 )
 
 type Faculty struct {
-	ID          uint      `gorm:"primaryKey;autoIncrement" json:"id"`
-	Name        string    `gorm:"type:varchar(255);not null" json:"name"`
-	Gender      string    `gorm:"type:varchar(255)" json:"gender"`
-	JoiningDate time.Time `gorm:"type:date" json:"joining_date"`
-	CreatedAt     time.Time      `json:"created_at"`
-	UpdatedAt     time.Time      `json:"updated_at"`
-	DeletedAt     gorm.DeletedAt `json:"-"`
-	IsActive      bool           `json:"isactive" gorm:"default:true"`
-	InstitutionID uint           `json:"institution_id"`
-	DepartmentID  uint           `json:"department_id"`
+	ID          uint           `gorm:"primaryKey;autoIncrement" json:"id"`
+	Name        string         `gorm:"type:varchar(255);not null" json:"name"`
+	Gender      string         `gorm:"type:varchar(255)" json:"gender"`
+	JoiningDate time.Time      `gorm:"type:date" json:"joining_date"`
+	CreatedAt   time.Time      `json:"created_at"`
+	UpdatedAt   time.Time      `json:"updated_at"`
+	DeletedAt   gorm.DeletedAt `json:"-"`
+	IsActive    bool           `gorm:"default:true" json:"isactive"`
 
-	Student *Student `gorm:"foreignKey:UserID;references:ID" json:"student,omitempty"`
-	Faculty *Faculty `gorm:"foreignKey:UserID;references:ID" json:"faculty,omitempty"`	
-	UserID        uint           `json:"user_id"`
+	DepartmentID uint `json:"department_id"`
+	UserID       uint `json:"user_id"`
 
-	Students []Student `gorm:"foreignKey:FacultyID;references:ID" json:"students"`
+	Department *Department `gorm:"foreignKey:DepartmentID;references:ID" json:"department,omitempty"`
+	User       *User       `gorm:"foreignKey:UserID;references:ID" json:"user,omitempty"`
+
+	Students []Student `gorm:"foreignKey:FacultyID;references:ID" json:"students,omitempty"`
 }

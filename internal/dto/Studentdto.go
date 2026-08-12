@@ -3,8 +3,8 @@ package dto
 import (
 	"backend_institutions/internal/model"
 	"errors"
-	"strings"
 	"github.com/jinzhu/copier"
+	"strings"
 )
 
 type CreateStudentDTO struct {
@@ -22,7 +22,6 @@ func (dto *CreateStudentDTO) Sanitize() {
 }
 
 func (dto *CreateStudentDTO) Validate() error {
-
 
 	if dto.Name == "" {
 		return errors.New("name is required")
@@ -48,11 +47,8 @@ type UpdateStudentDTO struct {
 	Gender string `json:"gender"`
 }
 
-
-
 func (dto *UpdateStudentDTO) Validate() error {
 	dto.Sanitize()
-	
 
 	if dto.Name == "" {
 		return errors.New("name is required")
@@ -74,17 +70,16 @@ func (dto *UpdateStudentDTO) Sanitize() {
 	dto.Email = strings.TrimSpace(strings.ToLower(dto.Email))
 	dto.Gender = strings.TrimSpace(strings.ToLower(dto.Gender))
 }
+
 type StudentResponseDTO struct {
-	ID         uint             `json:"id"`
-	Name       string           `json:"name"`
-	Email      string           `json:"email"`
-	Gender     string           `json:"gender"`
-	FacultyID  uint             `json:"faculty_id"`
-	IsActive   bool             `json:"isactive"`
-	Fees        []FeesResponseDTO `json:"fees"`
+	ID        uint              `json:"id"`
+	Name      string            `json:"name"`
+	Email     string            `json:"email"`
+	Gender    string            `json:"gender"`
+	FacultyID uint              `json:"faculty_id"`
+	IsActive  bool              `json:"isactive"`
+	Fees      []FeesResponseDTO `json:"fees"`
 }
-
-
 
 func ToStudentResponseDTO(stud *model.Student) StudentResponseDTO {
 	var dto StudentResponseDTO
@@ -101,6 +96,3 @@ func ToStudentResponseListDTO(studs []model.Student) []StudentResponseDTO {
 
 	return list
 }
-
-
-

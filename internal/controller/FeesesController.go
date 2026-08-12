@@ -8,7 +8,6 @@ import (
 	"strconv"
 
 	"github.com/gofiber/fiber/v3"
-	
 )
 
 type FeesController struct {
@@ -72,7 +71,7 @@ func (cl *FeesController) CreateFeesController(c fiber.Ctx) error {
 }
 
 func (cl *FeesController) GetAllFeesController(c fiber.Ctx) error {
-	search:=c.Query("search")
+	search := c.Query("search")
 	pageStr := c.Query("page")
 	limitStr := c.Query("limit")
 
@@ -90,7 +89,7 @@ func (cl *FeesController) GetAllFeesController(c fiber.Ctx) error {
 		}
 	}
 
-	fees, total, err := cl.feesService.GetFeesServicePaginated(search,page, limit)
+	fees, total, err := cl.feesService.GetFeesServicePaginated(search, page, limit)
 	if err != nil {
 		return helper.Error(c, 500, err.Error())
 	}
@@ -328,7 +327,6 @@ func (c *FeesController) CreatePayment(ctx fiber.Ctx) error {
 		payment,
 	)
 }
-
 
 func (c *StudentController) FetchPaidStudents(ctx fiber.Ctx) error {
 	students, err := c.studentService.FetchPaidStudents()

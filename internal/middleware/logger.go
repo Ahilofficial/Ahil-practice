@@ -10,39 +10,24 @@ import (
 
 func RequestResponseLogger() fiber.Handler {
 	return func(c fiber.Ctx) error {
-		
 		method := c.Method()
 		endpoint := c.Path()
 		reqBody := string(c.Body())
 
-		
 		err := c.Next()
 
-		
 		status := c.Response().StatusCode()
 		respBody := string(c.Response().Body())
 
-		
-		serviceName := "General"
+		// Redact sensitive credential payloads
 		cleanEndpoint := strings.ToLower(endpoint)
-		if strings.HasPrefix(cleanEndpoint, "/institutes") {
-			serviceName = "Institution"
-		} else if strings.HasPrefix(cleanEndpoint, "/departments") {
-			serviceName = "Department"
-		} else if strings.HasPrefix(cleanEndpoint, "/faculties") {
-			serviceName = "Faculty"
-		} else if strings.HasPrefix(cleanEndpoint, "/students") {
-			serviceName = "Student"
-		} else if strings.HasPrefix(cleanEndpoint, "/fees") {
-			serviceName = "Fees"
-		} else if strings.HasPrefix(cleanEndpoint, "/signup") || strings.HasPrefix(cleanEndpoint, "/signin") {
-			serviceName = "Auth"
+		if strings.Contains(cleanEndpoint, "signup") || strings.Contains(cleanEndpoint, "signin") || strings.Contains(cleanEndpoint, "password") {
 			reqBody = "[REDACTED/SENSITIVE]"
 		}
 
 		go func() {
 			sendLogErr := grpc.SendLog(
-				serviceName,
+				"MainAPI",
 				method,
 				endpoint,
 				reqBody,

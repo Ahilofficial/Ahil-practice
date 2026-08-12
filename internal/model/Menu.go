@@ -9,4 +9,3 @@ type Menu struct {
 	Parent   *Menu  `gorm:"foreignKey:ParentID"`
 	Children []Menu `gorm:"foreignKey:ParentID"`
 }
- 

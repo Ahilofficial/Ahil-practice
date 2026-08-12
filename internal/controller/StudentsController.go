@@ -224,7 +224,7 @@ func (cl *StudentController) FetchAllStudentsControllers(c fiber.Ctx) error {
 }
 
 func (cl *StudentController) FetchAllStudentsPaginatedControllers(c fiber.Ctx) error {
-	search:=c.Query("search")
+	search := c.Query("search")
 	pageStr := c.Query("page")
 	limitStr := c.Query("limit")
 
@@ -243,7 +243,7 @@ func (cl *StudentController) FetchAllStudentsPaginatedControllers(c fiber.Ctx) e
 		}
 	}
 
-	students, total, err := cl.studentService.GetStudentServicePaginated(search,page, limit)
+	students, total, err := cl.studentService.GetStudentServicePaginated(search, page, limit)
 	if err != nil {
 		return helper.Error(c, 500, err.Error())
 	}
@@ -277,4 +277,3 @@ func (c *StudentController) FetchStudentsByPaymentMonth(ctx fiber.Ctx) error {
 
 	return helper.Success(ctx, "Students fetched successfully", students)
 }
-

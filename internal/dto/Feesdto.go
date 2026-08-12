@@ -3,8 +3,8 @@ package dto
 import (
 	"backend_institutions/internal/model"
 	"errors"
-	"strings"
 	"github.com/jinzhu/copier"
+	"strings"
 )
 
 type CreateFeesDTO struct {
@@ -56,15 +56,14 @@ type PaymentResponseDTO struct {
 	PaymentMode string  `json:"payment_mode"`
 }
 type FeesResponseDTO struct {
-	ID             uint                 `json:"id"`
-	TotalAmount    float64              `json:"total_amount"`
-	TotalPaid      float64              `json:"total_paid"`
-	PendingAmount  float64              `json:"pending_amount"`
-	StudentID      uint                 `json:"student_id"`
-	IsActive       bool                 `json:"is_active"`
-	Payments       []PaymentResponseDTO `json:"payments"`
+	ID            uint                 `json:"id"`
+	TotalAmount   float64              `json:"total_amount"`
+	TotalPaid     float64              `json:"total_paid"`
+	PendingAmount float64              `json:"pending_amount"`
+	StudentID     uint                 `json:"student_id"`
+	IsActive      bool                 `json:"is_active"`
+	Payments      []PaymentResponseDTO `json:"payments"`
 }
-
 
 func ToFeesResponseDTO(fees *model.Fees) FeesResponseDTO {
 	var dto FeesResponseDTO
@@ -84,7 +83,7 @@ type CreatePaymentDTO struct {
 	Month       string  `json:"month"`
 	AmountPaid  float64 `json:"amount_paid"`
 	PaymentMode string  `json:"payment_mode"`
-	FeeID        uint    `json:"fee_id"`
+	FeeID       uint    `json:"fee_id"`
 }
 
 func (dto *CreatePaymentDTO) Validate() error {

@@ -22,4 +22,3 @@ func (r *EmailRepository) SendMail(email, subject, body string) error {
 	_ = utilities.WriteEmailLog(email, subject, true, "")
 	return nil
 }
-

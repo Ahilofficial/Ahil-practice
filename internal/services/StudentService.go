@@ -53,7 +53,6 @@ func (s *StudentService) CreateStudentService(
 	student *model.Student,
 ) (*model.Student, error) {
 
-	
 	institutionID, err := s.facultyRepo.GetInstitutionByFacultyID(
 		student.FacultyID,
 	)
@@ -61,7 +60,6 @@ func (s *StudentService) CreateStudentService(
 		return nil, err
 	}
 
-	
 	if err := s.checkInstitutionAccess(
 		userID,
 		institutionID,
@@ -69,12 +67,10 @@ func (s *StudentService) CreateStudentService(
 		return nil, err
 	}
 
-	
 	if err := s.userRepo.ValidateUser(student.UserID); err != nil {
 		return nil, err
 	}
 
-	
 	exists, err := s.studentRepo.ExistsByUserID(student.UserID)
 	if err != nil {
 		return nil, err
@@ -84,9 +80,14 @@ func (s *StudentService) CreateStudentService(
 		return nil, errors.New("user is already a student")
 	}
 
-	
 	if err := s.studentRepo.CreateStudent(student); err != nil {
 		return nil, err
+	}
+
+	if student.UserID != 0 {
+		if err := s.userRepo.UpdateUserStudentID(student.UserID, student.ID); err != nil {
+			return nil, err
+		}
 	}
 
 	return student, nil

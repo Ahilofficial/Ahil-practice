@@ -30,7 +30,6 @@ func (r *RoleRepository) FetchRoles(search string, page, limit int) ([]model.Rol
 	offset := (page - 1) * limit
 	searchPattern := "%" + search + "%"
 
-	
 	err := r.db.Raw(`
 		SELECT COUNT(*)
 		FROM roles
@@ -41,7 +40,6 @@ func (r *RoleRepository) FetchRoles(search string, page, limit int) ([]model.Rol
 		return nil, 0, err
 	}
 
-	
 	err = r.db.Raw(`
 		SELECT *
 		FROM roles
@@ -68,8 +66,6 @@ func (r *RoleRepository) GetRoleByID(id uint) (model.Role, error) {
 	}
 	return role, nil
 }
-
-
 
 func (r *RoleRepository) AssignPermissionsToRole(roleID uint, permissionIDs []uint, permissionNames []string) error {
 	role, err := r.GetRoleByID(roleID)
@@ -113,8 +109,6 @@ func (r *RoleRepository) GetRolePermissions(roleID uint) ([]model.Permission, er
 	return perms, err
 }
 
-
-
 func (r *RoleRepository) Permissions(search string, page, limit int) ([]model.Permission, int64, error) {
 	var permissions []model.Permission
 	var total int64
@@ -122,7 +116,6 @@ func (r *RoleRepository) Permissions(search string, page, limit int) ([]model.Pe
 	offset := (page - 1) * limit
 	searchPattern := "%" + search + "%"
 
-	
 	err := r.db.Raw(`
 		SELECT COUNT(*)
 		FROM permissions
@@ -133,7 +126,6 @@ func (r *RoleRepository) Permissions(search string, page, limit int) ([]model.Pe
 		return nil, 0, err
 	}
 
-	
 	err = r.db.Raw(`
 		SELECT id, name
 		FROM permissions
@@ -149,7 +141,6 @@ func (r *RoleRepository) Permissions(search string, page, limit int) ([]model.Pe
 
 	return permissions, total, nil
 }
-
 
 func (r *RoleRepository) RemovePermissionFromRole(roleID uint, permissionID uint) error {
 	res := r.db.Exec("DELETE FROM role_permissions WHERE role_id = ? AND permission_id = ?", roleID, permissionID)
@@ -339,7 +330,6 @@ func (r *RoleRepository) GetUserRolesByUserID(userID uint) (*model.User, error) 
 		return nil, err
 	}
 
-	
 	var roles []model.Role
 	err = r.db.Raw(`
 		SELECT r.id, r.name

@@ -12,8 +12,6 @@ type FeesRepository struct {
 	db *gorm.DB
 }
 
-
-
 func NewFeesRepository(db *gorm.DB) *FeesRepository {
 	return &FeesRepository{db: db}
 }

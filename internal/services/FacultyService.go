@@ -26,7 +26,7 @@ func NewFacultyService(
 	}
 }
 
-func (s *FacultyService) checkInstitutionAccess(userID uint,institutionID uint,) error {
+func (s *FacultyService) checkInstitutionAccess(userID uint, institutionID uint) error {
 
 	hasAccess, err := s.userRepo.HasInstitutionAccess(
 		userID,
@@ -45,8 +45,7 @@ func (s *FacultyService) checkInstitutionAccess(userID uint,institutionID uint,)
 	return nil
 }
 
-func (s *FacultyService) CreateFacultyService(userID uint,faculty *model.Faculty,) (model.Faculty, error) {
-
+func (s *FacultyService) CreateFacultyService(userID uint, faculty *model.Faculty) (model.Faculty, error) {
 
 	institutionID, err := s.departmentRepo.GetInstitutionByDepartmentID(
 		faculty.DepartmentID,
@@ -55,7 +54,6 @@ func (s *FacultyService) CreateFacultyService(userID uint,faculty *model.Faculty
 		return model.Faculty{}, err
 	}
 
-	
 	if err := s.checkInstitutionAccess(
 		userID,
 		institutionID,
@@ -63,11 +61,9 @@ func (s *FacultyService) CreateFacultyService(userID uint,faculty *model.Faculty
 		return model.Faculty{}, err
 	}
 
-
 	if err := s.userRepo.ValidateUser(faculty.UserID); err != nil {
 		return model.Faculty{}, err
 	}
-
 
 	exists, err := s.facultyRepo.ExistsByUserID(
 		faculty.UserID,
@@ -84,6 +80,12 @@ func (s *FacultyService) CreateFacultyService(userID uint,faculty *model.Faculty
 
 	if err := s.facultyRepo.CreateFaculty(faculty); err != nil {
 		return model.Faculty{}, err
+	}
+
+	if faculty.UserID != 0 {
+		if err := s.userRepo.UpdateUserFacultyID(faculty.UserID, faculty.ID); err != nil {
+			return model.Faculty{}, err
+		}
 	}
 
 	return *faculty, nil
@@ -105,14 +107,14 @@ func (s *FacultyService) GetFacultyServicePaginated(
 	)
 }
 
-func (s *FacultyService) GetFacultyServiceById(userID uint,id uint,) (*model.Faculty, error) {
+func (s *FacultyService) GetFacultyServiceById(userID uint, id uint) (*model.Faculty, error) {
 
 	faculty, err := s.facultyRepo.FetchFacultyById(id)
 	if err != nil {
 		return nil, err
 	}
 
-	institutionID, err := s.departmentRepo.GetInstitutionByDepartmentID(faculty.DepartmentID,)
+	institutionID, err := s.departmentRepo.GetInstitutionByDepartmentID(faculty.DepartmentID)
 	if err != nil {
 		return nil, err
 	}
